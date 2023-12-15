@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Scrape Staff",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scrape_staff.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        },
+        {
+            "name": "Scrape Modules",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scrape_modules.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        },
+        {
+            "name": "Scrape Exams",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/scrape_exams.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true
+        }
+    ]
+}
