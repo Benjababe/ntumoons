@@ -99,7 +99,7 @@ async def write_fs_semester_exam(semester: str, exam_list: list[Exam]):
         exam = exam.to_dict()
         doc_id = f"{semester}_{exam['module_code']}"
         try:
-            await db.collection("module").document(doc_id).update({"exam": exam})
+            await db.collection("modules").document(doc_id).update({"exam": exam})
         except:
             print(f"Module {doc_id} does not exist!")
 
