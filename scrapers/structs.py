@@ -99,7 +99,7 @@ class Module(Dictable):
     code: str
     course_codes: list[str]
     credits: str
-    desc: str
+    description: str
     grading: str
     prerequisites: list[list[str]]
     mutex: list[str]

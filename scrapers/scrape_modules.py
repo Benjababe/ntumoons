@@ -223,7 +223,7 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
         modules[i].verified = True
 
         desc = rows[-1].find("td").text.strip().replace("'", "").replace("\n", "<br/>")
-        modules[i].desc = desc
+        modules[i].description = desc
 
         active_header = ""
 
@@ -293,7 +293,7 @@ def get_category_modules_venues(
             code=module_code,
             course_codes=[],
             credits=module_credits,
-            desc="",
+            description="",
             grading="",
             prerequisites=[],
             mutex=[],
