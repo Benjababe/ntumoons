@@ -115,7 +115,7 @@ async def scrape():
     exams = get_exams(sem_year, sem_num, plan_num)
 
     write_json_exam(exams)
-    await write_fs_semester_exam("modules", f"{sem_year};{sem_num}", exams)
+    await write_fs_semester_exam(f"{sem_year};{sem_num}", exams)
 
 
 """

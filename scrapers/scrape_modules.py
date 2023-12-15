@@ -366,7 +366,7 @@ async def scrape():
 
     await write_fs_semester_modules("courseCategories", semester, "code", categories)
     await write_fs_semester_modules("modules", semester, "code", modules)
-    await write_fs_semester_venue("venues", semester, venues)
+    await write_fs_semester_venue(semester, venues)
 
 
 """

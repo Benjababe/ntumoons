@@ -163,8 +163,8 @@ async def scrape():
     keywords = get_keywords(all_staff)
 
     write_json_staff(all_staff)
-    await write_fs_staff("staff", "email", all_staff)
-    await write_fs_staff_keywords("staff", keywords)
+    await write_fs_staff("email", all_staff)
+    await write_fs_staff_keywords(keywords)
 
 
 """

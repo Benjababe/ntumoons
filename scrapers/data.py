@@ -12,11 +12,10 @@ app = firebase_admin.initialize_app(creds)
 db = firestore_async.client()
 
 
-async def write_fs_staff(coll: str, doc_id_key: str, staff_list: list[Staff]):
+async def write_fs_staff(doc_id_key: str, staff_list: list[Staff]):
     """Writes a list of staff to firestore
 
     Args:
-        coll (str): Staff collection name
         doc_id_key (str): Key of staff to use as document id
         staff_list (list[Staff]): List of staff data
     """
@@ -24,13 +23,13 @@ async def write_fs_staff(coll: str, doc_id_key: str, staff_list: list[Staff]):
     async def write_fs(data: Staff):
         data = data.to_dict()
         doc_id = data[doc_id_key]
-        await db.collection(coll).document(doc_id).set(data)
+        await db.collection("staff").document(doc_id).set(data)
 
     tasks = [write_fs(data) for data in staff_list]
     await asyncio.gather(*tasks)
 
 
-async def write_fs_staff_keywords(coll: str, keywords: list[str]):
+async def write_fs_staff_keywords(keywords: list[str]):
     """Writes staff keywords into firestore
 
     Args:
@@ -38,7 +37,7 @@ async def write_fs_staff_keywords(coll: str, keywords: list[str]):
         keywords (list[str]): List of keywords to filter staff by
     """
 
-    await db.collection(coll).document("metadata").set({"keywords": keywords})
+    await db.collection("staff").document("metadata").set({"keywords": keywords})
 
 
 async def write_fs_semester_modules(
@@ -55,57 +54,52 @@ async def write_fs_semester_modules(
 
     async def write_semester_data(data: Dictable):
         data = data.to_dict()
-        doc_id = data[doc_id_key]
+        data["semester"] = semester
+        doc_id = f"{semester}_{data[doc_id_key]}"
 
-        sem_doc_ref = db.collection(coll).document(semester)
-        subcollection_ref = sem_doc_ref.collection("entries")
-        await subcollection_ref.document(doc_id).set(data)
+        await db.collection(coll).document(doc_id).set(data)
 
     tasks = [write_semester_data(data) for data in data_list]
     await asyncio.gather(*tasks)
 
 
-async def write_fs_semester_venue(coll: str, semester: str, venue_list: list[Venue]):
-    """Writes a list of venues to firestore
+async def write_fs_semester_venue(semester: str, venue_list: list[Venue]):
+    """Writes a list of venues and lessons to firestore
 
     Args:
-        coll (str): _description_
-        semester (str): _description_
-        venue_list (list[Venue]): _description_
+        semester (str): Semester to store module in. Eg: 2023;2
+        venue_list (list[Venue]): List of venue data
     """
 
     async def write_venue_data(venue: Venue):
         base_venue = {"name": venue.name, "lat": venue.lat, "lng": venue.lng}
-        lessons = {"lessons": venue.to_dict()["lessons"]}
+        lessons = venue.to_dict()["lessons"]
         doc_id = venue.name
 
-        venue_doc = db.collection(coll).document(doc_id)
+        venue_doc = db.collection("venue").document(doc_id)
         actual_doc = await venue_doc.get()
         if not actual_doc.exists:
             await venue_doc.set(base_venue)
 
-        await venue_doc.collection(semester).document("lessons").set(lessons)
+        await venue_doc.update({f"{semester}_lessons": lessons})
 
     tasks = [write_venue_data(venue) for venue in venue_list]
     await asyncio.gather(*tasks)
 
 
-async def write_fs_semester_exam(coll: str, semester: str, exam_list: list[Exam]):
+async def write_fs_semester_exam(semester: str, exam_list: list[Exam]):
     """Updates existing modules in firestore with their exam information
 
     Args:
-        coll (str): Collection name used for modules ("module") by default
         semester (str): Semester to update module. Eg: 2023;2
         exam_list (list[Exam]): List of exam data
     """
 
     async def write_exam_data(exam: Exam):
         exam = exam.to_dict()
-        doc_id = exam["module_code"]
+        doc_id = f"{semester}_{exam['module_code']}"
         try:
-            sem_doc_ref = db.collection(coll).document(semester)
-            module_doc_ref = sem_doc_ref.collection("entries").document(doc_id)
-            await module_doc_ref.update({"exam": exam})
+            await db.collection("module").document(doc_id).update({"exam": exam})
         except:
             print(f"Module {doc_id} does not exist!")
 
