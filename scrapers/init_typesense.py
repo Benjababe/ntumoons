@@ -51,3 +51,12 @@ if __name__ == "__main__":
     create_collection("courseCategories", [{"name": "name", "type": "string"}])
     create_collection("staff", [{"name": "title", "type": "string"}])
     create_collection("venues", [{"name": "name", "type": "string"}])
+
+    key = client.keys.create(
+        {
+            "description": "Firebase Extension Key",
+            "actions": ["collections:*", "documents:*"],
+            "collections": ["*"],
+        }
+    )
+    print(f"API Key for firebase: {key['value']}")
