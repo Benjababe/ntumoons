@@ -76,7 +76,7 @@ async def write_fs_semester_venue(semester: str, venue_list: list[Venue]):
         lessons = venue.to_dict()["lessons"]
         doc_id = venue.name
 
-        venue_doc = db.collection("venue").document(doc_id)
+        venue_doc = db.collection("venues").document(doc_id)
         actual_doc = await venue_doc.get()
         if not actual_doc.exists:
             await venue_doc.set(base_venue)
