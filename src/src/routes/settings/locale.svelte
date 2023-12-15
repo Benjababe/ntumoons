@@ -19,7 +19,7 @@
         <div class="flex-1 m-auto">
             {$t('Settings.Switch between languages on a fly')}
         </div>
-        <div class="flex flex-row gap-2 items-center mr-12">
+        <div class="flex flex-row gap-2 items-center justify-center w-48">
             <select
                 class="select select-bordered"
                 bind:value={$locale}
