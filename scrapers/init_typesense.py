@@ -1,15 +1,20 @@
+import os
+
 import typesense
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = typesense.Client(
     {
         "nodes": [
             {
-                "host": "typesense.benjababe.duckdns.org",
-                "port": "443",
-                "protocol": "https",
+                "host": os.environ.get("TYPESENSE_HOST"),
+                "port": os.environ.get("TYPESENSE_PORT"),
+                "protocol": os.environ.get("TYPESENSE_PROTOCOL"),
             }
         ],
-        "api_key": "a60441d1-64a9-4c7d-9096-d2f06f851f00",
+        "api_key": os.environ.get("TYPESENSE_API_KEY"),
         "connection_timeout_seconds": 5,
     }
 )
