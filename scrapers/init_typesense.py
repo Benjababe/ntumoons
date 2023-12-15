@@ -41,16 +41,15 @@ def create_collection(name: str, fields: list[dict[str, str | bool]]):
 
 
 if __name__ == "__main__":
+    name_field = {"name": "name", "type": "string"}
+    desc_field = {"name": "description", "type": "string"}
+    semester_field = {"name": "semester", "type": "string"}
+
     create_collection(
         "modules",
-        [
-            {"name": "name", "type": "string"},
-            {"name": "code", "type": "string"},
-        ],
+        [name_field, semester_field, desc_field, {"name": "code", "type": "string"}],
     )
-    create_collection("courseCategories", [{"name": "name", "type": "string"}])
-    create_collection("staff", [{"name": "title", "type": "string"}])
-    create_collection("venues", [{"name": "name", "type": "string"}])
+    create_collection("staff", [desc_field, {"name": "title", "type": "string"}])
 
     key = client.keys.create(
         {
