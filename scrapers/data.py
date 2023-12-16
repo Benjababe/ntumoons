@@ -5,227 +5,102 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore_async
 
-import typesense_util
-from structs import CourseCategory, Dictable, Exam, Module, Staff, Venue
+from util.structs import Dictable
+from util.typesense import upsert_document
 
 creds = credentials.Certificate("serviceAccountKey.json")
 app = firebase_admin.initialize_app(creds)
 db = firestore_async.client()
 
 
-async def write_fs_staff(doc_id_key: str, staff_list: list[Staff]):
-    """Writes a list of staff to firestore and upserts indexable info to typesense
-
-    Args:
-        doc_id_key (str): Key of staff to use as document id
-        staff_list (list[Staff]): List of staff data
-    """
-
-    async def write_fs(data: Staff):
-        data = data.to_dict()
-        doc_id = data[doc_id_key]
-        await db.collection("staff").document(doc_id).set(data)
-
-        staff_typesense = {"title": data["title"], "description": data["description"]}
-        typesense_util.upsert_document(typesense_util.STAFF_COLL, staff_typesense)
-
-    typesense_util.init()
-    tasks = [write_fs(data) for data in staff_list]
-    await asyncio.gather(*tasks)
-
-
 async def write_fs_staff_keywords(keywords: list[str]):
-    """Writes staff keywords into firestore
+    """Writes staff keywords into firestore.
 
     Args:
-        coll (str): Staff collection name
-        keywords (list[str]): List of keywords to filter staff by
+        coll (str): Staff collection name.
+        keywords (list[str]): List of keywords to filter staff by.
     """
 
     await db.collection("staff").document("metadata").set({"keywords": keywords})
 
 
-async def write_fs_course_categories(
-    semester: str, doc_id_key: str, data_list: list[CourseCategory]
+async def write_fs(
+    fs_coll: str,
+    doc_id_key: str,
+    data_list: str,
+    doc_id_prepend: str = "",
+    override: bool = True,
 ):
-    """Writes a list of course categories to firestore
+    """Writes data to firestore.
 
     Args:
-        semester (str): Semester to store module in. Eg: 2023;2
-        doc_id_key (str): Key of dict to use as document identifier
-        data_list (list[CourseCategory]): List of course categories
+        fs_coll (str): Name of firestore collection to write to.
+        doc_id_key (str): Key of data to use as firestore document id.
+        data_list (list[Dictable]): List of data to upload.
+        doc_id_prepend (str, optional): String to prepend document id with. Defaults to "".
+        override (bool, optional): Flag whether to replace existing documents. Defaults to True.
     """
 
-    async def write_semester_data(data: Dictable):
+    async def write(data: Dictable):
         data = data.to_dict()
-        data["semester"] = semester
-        doc_id = f"{semester}_{data[doc_id_key]}"
-        await db.collection("courseCategory").document(doc_id).set(data)
+        doc_id = f"{doc_id_prepend}_{data[doc_id_key]}"
 
-    tasks = [write_semester_data(data) for data in data_list]
+        # does not insert if document exists
+        if not override:
+            doc = db.collection(fs_coll).document(doc_id)
+            actual_doc = await doc.get()
+            if not actual_doc.exists:
+                await doc.set(data)
+
+        else:
+            await db.collection(fs_coll).document(doc_id).set(data)
+
+    tasks = [write(data) for data in data_list]
     await asyncio.gather(*tasks)
 
 
-async def write_fs_modules(semester: str, doc_id_key: str, data_list: list[Module]):
-    """Writes a list of modules to firestore
+def write_json(data_list: list[Dictable], filename: str):
+    """Writes dictable data into a JSON file
 
     Args:
-        semester (str): Semester to store module in. Eg: 2023;2
-        doc_id_key (str): Key of dict to use as document identifier
-        data_list (list[Module]): List of module data
+        data_list (list[Dictable]): List of data to save
+        filename (str): Filename of the output JSON file
     """
 
-    async def write_semester_data(data: Dictable):
-        data = data.to_dict()
-        data["semester"] = semester
-        doc_id = f"{semester}_{data[doc_id_key]}"
-
-        await db.collection("modules").document(doc_id).set(data)
-
-        module_typesense = {
-            "name": data["name"],
-            "code": data["code"],
-            "semester": data["semester"],
-            "description": data["description"],
-        }
-        typesense_util.upsert_document(typesense_util.MODULE_COLL, module_typesense)
-
-    typesense_util.init()
-    tasks = [write_semester_data(data) for data in data_list]
-    await asyncio.gather(*tasks)
-
-
-async def write_fs_venue(semester: str, venue_list: list[Venue]):
-    """Writes a list of venues and lessons to firestore
-
-    Args:
-        semester (str): Semester to store module in. Eg: 2023;2
-        venue_list (list[Venue]): List of venue data
-    """
-
-    async def write_venue_data(venue: Venue):
-        base_venue = {"name": venue.name, "lat": venue.lat, "lng": venue.lng}
-        lessons = venue.to_dict()["lessons"]
-        doc_id = venue.name
-
-        venue_doc = db.collection("venues").document(doc_id)
-        actual_doc = await venue_doc.get()
-        if not actual_doc.exists:
-            await venue_doc.set(base_venue)
-
-        await venue_doc.update({f"{semester}_lessons": lessons})
-
-    tasks = [write_venue_data(venue) for venue in venue_list]
-    await asyncio.gather(*tasks)
-
-
-async def write_fs_semester_exam(semester: str, exam_list: list[Exam]):
-    """Updates existing modules in firestore with their exam information
-
-    Args:
-        semester (str): Semester to update module. Eg: 2023;2
-        exam_list (list[Exam]): List of exam data
-    """
-
-    async def write_exam_data(exam: Exam):
-        exam = exam.to_dict()
-        doc_id = f"{semester}_{exam['module_code']}"
-        try:
-            await db.collection("modules").document(doc_id).update({"exam": exam})
-        except:
-            print(f"Module {doc_id} does not exist!")
-
-    tasks = [write_exam_data(exam) for exam in exam_list]
-    await asyncio.gather(*tasks)
-
-
-def write_json_staff(staff_list: list[Staff]):
-    """Writes faculty staff to a local JSON file
-
-    Args:
-        staff (list[Staff]): List of faculty staff
-    """
-
-    filepath = "export/staff.json"
+    filepath = f"export/{filename}.json"
     if not os.path.exists(filepath):
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
-    staff_list = [staff.to_dict() for staff in staff_list]
+    data_list = [data.to_dict() for data in data_list]
+
+    if os.path.exists(filepath):
+        print(f"{filepath} already exists")
+        return
 
     with open(filepath, "w") as file:
-        json.dump(staff_list, file, indent=2)
+        json.dump(data_list, file, indent=2)
 
 
-def write_json_course_categories(category_list: list[CourseCategory]):
-    """Writes course categories to a local JSON file
-
-    Args:
-        category_list (list[CourseCategory]): List of course category data
-    """
-
-    filepath = "export/courseCategories.json"
-    if not os.path.exists(filepath):
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-
-    category_list = [category.to_dict() for category in category_list]
-
-    with open(filepath, "w") as file:
-        json.dump(category_list, file, indent=2)
-
-
-def write_json_modules(module_list: list[Module]):
-    """Writes modules to their individual JSON file
+def write_json_invidivual(data_list: list[Dictable], subfolder_name: str, fn_key: str):
+    """Writes dictable data into their own individual JSON file
 
     Args:
-        exam_list (list[Exam]): List of module data
+        data_list (list[Dictable]): List of data to save
+        subfolder_name (str): Folder to contain individual JSON files
+        fn_key (str): Key of the dictable to use as the filename
     """
 
-    dirpath = "export/modules/"
+    dirpath = f"export/{subfolder_name}/"
     if not os.path.exists(dirpath):
         os.makedirs(os.path.dirname(dirpath), exist_ok=True)
 
-    for module in module_list:
-        filepath = f"{dirpath}/{module.code}.json"
-        module_dict = module.to_dict()
-        del module_dict["code"]
+    for data in data_list:
+        data_dict = data.to_dict()
+        filepath = f"{dirpath}/{data_dict[fn_key]}.json"
+
+        if os.path.exists(filepath):
+            print(f"{filepath} already exists")
+            return
 
         with open(filepath, "w") as file:
-            json.dump(module_dict, file, indent=2)
-
-
-def write_json_venues(venue_list: list[Venue]):
-    """Writes venues to a local JSON file
-
-    Args:
-        venue_list (list[Venue]): List of venue data
-    """
-
-    filepath = "export/venues.json"
-    if not os.path.exists(filepath):
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-
-    venue_list = [venue.to_dict() for venue in venue_list]
-
-    with open(filepath, "w") as file:
-        json.dump(venue_list, file, indent=2)
-
-
-def write_json_exam(exam_list: list[Exam]):
-    """Writes exams to a local JSON file
-
-    Args:
-        exam_list (list[Exam]): List of exam data
-    """
-
-    filepath = "export/exams.json"
-    if not os.path.exists(filepath):
-        os.makedirs(os.path.dirname(filepath), exist_ok=True)
-
-    exams = {}
-    for exam in exam_list:
-        exam_dict = exam.to_dict()
-        del exam_dict["module_code"]
-        exams[exam.module_code] = exam_dict
-
-    with open(filepath, "w") as file:
-        json.dump(exams, file, indent=2)
+            json.dump(data_dict, file, indent=2)

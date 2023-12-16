@@ -5,28 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Scrape Staff",
+            "name": "Start Scraping",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/scrape_staff.py",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "justMyCode": true
-        },
-        {
-            "name": "Scrape Modules",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/scrape_modules.py",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "justMyCode": true
-        },
-        {
-            "name": "Scrape Exams",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/scrape_exams.py",
+            "program": "${workspaceFolder}/scrape.py",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
             "justMyCode": true

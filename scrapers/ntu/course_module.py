@@ -1,56 +1,41 @@
-import asyncio
 import re
 import sys
-from datetime import datetime
 from typing import cast
 
 import bs4
-import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter, Retry
+from requests import Session
 
-from data import (
-    write_fs_course_categories,
-    write_fs_modules,
-    write_fs_venue,
-    write_json_course_categories,
-    write_json_modules,
-    write_json_venues,
-)
-from structs import CourseCategory, Exam, Lesson, Module, Venue
-from util import (
+from util.helper import (
     merge_dicts_sets,
     read_cache,
     session_get_cache,
     session_post_cache,
     write_cache,
 )
+from util.structs import CourseCategory, Lesson, Module, Venue
 
 CACHE_FILENAME = "modules"
 SCHEDULE_SELECT_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main"
 COURSE_DETAIL_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/AUS_SCHEDULE.main_display1"
 COURSE_INFO_PAGE = "https://wis.ntu.edu.sg/webexe/owa/AUS_SUBJ_CONT.main_display1"
-EXAM_SEMSTER_PAGE = "https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.MainSubmit"
-EXAM_TIMETABLE_PAGE = "https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.Get_detail"
 
-OPT_GENERAL = 1
 DEFAULT_LAT = 1.3464
 DEFAULT_LNG = 103.6808
 
-retries = Retry(total=5, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])
-sess = requests.Session()
-sess.mount("https://", HTTPAdapter(max_retries=retries))
 
-
-def get_course_categories(force_semester="") -> tuple[str, list[CourseCategory]]:
-    """Returns all course categories for the current or given semester
+def get_course_categories(
+    sess: Session, force_semester=""
+) -> tuple[str, list[CourseCategory]]:
+    """Returns all course categories for the current or given semester.
 
     Args:
+        sess (Session): Persistent session of scraper.
         force_semester (str, optional): Academic semester to filter, format "YYYY;S".
         Eg. "2022;2" for 2022 Sem 2 Defaults to "".
 
     Returns:
-        tuple[str, list[CourseCategory]]: Semester string and list of course categories
+        tuple[str, list[CourseCategory]]: Semester string and list of course categories.
     """
     res = session_get_cache(sess, SCHEDULE_SELECT_PAGE)
     soup = BeautifulSoup(res.text, "lxml")
@@ -88,13 +73,14 @@ def get_course_categories(force_semester="") -> tuple[str, list[CourseCategory]]
 
 
 def scrape_category_modules(
-    semester: str, categories: list[CourseCategory]
+    sess: Session, semester: str, categories: list[CourseCategory]
 ) -> tuple[list[Module], list[Venue]]:
-    """Goes through all course categories and retrieve the module and venue information
+    """Goes through all course categories and retrieve the module and venue information.
 
     Args:
-        semester (str): Semester in YYYY;S format
-        categories (list[CourseCategory]): List of course categories
+        sess (Session): Persistent session of scraper.
+        semester (str): Semester in YYYY;S format.
+        categories (list[CourseCategory]): List of course categories.
     """
 
     # skip scraping and html parsing if possible
@@ -138,7 +124,7 @@ def scrape_category_modules(
         res = session_post_cache(sess, COURSE_DETAIL_PAGE, data)
 
         if res.ok:
-            modules, module_venues = get_category_modules_venues(res.text)
+            modules, module_venues = get_category_modules_venues(semester, res.text)
             venue_dict = merge_dicts_sets(venue_dict, module_venues)
         else:
             print(f"Error with scraping {category_name}")
@@ -200,14 +186,14 @@ def scrape_category_modules(
 
 
 def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
-    """Parses scraped module grading and description
+    """Parses scraped module grading and description.
 
     Args:
-        module_codes (list[Module]): Modules for the current category
-        html (str): HTTP response text
+        module_codes (list[Module]): Modules for the current category.
+        html (str): HTTP response text.
 
     Returns:
-        list[Module]: Modules populated with additional information
+        list[Module]: Modules populated with additional information.
     """
 
     module_codes = list(map(lambda m: m.code, modules))
@@ -264,18 +250,20 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
 
 
 def get_category_modules_venues(
+    semester: str,
     course_page_text: str,
 ) -> tuple[list[Module], dict[str, set[Lesson]]]:
     """Parses the "Load Content of Course" page with all the modules and returns a list
-       of modules for the course in the given academic semester and a list of venues
+       of modules for the course in the given academic semester and a list of venues.
 
     Args:
-        course_page_text (str): Text response from course detail POST request
+        semester (str): Semester in YYYY;S format.
+        course_page_text (str): Text response from course detail POST request.
 
     Returns:
         tuple[list[Module], dict[str, set[Lesson]]]:
         List of modules for course category in the academic semester
-        and its relevant scheduled lessons
+        and its relevant scheduled lessons.
     """
 
     modules = []
@@ -295,6 +283,7 @@ def get_category_modules_venues(
 
         module = Module(
             verified=False,
+            semester=semester,
             code=module_code,
             course_codes=[],
             credits=module_credits,
@@ -359,121 +348,3 @@ def get_category_modules_venues(
         modules.append(module)
 
     return modules, venues
-
-
-def get_exam_plan_num() -> str:
-    """Retrieves latest exam plan number
-
-    Returns:
-        str: Latest exam plan number
-    """
-
-    data = {"p_opt": OPT_GENERAL, "p_type": "UE", "bOption": "Next"}
-    res = session_post_cache(sess, EXAM_SEMSTER_PAGE, data)
-
-    soup = BeautifulSoup(res.text, "lxml")
-    plan_num = soup.find_all("input", {"name": "p_plan_no"})[-1]
-
-    return plan_num["value"]
-
-
-def process_exams(modules: list[Module], html: str) -> list[Exam]:
-    """Parse exam table rows and return structured list
-
-    Args:
-        modules (list[Module]): List of all scraped modules
-        html (str): Exam page html string
-
-    Returns:
-        list[Module]: List of all modules with exam information
-    """
-
-    soup = BeautifulSoup(html, "lxml")
-    exam_rows = soup.find_all("tr", {"align": "yes"})
-
-    # exam rows: date / day / time / course code / course title / duration
-    for exam_row in exam_rows:
-        exam_details = exam_row.find_all("td")
-
-        if len(exam_details) == 0:
-            continue
-
-        date = exam_details[0].text.strip()
-        day = exam_details[1].text.strip()
-        time = exam_details[2].text.strip()
-        c_code = exam_details[3].text.strip()
-        c_title = exam_details[4].text.strip()
-        dur = exam_details[5].text.strip()
-
-        date = datetime.strptime(date, "%d %B %Y").isoformat()
-        time = datetime.strptime(time, "%I.%M %p").strftime("%H:%M:%S")
-
-        exam = Exam(module_code=c_code, date=date, time=time, day=day, duration=dur)
-
-        for i, module in enumerate(modules):
-            if module.code == c_code:
-                modules[i].exam = exam
-                break
-
-    return modules
-
-
-def insert_exams(semester: str, plan_num: str, modules: list[Module]) -> list[Module]:
-    """Inserts exams into all available modules
-
-    Args:
-        semester (str): Semester in "YYYY:SS" format. Eg: 2023;2
-        plan_num (str): Scraped plan number
-        modules (list[Module]): List of all scraped modules
-
-    Returns:
-        list[Module]: List of all modules with exam information
-    """
-
-    sem_year, sem_num = semester.split(";")
-
-    data = {
-        "p_exam_dt": "",
-        "p_start_time": "",
-        "p_dept": "",
-        "p_subj": "",
-        "p_venue": "",
-        "p_matric": "",
-        "academic_session": "",
-        "p_plan_no": plan_num,
-        "p_exam_yr": sem_year,
-        "p_semester": sem_num,
-        "p_type": "UE",
-        "bOption": "Next",
-    }
-    res = session_post_cache(sess, EXAM_TIMETABLE_PAGE, data)
-    modules = process_exams(modules, res.text)
-    return modules
-
-
-async def scrape():
-    semester, categories = get_course_categories()
-    modules, venues = scrape_category_modules(semester, categories)
-    exam_plan_num = get_exam_plan_num()
-    modules = insert_exams(semester, exam_plan_num, modules)
-
-    write_json_course_categories(categories)
-    write_json_modules(modules)
-    write_json_venues(venues)
-
-    await write_fs_course_categories(semester, "code", categories)
-    await write_fs_modules(semester, "code", modules)
-    await write_fs_venue(semester, venues)
-
-
-"""
-Steps:
-- Gets all course categories from the class schedule page.
-- For each course category, get all modules offered, lessons and venues.
-    - Retrieving module and venues uses the class schedule for lesson times.
-    - And course content for module descriptions.
-    
-- Uploads course categories, modules and venues onto firebase.
-"""
-if __name__ == "__main__":
-    asyncio.run(scrape())

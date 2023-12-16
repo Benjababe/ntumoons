@@ -96,6 +96,7 @@ class Exam(Dictable):
 @dataclass
 class Module(Dictable):
     verified: bool
+    semester: str
     code: str
     course_codes: list[str]
     credits: str

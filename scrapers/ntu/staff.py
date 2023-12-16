@@ -1,28 +1,24 @@
-import asyncio
 import re
 from collections import defaultdict
 
-import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter, Retry
+from requests import Session
 
-from data import write_fs_staff, write_fs_staff_keywords, write_json_staff
-from structs import Staff
-from util import read_cache, session_get_cache, write_cache
+from util.helper import read_cache, session_get_cache, write_cache
+from util.structs import Staff
 
 CACHE_FILENAME = "staff"
 FACULTY_DIR_PAGE = "https://www.ntu.edu.sg/research/faculty-directory/GetAcademicProfiles/?searchFaculty=&interests=all&page={}"
 
-retries = Retry(total=5, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])
-sess = requests.Session()
-sess.mount("https://", HTTPAdapter(max_retries=retries))
 
+def get_all_staff(sess: Session) -> list[Staff]:
+    """Retrieves all faculty staff information.
 
-def get_all_staff() -> list[Staff]:
-    """Retrieves all faculty staff information
+    Args:
+        sess (Session): Persistent session of scraper.
 
     Returns:
-        list[Staff]: List of all faculty staff
+        list[Staff]: List of all faculty staff.
     """
 
     all_staff = read_cache(CACHE_FILENAME, "all_staff")
@@ -43,7 +39,7 @@ def get_all_staff() -> list[Staff]:
         if res.ok:
             data = res.json()
             total_pages = data["totalPages"]
-            all_staff += get_staff_in_page(data["items"])
+            all_staff += get_staff_in_page(sess, data["items"])
         else:
             break
 
@@ -53,14 +49,15 @@ def get_all_staff() -> list[Staff]:
     return all_staff
 
 
-def get_staff_details(url: str) -> Staff:
-    """Scrapes staff dedicated page in digital repository
+def get_staff_details(sess: Session, url: str) -> Staff:
+    """Scrapes staff dedicated page in digital repository.
 
     Args:
-        url (str): Staff page URL
+        sess (Session): Persistent session of scraper.
+        url (str): Staff page URL.
 
     Returns:
-        Staff: Staff object populated with additional information
+        Staff: Staff object populated with additional information.
     """
 
     details = defaultdict(lambda: None)
@@ -90,22 +87,23 @@ def get_staff_details(url: str) -> Staff:
     return details
 
 
-def get_staff_in_page(data: list[dict]) -> list[Staff]:
-    staff = list(map(staff_dict_to_obj, data))
+def get_staff_in_page(sess: Session, data: list[dict]) -> list[Staff]:
+    staff = list(map(lambda d: staff_dict_to_obj(sess, d), data))
     return staff
 
 
-def staff_dict_to_obj(s_dict: dict) -> Staff:
-    """Converts a generic staff dict to a structured Staff object
+def staff_dict_to_obj(sess: Session, s_dict: dict) -> Staff:
+    """Converts a generic staff dict to a structured Staff object.
 
     Args:
-        s_dict (dict): Generic staff dict
+        sess (Session): Persistent session of scraper.
+        s_dict (dict): Generic staff dict.
 
     Returns:
-        Staff: Proper Staff object
+        Staff: Proper Staff object.
     """
 
-    details = get_staff_details(s_dict["url"])
+    details = get_staff_details(sess, s_dict["url"])
 
     appointments = (
         []
@@ -135,18 +133,18 @@ def staff_dict_to_obj(s_dict: dict) -> Staff:
     )
 
 
-def get_keywords(all_staff: list[Staff]) -> list[str]:
-    """Gets relevant keywords for faculty staff. Only include those with 5 or more occurrences
+def get_keywords(staff_list: list[Staff]) -> list[str]:
+    """Gets relevant keywords for faculty staff. Only include those with 5 or more occurrences.
 
     Args:
-        all_staff (list[Staff]): List of faculty staff
+        staff_list (list[Staff]): List of faculty staff.
 
     Returns:
-        list[str]: All relevant keywords
+        list[str]: All relevant keywords.
     """
 
     keyword_count = defaultdict(lambda: 0)
-    for staff in all_staff:
+    for staff in staff_list:
         for keyword in staff.keywords:
             keyword_count[keyword] += 1
 
@@ -156,25 +154,3 @@ def get_keywords(all_staff: list[Staff]) -> list[str]:
             keywords.append(keyword)
 
     return sorted(keywords)
-
-
-async def scrape():
-    all_staff = get_all_staff()
-    keywords = get_keywords(all_staff)
-
-    write_json_staff(all_staff)
-    await write_fs_staff("email", all_staff)
-    await write_fs_staff_keywords(keywords)
-
-
-"""
-Scraping staff is pretty simple:
-
-- Goes through page 1 to go through faculty staff and retrieve total amount of pages.
-    - For each page, retrieve commonly found information for each professor.
-    
-- Use email as document id as it is expected not to change.
-- Upload everything to firebase.
-"""
-if __name__ == "__main__":
-    asyncio.run(scrape())
