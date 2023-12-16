@@ -20,8 +20,8 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### TypeSense Uploader
-TypeSense is used to index searching for modules and staff. It's hosted on a free [render](https://github.com/hmbrg/typesense-on-render) instance as of writing because free.
+### Typesense Uploader
+Typesense is used to index searching for modules and staff. It's hosted on a free [render](https://github.com/hmbrg/typesense-on-render) instance as of writing because free.
 
 A `.env` file is required containing the following environment variables.
 
@@ -40,14 +40,14 @@ Just run `python scrape.py` and pray everything goes smoothly.
 
 For those who don't want to look at the script, this is a short overview:
 
-1. Initialise TypeSense collections for insertion
+1. Initialise Typesense collections for insertion
 
 2. Scrape modules and everything related to them
     - Retrieve current semester and course categories
     - Retrieve all modules for all course categories
     - Retrieve venues for all modules and their respective lesson times
     - Save data to local JSON files (in case)
-    - Insert indexable data (Modules only currently) to TypeSense host
+    - Insert indexable data (Modules only currently) to Typesense host
     - Upload modules, course categories and venues to Firebase
 
 3. Scrape faculty staff and their related information
@@ -55,7 +55,7 @@ For those who don't want to look at the script, this is a short overview:
     - For each staff member, scrape their individual page for more detailed stuff
     - Gets commonly used keywords for staff members (>= 5 occurrences)
     - Save data to local JSON files (in case)
-    - Insert indexable data (Staff only currently) to TypeSense host
+    - Insert indexable data (Staff only currently) to Typesense host
     - Upload staff and their keywords to Firebase
 
 ## Structure
