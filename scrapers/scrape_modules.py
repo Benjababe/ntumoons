@@ -1,6 +1,7 @@
 import asyncio
 import re
 import sys
+from datetime import datetime
 from typing import cast
 
 import bs4
@@ -15,7 +16,7 @@ from data import (
     write_json_modules,
     write_json_venues,
 )
-from structs import CourseCategory, Lesson, Module, Venue
+from structs import CourseCategory, Exam, Lesson, Module, Venue
 from util import (
     merge_dicts_sets,
     read_cache,
@@ -28,7 +29,10 @@ CACHE_FILENAME = "modules"
 SCHEDULE_SELECT_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main"
 COURSE_DETAIL_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/AUS_SCHEDULE.main_display1"
 COURSE_INFO_PAGE = "https://wis.ntu.edu.sg/webexe/owa/AUS_SUBJ_CONT.main_display1"
+EXAM_SEMSTER_PAGE = "https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.MainSubmit"
+EXAM_TIMETABLE_PAGE = "https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.Get_detail"
 
+OPT_GENERAL = 1
 DEFAULT_LAT = 1.3464
 DEFAULT_LNG = 103.6808
 
@@ -356,9 +360,101 @@ def get_category_modules_venues(
     return modules, venues
 
 
+def get_exam_plan_num() -> str:
+    """Retrieves latest exam plan number
+
+    Returns:
+        str: Latest exam plan number
+    """
+
+    data = {"p_opt": OPT_GENERAL, "p_type": "UE", "bOption": "Next"}
+    res = session_post_cache(sess, EXAM_SEMSTER_PAGE, data)
+
+    soup = BeautifulSoup(res.text, "lxml")
+    plan_num = soup.find_all("input", {"name": "p_plan_no"})[-1]
+
+    return plan_num["value"]
+
+
+def process_exams(modules: list[Module], html: str) -> list[Exam]:
+    """Parse exam table rows and return structured list
+
+    Args:
+        modules (list[Module]): List of all scraped modules
+        html (str): Exam page html string
+
+    Returns:
+        list[Module]: List of all modules with exam information
+    """
+
+    soup = BeautifulSoup(html, "lxml")
+    exam_rows = soup.find_all("tr", {"align": "yes"})
+
+    # exam rows: date / day / time / course code / course title / duration
+    for exam_row in exam_rows:
+        exam_details = exam_row.find_all("td")
+
+        if len(exam_details) == 0:
+            continue
+
+        date = exam_details[0].text.strip()
+        day = exam_details[1].text.strip()
+        time = exam_details[2].text.strip()
+        c_code = exam_details[3].text.strip()
+        c_title = exam_details[4].text.strip()
+        dur = exam_details[5].text.strip()
+
+        date = datetime.strptime(date, "%d %B %Y").isoformat()
+        time = datetime.strptime(time, "%I.%M %p").strftime("%H:%M:%S")
+
+        exam = Exam(module_code=c_code, date=date, time=time, day=day, duration=dur)
+
+        for i, module in enumerate(modules):
+            if module.code == c_code:
+                modules[i].exam = exam
+                break
+
+    return modules
+
+
+def insert_exams(semester: str, plan_num: str, modules: list[Module]) -> list[Module]:
+    """Inserts exams into all available modules
+
+    Args:
+        semester (str): Semester in "YYYY:SS" format. Eg: 2023;2
+        plan_num (str): Scraped plan number
+        modules (list[Module]): List of all scraped modules
+
+    Returns:
+        list[Module]: List of all modules with exam information
+    """
+
+    sem_year, sem_num = semester.split(";")
+
+    data = {
+        "p_exam_dt": "",
+        "p_start_time": "",
+        "p_dept": "",
+        "p_subj": "",
+        "p_venue": "",
+        "p_matric": "",
+        "academic_session": "",
+        "p_plan_no": plan_num,
+        "p_exam_yr": sem_year,
+        "p_semester": sem_num,
+        "p_type": "UE",
+        "bOption": "Next",
+    }
+    res = session_post_cache(sess, EXAM_TIMETABLE_PAGE, data)
+    modules = process_exams(modules, res.text)
+    return modules
+
+
 async def scrape():
     semester, categories = get_course_categories()
     modules, venues = scrape_category_modules(semester, categories)
+    exam_plan_num = get_exam_plan_num()
+    modules = insert_exams(semester, exam_plan_num, modules)
 
     write_json_course_categories(categories)
     write_json_modules(modules)
