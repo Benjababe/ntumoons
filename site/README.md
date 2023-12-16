@@ -4,10 +4,10 @@ Work in progress, evolution of this [piece of shit](https://devpost.com/software
 
 ## Todos
 
-[x] Timetable local search for modules
-[ ] Basic timetable for modules
-[ ] Venue display, local search and Firestore fetching
-[ ] Course category display, local search and Firestore fetching
-[ ] Staff display, local search, Typesense searching and Firestore fetching
-[ ] Dedicated course page with Typesense search and Firestore fetching
-[ ] Not use built in DaisyUI themes
+- [x] Timetable local search for modules
+- [ ] Basic timetable for modules
+- [ ] Venue display, local search and Firestore fetching
+- [ ] Course category display, local search and Firestore fetching
+- [ ] Staff display, local search, Typesense searching and Firestore fetching
+- [ ] Dedicated course page with Typesense search and Firestore fetching
+- [ ] Not use built in DaisyUI themes
