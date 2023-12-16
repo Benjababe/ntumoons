@@ -5,6 +5,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore_async
 
+import typesense_util
 from structs import CourseCategory, Dictable, Exam, Module, Staff, Venue
 
 creds = credentials.Certificate("serviceAccountKey.json")
@@ -13,7 +14,7 @@ db = firestore_async.client()
 
 
 async def write_fs_staff(doc_id_key: str, staff_list: list[Staff]):
-    """Writes a list of staff to firestore
+    """Writes a list of staff to firestore and upserts indexable info to typesense
 
     Args:
         doc_id_key (str): Key of staff to use as document id
@@ -25,6 +26,10 @@ async def write_fs_staff(doc_id_key: str, staff_list: list[Staff]):
         doc_id = data[doc_id_key]
         await db.collection("staff").document(doc_id).set(data)
 
+        staff_typesense = {"title": data["title"], "description": data["description"]}
+        typesense_util.upsert_document(typesense_util.STAFF_COLL, staff_typesense)
+
+    typesense_util.init()
     tasks = [write_fs(data) for data in staff_list]
     await asyncio.gather(*tasks)
 
@@ -40,16 +45,34 @@ async def write_fs_staff_keywords(keywords: list[str]):
     await db.collection("staff").document("metadata").set({"keywords": keywords})
 
 
-async def write_fs_semester_modules(
-    coll: str, semester: str, doc_id_key: str, data_list: list[Dictable]
+async def write_fs_course_categories(
+    semester: str, doc_id_key: str, data_list: list[CourseCategory]
 ):
+    """Writes a list of course categories to firestore
+
+    Args:
+        semester (str): Semester to store module in. Eg: 2023;2
+        doc_id_key (str): Key of dict to use as document identifier
+        data_list (list[CourseCategory]): List of course categories
+    """
+
+    async def write_semester_data(data: Dictable):
+        data = data.to_dict()
+        data["semester"] = semester
+        doc_id = f"{semester}_{data[doc_id_key]}"
+        await db.collection("courseCategory").document(doc_id).set(data)
+
+    tasks = [write_semester_data(data) for data in data_list]
+    await asyncio.gather(*tasks)
+
+
+async def write_fs_modules(semester: str, doc_id_key: str, data_list: list[Module]):
     """Writes a list of modules to firestore
 
     Args:
-        coll (str): Collection name ("courseCategories"/"module" typically)
         semester (str): Semester to store module in. Eg: 2023;2
         doc_id_key (str): Key of dict to use as document identifier
-        data_list (list[Dictable]): List of document data
+        data_list (list[Module]): List of module data
     """
 
     async def write_semester_data(data: Dictable):
@@ -57,13 +80,22 @@ async def write_fs_semester_modules(
         data["semester"] = semester
         doc_id = f"{semester}_{data[doc_id_key]}"
 
-        await db.collection(coll).document(doc_id).set(data)
+        await db.collection("modules").document(doc_id).set(data)
 
+        module_typesense = {
+            "name": data["name"],
+            "code": data["code"],
+            "semester": data["semester"],
+            "description": data["description"],
+        }
+        typesense_util.upsert_document(typesense_util.MODULE_COLL, module_typesense)
+
+    typesense_util.init()
     tasks = [write_semester_data(data) for data in data_list]
     await asyncio.gather(*tasks)
 
 
-async def write_fs_semester_venue(semester: str, venue_list: list[Venue]):
+async def write_fs_venue(semester: str, venue_list: list[Venue]):
     """Writes a list of venues and lessons to firestore
 
     Args:

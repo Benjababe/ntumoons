@@ -10,8 +10,9 @@ from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter, Retry
 
 from data import (
-    write_fs_semester_modules,
-    write_fs_semester_venue,
+    write_fs_course_categories,
+    write_fs_modules,
+    write_fs_venue,
     write_json_course_categories,
     write_json_modules,
     write_json_venues,
@@ -460,9 +461,9 @@ async def scrape():
     write_json_modules(modules)
     write_json_venues(venues)
 
-    await write_fs_semester_modules("courseCategories", semester, "code", categories)
-    await write_fs_semester_modules("modules", semester, "code", modules)
-    await write_fs_semester_venue(semester, venues)
+    await write_fs_course_categories(semester, "code", categories)
+    await write_fs_modules(semester, "code", modules)
+    await write_fs_venue(semester, venues)
 
 
 """

@@ -31,14 +31,5 @@
             "cwd": "${workspaceFolder}",
             "justMyCode": true
         },
-        {
-            "name": "Init Typesense",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/init_typesense.py",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "justMyCode": true
-        },
     ]
 }
