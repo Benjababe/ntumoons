@@ -115,7 +115,7 @@ def typesense_upsert(
     documents = []
     for data in data_list:
         data = data.to_dict()
-        document = {"id": f"{id_prepend}_{data[id_key]}"}
+        document = {"id": f"{id_prepend}{data[id_key]}"}
 
         for attr in attributes:
             document[attr] = data[attr]

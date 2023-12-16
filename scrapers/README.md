@@ -46,7 +46,7 @@ For those who don't want to look at the script, this is a short overview:
     - Retrieve current semester and course categories
     - Retrieve all modules for all course categories
     - Retrieve venues for all modules and their respective lesson times
-    - Save data to local JSON files (in case)
+    - Save data to local JSON files (Module codes and venues are used for now)
     - Insert indexable data (Modules only currently) to Typesense host
     - Upload modules, course categories and venues to Firebase
 

@@ -5,8 +5,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore_async
 
-from util.structs import Dictable
-from util.typesense import upsert_document
+from util.structs import Dictable, Module
 
 creds = credentials.Certificate("serviceAccountKey.json")
 app = firebase_admin.initialize_app(creds)
@@ -24,7 +23,7 @@ async def write_fs_staff_keywords(keywords: list[str]):
     await db.collection("staff").document("metadata").set({"keywords": keywords})
 
 
-async def write_fs(
+async def write_firestore(
     fs_coll: str,
     doc_id_key: str,
     data_list: str,
@@ -43,7 +42,7 @@ async def write_fs(
 
     async def write(data: Dictable):
         data = data.to_dict()
-        doc_id = f"{doc_id_prepend}_{data[doc_id_key]}"
+        doc_id = f"{doc_id_prepend}{data[doc_id_key]}"
 
         # does not insert if document exists
         if not override:
@@ -59,26 +58,36 @@ async def write_fs(
     await asyncio.gather(*tasks)
 
 
-def write_json(data_list: list[Dictable], filename: str):
+def write_json(data_list: list[Dictable], filename: str, keep_attrs: list[str] = None):
     """Writes dictable data into a JSON file
 
     Args:
         data_list (list[Dictable]): List of data to save
         filename (str): Filename of the output JSON file
+        keep_attrs (list[str], optional): List of attributes to keep. Defaults to None
     """
 
     filepath = f"export/{filename}.json"
     if not os.path.exists(filepath):
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
-    data_list = [data.to_dict() for data in data_list]
-
     if os.path.exists(filepath):
         print(f"{filepath} already exists")
         return
 
+    if keep_attrs is None:
+        store_list = [data.to_dict() for data in data_list]
+    else:
+        store_list = []
+        for data in data_list:
+            data = data.to_dict()
+            store = {}
+            for attr in keep_attrs:
+                store[attr] = data[attr]
+            store_list.append(store)
+
     with open(filepath, "w") as file:
-        json.dump(data_list, file, indent=2)
+        json.dump(store_list, file, indent=2)
 
 
 def write_json_invidivual(data_list: list[Dictable], subfolder_name: str, fn_key: str):

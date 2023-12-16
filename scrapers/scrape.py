@@ -1,9 +1,15 @@
 import asyncio
+import platform
 
 import requests
 from requests.adapters import HTTPAdapter, Retry
 
-from data import write_fs, write_fs_staff_keywords, write_json, write_json_invidivual
+from data import (
+    write_firestore,
+    write_fs_staff_keywords,
+    write_json,
+    write_json_invidivual,
+)
 from ntu.course_module import get_course_categories, scrape_category_modules
 from ntu.exam import get_exam_plan_num, insert_module_exams
 from ntu.staff import get_all_staff, get_keywords
@@ -42,14 +48,15 @@ async def scrape_modules():
     modules = insert_module_exams(sess, semester, exam_plan_num, modules)
 
     write_json_invidivual(modules, f"{semester}/modules", "code")
+    write_json(modules, "modulesBasic", ["name", "code"])
     write_json(categories, "courseCategories")
     write_json(venues, "venues")
 
-    typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester)
+    typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, f"{semester}_")
 
-    await write_fs(FS_COLL_MODULE, "code", modules, semester)
-    await write_fs(FS_COLL_COURSE_CATEGORY, "code", categories, semester)
-    await write_fs(FS_COLL_VENUE, "name", venues, override=False)
+    await write_firestore(FS_COLL_MODULE, "code", modules, semester)
+    await write_firestore(FS_COLL_COURSE_CATEGORY, "code", categories, f"{semester}_")
+    await write_firestore(FS_COLL_VENUE, "name", venues, override=False)
 
 
 async def scrape_staff():
@@ -70,11 +77,15 @@ async def scrape_staff():
 
     typesense_upsert(TS_COLL_STAFF, "email", staff_list, TS_ATTRS_STAFF)
 
-    await write_fs(FS_COLL_STAFF, "email", staff_list)
+    await write_firestore(FS_COLL_STAFF, "email", staff_list)
     await write_fs_staff_keywords(keywords)
+
+
+async def scrape():
+    await scrape_modules()
+    await scrape_staff()
 
 
 if __name__ == "__main__":
     init_typesense()
-    asyncio.run(scrape_modules())
-    asyncio.run(scrape_staff())
+    asyncio.run(scrape())
