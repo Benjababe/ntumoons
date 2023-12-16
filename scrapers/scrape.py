@@ -48,7 +48,7 @@ async def scrape_modules():
     modules = insert_module_exams(sess, semester, exam_plan_num, modules)
 
     write_json_invidivual(modules, f"{semester}/modules", "code")
-    write_json(modules, "modulesBasic", ["name", "code"])
+    write_json(modules, "modulesBasic", ["name", "code"], "code")
     write_json(categories, "courseCategories")
     write_json(venues, "venues")
 

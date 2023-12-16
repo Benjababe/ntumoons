@@ -58,13 +58,19 @@ async def write_firestore(
     await asyncio.gather(*tasks)
 
 
-def write_json(data_list: list[Dictable], filename: str, keep_attrs: list[str] = None):
+def write_json(
+    data_list: list[Dictable],
+    filename: str,
+    keep_attrs: list[str] = None,
+    sort_key: str = None,
+):
     """Writes dictable data into a JSON file
 
     Args:
         data_list (list[Dictable]): List of data to save
         filename (str): Filename of the output JSON file
         keep_attrs (list[str], optional): List of attributes to keep. Defaults to None
+        sort_key (str, optional): If the output needs to be sorted, key will be used
     """
 
     filepath = f"export/{filename}.json"
@@ -85,6 +91,9 @@ def write_json(data_list: list[Dictable], filename: str, keep_attrs: list[str] =
             for attr in keep_attrs:
                 store[attr] = data[attr]
             store_list.append(store)
+
+    if sort_key is not None:
+        store_list = sorted(store_list, key=lambda d: d[sort_key])
 
     with open(filepath, "w") as file:
         json.dump(store_list, file, indent=2)
