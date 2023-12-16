@@ -1,9 +1,21 @@
 {
+    "Nav": {
+        "Timetable": "Timetable"
+    },
+
     "Settings": {
         "Settings": "Settings",
         "Toggle Theme": "Toggle Theme",
-        "Toggle between dark and light themes": "Toggle between dark and light themes",
+        "Toggle between dark and light themes": "Theme can swap swap dark and light",
         "Set Locale": "Set Locale",
-        "Switch between languages on a fly": "Fast game change language"
+        "Switch between languages on a fly": "Fast game change language. Multiculture country you know?"
+    },
+
+    "Timetable": {
+        "Course code or name": "Course code or name"
+    },
+
+    "Courses": {
+        "Enter course code, name or descriptions": "Course code, name or description also can one"
     }
 }

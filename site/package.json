@@ -36,6 +36,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"sveltekit-i18n": "^2.4.2"
+		"@babel/runtime": "^7.23.6",
+		"sveltekit-i18n": "^2.4.2",
+		"typesense": "^1.7.2"
 	}
 }
