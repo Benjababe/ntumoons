@@ -1,4 +1,4 @@
-import { typesense, COLLECTION_MODULE } from '$lib/typesense';
+import { typesense, COLLECTION_MODULE } from '$lib/search/typesense';
 import { json } from '@sveltejs/kit';
 
 export async function POST({ request }) {

@@ -1,5 +1,9 @@
 <script lang="ts">
-    import { TimetableModuleSearch } from '$lib/components/timetable';
+    import { ModuleSearch, ModuleTable, TimetableModule } from '$lib/components/timetable';
 </script>
 
-<TimetableModuleSearch />
+<div class="flex flex-col justify-center relative max-w-full">
+    <TimetableModule />
+    <ModuleSearch />
+    <ModuleTable />
+</div>

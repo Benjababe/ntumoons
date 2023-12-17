@@ -12,7 +12,8 @@
     },
 
     "Timetable": {
-        "Course code or name": "Course code or name"
+        "Course code or name": "Course code or name",
+        "No exam for this module.": "No exam for this module."
     },
 
     "Courses": {

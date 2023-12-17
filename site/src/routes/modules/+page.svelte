@@ -4,7 +4,7 @@
     let modules = [];
     let searchValue = '';
     let searching = false;
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
 
     function handleSearch() {
         searching = true;
@@ -19,7 +19,7 @@
             return;
         }
 
-        const data = await fetch('/search', {
+        const data = await fetch('/search/typesense/module', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
