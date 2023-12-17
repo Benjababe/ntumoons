@@ -1,10 +1,13 @@
 <script lang="ts">
+    import { page } from '$app/stores';
     export let href: string;
+
+    $: linkColour = $page.url.pathname === href ? 'text-accent' : 'hover:text-accent';
 </script>
 
 <a
     {href}
-    class="bg-base-300 hover:text-accent"
+    class="bg-base-300 {linkColour}"
 >
     <slot />
 </a>
