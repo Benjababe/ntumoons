@@ -125,7 +125,9 @@ def typesense_upsert(
     res = client.collections[collection].documents.import_(documents, action_mode)
     success_count = len([item for item in res if item["success"]])
 
-    print(f"{success_count}/{len(res)} documents saved")
+    print(
+        f"{success_count}/{len(res)} documents saved to Typesense '{collection}' collection"
+    )
 
 
 if __name__ == "__main__":

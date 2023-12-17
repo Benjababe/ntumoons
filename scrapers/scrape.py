@@ -43,19 +43,21 @@ async def scrape_modules():
     """
 
     semester, categories = get_course_categories(sess)
-    modules, venues = scrape_category_modules(sess, semester, categories)
+    categories, modules, venues = scrape_category_modules(sess, semester, categories)
     exam_plan_num = get_exam_plan_num(sess)
     modules = insert_module_exams(sess, semester, exam_plan_num, modules)
 
     write_json_invidivual(modules, f"{semester}/modules", "code")
-    write_json(modules, "modulesBasic", ["name", "code"], "code")
+    write_json(modules, "modulesBasic", ["name_pretty", "code"], "code")
     write_json(categories, "courseCategories")
     write_json(venues, "venues")
 
-    typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, f"{semester}_")
+    semester_prepend = f"{semester}_"
 
-    await write_firestore(FS_COLL_MODULE, "code", modules, semester)
-    await write_firestore(FS_COLL_COURSE_CATEGORY, "code", categories, f"{semester}_")
+    typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
+
+    await write_firestore(FS_COLL_MODULE, "code", modules, semester_prepend)
+    await write_firestore(FS_COLL_COURSE_CATEGORY, "code", categories, semester_prepend)
     await write_firestore(FS_COLL_VENUE, "name", venues, override=False)
 
 
@@ -87,5 +89,8 @@ async def scrape():
 
 
 if __name__ == "__main__":
+    if platform.system() == "Windows":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     init_typesense()
     asyncio.run(scrape())

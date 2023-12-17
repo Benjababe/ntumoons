@@ -74,7 +74,7 @@ def get_course_categories(
 
 def scrape_category_modules(
     sess: Session, semester: str, categories: list[CourseCategory]
-) -> tuple[list[Module], list[Venue]]:
+) -> tuple[list[CourseCategory], list[Module], list[Venue]]:
     """Goes through all course categories and retrieve the module and venue information.
 
     Args:
@@ -87,8 +87,7 @@ def scrape_category_modules(
     cache_key = f"{semester}_category_modules"
     cache = read_cache(CACHE_FILENAME, cache_key)
     if cache is not None:
-        categories = cache["categories"]
-        return cache["modules"], cache["venues"]
+        return cache["categories"], cache["modules"], cache["venues"]
 
     category_modules: list[Module] = []
     added_codes = set()
@@ -161,7 +160,9 @@ def scrape_category_modules(
                 category_modules[j].course_codes.append(category_code)
 
         # include module codes offered into category
-        category.modules = list(map(lambda m: m.code, modules))
+        category.modules = list(
+            map(lambda m: {"name": m.name, "code": m.code}, modules)
+        )
         categories[i] = category
 
     for v_name, lessons in venue_dict.items():
@@ -182,7 +183,7 @@ def scrape_category_modules(
     }
     write_cache(CACHE_FILENAME, cache_key, cache_val)
 
-    return category_modules, venues
+    return categories, category_modules, venues
 
 
 def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
@@ -206,12 +207,17 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
 
         header = rows[0].find_all("td")
         code = header[0].text.strip()
+        name = header[1].text.strip()
 
         if code not in module_codes:
             continue
 
         i = module_codes.index(code)
         modules[i].verified = True
+
+        # update name again because class schedule includes symbols
+        modules[i].name = name
+        modules[i].name_pretty = name.title()
 
         desc = rows[-1].find("td").text.strip().replace("'", "").replace("\n", "<br/>")
         modules[i].description = desc
@@ -292,6 +298,7 @@ def get_category_modules_venues(
             prerequisites=[],
             mutex=[],
             name=module_name,
+            name_pretty=module_name.title(),
             index_numbers={},
             exam=None,
         )

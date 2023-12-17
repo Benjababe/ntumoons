@@ -59,10 +59,18 @@ def process_exams(modules: list[Module], html: str) -> list[Exam]:
         c_title = exam_details[4].text.strip()
         dur = exam_details[5].text.strip()
 
-        date = datetime.strptime(date, "%d %B %Y").isoformat()
-        time = datetime.strptime(time, "%I.%M %p").strftime("%H:%M:%S")
+        iso_date = datetime.strptime(date, "%d %B %Y").isoformat()
+        hr_time = datetime.strptime(time, "%I.%M %p").strftime("%H:%M:%S")
 
-        exam = Exam(module_code=c_code, date=date, time=time, day=day, duration=dur)
+        exam = Exam(
+            module_code=c_code,
+            date=date,
+            time=time,
+            day=day,
+            duration=dur,
+            iso_date=iso_date,
+            hr_time=hr_time,
+        )
 
         for i, module in enumerate(modules):
             if module.code == c_code:

@@ -1,4 +1,3 @@
-import datetime
 import json
 import urllib
 from dataclasses import asdict, dataclass
@@ -91,6 +90,8 @@ class Exam(Dictable):
     time: str
     day: str
     duration: str
+    iso_date: str
+    hr_time: str
 
 
 @dataclass
@@ -105,6 +106,7 @@ class Module(Dictable):
     prerequisites: list[list[str]]
     mutex: list[str]
     name: str
+    name_pretty: str
     index_numbers: dict[str, list[Lesson]]
     exam: Exam
 
