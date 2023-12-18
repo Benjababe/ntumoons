@@ -7,14 +7,13 @@
 
     onMount(async () => {
         const initLocale = localStorage.locale ?? 'en';
-        const semesterStr = localStorage.semester;
-        if (semesterStr === undefined) {
-            $semester = await getSemester();
-        }
         await loadTranslations(initLocale);
+
+        if (!$semester.active) $semester = await getSemester();
     });
 
     async function getSemester() {
+        console.log('Fetching latest semester...');
         return (await (await fetch('/search/firebase/semester')).json()) as Semester;
     }
 </script>

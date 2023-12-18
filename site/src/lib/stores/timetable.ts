@@ -1,12 +1,4 @@
-import { type Writable, writable } from 'svelte/store';
-import { browser } from '$app/environment';
+import { persisted } from 'svelte-persisted-store';
 
 const key = 'timetableModules';
-
-const initialModules = browser ? JSON.parse(localStorage[key] ?? '[]') : [];
-
-export const timetableModules: Writable<Module[]> = writable(initialModules);
-
-if (browser) {
-    timetableModules.subscribe((modules) => (localStorage[key] = JSON.stringify(modules)));
-}
+export const timetableModules = persisted<Module[]>(key, []);
