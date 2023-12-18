@@ -4,14 +4,14 @@ type Module = {
     name_pretty: string;
     credits: string;
     exam: Exam;
-    prerequisites: string;
+    prerequisites: string[];
     course_codes: string[];
     verified: boolean;
     description: string;
     mutex: string[];
     semester: string;
     grading: string;
-    index_numbers: { [key: number]: Lesson };
+    index_numbers: { [key: number]: Lesson[] };
     active_index_number: string;
 };
 
@@ -26,12 +26,14 @@ type Exam = {
 };
 
 type Lesson = {
+    module_code: string;
+    index: string;
     remark: string;
     group: string;
     time: string;
     day: string;
     type: string;
-    venue: string;
+    venue_name: string;
 };
 
 type Semester = {

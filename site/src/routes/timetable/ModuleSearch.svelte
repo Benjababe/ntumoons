@@ -1,7 +1,7 @@
 <script lang="ts">
     import modules from '$lib/modules/modulesBasic.json';
     import type { ModulesBasic } from '$lib/modules/types';
-    import { semester, timetableModules } from '$lib/stores/';
+    import { semester, timetableModules } from '$lib/stores';
     import { t } from '$lib/translations';
 
     let moduleResults: ModulesBasic = [];

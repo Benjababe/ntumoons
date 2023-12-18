@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { timetableModules } from '$lib/stores/timetable';
+    import { timetableModules } from '$lib/stores';
     import ModuleTableCell from './ModuleTableCell.svelte';
 
     function removeModule(e: CustomEvent<{ code: string }>) {

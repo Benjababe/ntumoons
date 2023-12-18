@@ -3,7 +3,7 @@
     import { Link, Settings } from '$lib/components/navbar';
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
-    import { semester } from '$lib/stores/';
+    import { semester } from '$lib/stores';
 
     onMount(async () => {
         const initLocale = localStorage.locale ?? 'en';

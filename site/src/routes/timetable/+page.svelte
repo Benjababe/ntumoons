@@ -1,5 +1,7 @@
 <script lang="ts">
-    import { ModuleSearch, ModuleTable, TimetableModule } from '$lib/components/timetable';
+    import ModuleSearch from './ModuleSearch.svelte';
+    import ModuleTable from './ModuleTable.svelte';
+    import { TimetableModule } from '$lib/components/timetable';
 </script>
 
 <div class="flex flex-col justify-center relative max-w-full">

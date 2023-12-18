@@ -1,6 +1,6 @@
 <script lang="ts">
     import crossIcon from '$lib/assets/cross.svg?raw';
-    import { semester } from '$lib/stores/';
+    import { semester } from '$lib/stores';
     import { t } from '$lib/translations';
     import { createEventDispatcher } from 'svelte';
 
@@ -21,7 +21,7 @@
 <div class="table-cell">
     <div class="float-right h-fit mt-1 ml-4 mr-4">
         <button
-            class="btn-outline rounded-full w-max h-max"
+            class="btn-outline rounded-full w-max h-max p-1"
             on:click|preventDefault={remove}
         >
             {@html crossIcon}
@@ -44,12 +44,12 @@
         {:else}
             <span>{$t('Timetable.No exam for this module.')}</span>
         {/if}
-        <span>-- {mod.credits} CU</span>
+        <span>-- {mod.credits} AU</span>
     </div>
     <div class="text-sm mt-2">
         <span>Index Number: </span>
         <select
-            class="ml-2"
+            class="ml-2 rounded-sm"
             bind:value={activeIndexNumber}
             on:change={updateIndex}
         >
