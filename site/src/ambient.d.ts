@@ -12,6 +12,7 @@ type Module = {
     semester: string;
     grading: string;
     index_numbers: { [key: number]: Lesson };
+    active_index_number: string;
 };
 
 type Exam = {

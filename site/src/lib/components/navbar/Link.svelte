@@ -2,7 +2,7 @@
     import { page } from '$app/stores';
     export let href: string;
 
-    $: linkColour = $page.url.pathname === href ? 'text-accent' : 'hover:text-accent';
+    $: linkColour = $page.url.pathname === href ? 'text-primary' : 'hover:text-primary';
 </script>
 
 <a

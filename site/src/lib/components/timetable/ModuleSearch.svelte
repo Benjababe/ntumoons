@@ -1,7 +1,7 @@
 <script lang="ts">
     import modules from '$lib/modules/modulesBasic.json';
     import type { ModulesBasic } from '$lib/modules/types';
-    import { semester, timetableModules } from '$lib/store';
+    import { semester, timetableModules } from '$lib/stores/';
     import { t } from '$lib/translations';
 
     let moduleResults: ModulesBasic = [];
@@ -23,7 +23,6 @@
 
         if (newModule !== -1) {
             $timetableModules = [...$timetableModules, newModule];
-            localStorage.setItem('timetableModules', JSON.stringify($timetableModules));
         } else {
             console.error(`Failed to retrieve module ${moduleCode}`);
         }
@@ -40,6 +39,7 @@
         });
 
         const mod: Module = await res.json();
+        mod.active_index_number = '-1';
         return mod;
     }
 </script>
@@ -60,8 +60,8 @@
                 <li class="hover:text-accent bg-base-100 hover:bg-base-300">
                     <button
                         class="px-4 py-2 w-full text-left capitalize cursor-pointer"
-                        on:mousedown|preventDefault={() => addModuleTimetable(mod.code)}
-                        on:keydown|preventDefault={() => addModuleTimetable(mod.code)}
+                        on:mousedown|preventDefault|once={() => addModuleTimetable(mod.code)}
+                        on:keydown|preventDefault|once={() => addModuleTimetable(mod.code)}
                     >
                         {`${mod.code} ${mod.name_pretty}`}
                     </button>

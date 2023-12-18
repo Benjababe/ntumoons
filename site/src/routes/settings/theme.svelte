@@ -8,13 +8,13 @@
     let isLight = false;
 
     onMount(() => {
-        const theme = localStorage.getItem('theme') ?? 'dark';
+        const theme = localStorage.theme ?? 'dark';
         isLight = theme === 'light';
     });
 
     function toggleTheme() {
         const theme = isLight ? 'light' : 'dark';
-        localStorage.setItem('theme', theme);
+        localStorage.theme = theme;
         document.documentElement.setAttribute('data-theme', theme);
     }
 </script>

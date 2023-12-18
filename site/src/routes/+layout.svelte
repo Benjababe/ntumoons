@@ -3,25 +3,19 @@
     import { Link, Settings } from '$lib/components/navbar';
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
-    import { semester } from '$lib/store';
+    import { semester } from '$lib/stores/';
 
     onMount(async () => {
-        const initLocale = localStorage.getItem('locale') ?? 'en';
-
-        const semesterStr = localStorage.getItem('semester');
-        if (semesterStr === null) {
+        const initLocale = localStorage.locale ?? 'en';
+        const semesterStr = localStorage.semester;
+        if (semesterStr === undefined) {
             $semester = await getSemester();
-        } else {
-            $semester = JSON.parse(semesterStr);
         }
-
         await loadTranslations(initLocale);
     });
 
     async function getSemester() {
-        const sem: Semester = await (await fetch('/search/firebase/semester')).json();
-        localStorage.setItem('semester', JSON.stringify(sem));
-        return sem;
+        return (await (await fetch('/search/firebase/semester')).json()) as Semester;
     }
 </script>
 

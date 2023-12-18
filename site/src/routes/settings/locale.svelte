@@ -7,7 +7,7 @@
     };
 
     function setLocale() {
-        localStorage.setItem('locale', $locale);
+        localStorage.locale = $locale;
     }
 </script>
 
