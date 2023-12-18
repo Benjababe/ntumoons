@@ -3,9 +3,9 @@ import { browser } from '$app/environment';
 
 const key = 'timetableModules';
 
-export const timetableModules: Writable<Module[]> = writable(
-    localStorage[key] ? JSON.parse(localStorage[key]) : []
-);
+const initialModules = browser ? JSON.parse(localStorage[key] ?? '[]') : [];
+
+export const timetableModules: Writable<Module[]> = writable(initialModules);
 
 if (browser) {
     timetableModules.subscribe((modules) => (localStorage[key] = JSON.stringify(modules)));
