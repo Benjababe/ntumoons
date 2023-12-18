@@ -103,20 +103,17 @@ class Module(Dictable):
     credits: str
     description: str
     grading: str
-    prerequisites: list[list[str]]
+    prerequisites: list[str]
     mutex: list[str]
     name: str
     name_pretty: str
     index_numbers: dict[str, list[Lesson]]
     exam: Exam
 
-    def to_dict(self):
-        self.prerequisites = json.dumps(self.prerequisites, separators=(",", ":"))
-        return super().to_dict()
-
 
 @dataclass
 class CourseCategory(Dictable):
     code: str
     name: str
+    name_pretty: str
     modules: list[Module]

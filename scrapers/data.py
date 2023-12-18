@@ -41,18 +41,18 @@ async def write_firestore(
     """
 
     async def write(data: Dictable):
-        data = data.to_dict()
-        doc_id = f"{doc_id_prepend}{data[doc_id_key]}"
+        data_dict = data.to_dict()
+        doc_id = f"{doc_id_prepend}{data_dict[doc_id_key]}"
 
         # does not insert if document exists
         if not override:
             doc = db.collection(fs_coll).document(doc_id)
             actual_doc = await doc.get()
             if not actual_doc.exists:
-                await doc.set(data)
+                await doc.set(data_dict)
 
         else:
-            await db.collection(fs_coll).document(doc_id).set(data)
+            await db.collection(fs_coll).document(doc_id).set(data_dict)
 
     tasks = [write(data) for data in data_list]
     await asyncio.gather(*tasks)

@@ -64,7 +64,12 @@ def get_course_categories(
     # only keep category value and name
     categories = list(
         map(
-            lambda c: CourseCategory(code=c["value"], name=c.text.strip(), modules=[]),
+            lambda c: CourseCategory(
+                code=c["value"],
+                name=c.text.strip(),
+                name_pretty=c.text.strip().title(),
+                modules=[],
+            ),
             categories,
         )
     )
@@ -236,8 +241,8 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
 
             elif "prerequisite" in header_cell.text.lower():
                 active_header = "prerequisite"
-                prereqs = cells[1].text.strip().replace("OR", "").split(" & ")
-                modules[i].prerequisites.append([p.strip() for p in prereqs])
+                prereqs = cells[1].text.strip().replace("OR", "")
+                modules[i].prerequisites.append(prereqs)
 
             elif "mutually exclusive" in header_cell.text.lower():
                 active_header = "mutex"
@@ -249,8 +254,8 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
                 if cells[1].text.strip() == "":
                     continue
 
-                prereqs = cells[1].text.strip().replace("OR", "").split(" & ")
-                modules[i].prerequisites.append([p.strip() for p in prereqs])
+                prereqs = cells[1].text.strip().replace("OR", "")
+                modules[i].prerequisites.append(prereqs)
 
     return modules
 
