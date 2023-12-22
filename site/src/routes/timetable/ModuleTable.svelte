@@ -4,7 +4,6 @@
 
     function removeModule(e: CustomEvent<{ code: string }>) {
         $timetableModules = $timetableModules.filter((tm) => tm.code !== e.detail.code);
-        Object.keys($timetableModules[0].index_numbers);
     }
 
     function updateIndex(e: CustomEvent<{ code: string; index: string }>) {
