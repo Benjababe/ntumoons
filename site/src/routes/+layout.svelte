@@ -14,7 +14,7 @@
 
     async function getSemester() {
         console.log('Fetching latest semester...');
-        const semData = (await (await fetch('/search/firebase/semester')).json()) as Semester;
+        const semData = (await (await fetch('/search/r2/semester')).json()) as Semester;
         return semData;
     }
 </script>

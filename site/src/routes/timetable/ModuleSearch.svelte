@@ -32,12 +32,13 @@
     async function fetchModule(moduleCode: string) {
         if ($timetableModules.some((tm) => tm.code === moduleCode)) return -1;
 
-        const res = await fetch('/search/firebase/module', {
+        const res = await fetch('/search/r2/module', {
             method: 'POST',
             body: JSON.stringify({ code: moduleCode, semesterId: $semester.id })
         });
 
         if (!res.ok) {
+            console.log(res);
             return -1;
         }
 
