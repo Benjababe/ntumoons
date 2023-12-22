@@ -4,9 +4,8 @@ import platform
 import requests
 from requests.adapters import HTTPAdapter, Retry
 
-from data.firestore import write_firestore, write_fs_staff_keywords
+from data.firestore import write_fs, write_fs_list
 from data.json import write_json, write_json_invidivual
-from data.r2 import init_r2, write_r2, write_r2_list
 from ntu.course_module import (
     get_course_categories,
     get_sem_title,
@@ -16,16 +15,11 @@ from ntu.exam import get_exam_plan_num, insert_module_exams
 from ntu.staff import get_all_staff, get_keywords
 from util.typesense import init_typesense, typesense_upsert
 
+FS_COLL_SEM = "semester"
 FS_COLL_MODULE = "modules"
 FS_COLL_COURSE_CATEGORY = "courseCategories"
 FS_COLL_VENUE = "venues"
 FS_COLL_STAFF = "staff"
-
-R2_BKT_SEMESTER = "semester"
-R2_BKT_MODULE = "modules"
-R2_BKT_COURSE_CATEGORY = "course-categories"
-R2_BKT_VENUE = "venues"
-R2_BKT_STAFF = "staff"
 
 TS_COLL_MODULE = "modules"
 TS_COLL_STAFF = "staff"
@@ -64,14 +58,10 @@ async def scrape_modules():
     typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
 
     sem_obj = {"active": True, "id": semester, "title": get_sem_title(semester)}
-    write_r2(R2_BKT_SEMESTER, "active-semester", sem_obj)
-    await write_r2_list(R2_BKT_MODULE, "code", modules, semester_prepend)
-    await write_r2_list(R2_BKT_COURSE_CATEGORY, "code", categories, semester_prepend)
-    await write_r2_list(R2_BKT_VENUE, "name", venues, override=False)
-
-    # await write_firestore(FS_COLL_MODULE, "code", modules, semester_prepend)
-    # await write_firestore(FS_COLL_COURSE_CATEGORY, "code", categories, semester_prepend)
-    # await write_firestore(FS_COLL_VENUE, "name", venues, override=False)
+    await write_fs(FS_COLL_SEM, semester, sem_obj)
+    await write_fs_list(FS_COLL_MODULE, "code", modules, semester_prepend)
+    await write_fs_list(FS_COLL_COURSE_CATEGORY, "code", categories, semester_prepend)
+    await write_fs_list(FS_COLL_VENUE, "name", venues, override=False)
 
 
 async def scrape_staff():
@@ -92,11 +82,8 @@ async def scrape_staff():
 
     typesense_upsert(TS_COLL_STAFF, "email", staff_list, TS_ATTRS_STAFF)
 
-    await write_r2_list(R2_BKT_STAFF, "email", staff_list)
-    write_r2(R2_BKT_STAFF, "metadata", {"keywords": keywords})
-
-    # await write_firestore(FS_COLL_STAFF, "email", staff_list)
-    # await write_fs_staff_keywords(keywords)
+    await write_fs(FS_COLL_STAFF, "metadata", {"keywords": keywords})
+    await write_fs_list(FS_COLL_STAFF, "email", staff_list)
 
 
 async def scrape():
@@ -108,7 +95,6 @@ if __name__ == "__main__":
     if platform.system() == "Windows":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-    init_r2()
     init_typesense()
 
     asyncio.run(scrape())
