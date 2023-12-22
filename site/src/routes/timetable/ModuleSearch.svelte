@@ -1,6 +1,5 @@
 <script lang="ts">
     import modules from '$lib/modules/modulesBasic.json';
-    import type { ModulesBasic } from '$lib/modules/types';
     import { semester, timetableModules } from '$lib/stores';
     import { t } from '$lib/translations';
 
@@ -37,6 +36,10 @@
             method: 'POST',
             body: JSON.stringify({ code: moduleCode, semesterId: $semester.id })
         });
+
+        if (!res.ok) {
+            return -1;
+        }
 
         const mod: Module = await res.json();
         mod.active_index_number = '-1';
