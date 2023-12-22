@@ -1,3 +1,8 @@
+type ModulesBasic = Array<{
+    name_pretty: string;
+    code: string;
+}>;
+
 type Module = {
     code: string;
     name: string;
