@@ -360,3 +360,10 @@ def get_category_modules_venues(
         modules.append(module)
 
     return modules, venues
+
+
+def get_sem_title(semester: str) -> str:
+    pattern = r"\d{2}(\d{2});(\d{1})"
+    matches = re.search(pattern, semester)
+    ay, sem_num = int(matches.group(1)), matches.group(2)
+    return f"AY 20{ay}/{ay+1} Semester {sem_num}"
