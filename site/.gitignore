@@ -4,8 +4,10 @@ node_modules
 /.svelte-kit
 /package
 .env
+.dev.vars
 .env.*
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 /src/lib/modules/*/**
+.wrangler/**

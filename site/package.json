@@ -43,6 +43,7 @@
     "dependencies": {
         "@aws-sdk/client-s3": "^3.478.0",
         "@babel/runtime": "^7.23.6",
+        "@sveltejs/adapter-vercel": "^4.0.3",
         "svelte-persisted-store": "^0.7.0",
         "sveltekit-i18n": "^2.4.2",
         "typesense": "^1.7.2"
