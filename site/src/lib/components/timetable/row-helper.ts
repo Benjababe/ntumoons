@@ -14,35 +14,21 @@ export type RowCellDetails = {
 };
 
 /**
- * Iterates through all modules for the day in the timetable and does basic calculations
+ * Iterates through all lessons for the day in the timetable and does basic calculations
  * for the width and left offsets for displaying the cells.
- * @param timetableModules All modules added to the timetable.
+ * @param rowLessons All lessons added to the timetable.
  * @param rowDetails Information of the timetable row.
  * @returns Details of all timetable cells including dimensions and offsets.
  */
-export function getRowCells(timetableModules: Module[], rowDetails: RowDetails) {
-    const cells = timetableModules
-        .filter((mod) => mod.active_index_number !== '-1')
-        .reduce(
-            (acc, mod) => {
-                const indexNum = parseInt(mod.active_index_number);
-                const modLessons = mod.index_numbers[indexNum];
-                const rowLessons = modLessons.filter((l) => l.day === rowDetails.day);
+export function getRowCells(rowLessons: Lesson[], rowDetails: RowDetails) {
+    const cells = rowLessons.map((lesson) => {
+        const lStart = lesson.start_time;
+        const lEnd = lesson.end_time;
 
-                const tmpDetails = rowLessons.map((lesson) => {
-                    const lStart = lesson.start_time;
-                    const lEnd = lesson.end_time;
-
-                    const left = getLessonLeftOffset(lStart, rowDetails);
-                    const width = getLessonWidth(lStart, lEnd, rowDetails);
-                    return { left, width, lesson, overlap: false, squeeze: false };
-                });
-
-                acc = [...acc, ...tmpDetails];
-                return acc;
-            },
-            <RowCellDetails[]>[]
-        );
+        const left = getLessonLeftOffset(lStart, rowDetails);
+        const width = getLessonWidth(lStart, lEnd, rowDetails);
+        return { left, width, lesson, overlap: false, squeeze: false };
+    });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
     return cells;

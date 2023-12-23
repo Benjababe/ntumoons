@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { timetableModules } from '$lib/stores';
     import TimetableCell from './TimetableCell.svelte';
     import {
         calculateCellOffsets,
@@ -10,6 +9,7 @@
         type RowDetails
     } from './row-helper';
 
+    export let lessons: Lesson[];
     export let day: string;
     export let startTime: number = 830;
 
@@ -19,7 +19,7 @@
     const rowDetails: RowDetails = { day, startTime, widthIntervalPercent };
 
     $: {
-        const cells = getRowCells($timetableModules, rowDetails);
+        const cells = getRowCells(lessons, rowDetails);
         const intervals = getIntervals(cells);
         rows = intervalsToRows(intervals);
         rows = calculateCellOffsets(rows);
