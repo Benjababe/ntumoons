@@ -10,7 +10,7 @@
 ## Setup
 
 ### Scraper
-Python 3.11 was used during development, YMMV.
+Python 3.11 was used during development but there are no version specific features used.
 
 Setup environment with
 
@@ -20,17 +20,12 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+Ensure `serviceAccountKey.json` exists in the root directory. If not, it can be exported from firebase. Refer to `serviceAccountKey.example.json` for reference
+
 ### Typesense Uploader
-Typesense is used to index searching for modules and staff. It's hosted on a free [render](https://github.com/hmbrg/typesense-on-render) instance as of writing because free.
+Typesense is used to index searching for modules and staff. It's hosted on a free [render](https://github.com/hmbrg/typesense-on-render) instance on my potato computer as of writing because free.
 
-A `.env` file is required containing the following environment variables.
-
-```bash
-TYPESENSE_HOST=""
-TYPESENSE_PORT=""
-TYPESENSE_PROTOCOL=""
-TYPESENSE_API_KEY=""
-```
+A `.env` file is required containing the environment variables related to Typesense. Refer to `.env.example` for reference. 
 
 ### Scraping
 
