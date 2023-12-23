@@ -1,79 +1,48 @@
 <script lang="ts">
     import { timetableModules } from '$lib/stores';
     import TimetableCell from './TimetableCell.svelte';
+    import {
+        calculateCellOffsets,
+        getRowCells,
+        getIntervals,
+        intervalsToRows,
+        type RowCellDetails,
+        type RowDetails
+    } from './row-helper';
 
     export let day: string;
     export let startTime: number = 830;
 
-    type RowCellDetails = {
-        left: number;
-        width: number;
-        lesson: Lesson;
-        accLeft?: number;
-    };
-
     // Percentage of width for every hour
     let widthIntervalPercent = 8.33;
-    let details: RowCellDetails[] = [];
+    let rows: RowCellDetails[][] = [];
+    const rowDetails: RowDetails = { day, startTime, widthIntervalPercent };
 
     $: {
-        details = $timetableModules
-            .filter((mod) => mod.active_index_number !== '-1')
-            .reduce(
-                (acc, mod) => {
-                    const indexNum = parseInt(mod.active_index_number);
-                    const modLessons = mod.index_numbers[indexNum];
-                    const rowLessons = modLessons.filter((l) => l.day === day);
-
-                    details = rowLessons.map((lesson) => {
-                        const times = lesson.time.split('-');
-                        const lStart = times[0];
-                        const lEnd = times[1];
-
-                        const left = getLessonLeftOffset(lStart);
-                        const width = getLessonWidth(lStart, lEnd);
-                        return { left, width, lesson };
-                    });
-
-                    acc = [...acc, ...details];
-                    return acc;
-                },
-                <RowCellDetails[]>[]
-            )
-            .toSorted((a, b) => a.left - b.left)
-            .reduce(
-                (acc, { left, width, lesson }, i) => {
-                    if (i == 0) return [{ left, width, lesson, accLeft: left + width }];
-                    const newLeft = left - (acc[i - 1].accLeft ?? 0);
-                    acc = [...acc, { left: newLeft, width, lesson, accLeft: left + width }];
-                    return acc;
-                },
-                <RowCellDetails[]>[]
-            );
-    }
-
-    function getLessonLeftOffset(lessonStart: string) {
-        const hours = (parseInt(lessonStart) - startTime) / 100;
-        return hours * widthIntervalPercent;
-    }
-
-    function getLessonWidth(lessonStart: string, lessonEnd: string) {
-        const hours = (parseInt(lessonEnd) - parseInt(lessonStart)) / 100;
-        return hours * widthIntervalPercent;
+        const cells = getRowCells($timetableModules, rowDetails);
+        const intervals = getIntervals(cells);
+        rows = intervalsToRows(intervals);
+        rows = calculateCellOffsets(rows);
     }
 </script>
 
-<li class="tt-row border-neutral">
+<li class="tt-row border-neutral tt-row-content">
     <div class="tt-row-day border-neutral">
         {day}
     </div>
-    <div class="tt-row-content">
-        {#each details as cellDetails}
-            <TimetableCell
-                left={cellDetails.left}
-                width={cellDetails.width}
-                lesson={cellDetails.lesson}
-            />
+    <div class="relative h-full w-full">
+        {#each rows as row}
+            <div class="flex py-1">
+                {#each row as cellDetails}
+                    <TimetableCell
+                        left={cellDetails.left}
+                        width={cellDetails.width}
+                        lesson={cellDetails.lesson}
+                        overlap={cellDetails.overlap}
+                        squeeze={cellDetails.squeeze}
+                    />
+                {/each}
+            </div>
         {/each}
     </div>
 </li>
@@ -102,10 +71,6 @@
     }
 
     .tt-row-content {
-        display: flex;
-        flex: 1 1 auto;
-        flex-direction: row;
-        min-height: 100%;
         background: linear-gradient(90deg, #1a1e2c 50%, transparent 0);
         background-size: 16.7% 16.7%;
     }

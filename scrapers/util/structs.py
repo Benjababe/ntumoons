@@ -46,6 +46,8 @@ class Lesson(Dictable):
     group: str
     day: str
     time: str
+    start_time: int
+    end_time: int
     venue_name: str
     remark: str
 
@@ -58,6 +60,8 @@ class Lesson(Dictable):
                 self.venue_name,
                 self.day,
                 self.time,
+                self.start_time,
+                self.end_time,
             )
         )
 
@@ -71,6 +75,8 @@ class Lesson(Dictable):
             and self.venue_name == other.venue_name
             and self.day == other.day
             and self.time == other.time
+            and self.start_time == other.start_time
+            and self.end_time == other.end_time
         )
 
 

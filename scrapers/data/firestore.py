@@ -10,25 +10,26 @@ app = firebase_admin.initialize_app(creds)
 db = firestore_async.client()
 
 
-async def write_fs_staff_keywords(keywords: list[str]):
-    """Writes staff keywords into firestore.
+async def write_fs(fs_coll: str, doc_id: str, data: dict):
+    """Writes data to firestore.
 
     Args:
-        coll (str): Staff collection name.
-        keywords (list[str]): List of keywords to filter staff by.
+        fs_coll (str): Name of firestore collection to write to.
+        doc_id (str): Document id to write as
+        data (dict): Data for the document
     """
 
-    await db.collection("staff").document("metadata").set({"keywords": keywords})
+    await db.collection(fs_coll).document(doc_id).set(data)
 
 
-async def write_firestore(
+async def write_fs_list(
     fs_coll: str,
     doc_id_key: str,
     data_list: str,
     doc_id_prepend: str = "",
     override: bool = True,
 ):
-    """Writes data to firestore.
+    """Writes a list of data to firestore.
 
     Args:
         fs_coll (str): Name of firestore collection to write to.
