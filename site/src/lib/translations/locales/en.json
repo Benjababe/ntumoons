@@ -17,6 +17,19 @@
         "No exam for this module.": "No exam for this module."
     },
 
+    "Modules": {
+        "Credits": "Credits: ",
+        "Prerequisites": "Prerequisites",
+        "Mutex": "Mutually Exclusive To",
+        "NoExam": "There is no examinations for this module.",
+        "Description": "Description",
+        "Exam": "Exam",
+        "ExamDate": "Exam Date: ",
+        "ExamDay": "Exam Day: ",
+        "ExamDuration": "Exam Duration: ",
+        "ExamTime": "Exam Time: "
+    },
+
     "Courses": {
         "Enter course code, name or descriptions": "Enter course code, name or descriptions"
     }

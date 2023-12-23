@@ -33,6 +33,8 @@
     </div>
 </nav>
 
-<div class="p-12">
-    <slot />
+<div class="flex justify-center pt-12 pb-24">
+    <div class="min-w-3/5 max-w-4/5">
+        <slot />
+    </div>
 </div>

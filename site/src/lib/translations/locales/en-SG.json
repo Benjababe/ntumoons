@@ -17,6 +17,18 @@
         "No exam for this module.": "Swee la no exam this one."
     },
 
+    "Modules": {
+        "Credits": "Credits: ",
+        "Prerequisites": "Prerequisites",
+        "NoExam": "There is no examinations for this module.",
+        "Description": "Description",
+        "Exam": "Exam",
+        "ExamDate": "Exam Date: ",
+        "ExamDay": "Exam Day: ",
+        "ExamDuration": "Exam Duration: ",
+        "ExamTime": "Exam Time: "
+    },
+
     "Courses": {
         "Enter course code, name or descriptions": "Course code, name or description also can one"
     }

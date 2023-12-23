@@ -8,7 +8,7 @@
     const overlapStyle = overlap ? 'border: 3px solid red;' : '';
 </script>
 
-<button
+<div
     class="tt-cell"
     style="margin-left: calc({left}%); width: calc({width}%); {overlapStyle}"
 >
@@ -18,11 +18,10 @@
         <div>{lesson.time}</div>
         <div>{lesson.remark}</div>
     </div>
-</button>
+</div>
 
 <style>
     .tt-cell {
-        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -30,7 +29,6 @@
         padding: 0.375rem;
         font-size: 0.75rem;
         background-color: white;
-        height: 95%;
         border-radius: 0.5rem;
     }
 </style>

@@ -10,7 +10,7 @@ type Module = {
     credits: string;
     exam: Exam;
     prerequisites: string[];
-    course_codes: string[];
+    courses_offered: { code: string; name: string }[];
     verified: boolean;
     description: string;
     mutex: string[];
