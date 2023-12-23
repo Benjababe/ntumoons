@@ -36,6 +36,8 @@ type Lesson = {
     remark: string;
     group: string;
     time: string;
+    start_time: number;
+    end_time: number;
     day: string;
     type: string;
     venue_name: string;
