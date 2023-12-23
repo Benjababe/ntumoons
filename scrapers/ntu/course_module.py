@@ -336,6 +336,10 @@ def get_category_modules_venues(
             # some locations are stupid and put unwanted characters
             l_venue = l_venue.replace("/", "").replace('"', "")
 
+            start_time, end_time = 0, 0
+            if "-" in l_time:
+                start_time, end_time = l_time.strip().split("-")
+
             lesson = Lesson(
                 index=index_num,
                 module_code=module_code,
@@ -343,6 +347,8 @@ def get_category_modules_venues(
                 group=l_group,
                 day=l_day,
                 time=l_time,
+                start_time=int(start_time),
+                end_time=int(end_time),
                 venue_name=l_venue,
                 remark=l_remark,
             )

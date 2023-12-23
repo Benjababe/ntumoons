@@ -53,7 +53,7 @@ async def scrape_modules():
     write_json(categories, "courseCategories")
     write_json(venues, "venues")
 
-    semester_prepend = f"{semester}/"
+    semester_prepend = f"{semester}_"
 
     typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
 
