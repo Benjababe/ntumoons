@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import TimetableRow from './TimetableRow.svelte';
+    import TimetableDay from './TimetableDay.svelte';
 
     export let lessons: Lesson[];
 
     const days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
     let times = ['0830'];
-    let rowLessons: { [key: string]: Lesson[] } = {};
+    let dayLessons: { [key: string]: Lesson[] } = {};
 
     onMount(() => {
         while (times[times.length - 1] != '1930') {
@@ -17,11 +17,11 @@
     });
 
     $: {
-        rowLessons = {};
-        for (const day of days) rowLessons[day] = [];
+        dayLessons = {};
+        for (const day of days) dayLessons[day] = [];
         for (const lesson of lessons) {
-            const lessonArr = [...rowLessons[lesson.day], lesson];
-            rowLessons[lesson.day] = lessonArr;
+            const lessonArr = [...dayLessons[lesson.day], lesson];
+            dayLessons[lesson.day] = lessonArr;
         }
     }
 </script>
@@ -35,8 +35,8 @@
     </div>
     <ol class="border border-b-1 border-solid border-neutral rounded-lg">
         {#each days as day}
-            <TimetableRow
-                lessons={rowLessons[day]}
+            <TimetableDay
+                lessons={dayLessons[day]}
                 {day}
                 startTime={parseInt(times[0])}
             />
