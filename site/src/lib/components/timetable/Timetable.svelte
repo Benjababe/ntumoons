@@ -25,7 +25,6 @@
             const lessonArr = [...dayLessons[lesson.day], lesson];
             dayLessons[lesson.day] = lessonArr;
         }
-        console.log(lessons);
     }
 </script>
 

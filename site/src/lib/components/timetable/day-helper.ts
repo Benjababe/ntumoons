@@ -170,7 +170,6 @@ export function calculateCellLeftOffsets(rows: RowCellDetails[][]) {
                     cell.left = newLeft;
                     cell.accLeft = cell.left + cell.width;
                 }
-                console.log(cell);
                 return [...acc, cell];
             },
             <RowCellDetails[]>[]
