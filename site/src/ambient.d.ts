@@ -16,7 +16,7 @@ type Module = {
     mutex: string[];
     semester: string;
     grading: string;
-    index_numbers: { [key: number]: Lesson[] };
+    index_numbers: { [key: string]: Lesson[] };
     active_index_number: string;
 };
 

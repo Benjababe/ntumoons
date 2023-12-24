@@ -8,11 +8,10 @@
 
     $: {
         lessons = [];
-        for (const module of $timetableModules) {
-            if (module.active_index_number === '-1') continue;
+        for (const mod of $timetableModules) {
+            if (mod.active_index_number === '-1') continue;
 
-            const indexNumber = parseInt(module.active_index_number);
-            lessons = [...lessons, ...module.index_numbers[indexNumber]];
+            lessons = [...lessons, ...mod.index_numbers[mod.active_index_number]];
         }
     }
 </script>

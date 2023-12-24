@@ -24,7 +24,7 @@
             return;
         }
 
-        lessons = data.module.index_numbers[parseInt(indexNumber)];
+        lessons = data.module.index_numbers[indexNumber];
     }
 </script>
 
