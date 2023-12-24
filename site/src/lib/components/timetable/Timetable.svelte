@@ -22,6 +22,7 @@
         dayLessons = {};
         for (const day of days) dayLessons[day] = [];
         for (const lesson of lessons) {
+            if (lesson.day === '') continue;
             const lessonArr = [...dayLessons[lesson.day], lesson];
             dayLessons[lesson.day] = lessonArr;
         }
