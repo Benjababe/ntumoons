@@ -1,3 +1,5 @@
+import { generateRandomString } from '$lib/util';
+
 export type DayDetails = {
     day: string;
     startTime: number;
@@ -5,6 +7,7 @@ export type DayDetails = {
 };
 
 export type RowCellDetails = {
+    id: string;
     left: number;
     width: number;
     lesson: Lesson;
@@ -14,6 +17,7 @@ export type RowCellDetails = {
 };
 
 export type ColCellDetails = {
+    id: string;
     top: number;
     height: number;
     lesson: Lesson;
@@ -34,9 +38,10 @@ export function getRowCells(dayLessons: Lesson[], dayDetails: DayDetails): RowCe
         const lStart = lesson.start_time;
         const lEnd = lesson.end_time;
 
+        const id = generateRandomString(12);
         const left = getLessonOffset(lStart, dayDetails);
         const width = getLessonSize(lStart, lEnd, dayDetails);
-        return { left, width, lesson, overlap: false, squeeze: false };
+        return { id, left, width, lesson, overlap: false, squeeze: false };
     });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
@@ -48,9 +53,10 @@ export function getColumnCells(dayLessons: Lesson[], dayDetails: DayDetails): Co
         const lStart = lesson.start_time;
         const lEnd = lesson.end_time;
 
+        const id = generateRandomString(12);
         const top = getLessonOffset(lStart, dayDetails);
         const height = getLessonSize(lStart, lEnd, dayDetails);
-        return { top, height, lesson, overlap: false, squeeze: false };
+        return { id, top, height, lesson, overlap: false, squeeze: false };
     });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
@@ -164,7 +170,7 @@ export function calculateCellLeftOffsets(rows: RowCellDetails[][]) {
         return row.reduce(
             (acc, cell, i) => {
                 if (i === 0) {
-                    cell.accLeft = cell.width;
+                    cell.accLeft = cell.left + cell.width;
                 } else {
                     const newLeft = cell.left - (acc[i - 1].accLeft ?? 0);
                     cell.left = newLeft;

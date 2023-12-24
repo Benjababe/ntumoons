@@ -110,6 +110,8 @@ class CourseInfo(Dictable):
 class Module(Dictable):
     verified: bool
     semester: str
+    year: str
+    semester_num: str
     code: str
     courses_offered: list[CourseInfo]
     credits: str

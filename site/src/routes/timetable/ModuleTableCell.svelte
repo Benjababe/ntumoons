@@ -28,7 +28,7 @@
         </button>
     </div>
     <a
-        href="/modules/{$semester.id}/{mod.code}"
+        href="/modules/{$semester.year}/{$semester.semester_num}/{mod.code}"
         class="capitalize text-primary"
     >
         {mod.code}

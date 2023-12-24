@@ -19,6 +19,7 @@
     });
 
     $: {
+        console.log('hi');
         dayLessons = {};
         for (const day of days) dayLessons[day] = [];
         for (const lesson of lessons) {

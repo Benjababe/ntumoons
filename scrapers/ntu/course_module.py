@@ -298,9 +298,14 @@ def get_category_modules_venues(
         res = cast(re.Match[str], re.search(r"(\d*.\d)\s+AU", header_cells[2].text))
         module_credits = res.group(1)
 
+        res = re.search(r"(\d+);(\d+)", semester)
+        year, semester_num = res.group(1), res.group(2)
+
         module = Module(
             verified=False,
             semester=semester,
+            year=year,
+            semester_num=semester_num,
             code=module_code,
             courses_offered=[],
             credits=module_credits,

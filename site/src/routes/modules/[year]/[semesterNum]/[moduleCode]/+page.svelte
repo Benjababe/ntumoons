@@ -15,7 +15,7 @@
     function openModule(e: CustomEvent<string>) {
         const moduleCode = e.detail.match(/([A-Z]{2}[\d|\w]{4})/g);
         if (moduleCode === null) return;
-        goto(`/modules/${data.semesterId}/${moduleCode}`);
+        goto(`/modules/${data.year}/${data.semesterNum}/${moduleCode}`);
     }
 
     function updateIndex() {

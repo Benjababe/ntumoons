@@ -37,10 +37,7 @@
             body: JSON.stringify({ code: moduleCode, semesterId: $semester.id })
         });
 
-        if (!res.ok) {
-            console.log(res);
-            return -1;
-        }
+        if (!res.ok) return -1;
 
         const mod: Module = await res.json();
         mod.active_index_number = '-1';

@@ -81,7 +81,8 @@
         {#each moduleHits as hit}
             <div class="mt-8 mb-4">
                 <a
-                    href="/modules/{hit.document.semester}/{hit.document.code}"
+                    href="/modules/{hit.document.year}/{hit.document.semester_num}/{hit.document
+                        .code}"
                     class="text-primary text-xl"
                 >
                     {@html hit.highlight.code ? hit.highlight.code.snippet : hit.document.code}

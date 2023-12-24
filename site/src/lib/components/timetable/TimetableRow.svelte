@@ -33,7 +33,7 @@
     <div class="relative w-full tt-row-content">
         {#each groups as group}
             <div class="flex py-1 relative">
-                {#each group as cellDetails}
+                {#each group as cellDetails (cellDetails.id)}
                     <TimetableCell
                         left={cellDetails.left}
                         width={cellDetails.width}

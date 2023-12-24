@@ -47,6 +47,8 @@ type Semester = {
     id: string;
     active: boolean;
     title: string;
+    year: string;
+    semester_num: string;
 };
 
 type TypesenseModuleDoc = {
@@ -55,5 +57,6 @@ type TypesenseModuleDoc = {
     id: string;
     name: string;
     name_pretty: string;
-    semester: string;
+    year: string;
+    semester_num: string;
 };
