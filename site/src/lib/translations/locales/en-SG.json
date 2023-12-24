@@ -19,7 +19,7 @@
 
     "Modules": {
         "Search": {
-            "TotalFound": "found {{found}} modules, zhun bo?"
+            "TotalFound": "Found {{found}} modules, zhun bo?"
         },
         "Details": {
             "Credits": "Credits: ",
