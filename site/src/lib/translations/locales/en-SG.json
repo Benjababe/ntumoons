@@ -18,18 +18,26 @@
     },
 
     "Modules": {
-        "Credits": "Credits: ",
-        "Prerequisites": "Prerequisites",
-        "NoExam": "There is no examinations for this module.",
-        "Description": "Description",
-        "Exam": "Exam",
-        "ExamDate": "Exam Date: ",
-        "ExamDay": "Exam Day: ",
-        "ExamDuration": "Exam Duration: ",
-        "ExamTime": "Exam Time: "
+        "Search": {
+            "TotalFound": "found {{found}} modules, zhun bo?"
+        },
+        "Details": {
+            "Credits": "Credits: ",
+            "Prerequisites": "Prerequisites",
+            "Mutex": "Mutually Exclusive To",
+            "NoExam": "Swee la, this mod no exam one.",
+            "Description": "Description",
+            "Exam": "Exam",
+            "ExamDate": "Exam Date: ",
+            "ExamDay": "Exam Day: ",
+            "ExamDuration": "Exam Duration: ",
+            "ExamTime": "Exam Time: ",
+            "Schedule": "Schedule",
+            "Index Number": "Index Number: "
+        }
     },
 
     "Courses": {
-        "Enter course code, name or descriptions": "Course code, name or description also can one"
+        "Enter course code, name or descriptions": "Course code, name or description also can find one"
     }
 }

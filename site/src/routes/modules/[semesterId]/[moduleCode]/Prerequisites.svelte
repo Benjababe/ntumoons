@@ -11,7 +11,7 @@
 </script>
 
 <div>
-    <h2 class="text-xl font-medium">{$t('Modules.Prerequisites')}</h2>
+    <h2 class="text-xl font-medium">{$t('Modules.Details.Prerequisites')}</h2>
     <div class="divider my-0" />
     <div class="flex flex-wrap gap-4 mt-2">
         {#each prerequisitesArr as prerequisites}

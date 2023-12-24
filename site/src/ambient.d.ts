@@ -48,3 +48,12 @@ type Semester = {
     active: boolean;
     title: string;
 };
+
+type TypesenseModuleDoc = {
+    code: string;
+    description: string;
+    id: string;
+    name: string;
+    name_pretty: string;
+    semester: string;
+};

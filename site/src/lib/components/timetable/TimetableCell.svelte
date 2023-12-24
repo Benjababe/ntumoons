@@ -5,7 +5,6 @@
     export let height: string | number | undefined = undefined;
     export let lesson: Lesson;
     export let overlap: boolean;
-    export let squeeze: boolean;
 
     const overlapStyle = overlap ? 'border: 3px solid red;' : '';
     const landscapeStyle =

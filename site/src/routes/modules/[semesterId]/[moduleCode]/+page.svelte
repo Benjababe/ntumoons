@@ -32,7 +32,7 @@
     <div>
         <h1 class="text-5xl font-semibold">{data.module.code} {data.module.name_pretty}</h1>
         <div class="mt-4">
-            <span>{$t('Modules.Credits')}</span>
+            <span>{$t('Modules.Details.Credits')}</span>
             <span class="text-center">{data.module.credits} AU</span>
         </div>
     </div>
@@ -54,25 +54,25 @@
                 </div>
             {/if}
             <div class="mt-8">
-                <h2 class="text-xl font-medium">{$t('Modules.Description')}</h2>
+                <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
                 <div>{@html data.module.description}</div>
             </div>
             <div class="mt-10">
-                <h2 class="text-xl font-medium">{$t('Modules.Exam')}</h2>
+                <h2 class="text-xl font-medium">{$t('Modules.Details.Exam')}</h2>
                 <div class="divider my-0" />
                 {#if data.module.exam !== null}
                     <Exam exam={data.module.exam} />
                 {:else}
-                    <div>{$t('Modules.NoExam')}</div>
+                    <div>{$t('Modules.Details.NoExam')}</div>
                 {/if}
             </div>
         </div>
         <div class="pl-8 ml-4">
-            <h2 class="text-xl font-medium">{$t('Modules.Schedule')}</h2>
+            <h2 class="text-xl font-medium">{$t('Modules.Details.Schedule')}</h2>
             <div class="divider mt-0 mb-4" />
             <div class="flex justify-center items-center pb-4">
-                <span>{$t('Modules.Index Number')}</span>
+                <span>{$t('Modules.Details.Index Number')}</span>
                 <select
                     class="select border border-solid border-neutral ml-4"
                     bind:value={indexNumber}

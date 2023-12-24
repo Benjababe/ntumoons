@@ -39,7 +39,6 @@
                         width={cellDetails.width}
                         lesson={cellDetails.lesson}
                         overlap={cellDetails.overlap}
-                        squeeze={cellDetails.squeeze}
                     />
                 {/each}
             </div>

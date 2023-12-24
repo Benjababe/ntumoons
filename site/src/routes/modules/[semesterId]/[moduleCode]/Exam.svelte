@@ -4,15 +4,15 @@
 </script>
 
 <div class="grid grid-cols-info gap-4 pt-2">
-    <span>{$t('Modules.ExamDate')}</span>
+    <span>{$t('Modules.Details.ExamDate')}</span>
     <span class="text-center">{exam.date}</span>
 
-    <span>{$t('Modules.ExamDay')}</span>
+    <span>{$t('Modules.Details.ExamDay')}</span>
     <span class="text-center">{exam.day}</span>
 
-    <span>{$t('Modules.ExamDuration')}</span>
+    <span>{$t('Modules.Details.ExamDuration')}</span>
     <span class="text-center">{exam.duration}</span>
 
-    <span>{$t('Modules.ExamTime')}</span>
+    <span>{$t('Modules.Details.ExamTime')}</span>
     <span class="text-center">{exam.time}</span>
 </div>
