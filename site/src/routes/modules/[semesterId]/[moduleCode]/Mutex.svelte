@@ -10,7 +10,7 @@
     }
 </script>
 
-<div class="mt-6">
+<div>
     <h2 class="text-xl font-medium">{$t('Modules.Mutex')}</h2>
     <div class="divider my-0" />
     <div class="flex flex-wrap gap-4 mt-2">

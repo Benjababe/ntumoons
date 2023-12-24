@@ -1,7 +1,7 @@
 <script lang="ts">
     import ModuleSearch from './ModuleSearch.svelte';
     import ModuleTable from './ModuleTable.svelte';
-    import { TimetableModule } from '$lib/components/timetable';
+    import { Timetable } from '$lib/components/timetable';
     import { timetableModules } from '$lib/stores';
 
     let lessons: Lesson[] = [];
@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex flex-col justify-center relative max-w-full">
-    <TimetableModule {lessons} />
+    <Timetable {lessons} />
     <ModuleSearch />
     <ModuleTable />
 </div>

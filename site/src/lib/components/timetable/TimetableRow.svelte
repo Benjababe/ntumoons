@@ -1,11 +1,11 @@
 <script lang="ts">
     import TimetableCell from './TimetableCell.svelte';
     import {
-        calculateCellOffsets,
-        getDayCells,
+        calculateCellLeftOffsets,
+        getRowCells,
         getIntervals,
         intervalsToGroups,
-        type DayCellDetails,
+        type RowCellDetails,
         type DayDetails
     } from './day-helper';
 
@@ -15,24 +15,24 @@
 
     // Percentage of width for every hour
     let widthIntervalPercent = 8.33;
-    let groups: DayCellDetails[][] = [];
-    const dayDetails: DayDetails = { day, startTime, widthIntervalPercent };
+    let groups: RowCellDetails[][] = [];
+    const dayDetails: DayDetails = { day, startTime, hourIntervalPercent: widthIntervalPercent };
 
     $: {
-        const cells = getDayCells(lessons, dayDetails);
+        const cells = getRowCells(lessons, dayDetails);
         const intervals = getIntervals(cells);
         groups = intervalsToGroups(intervals);
-        groups = calculateCellOffsets(groups);
+        groups = calculateCellLeftOffsets(groups);
     }
 </script>
 
-<li class="tt-day border-neutral">
-    <div class="tt-day-header border-neutral">
+<li class="tt-row border-neutral">
+    <div class="tt-row-day border-neutral">
         {day}
     </div>
-    <div class="relative w-full tt-day-content">
+    <div class="relative w-full tt-row-content">
         {#each groups as group}
-            <div class="flex py-1">
+            <div class="flex py-1 relative">
                 {#each group as cellDetails}
                     <TimetableCell
                         left={cellDetails.left}
@@ -44,24 +44,23 @@
                 {/each}
             </div>
         {/each}
-        <div></div>
     </div>
 </li>
 
 <style>
-    .tt-day {
+    .tt-row {
         display: flex;
         position: relative;
-        min-height: 3.5rem;
+        min-height: 5rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
     }
 
-    .tt-day:last-child {
+    .tt-row:last-child {
         border-bottom: 0px;
     }
 
-    .tt-day-header {
+    .tt-row-day {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -71,7 +70,7 @@
         border-right-width: 1px;
     }
 
-    .tt-day-content {
+    .tt-row-content {
         background: linear-gradient(90deg, #1a1e2c 50%, transparent 0);
         background-size: 16.7% 16.7%;
     }

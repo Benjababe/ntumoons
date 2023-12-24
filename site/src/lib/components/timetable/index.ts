@@ -1,1 +1,1 @@
-export { default as TimetableModule } from './TimetableModule.svelte';
+export { default as Timetable } from './Timetable.svelte';

@@ -27,7 +27,9 @@
         "ExamDate": "Exam Date: ",
         "ExamDay": "Exam Day: ",
         "ExamDuration": "Exam Duration: ",
-        "ExamTime": "Exam Time: "
+        "ExamTime": "Exam Time: ",
+        "Schedule": "Schedule",
+        "Index Number": "Index Number: "
     },
 
     "Courses": {

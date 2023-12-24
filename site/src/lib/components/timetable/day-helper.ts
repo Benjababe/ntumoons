@@ -1,16 +1,25 @@
 export type DayDetails = {
     day: string;
     startTime: number;
-    widthIntervalPercent: number;
+    hourIntervalPercent: number;
 };
 
-export type DayCellDetails = {
+export type RowCellDetails = {
     left: number;
     width: number;
     lesson: Lesson;
     overlap: boolean;
     squeeze: boolean;
     accLeft?: number;
+};
+
+export type ColCellDetails = {
+    top: number;
+    height: number;
+    lesson: Lesson;
+    overlap: boolean;
+    squeeze: boolean;
+    accTop?: number;
 };
 
 /**
@@ -20,14 +29,28 @@ export type DayCellDetails = {
  * @param dayDetails Information of the timetable day.
  * @returns Details of all timetable cells including dimensions and offsets.
  */
-export function getDayCells(dayLessons: Lesson[], dayDetails: DayDetails) {
+export function getRowCells(dayLessons: Lesson[], dayDetails: DayDetails): RowCellDetails[] {
     const cells = dayLessons.map((lesson) => {
         const lStart = lesson.start_time;
         const lEnd = lesson.end_time;
 
-        const left = getLessonLeftOffset(lStart, dayDetails);
-        const width = getLessonWidth(lStart, lEnd, dayDetails);
+        const left = getLessonOffset(lStart, dayDetails);
+        const width = getLessonSize(lStart, lEnd, dayDetails);
         return { left, width, lesson, overlap: false, squeeze: false };
+    });
+
+    cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
+    return cells;
+}
+
+export function getColumnCells(dayLessons: Lesson[], dayDetails: DayDetails): ColCellDetails[] {
+    const cells = dayLessons.map((lesson) => {
+        const lStart = lesson.start_time;
+        const lEnd = lesson.end_time;
+
+        const top = getLessonOffset(lStart, dayDetails);
+        const height = getLessonSize(lStart, lEnd, dayDetails);
+        return { top, height, lesson, overlap: false, squeeze: false };
     });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
@@ -40,9 +63,9 @@ export function getDayCells(dayLessons: Lesson[], dayDetails: DayDetails) {
  * @param dayDetails Information of the timetable day.
  * @returns Absolute left offset required for the cell.
  */
-export function getLessonLeftOffset(lessonStart: number, dayDetails: DayDetails) {
+export function getLessonOffset(lessonStart: number, dayDetails: DayDetails) {
     const hours = (lessonStart - dayDetails.startTime) / 100;
-    return hours * dayDetails.widthIntervalPercent;
+    return hours * dayDetails.hourIntervalPercent;
 }
 
 /**
@@ -52,9 +75,9 @@ export function getLessonLeftOffset(lessonStart: number, dayDetails: DayDetails)
  * @param dayDetails Information of the timetable day.
  * @returns Width required for the cell.
  */
-export function getLessonWidth(lessonStart: number, lessonEnd: number, dayDetails: DayDetails) {
+export function getLessonSize(lessonStart: number, lessonEnd: number, dayDetails: DayDetails) {
     const hours = (lessonEnd - lessonStart) / 100;
-    return hours * dayDetails.widthIntervalPercent;
+    return hours * dayDetails.hourIntervalPercent;
 }
 
 /**
@@ -62,10 +85,10 @@ export function getLessonWidth(lessonStart: number, lessonEnd: number, dayDetail
  * @param cells All cells for the timetable day.
  * @returns All intervals of time in the timetable without gaps.
  */
-export function getIntervals(cells: DayCellDetails[]) {
+export function getIntervals<T extends RowCellDetails | ColCellDetails>(cells: T[]) {
     let groupsNeeded = 0;
-    let intervals: DayCellDetails[][] = [];
-    let curInterval: DayCellDetails[] = [];
+    let intervals: T[][] = [];
+    let curInterval: T[] = [];
     let curIntervalRng = [Number.MAX_SAFE_INTEGER, 0];
 
     for (const cell of cells) {
@@ -101,7 +124,7 @@ export function getIntervals(cells: DayCellDetails[]) {
  * @param interval An interval of time without any gaps between lessons.
  * @returns Interval updated with overlap information.
  */
-export function getLessonsClash(interval: DayCellDetails[]) {
+export function getLessonsClash<T extends RowCellDetails | ColCellDetails>(interval: T[]) {
     const uniqueCodes = new Set();
     for (const lesson of interval) {
         uniqueCodes.add(lesson.lesson.module_code);
@@ -118,8 +141,8 @@ export function getLessonsClash(interval: DayCellDetails[]) {
  * @param intervals All intervals of time without gaps between lessons.
  * @returns Groups properly organised and to be displayed.
  */
-export function intervalsToGroups(intervals: DayCellDetails[][]) {
-    const groups: DayCellDetails[][] = [];
+export function intervalsToGroups<T extends RowCellDetails | ColCellDetails>(intervals: T[][]) {
+    const groups: T[][] = [];
 
     for (const interval of intervals) {
         for (let i = 0; i < interval.length; i++) {
@@ -136,20 +159,39 @@ export function intervalsToGroups(intervals: DayCellDetails[][]) {
  * @param groups All groups organised to be displayed.
  * @returns Groups with the cells properly offset.
  */
-export function calculateCellOffsets(groups: DayCellDetails[][]) {
+export function calculateCellLeftOffsets(rows: RowCellDetails[][]) {
+    rows = rows.map((row) => {
+        return row.reduce(
+            (acc, cell, i) => {
+                if (i === 0) {
+                    cell.accLeft = cell.width;
+                } else {
+                    const newLeft = cell.left - (acc[i - 1].accLeft ?? 0);
+                    cell.left = newLeft;
+                    cell.accLeft = cell.left + cell.width;
+                }
+                console.log(cell);
+                return [...acc, cell];
+            },
+            <RowCellDetails[]>[]
+        );
+    });
+    return rows;
+}
+
+/**
+ * Recalculate the cell's offsets to ensure proper fitting in the timetable.
+ * @param groups All groups organised to be displayed.
+ * @returns Groups with the cells properly offset.
+ */
+export function calculateCellTopOffsets(groups: ColCellDetails[][]) {
     groups = groups.map((group) => {
         return group.reduce(
-            (acc, { left, width, lesson, overlap, squeeze }, i) => {
-                if (i == 0)
-                    return [{ left, width, lesson, accLeft: left + width, overlap, squeeze }];
-                const newLeft = left - (acc[i - 1].accLeft ?? 0);
-                acc = [
-                    ...acc,
-                    { left: newLeft, width, lesson, accLeft: left + width, overlap, squeeze }
-                ];
-                return acc;
+            (acc, cell) => {
+                cell.accTop = cell.top + cell.height;
+                return [...acc, cell];
             },
-            <DayCellDetails[]>[]
+            <ColCellDetails[]>[]
         );
     });
     return groups;

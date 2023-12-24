@@ -34,7 +34,10 @@
 </nav>
 
 <div class="flex justify-center pt-12 pb-24">
-    <div class="min-w-3/5 max-w-4/5">
+    <div
+        style:width="80%"
+        class="max-w-1200"
+    >
         <slot />
     </div>
 </div>
