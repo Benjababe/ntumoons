@@ -10,13 +10,13 @@ type Module = {
     credits: string;
     exam: Exam;
     prerequisites: string[];
-    course_codes: string[];
+    courses_offered: { code: string; name: string }[];
     verified: boolean;
     description: string;
     mutex: string[];
     semester: string;
     grading: string;
-    index_numbers: { [key: number]: Lesson[] };
+    index_numbers: { [key: string]: Lesson[] };
     active_index_number: string;
 };
 
@@ -47,4 +47,13 @@ type Semester = {
     id: string;
     active: boolean;
     title: string;
+};
+
+type TypesenseModuleDoc = {
+    code: string;
+    description: string;
+    id: string;
+    name: string;
+    name_pretty: string;
+    semester: string;
 };

@@ -101,11 +101,17 @@ class Exam(Dictable):
 
 
 @dataclass
+class CourseInfo(Dictable):
+    code: str
+    name: str
+
+
+@dataclass
 class Module(Dictable):
     verified: bool
     semester: str
     code: str
-    course_codes: list[str]
+    courses_offered: list[CourseInfo]
     credits: str
     description: str
     grading: str

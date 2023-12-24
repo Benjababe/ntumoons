@@ -18,7 +18,7 @@
     }
 </script>
 
-<div class="table-cell">
+<div>
     <div class="float-right h-fit mt-1 ml-4 mr-4">
         <button
             class="btn-outline rounded-full w-max h-max p-1"

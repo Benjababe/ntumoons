@@ -68,16 +68,24 @@ def init_typesense():
         }
     )
 
-    name_field = {"name": "name", "type": "string"}
     desc_field = {"name": "description", "type": "string"}
-    semester_field = {"name": "semester", "type": "string"}
-
     create_collection(
         MODULE_COLLECTION,
-        [name_field, semester_field, desc_field, {"name": "code", "type": "string"}],
+        [
+            desc_field,
+            {"name": "name", "type": "string"},
+            {"name": "semester", "type": "string"},
+            {"name": "name_pretty", "type": "string"},
+            {"name": "code", "type": "string"},
+        ],
     )
     create_collection(
-        STAFF_COLLECTION, [desc_field, {"name": "title", "type": "string"}]
+        STAFF_COLLECTION,
+        [
+            desc_field,
+            {"name": "title", "type": "string"},
+            {"name": "email", "type": "string"},
+        ],
     )
 
 

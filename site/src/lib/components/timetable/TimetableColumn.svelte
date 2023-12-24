@@ -1,11 +1,11 @@
 <script lang="ts">
     import TimetableCell from './TimetableCell.svelte';
     import {
-        calculateCellLeftOffsets,
-        getRowCells,
+        getColumnCells,
+        calculateCellTopOffsets,
         getIntervals,
         intervalsToGroups,
-        type RowCellDetails,
+        type ColCellDetails,
         type DayDetails
     } from './day-helper';
 
@@ -15,62 +15,66 @@
 
     // Percentage of width for every hour
     let widthIntervalPercent = 8.33;
-    let groups: RowCellDetails[][] = [];
+    let groups: ColCellDetails[][] = [];
     const dayDetails: DayDetails = { day, startTime, hourIntervalPercent: widthIntervalPercent };
 
     $: {
-        const cells = getRowCells(lessons, dayDetails);
+        const cells = getColumnCells(lessons, dayDetails);
         const intervals = getIntervals(cells);
         groups = intervalsToGroups(intervals);
-        groups = calculateCellLeftOffsets(groups);
+        groups = calculateCellTopOffsets(groups);
     }
 </script>
 
-<li class="tt-row border-neutral">
-    <div class="tt-row-day border-neutral">
+<li class="tt-day border-neutral">
+    <div class="tt-day-header border-neutral">
         {day}
     </div>
-    <div class="relative w-full tt-row-content">
+    <div class="relative h-full tt-day-content pl-1">
         {#each groups as group}
-            <div class="flex py-1 relative">
+            <div class="flex flex-col">
                 {#each group as cellDetails}
                     <TimetableCell
-                        left={cellDetails.left}
-                        width={cellDetails.width}
+                        top={cellDetails.top}
+                        height={cellDetails.height}
                         lesson={cellDetails.lesson}
                         overlap={cellDetails.overlap}
                     />
                 {/each}
             </div>
         {/each}
+        <div></div>
     </div>
 </li>
 
 <style>
-    .tt-row {
+    .tt-day {
         display: flex;
+        flex-direction: column;
         position: relative;
-        min-height: 5rem;
+        min-height: 3.5rem;
+        min-width: 8rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
     }
 
-    .tt-row:last-child {
+    .tt-day:last-child {
         border-bottom: 0px;
     }
 
-    .tt-row-day {
+    .tt-day-header {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 3.5rem;
+        height: 3.5rem;
         font-weight: 600;
         border-style: solid;
         border-right-width: 1px;
+        border-bottom-width: 1px;
     }
-
-    .tt-row-content {
-        background: linear-gradient(90deg, #1a1e2c 50%, transparent 0);
+    .tt-day-content {
+        display: flex;
+        background: linear-gradient(360deg, #1a1e2c 50%, transparent 0);
         background-size: 16.7% 16.7%;
     }
 </style>

@@ -1,7 +1,8 @@
 import i18n from 'sveltekit-i18n';
+import type { Config } from 'sveltekit-i18n';
 import lang from './lang.json';
 
-export const config: import('sveltekit-i18n').Config = {
+export const config: Config<{ found: number }> = {
     fallbackLocale: 'en',
     translations: {
         en: { lang },

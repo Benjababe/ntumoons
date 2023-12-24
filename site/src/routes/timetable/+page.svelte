@@ -1,11 +1,23 @@
 <script lang="ts">
     import ModuleSearch from './ModuleSearch.svelte';
     import ModuleTable from './ModuleTable.svelte';
-    import { TimetableModule } from '$lib/components/timetable';
+    import { Timetable } from '$lib/components/timetable';
+    import { timetableModules } from '$lib/stores';
+
+    let lessons: Lesson[] = [];
+
+    $: {
+        lessons = [];
+        for (const mod of $timetableModules) {
+            if (mod.active_index_number === '-1') continue;
+
+            lessons = [...lessons, ...mod.index_numbers[mod.active_index_number]];
+        }
+    }
 </script>
 
 <div class="flex flex-col justify-center relative max-w-full">
-    <TimetableModule />
+    <Timetable {lessons} />
     <ModuleSearch />
     <ModuleTable />
 </div>

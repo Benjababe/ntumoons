@@ -13,7 +13,7 @@ from util.helper import (
     session_post_cache,
     write_cache,
 )
-from util.structs import CourseCategory, Lesson, Module, Venue
+from util.structs import CourseCategory, CourseInfo, Lesson, Module, Venue
 
 CACHE_FILENAME = "modules"
 SCHEDULE_SELECT_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main"
@@ -94,7 +94,8 @@ def scrape_category_modules(
     if cache is not None:
         return cache["categories"], cache["modules"], cache["venues"]
 
-    category_modules: list[Module] = []
+    # keep track of all modules scraped as well
+    all_modules: list[Module] = []
     added_codes = set()
 
     # just a dict, key=course code, value=set of lessons
@@ -103,6 +104,8 @@ def scrape_category_modules(
     venues = []
 
     for i, category in enumerate(categories):
+        category_module_codes = set()
+
         category_name = category.name
 
         sys.stdout.write("\033[K")
@@ -153,16 +156,19 @@ def scrape_category_modules(
 
         # add modules which have not already been added
         for module in modules:
+            category_module_codes.add(module.code)
+
             if not module.verified or module.code in added_codes:
                 continue
             else:
-                category_modules.append(module)
+                all_modules.append(module)
                 added_codes.add(module.code)
 
         # add category code to module if this category offers it
-        for j, module in enumerate(category_modules):
-            if module.code in added_codes:
-                category_modules[j].course_codes.append(category_code)
+        for j, module in enumerate(all_modules):
+            if module.code in category_module_codes:
+                course_info = CourseInfo(code=category_code, name=category_name)
+                all_modules[j].courses_offered.append(course_info)
 
         # include module codes offered into category
         category.modules = list(
@@ -183,12 +189,12 @@ def scrape_category_modules(
     # cache results in case of reuse
     cache_val = {
         "categories": categories,
-        "modules": category_modules,
+        "modules": all_modules,
         "venues": venues,
     }
     write_cache(CACHE_FILENAME, cache_key, cache_val)
 
-    return categories, category_modules, venues
+    return categories, all_modules, venues
 
 
 def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
@@ -296,7 +302,7 @@ def get_category_modules_venues(
             verified=False,
             semester=semester,
             code=module_code,
-            course_codes=[],
+            courses_offered=[],
             credits=module_credits,
             description="",
             grading="",

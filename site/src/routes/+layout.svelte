@@ -23,6 +23,7 @@
     <div class="flex-1">
         <Link href="/">NTUMoons</Link>
         <Link href="/timetable">{$t('Nav.Timetable')}</Link>
+        <Link href="/modules">{$t('Nav.Modules')}</Link>
     </div>
     <span class="mr-4 select-none">
         {$semester.title}
@@ -32,6 +33,11 @@
     </div>
 </nav>
 
-<div class="p-12">
-    <slot />
+<div class="flex justify-center pt-12 pb-24">
+    <div
+        style:width="80%"
+        class="max-w-1200"
+    >
+        <slot />
+    </div>
 </div>

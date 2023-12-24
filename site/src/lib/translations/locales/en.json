@@ -1,6 +1,7 @@
 {
     "Nav": {
-        "Timetable": "Timetable"
+        "Timetable": "Timetable",
+        "Modules": "Modules"
     },
 
     "Settings": {
@@ -14,6 +15,26 @@
     "Timetable": {
         "Course code or name": "Course code or name",
         "No exam for this module.": "No exam for this module."
+    },
+
+    "Modules": {
+        "Search": {
+            "TotalFound": "{{found}} modules found based off your search"
+        },
+        "Details": {
+            "Credits": "Credits: ",
+            "Prerequisites": "Prerequisites",
+            "Mutex": "Mutually Exclusive To",
+            "NoExam": "There is no examinations for this module.",
+            "Description": "Description",
+            "Exam": "Exam",
+            "ExamDate": "Exam Date: ",
+            "ExamDay": "Exam Day: ",
+            "ExamDuration": "Exam Duration: ",
+            "ExamTime": "Exam Time: ",
+            "Schedule": "Schedule",
+            "Index Number": "Index Number: "
+        }
     },
 
     "Courses": {
