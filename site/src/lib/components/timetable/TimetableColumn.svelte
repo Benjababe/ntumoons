@@ -26,11 +26,11 @@
     }
 </script>
 
-<li class="tt-day border-neutral">
-    <div class="tt-day-header border-neutral">
+<li class="tt-day">
+    <div class="tt-day-header border-neutral border-opacity-50 {day !== 'FRI' ? 'border-r' : ''}">
         {day}
     </div>
-    <div class="relative h-full tt-day-content pl-1">
+    <div class="flex relative h-full bg-tt-alternate-v bg-tt-loop pl-1">
         {#each groups as group}
             <div class="flex flex-col">
                 {#each group as cellDetails}
@@ -54,12 +54,6 @@
         position: relative;
         min-height: 3.5rem;
         min-width: 8rem;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-    }
-
-    .tt-day:last-child {
-        border-bottom: 0px;
     }
 
     .tt-day-header {
@@ -69,12 +63,6 @@
         height: 3.5rem;
         font-weight: 600;
         border-style: solid;
-        border-right-width: 1px;
         border-bottom-width: 1px;
-    }
-    .tt-day-content {
-        display: flex;
-        background: linear-gradient(360deg, #1a1e2c 50%, transparent 0);
-        background-size: 16.7% 16.7%;
     }
 </style>

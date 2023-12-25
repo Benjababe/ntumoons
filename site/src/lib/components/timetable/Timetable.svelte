@@ -19,7 +19,6 @@
     });
 
     $: {
-        console.log('hi');
         dayLessons = {};
         for (const day of days) dayLessons[day] = [];
         for (const lesson of lessons) {
@@ -38,7 +37,7 @@
             {/each}
             <span></span>
         </div>
-        <ol class="border border-b-1 border-solid border-neutral rounded-lg">
+        <ol class="border border-b-1 border-solid border-neutral rounded-lg border-opacity-50">
             {#each days as day}
                 <TimetableRow
                     lessons={dayLessons[day]}
@@ -58,7 +57,7 @@
         </div>
         <ol
             style:height="1280px"
-            class="flex border border-b-1 border-solid border-neutral rounded-lg"
+            class="flex border border-b-1 border-solid border-neutral rounded-lg border-opacity-50"
         >
             {#each days as day}
                 <TimetableColumn

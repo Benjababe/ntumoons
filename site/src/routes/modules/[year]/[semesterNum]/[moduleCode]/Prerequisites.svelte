@@ -15,7 +15,7 @@
     <div class="divider my-0" />
     <div class="flex flex-wrap gap-4 mt-2">
         {#each prerequisitesArr as prerequisites}
-            <div class="flex justify-center items-center bg-neutral-content rounded-md p-2 w-max">
+            <div class="flex justify-center items-center bg-neutral rounded-md p-2 w-max">
                 {#each prerequisites.split(' & ') as moduleCode, i}
                     <button
                         class="btn py-1 px-2"

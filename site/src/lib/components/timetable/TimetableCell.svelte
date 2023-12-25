@@ -6,7 +6,6 @@
     export let lesson: Lesson;
     export let overlap: boolean;
 
-    const overlapStyle = overlap ? 'border: 3px solid red;' : '';
     const landscapeStyle =
         left !== undefined && width !== undefined
             ? `margin-left: calc(${left}%); width: calc(${width}%);`
@@ -18,10 +17,10 @@
 </script>
 
 <div
-    class="tt-cell"
-    style="{landscapeStyle} {portraitStyle} {overlapStyle}"
+    class="tt-cell {overlap ? 'border-3 border-solid border-error' : 'border border-neutral'}"
+    style="{landscapeStyle} {portraitStyle}"
 >
-    <div class="text-center">
+    <div class="text-center text-gray-700">
         <div>{lesson.module_code} {lesson.type}</div>
         <div>{lesson.venue_name}</div>
         <div>{lesson.time}</div>

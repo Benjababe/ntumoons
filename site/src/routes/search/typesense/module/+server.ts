@@ -11,7 +11,6 @@ export async function POST({ request }) {
         snippet_threshold: 5000
     };
     const tsRes = await typesense.collections(COLLECTION_MODULE).documents().search(queryParams);
-    console.log(tsRes);
     if (tsRes.hits === undefined || tsRes.hits.length === 0) return error(404, 'No modules found');
 
     return json({ tsRes });

@@ -56,9 +56,11 @@
         on:blur={() => (searchHidden = true)}
     />
     {#if moduleResults.length > 0 && !searchHidden && searchValue.length > 0}
-        <ol class="absolute w-full max-h-48 top-11 overflow-y-scroll z-10">
+        <ol
+            class="absolute w-full max-h-48 top-11 border border-neutral border-opacity-50 overflow-y-scroll rounded-sm z-10"
+        >
             {#each moduleResults as mod}
-                <li class="hover:text-accent bg-base-100 hover:bg-base-300">
+                <li class="hover:text-primary bg-base-100 hover:bg-base-300">
                     <button
                         class="px-4 py-2 w-full text-left capitalize cursor-pointer"
                         on:mousedown|preventDefault|once={() => addModuleTimetable(mod.code)}

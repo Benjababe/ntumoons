@@ -26,11 +26,11 @@
     }
 </script>
 
-<li class="tt-row border-neutral">
-    <div class="tt-row-day border-neutral">
+<li class="tt-row border-neutral border-opacity-50">
+    <div class="tt-row-day border-neutral border-opacity-50">
         {day}
     </div>
-    <div class="relative w-full tt-row-content">
+    <div class="relative w-full bg-tt-loop bg-tt-alternate-h">
         {#each groups as group}
             <div class="flex py-1 relative">
                 {#each group as cellDetails (cellDetails.id)}
@@ -67,10 +67,5 @@
         font-weight: 600;
         border-style: solid;
         border-right-width: 1px;
-    }
-
-    .tt-row-content {
-        background: linear-gradient(90deg, #1a1e2c 50%, transparent 0);
-        background-size: 16.7% 16.7%;
     }
 </style>
