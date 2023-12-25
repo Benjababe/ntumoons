@@ -57,7 +57,13 @@ async def scrape_modules():
 
     typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
 
-    sem_obj = {"active": True, "id": semester, "title": get_sem_title(semester)}
+    sem_obj = {
+        "active": True,
+        "id": semester,
+        "title": get_sem_title(semester),
+        "year": semester.split(";")[0],
+        "semester_num": semester.split(";")[1],
+    }
     await write_fs(FS_COLL_SEM, semester, sem_obj)
     await write_fs_list(FS_COLL_MODULE, "code", modules, semester_prepend)
     await write_fs_list(FS_COLL_COURSE_CATEGORY, "code", categories, semester_prepend)
