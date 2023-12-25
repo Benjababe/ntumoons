@@ -12,6 +12,7 @@
     export let lessons: Lesson[];
     export let day: string;
     export let startTime: number = 830;
+    export let lastColumn: boolean = false;
 
     // Percentage of width for every hour
     let widthIntervalPercent = 8.33;
@@ -27,7 +28,7 @@
 </script>
 
 <li class="tt-day">
-    <div class="tt-day-header border-neutral border-opacity-50 {day !== 'FRI' ? 'border-r' : ''}">
+    <div class="tt-day-header border-neutral border-opacity-50 {lastColumn ? '' : 'border-r'}">
         {day}
     </div>
     <div class="flex relative h-full bg-tt-alternate-v bg-tt-loop pl-1">

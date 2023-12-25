@@ -6,7 +6,7 @@
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
 
-    const days = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
+    const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     let times = ['0830'];
     let dayLessons: { [key: string]: Lesson[] } = {};
 
@@ -59,11 +59,12 @@
             style:height="1280px"
             class="flex border border-b-1 border-solid border-neutral rounded-lg border-opacity-50"
         >
-            {#each days as day}
+            {#each days as day, i}
                 <TimetableColumn
                     lessons={dayLessons[day]}
                     {day}
                     startTime={parseInt(times[0])}
+                    lastColumn={i === days.length - 1}
                 />
             {/each}
         </ol>

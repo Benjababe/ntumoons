@@ -162,12 +162,34 @@ export function getLessonsClash<T extends RowCellDetails | ColCellDetails>(inter
  * @returns Groups properly organised and to be displayed.
  */
 export function intervalsToGroups<T extends RowCellDetails | ColCellDetails>(intervals: T[][]) {
-    const groups: T[][] = [];
+    let groups: T[][] = [];
 
     for (const interval of intervals) {
         for (let i = 0; i < interval.length; i++) {
-            if (groups.length - 1 < i) groups[i] = [interval[i]];
-            else groups[i] = [...groups[i], interval[i]];
+            const cell = interval[i];
+
+            // if groups is empty, add cell
+            if (groups.length == 0) {
+                groups[0] = [cell];
+                continue;
+            }
+
+            // else, check for earliest group that supports the cell
+            // by checking the end time of the last cell in a group.
+            // it's fine as intervals is already sorted.
+
+            let stored = false;
+            for (let j = 0; j < groups.length; j++) {
+                const group = groups[j];
+                if (group[group.length - 1].lesson.end_time < cell.lesson.start_time) {
+                    stored = true;
+                    groups[j] = [...groups[j], cell];
+                    break;
+                }
+            }
+
+            // if no group supports the cell, create a new group
+            if (!stored) groups = [...groups, [cell]];
         }
     }
 
