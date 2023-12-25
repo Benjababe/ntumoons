@@ -2,11 +2,14 @@
     import { onMount } from 'svelte';
     import TimetableRow from './TimetableRow.svelte';
     import TimetableColumn from './TimetableColumn.svelte';
+    import { hideSaturday } from '$lib/stores';
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
 
-    const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const days = $hideSaturday
+        ? ['MON', 'TUE', 'WED', 'THU', 'FRI']
+        : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     let times = ['0830'];
     let dayLessons: { [key: string]: Lesson[] } = {};
 
@@ -22,7 +25,7 @@
         dayLessons = {};
         for (const day of days) dayLessons[day] = [];
         for (const lesson of lessons) {
-            if (lesson.day === '') continue;
+            if (lesson.day === '' || (lesson.day === 'SAT' && $hideSaturday)) continue;
             const lessonArr = [...dayLessons[lesson.day], lesson];
             dayLessons[lesson.day] = lessonArr;
         }

@@ -6,10 +6,25 @@
 
     "Settings": {
         "Settings": "Settings",
-        "Toggle Theme": "Toggle Theme",
-        "Toggle between dark and light themes": "Theme can swap dark and light one",
-        "Set Locale": "Set Locale",
-        "Switch between languages on a fly": "Fast game change language. Multiculture country you know?"
+
+        "Theme": {
+            "Toggle Theme": "Toggle Theme",
+            "Toggle between dark and light themes": "Theme can swap dark and light one"
+        },
+
+        "Saturday": {
+            "Hide Saturday": "Hide Saturday",
+            "Hide Saturdays from timetable": "Seriously got some module lessons on Sat one sia, you think I put this for fun issit?"
+        },
+
+        "Locale": {
+            "Set Locale": "Set Locale",
+            "Switch between languages on a fly": "Fast game change language. Multiculture country you know?",
+            "Languages": {
+                "English": "🇬🇧 English",
+                "Singlish": "🇸🇬 Singlish"
+            }
+        }
     },
 
     "Timetable": {

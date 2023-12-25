@@ -21,11 +21,11 @@
 
 <div>
     <h3 class="text-xl font-semibold mb-4">
-        {$t('Settings.Toggle Theme')}
+        {$t('Settings.Theme.Toggle Theme')}
     </h3>
     <div class="flex">
         <div class="flex-1 m-auto">
-            {$t('Settings.Toggle between dark and light themes')}
+            {$t('Settings.Theme.Toggle between dark and light themes')}
         </div>
         <div class="flex flex-row gap-2 items-center justify-center w-48">
             {@html moonIcon}

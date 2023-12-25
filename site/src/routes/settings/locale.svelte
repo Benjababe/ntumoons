@@ -2,8 +2,8 @@
     import { t, locale, locales } from '$lib/translations';
 
     const localeDisplay: { [key: string]: string } = {
-        en: '🇬🇧 English',
-        'en-SG': '🇸🇬 Singlish'
+        en: $t('Settings.Locale.Languages.English'),
+        'en-SG': $t('Settings.Locale.Languages.Singlish')
     };
 
     function setLocale() {
@@ -13,11 +13,11 @@
 
 <div>
     <h3 class="text-xl font-semibold mb-4">
-        {$t('Settings.Set Locale')}
+        {$t('Settings.Locale.Set Locale')}
     </h3>
     <div class="flex">
         <div class="flex-1 m-auto">
-            {$t('Settings.Switch between languages on a fly')}
+            {$t('Settings.Locale.Switch between languages on a fly')}
         </div>
         <div class="flex flex-row gap-2 items-center justify-center w-48">
             <select

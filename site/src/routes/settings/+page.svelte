@@ -1,7 +1,8 @@
 <script lang="ts">
     import { t } from '$lib/translations';
-    import Theme from './theme.svelte';
-    import Locale from './locale.svelte';
+    import Theme from './Theme.svelte';
+    import Locale from './Locale.svelte';
+    import Saturday from './Saturday.svelte';
 </script>
 
 <div class="flex justify-center">
@@ -9,6 +10,8 @@
         <h1 class="text-3xl font-bold">
             {$t('Settings.Settings')}
         </h1>
+        <div class="divider" />
+        <Saturday />
         <div class="divider" />
         <Theme />
         <div class="divider" />

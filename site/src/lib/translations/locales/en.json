@@ -6,10 +6,25 @@
 
     "Settings": {
         "Settings": "Settings",
-        "Toggle Theme": "Toggle Theme",
-        "Toggle between dark and light themes": "Toggle between dark and light themes",
-        "Set Locale": "Set Locale",
-        "Switch between languages on a fly": "Switch between languages on a fly"
+
+        "Theme": {
+            "Toggle Theme": "Toggle Theme",
+            "Toggle between dark and light themes": "Toggle between dark and light themes"
+        },
+
+        "Saturday": {
+            "Hide Saturday": "Hide Saturday",
+            "Hide Saturdays from timetable": "Hides the Saturday row/column from the timetable view"
+        },
+
+        "Locale": {
+            "Set Locale": "Set Locale",
+            "Switch between languages on a fly": "Switch between languages on a fly",
+            "Languages": {
+                "English": "🇬🇧 English",
+                "Singlish": "🇸🇬 Singlish"
+            }
+        }
     },
 
     "Timetable": {
