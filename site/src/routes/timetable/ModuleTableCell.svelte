@@ -49,7 +49,7 @@
     <div class="text-sm mt-2">
         <span>Index Number: </span>
         <select
-            class="ml-2 rounded-sm"
+            class="ml-2 rounded-sm bg-base-300"
             bind:value={activeIndexNumber}
             on:change={updateIndex}
         >

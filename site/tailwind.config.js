@@ -31,11 +31,11 @@ export default {
             {
                 light: {
                     "color-scheme": "light",
-                    "primary": "oklch(49.12% 0.3096 275.75)",
+                    "primary": "#3b82f6",
                     "secondary": "oklch(69.71% 0.329 342.55)",
                     "secondary-content": "oklch(98.71% 0.0106 342.55)",
-                    "accent": "oklch(76.76% 0.184 183.61)",
-                    "neutral": "#2B3440",
+                    "accent": "#2563eb",
+                    "neutral": "#9ca3af",
                     "neutral-content": "#D7DDE4",
                     "base-100": "oklch(100% 0 0)",
                     "base-200": "#F2F2F2",
@@ -47,7 +47,7 @@ export default {
                     "color-scheme": "dark",
                     "primary": "#3b82f6",
                     "secondary": "#99f6e4",
-                    "accent": "#6366f1",
+                    "accent": "#2563eb",
                     "neutral": "#e5e7eb",
                     "base-100": "#1f2937",
                     "info": "#3b82f6",
