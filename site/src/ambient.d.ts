@@ -60,3 +60,12 @@ type TypesenseModuleDoc = {
     year: string;
     semester_num: string;
 };
+
+type TypesenseModuleDoc = {
+    code: string;
+    description: string;
+    id: string;
+    name: string;
+    name_pretty: string;
+    semester: string;
+};

@@ -45,6 +45,7 @@ export function getRowCells(dayLessons: Lesson[], dayDetails: DayDetails): RowCe
         const id = generateRandomString(12) + left;
 
         return { id, left, width, lesson, overlap: false, squeeze: false };
+=======
     });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
