@@ -1,6 +1,6 @@
 <script lang="ts">
     import { t } from '$lib/translations';
-    import Theme from './Theme.svelte';
+    import Themes from './Themes.svelte';
     import Locale from './Locale.svelte';
     import Saturday from './Saturday.svelte';
 </script>
@@ -13,7 +13,7 @@
         <div class="divider" />
         <Saturday />
         <div class="divider" />
-        <Theme />
+        <Themes />
         <div class="divider" />
         <Locale />
         <div class="divider" />
