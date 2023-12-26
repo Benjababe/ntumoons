@@ -53,6 +53,10 @@
         }
     },
 
+    "Staff": {
+        "Enter name or description": "Enter name or description"
+    },
+
     "Courses": {
         "Enter course code, name or descriptions": "Enter course code, name or descriptions"
     }
