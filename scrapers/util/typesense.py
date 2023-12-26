@@ -88,6 +88,8 @@ def init_typesense():
             {"name": "email", "type": "string"},
             {"name": "keywords", "type": "string[]", "facet": True},
             {"name": "profile_pic_url", "type": "string"},
+            {"name": "appointments", "type": "string[]"},
+            {"name": "tag", "type": "string"},
         ],
     )
 

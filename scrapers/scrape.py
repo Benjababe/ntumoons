@@ -25,7 +25,15 @@ TS_COLL_MODULE = "modules"
 TS_COLL_STAFF = "staff"
 
 TS_ATTRS_MODULE = ["name", "name_pretty", "code", "year", "semester_num", "description"]
-TS_ATTRS_STAFF = ["title", "email", "description", "keywords", "profile_pic_url"]
+TS_ATTRS_STAFF = [
+    "title",
+    "email",
+    "description",
+    "keywords",
+    "profile_pic_url",
+    "appointments",
+    "tag",
+]
 
 retries = Retry(total=5, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])
 sess = requests.Session()
@@ -88,12 +96,12 @@ async def scrape_staff():
 
     typesense_upsert(TS_COLL_STAFF, "email", staff_list, TS_ATTRS_STAFF)
 
-    await write_fs(FS_COLL_STAFF, "metadata", {"keywords": keywords})
-    await write_fs_list(FS_COLL_STAFF, "email", staff_list)
+    # await write_fs(FS_COLL_STAFF, "metadata", {"keywords": keywords})
+    # await write_fs_list(FS_COLL_STAFF, "email", staff_list)
 
 
 async def scrape():
-    await scrape_modules()
+    # await scrape_modules()
     await scrape_staff()
 
 
