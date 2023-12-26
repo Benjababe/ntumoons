@@ -35,6 +35,7 @@
 
     "Modules": {
         "Search": {
+            "Enter course code, name or descriptions": "Enter course code, name or descriptions",
             "TotalFound": "{{found}} modules found based off your search"
         },
         "Details": {
@@ -54,10 +55,10 @@
     },
 
     "Staff": {
-        "Enter name or description": "Enter name or description"
-    },
-
-    "Courses": {
-        "Enter course code, name or descriptions": "Enter course code, name or descriptions"
+        "Search": {
+            "Enter name or description": "Enter name or description",
+            "Total Found": "{{found}} staff found based off your search",
+            "No description provided": "No description provided"
+        }
     }
 }

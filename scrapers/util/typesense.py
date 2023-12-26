@@ -88,6 +88,8 @@ def init_typesense():
             {"name": "email", "type": "string"},
             {"name": "keywords", "type": "string[]", "facet": True},
             {"name": "profile_pic_url", "type": "string"},
+            {"name": "appointments", "type": "string[]"},
+            {"name": "tag", "type": "string", "facet": True},
         ],
     )
 
@@ -124,7 +126,9 @@ def typesense_upsert(
     global client
 
     documents = []
-    for data in data_list:
+
+    # insert in reverse as it fetches by LIFO without any filters
+    for data in data_list[::-1]:
         data = data.to_dict()
         document = {"id": f"{id_prepend}{data[id_key]}"}
 

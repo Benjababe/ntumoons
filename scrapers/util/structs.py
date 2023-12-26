@@ -19,7 +19,7 @@ class Staff(Dictable):
     profile_pic_url: str
     description: str
     biography: str
-    appointments: list[str]
+    appointments: str
     interests: list[str]
     keywords: list[str]
     research_interests: list[str]

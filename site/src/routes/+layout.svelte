@@ -1,5 +1,6 @@
 <script lang="ts">
     import '../app.css';
+    import logoIcon from '$lib/assets/logo.svg?raw';
     import { Link, Settings } from '$lib/components/navbar';
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
@@ -21,7 +22,15 @@
 
 <nav class="navbar py-0 bg-base-300">
     <div class="flex-1">
-        <Link href="/">NTUMoons</Link>
+        <Link
+            class="group"
+            href="/"
+        >
+            <div class="mr-2 group-hover:scale-120 transition-transform duration-300">
+                {@html logoIcon}
+            </div>
+            NTUMoons
+        </Link>
         <Link href="/timetable">{$t('Nav.Timetable')}</Link>
         <Link href="/modules">{$t('Nav.Modules')}</Link>
         <Link href="/staff">{$t('Nav.Staff')}</Link>
@@ -35,10 +44,7 @@
 </nav>
 
 <div class="flex justify-center pt-12 pb-24">
-    <div
-        style:width="80%"
-        class="max-w-1200"
-    >
+    <div class="w-4/5 max-w-1200">
         <slot />
     </div>
 </div>

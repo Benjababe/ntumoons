@@ -88,6 +88,16 @@ def get_staff_details(sess: Session, url: str) -> Staff:
 
 
 def get_staff_in_page(sess: Session, data: list[dict]) -> list[Staff]:
+    """For a scraped page, get all of the staff in the page
+
+    Args:
+        sess (Session): Persistent session of scraper.
+        data (list[dict]): Response from the staff request
+
+    Returns:
+        list[Staff]: List of staff in the page scraped
+    """
+
     staff = list(map(lambda d: staff_dict_to_obj(sess, d), data))
     return staff
 

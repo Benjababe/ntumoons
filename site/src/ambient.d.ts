@@ -65,4 +65,8 @@ type TypesenseStaffDoc = {
     email: string;
     title: string;
     description: string;
+    keywords: string[];
+    profile_pic_url: string;
+    appointments: string[];
+    tag: string;
 };
