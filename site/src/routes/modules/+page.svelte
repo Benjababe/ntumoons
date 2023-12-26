@@ -57,8 +57,8 @@
 
     function updatePaginator(page: number, found: number) {
         const totalPages = Math.ceil(found / TYPESENSE_PER_PAGE);
-        const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH));
-        const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH));
+        const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH / 2));
+        const end = Math.max(Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH / 2)), 5);
 
         let tmpPages = [];
         for (let i = start; i <= end; i++) tmpPages.push(i);
