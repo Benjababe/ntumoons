@@ -12,7 +12,7 @@ from ntu.course_module import (
     scrape_category_modules,
 )
 from ntu.exam import get_exam_plan_num, insert_module_exams
-from ntu.staff import get_all_staff, get_keywords
+from ntu.staff import get_all_staff, get_metadata
 from util.typesense import init_typesense, typesense_upsert
 
 FS_COLL_SEM = "semester"
@@ -90,13 +90,13 @@ async def scrape_staff():
     """
 
     staff_list = get_all_staff(sess)
-    keywords = get_keywords(staff_list)
+    metadata = get_metadata(staff_list)
 
     write_json(staff_list, "staff")
 
     typesense_upsert(TS_COLL_STAFF, "email", staff_list, TS_ATTRS_STAFF)
 
-    await write_fs(FS_COLL_STAFF, "metadata", {"keywords": keywords})
+    await write_fs(FS_COLL_STAFF, "metadata", metadata)
     await write_fs_list(FS_COLL_STAFF, "email", staff_list)
 
 

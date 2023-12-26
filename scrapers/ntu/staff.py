@@ -143,6 +143,12 @@ def staff_dict_to_obj(sess: Session, s_dict: dict) -> Staff:
     )
 
 
+def get_metadata(staff_list: list[Staff]) -> dict:
+    keywords = get_keywords(staff_list)
+    tags = get_tags(staff_list)
+    return {"keywords": keywords, "tags": tags}
+
+
 def get_keywords(staff_list: list[Staff]) -> list[str]:
     """Gets relevant keywords for faculty staff. Only include those with 5 or more occurrences.
 
@@ -164,3 +170,20 @@ def get_keywords(staff_list: list[Staff]) -> list[str]:
             keywords.append(keyword)
 
     return sorted(keywords)
+
+
+def get_tags(staff_list: list[Staff]) -> list[str]:
+    """Gets all tags of faculty staff.
+
+    Args:
+        staff_list (list[Staff]): List of faculty staff.
+
+    Returns:
+        list[str]: All tags
+    """
+
+    tags = set()
+    for staff in staff_list:
+        if staff.tag != "":
+            tags.add(staff.tag)
+    return sorted(list(tags))
