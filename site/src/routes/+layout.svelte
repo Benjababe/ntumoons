@@ -24,6 +24,7 @@
         <Link href="/">NTUMoons</Link>
         <Link href="/timetable">{$t('Nav.Timetable')}</Link>
         <Link href="/modules">{$t('Nav.Modules')}</Link>
+        <Link href="/staff">{$t('Nav.Staff')}</Link>
     </div>
     <span class="mr-4 select-none">
         {$semester.title}
