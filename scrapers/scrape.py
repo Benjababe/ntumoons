@@ -25,7 +25,7 @@ TS_COLL_MODULE = "modules"
 TS_COLL_STAFF = "staff"
 
 TS_ATTRS_MODULE = ["name", "name_pretty", "code", "year", "semester_num", "description"]
-TS_ATTRS_STAFF = ["title", "email", "description"]
+TS_ATTRS_STAFF = ["title", "email", "description", "keywords", "profile_pic_url"]
 
 retries = Retry(total=5, backoff_factor=0.1, status_forcelist=[500, 502, 503, 504])
 sess = requests.Session()

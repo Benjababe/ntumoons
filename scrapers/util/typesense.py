@@ -86,6 +86,8 @@ def init_typesense():
             desc_field,
             {"name": "title", "type": "string"},
             {"name": "email", "type": "string"},
+            {"name": "keywords", "type": "string[]", "facet": True},
+            {"name": "profile_pic_url", "type": "string"},
         ],
     )
 
