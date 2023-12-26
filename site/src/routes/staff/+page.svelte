@@ -1,14 +1,18 @@
 <script lang="ts">
+    import MultiFilterButton from '$lib/components/search/MultiFilterButton.svelte';
     import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
     import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
+
+    export let data;
 
     const TYPESENSE_PER_PAGE = 10;
     const PAGINATOR_WIDTH = 5;
 
     let staffHits: SearchResponseHit<TypesenseStaffDoc>[] = [];
     let searchValue = '';
+    let activeFilters: { [key: string]: string[] } = {};
     let searching = false;
     let found = 0;
     let activePage = 1;
@@ -18,6 +22,11 @@
     onMount(() => {
         searchStaff();
     });
+
+    function handleFilterUpdate(name: string, newFilters: string[]) {
+        activeFilters[name] = newFilters;
+        searchStaff();
+    }
 
     function handleSearch() {
         searching = true;
@@ -31,6 +40,14 @@
             page = Math.ceil(found / TYPESENSE_PER_PAGE);
         }
 
+        let tsFilters: string[] = [];
+        for (let [name, filters] of Object.entries(activeFilters)) {
+            if (filters.length == 0) continue;
+
+            const filterStr = `[${filters.map((f) => `\`${f}\``).join(', ')}]`;
+            tsFilters = [...tsFilters, `${name}:=${filterStr}`];
+        }
+
         const res = await fetch('/search/typesense/staff', {
             method: 'POST',
             headers: {
@@ -41,11 +58,16 @@
                 q: searchValue,
                 page,
                 per_page: TYPESENSE_PER_PAGE,
-                filters: ''
+                filters: tsFilters.join(' && ')
             })
         });
 
-        if (!res.ok) return;
+        if (!res.ok) {
+            updatePaginator(1, 0);
+            staffHits = [];
+            found = 0;
+            return;
+        }
 
         const resJson = await res.json();
         const tsRes: SearchResponse<TypesenseStaffDoc> = resJson['tsRes'];
@@ -62,8 +84,8 @@
 
     function updatePaginator(page: number, found: number) {
         const totalPages = Math.ceil(found / TYPESENSE_PER_PAGE);
-        const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH));
-        const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH));
+        const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH / 2));
+        const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH / 2));
 
         let tmpPages = [];
         for (let i = start; i <= end; i++) tmpPages.push(i);
@@ -80,6 +102,20 @@
         bind:value={searchValue}
         on:input={handleSearch}
     />
+    <div>
+        <MultiFilterButton
+            class="mt-2"
+            name="Tag"
+            filterList={data.tags}
+            on:filterChange={(e) => handleFilterUpdate('tag', e.detail)}
+        />
+        <MultiFilterButton
+            class="mt-2"
+            name="Keywords"
+            filterList={data.keywords}
+            on:filterChange={(e) => handleFilterUpdate('keywords', e.detail)}
+        />
+    </div>
     {#if found > 0 && searchValue.length > 0}
         <div class="my-2">
             {t.get('Staff.Search.Total Found', { found })}
@@ -127,11 +163,13 @@
             </div>
         {/each}
     </div>
-    <Paginator
-        {pages}
-        {activePage}
-        on:pageChange={(e) => searchStaff(e.detail)}
-    />
+    {#if found > TYPESENSE_PER_PAGE}
+        <Paginator
+            {pages}
+            {activePage}
+            on:pageChange={(e) => searchStaff(e.detail)}
+        />
+    {/if}
 </div>
 
 <style>

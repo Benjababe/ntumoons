@@ -60,5 +60,13 @@
             "Total Found": "{{found}} staff found based off your search",
             "No description provided": "No description provided"
         }
+    },
+
+    "Components": {
+        "Search": {
+            "FilterButton": {
+                "Search filters...": "Search filters..."
+            }
+        }
     }
 }
