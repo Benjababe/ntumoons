@@ -96,12 +96,12 @@ async def scrape_staff():
 
     typesense_upsert(TS_COLL_STAFF, "email", staff_list, TS_ATTRS_STAFF)
 
-    # await write_fs(FS_COLL_STAFF, "metadata", {"keywords": keywords})
-    # await write_fs_list(FS_COLL_STAFF, "email", staff_list)
+    await write_fs(FS_COLL_STAFF, "metadata", {"keywords": keywords})
+    await write_fs_list(FS_COLL_STAFF, "email", staff_list)
 
 
 async def scrape():
-    # await scrape_modules()
+    await scrape_modules()
     await scrape_staff()
 
 
