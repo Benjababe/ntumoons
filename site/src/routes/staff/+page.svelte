@@ -1,5 +1,6 @@
 <script lang="ts">
     import { t } from '$lib/translations';
+    import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
 
     const TYPESENSE_PER_PAGE = 10;
@@ -15,6 +16,10 @@
     let pages: number[] = [];
     let timeout: NodeJS.Timeout;
 
+    onMount(() => {
+        searchStaff();
+    });
+
     function handleSearch() {
         searching = true;
         if (timeout) clearTimeout(timeout);
@@ -22,12 +27,6 @@
     }
 
     async function searchStaff(page = 1) {
-        if (!searchValue) {
-            staffHits = [];
-            searching = false;
-            return;
-        }
-
         const res = await fetch('/search/typesense/staff', {
             method: 'POST',
             headers: {
@@ -46,7 +45,6 @@
 
         const resJson = await res.json();
         const tsRes: SearchResponse<TypesenseStaffDoc> = resJson['tsRes'];
-        console.log(tsRes);
 
         if (tsRes.hits === undefined) return;
 
@@ -73,9 +71,93 @@
 <div class="flex flex-col justify-center items-center max-w-1200">
     <input
         type="text"
-        placeholder={$t('Staff.Enter name or description')}
+        placeholder={$t('Staff.Search.Enter name or description')}
         class="input input-bordered w-full max-w-xl"
         bind:value={searchValue}
         on:input={handleSearch}
     />
+    {#if found > 0 && searchValue.length > 0}
+        <div class="my-2">
+            {t.get('Staff.Search.Total Found', { found })}
+        </div>
+    {/if}
+    <div class="search-results max-w-4xl">
+        {#each staffHits as hit (hit.document.email)}
+            <div class="flex gap-4 mt-8 mb-4">
+                <div class="m-auto w-1/6">
+                    <a href="/staff/{hit.document.email}">
+                        <img
+                            class="w-full aspect-staff-photo object-cover object-center"
+                            src={hit.document.profile_pic_url}
+                            alt={hit.document.title}
+                        />
+                    </a>
+                </div>
+                <div class="w-5/6 text-sm">
+                    <a
+                        href="/staff/{hit.document.email}"
+                        class="text-primary text-xl"
+                    >
+                        {@html hit.highlight.title
+                            ? hit.highlight.title.snippet
+                            : hit.document.title}
+                    </a>
+                    <div>{hit.document.tag}</div>
+                    <div class="divider mt-0 mb-2" />
+                    <div>
+                        {#if hit.document.description !== ''}
+                            {@html hit.highlight.description
+                                ? hit.highlight.description.snippet
+                                : hit.document.description}
+                        {:else}
+                            {$t('Staff.Search.No description provided')}
+                        {/if}
+                    </div>
+                    <div class="mt-4">
+                        <div class="font-semibold">Appointments:</div>
+                        {#each hit.document.appointments as appointment}
+                            <div>{appointment}</div>
+                        {/each}
+                    </div>
+                </div>
+            </div>
+        {/each}
+    </div>
+    {#if pages.length > 0}
+        <div class="join mt-8">
+            {#if activePage > 1}
+                <button
+                    class="join-item btn btn-md"
+                    on:click|preventDefault={() => searchStaff(1)}
+                >
+                    {DOUBLE_LEFT}
+                </button>
+            {/if}
+            {#each pages as pageNum}
+                <button
+                    class="join-item btn btn-md {pageNum === activePage ? 'btn-active' : ''}"
+                    on:click|preventDefault={() => searchStaff(pageNum)}
+                >
+                    {pageNum}
+                </button>
+            {/each}
+            {#if activePage !== pages[pages.length - 1]}
+                <button
+                    class="join-item btn btn-md"
+                    on:click|preventDefault={() => searchStaff(pages[pages.length - 1])}
+                >
+                    {DOUBLE_RIGHT}
+                </button>
+            {/if}
+        </div>
+    {/if}
 </div>
+
+<style>
+    :global(.search-results > * mark) {
+        color: var(--bc);
+        background-color: inherit;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+</style>

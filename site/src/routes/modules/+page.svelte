@@ -1,5 +1,6 @@
 <script lang="ts">
     import { t } from '$lib/translations';
+    import { onMount } from 'svelte';
     import type { SearchResponseHit, SearchResponse } from 'typesense/lib/Typesense/Documents';
 
     const TYPESENSE_PER_PAGE = 10;
@@ -15,6 +16,10 @@
     let pages: number[] = [];
     let timeout: NodeJS.Timeout;
 
+    onMount(() => {
+        searchModules();
+    });
+
     function handleSearch() {
         searching = true;
         if (timeout) clearTimeout(timeout);
@@ -22,12 +27,6 @@
     }
 
     async function searchModules(page = 1) {
-        if (!searchValue) {
-            moduleHits = [];
-            searching = false;
-            return;
-        }
-
         const res = await fetch('/search/typesense/module', {
             method: 'POST',
             headers: {
@@ -67,12 +66,12 @@
 <div class="flex flex-col justify-center items-center max-w-1200">
     <input
         type="text"
-        placeholder={$t('Courses.Enter course code, name or descriptions')}
+        placeholder={$t('Modules.Search.Enter course code, name or descriptions')}
         class="input input-bordered w-full max-w-xl"
         bind:value={searchValue}
         on:input={handleSearch}
     />
-    {#if found > 0}
+    {#if found > 0 && searchValue.length > 0}
         <div class="my-2">
             {t.get('Modules.Search.TotalFound', { found })}
         </div>

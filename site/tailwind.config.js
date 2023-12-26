@@ -5,6 +5,9 @@ export default {
     content: ['./src/**/*.{html,js,svelte,ts}'],
     theme: {
         extend: {
+            aspectRatio: {
+                'staff-photo': '3 / 4',
+            },
             borderWidth: {
                 '3': '3px',
             },
