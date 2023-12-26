@@ -1,7 +1,8 @@
 {
     "Nav": {
         "Timetable": "Timetable",
-        "Modules": "Modules"
+        "Modules": "Modules",
+        "Staff": "Staff"
     },
 
     "Settings": {
@@ -50,6 +51,10 @@
             "Schedule": "Schedule",
             "Index Number": "Index Number: "
         }
+    },
+
+    "Staff": {
+        "Enter name or description": "Enter name or description"
     },
 
     "Courses": {

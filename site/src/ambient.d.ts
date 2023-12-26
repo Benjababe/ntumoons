@@ -61,11 +61,8 @@ type TypesenseModuleDoc = {
     semester_num: string;
 };
 
-type TypesenseModuleDoc = {
-    code: string;
+type TypesenseStaffDoc = {
+    email: string;
+    title: string;
     description: string;
-    id: string;
-    name: string;
-    name_pretty: string;
-    semester: string;
 };
