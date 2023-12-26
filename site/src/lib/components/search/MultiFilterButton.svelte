@@ -53,9 +53,13 @@
                         bind:checked={checkedFilters[i]}
                         on:change={handleFilterUpdate}
                     />
+                    <!-- Allow this here as the label would just close the dropdown menu -->
+                    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                     <label
                         for="chk_{filter}"
                         class="w-5/6 px-1 py-1 text-sm font-medium"
+                        on:mousedown|preventDefault={() => {}}
+                        on:keydown|preventDefault={() => {}}
                     >
                         {filter}
                     </label>
