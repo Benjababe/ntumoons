@@ -1,12 +1,11 @@
 <script lang="ts">
+    import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
     import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
 
     const TYPESENSE_PER_PAGE = 10;
     const PAGINATOR_WIDTH = 5;
-    const DOUBLE_LEFT = '«';
-    const DOUBLE_RIGHT = '»';
 
     let staffHits: SearchResponseHit<TypesenseStaffDoc>[] = [];
     let searchValue = '';
@@ -27,6 +26,11 @@
     }
 
     async function searchStaff(page = 1) {
+        if (page === -1) {
+            if (found === 0) return;
+            page = Math.ceil(found / TYPESENSE_PER_PAGE);
+        }
+
         const res = await fetch('/search/typesense/staff', {
             method: 'POST',
             headers: {
@@ -123,34 +127,11 @@
             </div>
         {/each}
     </div>
-    {#if pages.length > 0}
-        <div class="join mt-8">
-            {#if activePage > 1}
-                <button
-                    class="join-item btn btn-md"
-                    on:click|preventDefault={() => searchStaff(1)}
-                >
-                    {DOUBLE_LEFT}
-                </button>
-            {/if}
-            {#each pages as pageNum}
-                <button
-                    class="join-item btn btn-md {pageNum === activePage ? 'btn-active' : ''}"
-                    on:click|preventDefault={() => searchStaff(pageNum)}
-                >
-                    {pageNum}
-                </button>
-            {/each}
-            {#if activePage !== pages[pages.length - 1]}
-                <button
-                    class="join-item btn btn-md"
-                    on:click|preventDefault={() => searchStaff(pages[pages.length - 1])}
-                >
-                    {DOUBLE_RIGHT}
-                </button>
-            {/if}
-        </div>
-    {/if}
+    <Paginator
+        {pages}
+        {activePage}
+        on:pageChange={(e) => searchStaff(e.detail)}
+    />
 </div>
 
 <style>
