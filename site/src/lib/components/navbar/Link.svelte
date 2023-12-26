@@ -7,7 +7,7 @@
 
 <a
     {href}
-    class="bg-base-300 {linkColour}"
+    class="bg-base-300 {linkColour} {$$props.class}"
 >
     <slot />
 </a>

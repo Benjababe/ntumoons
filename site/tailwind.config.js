@@ -8,6 +8,13 @@ export default {
             aspectRatio: {
                 'staff-photo': '3 / 4',
             },
+            backgroundImage: {
+                'tt-alternate-h': 'linear-gradient(90deg, var(--tt-alternate) 50%, transparent 0)',
+                'tt-alternate-v': 'linear-gradient(360deg, var(--tt-alternate) 50%, transparent 0)'
+            },
+            backgroundSize: {
+                'tt-loop': '16.7% 16.7%',
+            },
             borderWidth: {
                 '3': '3px',
             },
@@ -20,13 +27,9 @@ export default {
             maxWidth: {
                 '1200': '1200px',
             },
-            backgroundImage: {
-                'tt-alternate-h': 'linear-gradient(90deg, var(--tt-alternate) 50%, transparent 0)',
-                'tt-alternate-v': 'linear-gradient(360deg, var(--tt-alternate) 50%, transparent 0)'
-            },
-            backgroundSize: {
-                'tt-loop': '16.7% 16.7%',
-            },
+            scale: {
+                '120': '1.2',
+            }
         },
     },
     daisyui: {
