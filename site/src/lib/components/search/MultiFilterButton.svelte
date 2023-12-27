@@ -6,7 +6,7 @@
     export let name: string = '';
     export let filterList: string[] = [];
 
-    const dispatch = createEventDispatcher<{ filterChange: string[] }>();
+    const dispatch = createEventDispatcher<{ filterUpdate: DispatchFilterUpdate }>();
     let checkedFilters: boolean[] = new Array(filterList.length).fill(false);
     let filterSearch = '';
 
@@ -20,7 +20,7 @@
             .map((f, i) => (f ? filterList[i] : ''))
             .filter((f) => f !== '');
 
-        dispatch('filterChange', filtersEnabled);
+        dispatch('filterUpdate', { name, newFilters: filtersEnabled });
     }
 </script>
 

@@ -7,14 +7,17 @@
     export let mod: Module;
     let activeIndexNumber = mod.active_index_number;
 
-    const removeDispatch = createEventDispatcher<{ remove: { code: string } }>();
+    const dispatch = createEventDispatcher<{
+        remove: DispatchRemoveModule;
+        updateIndex: DispatchUpdateIndex;
+    }>();
+
     function remove() {
-        removeDispatch('remove', { code: mod.code });
+        dispatch('remove', { code: mod.code });
     }
 
-    const idxDispatch = createEventDispatcher<{ updateIndex: { code: string; index: string } }>();
     function updateIndex() {
-        idxDispatch('updateIndex', { code: mod.code, index: activeIndexNumber });
+        dispatch('updateIndex', { code: mod.code, index: activeIndexNumber });
     }
 </script>
 

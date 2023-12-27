@@ -70,3 +70,17 @@ type TypesenseStaffDoc = {
     appointments: string[];
     tag: string;
 };
+
+type DispatchRemoveModule = {
+    code: string;
+};
+
+type DispatchUpdateIndex = {
+    code: string;
+    index: string;
+};
+
+type DispatchFilterUpdate = {
+    name: string;
+    newFilters: string[];
+};

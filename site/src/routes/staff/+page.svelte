@@ -23,7 +23,7 @@
         searchStaff();
     });
 
-    function handleFilterUpdate(name: string, newFilters: string[]) {
+    function handleFilterUpdate({ name, newFilters }: DispatchFilterUpdate) {
         activeFilters[name] = newFilters;
         searchStaff();
     }
@@ -107,13 +107,13 @@
             class="mt-2"
             name="Tag"
             filterList={data.tags}
-            on:filterChange={(e) => handleFilterUpdate('tag', e.detail)}
+            on:filterChange={(e) => handleFilterUpdate(e.detail)}
         />
         <MultiFilterButton
             class="mt-2"
             name="Keywords"
             filterList={data.keywords}
-            on:filterChange={(e) => handleFilterUpdate('keywords', e.detail)}
+            on:filterChange={(e) => handleFilterUpdate(e.detail)}
         />
     </div>
     {#if found > 0 && searchValue.length > 0}
