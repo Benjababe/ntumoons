@@ -105,13 +105,13 @@
     <div>
         <MultiFilterButton
             class="mt-2"
-            name="Tag"
+            name="tag"
             filterList={data.tags}
             on:filterChange={(e) => handleFilterUpdate(e.detail)}
         />
         <MultiFilterButton
             class="mt-2"
-            name="Keywords"
+            name="keywords"
             filterList={data.keywords}
             on:filterChange={(e) => handleFilterUpdate(e.detail)}
         />

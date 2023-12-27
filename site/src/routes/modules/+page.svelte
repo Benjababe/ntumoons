@@ -31,7 +31,7 @@
             page = Math.ceil(found / TYPESENSE_PER_PAGE);
         }
 
-        const res = await fetch('/search/typesense/module', {
+        const res = await fetch('/search/typesense/modules', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
