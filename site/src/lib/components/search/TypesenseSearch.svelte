@@ -4,6 +4,7 @@
     import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
     import MultiFilterButton from './MultiFilterButton.svelte';
+    import { callSearchPath } from './search-helper';
 
     export let searchPlaceholder: string = '';
     export let searchPath: string = '';
@@ -25,6 +26,12 @@
         search();
     });
 
+    function reset() {
+        updatePaginator(1, 0);
+        hits = [];
+        found = 0;
+    }
+
     function handleFilterUpdate({ name, newFilters }: DispatchFilterUpdate) {
         activeFilters[name] = newFilters;
         search();
@@ -37,20 +44,28 @@
     }
 
     async function search(page = 1) {
-        const res = await callSearchPath(page);
-        if (!res) return;
+        const res = await callSearchPath(
+            searchPath,
+            searchValue,
+            page,
+            found,
+            TYPESENSE_PER_PAGE,
+            activeFilters
+        );
+        if (res === -1) return;
 
         if (!res.ok) {
-            updatePaginator(1, 0);
-            hits = [];
-            found = 0;
+            reset();
             return;
         }
 
         const resJson = await res.json();
         const tsRes: SearchResponse<TypesenseStaffDoc | TypesenseModuleDoc> = resJson['tsRes'];
 
-        if (tsRes.hits === undefined) return;
+        if (tsRes.hits === undefined) {
+            reset();
+            return;
+        }
 
         updatePaginator(tsRes.page, tsRes.found);
         hits = tsRes.hits;
@@ -60,46 +75,11 @@
         document.body.scrollIntoView();
     }
 
-    async function callSearchPath(page: number) {
-        if (page === -1) {
-            if (found === 0) return;
-            page = Math.ceil(found / TYPESENSE_PER_PAGE);
-        }
-
-        let tsFilters: string[] = [];
-        for (let [name, filters] of Object.entries(activeFilters)) {
-            if (filters.length == 0) continue;
-
-            const filterStr = `[${filters.map((f) => `\`${f}\``).join(', ')}]`;
-            tsFilters = [...tsFilters, `${name}:=${filterStr}`];
-        }
-
-        const res = await fetch(searchPath, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                q: searchValue,
-                page,
-                per_page: TYPESENSE_PER_PAGE,
-                filters: tsFilters.join(' && ')
-            })
-        });
-
-        return res;
-    }
-
     function updatePaginator(page: number, found: number) {
         const totalPages = Math.ceil(found / TYPESENSE_PER_PAGE);
         const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH / 2));
         const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH / 2));
-
-        let tmpPages = [];
-        for (let i = start; i <= end; i++) tmpPages.push(i);
-
-        pages = tmpPages;
+        pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
     }
 </script>
 

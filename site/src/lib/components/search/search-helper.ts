@@ -1,4 +1,4 @@
-export async function search(
+export async function callSearchPath(
     searchPath: string,
     searchValue: string,
     page = 1,
@@ -7,7 +7,7 @@ export async function search(
     activeFilters: { [key: string]: string[] } = {}
 ) {
     if (page === -1) {
-        if (found === 0) return;
+        if (found === 0) return -1;
         page = Math.ceil(found / per_page);
     }
 
@@ -33,8 +33,5 @@ export async function search(
         })
     });
 
-    if (!res.ok) return -1;
-
-    const resJson = await res.json();
-    return resJson;
+    return res;
 }
