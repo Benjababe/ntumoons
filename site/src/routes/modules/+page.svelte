@@ -8,8 +8,6 @@
     searchPlaceholder={$t('Modules.Search.Enter course code, name or descriptions')}
     let:hit
 >
-    <svelte:fragment slot="filters"></svelte:fragment>
-
     <div class="mt-8 mb-4">
         <a
             href="/modules/{hit.document.year}/{hit.document.semester_num}/{hit.document.code}"

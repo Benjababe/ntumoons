@@ -1,40 +1,16 @@
 <script lang="ts">
-    import MultiFilterButton from '$lib/components/search/MultiFilterButton.svelte';
     import TypesenseSearch from '$lib/components/search/TypesenseSearch.svelte';
     import { t } from '$lib/translations';
 
     export let data;
-
-    let activeFilters: { [key: string]: string[] } = {};
-
-    function handleFilterUpdate({ name, newFilters }: DispatchFilterUpdate) {
-        const tmpFilters = { ...activeFilters };
-        tmpFilters[name] = newFilters;
-        activeFilters = tmpFilters;
-    }
 </script>
 
 <TypesenseSearch
     searchPlaceholder={$t('Staff.Search.Enter name or description')}
     searchPath="/search/typesense/staff"
-    {activeFilters}
+    searchFilters={data}
     let:hit
 >
-    <svelte:fragment slot="filters">
-        <MultiFilterButton
-            class="mt-2"
-            name="tag"
-            filterList={data.tags}
-            on:filterUpdate={(e) => handleFilterUpdate(e.detail)}
-        />
-        <MultiFilterButton
-            class="mt-2"
-            name="keywords"
-            filterList={data.keywords}
-            on:filterUpdate={(e) => handleFilterUpdate(e.detail)}
-        />
-    </svelte:fragment>
-
     <div class="flex gap-4 mt-8 mb-4">
         <div class="m-auto w-1/6">
             <a href="/staff/{hit.document.email}">

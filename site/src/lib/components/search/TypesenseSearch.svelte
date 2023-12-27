@@ -3,16 +3,18 @@
     import { t } from '$lib/translations';
     import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
+    import MultiFilterButton from './MultiFilterButton.svelte';
 
     export let searchPlaceholder: string = '';
     export let searchPath: string = '';
-    export let activeFilters: { [key: string]: string[] } = {};
+    export let searchFilters: { [key: string]: string[] } = {};
 
     const TYPESENSE_PER_PAGE = 10;
     const PAGINATOR_WIDTH = 5;
 
     let hits: SearchResponseHit<TypesenseStaffDoc | TypesenseModuleDoc>[] = [];
     let searchValue = '';
+    let activeFilters: { [key: string]: string[] } = {};
     let searching = false;
     let found = 0;
     let activePage = 1;
@@ -23,6 +25,11 @@
         search();
     });
 
+    function handleFilterUpdate({ name, newFilters }: DispatchFilterUpdate) {
+        activeFilters[name] = newFilters;
+        search();
+    }
+
     function handleSearch() {
         searching = true;
         if (timeout) clearTimeout(timeout);
@@ -30,6 +37,30 @@
     }
 
     async function search(page = 1) {
+        const res = await callSearchPath(page);
+        if (!res) return;
+
+        if (!res.ok) {
+            updatePaginator(1, 0);
+            hits = [];
+            found = 0;
+            return;
+        }
+
+        const resJson = await res.json();
+        const tsRes: SearchResponse<TypesenseStaffDoc | TypesenseModuleDoc> = resJson['tsRes'];
+
+        if (tsRes.hits === undefined) return;
+
+        updatePaginator(tsRes.page, tsRes.found);
+        hits = tsRes.hits;
+        activePage = page;
+        found = tsRes.found;
+
+        document.body.scrollIntoView();
+    }
+
+    async function callSearchPath(page: number) {
         if (page === -1) {
             if (found === 0) return;
             page = Math.ceil(found / TYPESENSE_PER_PAGE);
@@ -57,24 +88,7 @@
             })
         });
 
-        if (!res.ok) {
-            updatePaginator(1, 0);
-            hits = [];
-            found = 0;
-            return;
-        }
-
-        const resJson = await res.json();
-        const tsRes: SearchResponse<TypesenseStaffDoc | TypesenseModuleDoc> = resJson['tsRes'];
-
-        if (tsRes.hits === undefined) return;
-
-        updatePaginator(tsRes.page, tsRes.found);
-        hits = tsRes.hits;
-        activePage = page;
-        found = tsRes.found;
-
-        document.body.scrollIntoView();
+        return res;
     }
 
     function updatePaginator(page: number, found: number) {
@@ -98,9 +112,15 @@
         on:input={handleSearch}
     />
     <div>
-        <slot name="filters" />
+        {#each Object.entries(searchFilters) as [name, filterList]}
+            <MultiFilterButton
+                {name}
+                {filterList}
+                on:filterUpdate={(e) => handleFilterUpdate(e.detail)}
+            />
+        {/each}
     </div>
-    {#if found > 0 && searchValue.length > 0}
+    {#if found > 0 && search.length > 0}
         <div class="my-2">
             {$t('Staff.Search.Total Found', { found })}
         </div>

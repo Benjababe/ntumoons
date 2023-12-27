@@ -6,7 +6,7 @@
     export let name: string = '';
     export let filterList: string[] = [];
 
-    const dispatch = createEventDispatcher<{ filterChange: DispatchFilterUpdate }>();
+    const dispatch = createEventDispatcher<{ filterUpdate: DispatchFilterUpdate }>();
     let checkedFilters: boolean[] = new Array(filterList.length).fill(false);
     let filterSearch = '';
 
@@ -15,12 +15,12 @@
         return 'hidden';
     }
 
-    function handleFilterChange() {
+    function handleFilterUpdate() {
         const filtersEnabled = checkedFilters
             .map((f, i) => (f ? filterList[i] : ''))
             .filter((f) => f !== '');
 
-        dispatch('filterChange', { name, newFilters: filtersEnabled });
+        dispatch('filterUpdate', { name, newFilters: filtersEnabled });
     }
 </script>
 
@@ -51,7 +51,7 @@
                         type="checkbox"
                         class="w-1/6 h-4 rounded"
                         bind:checked={checkedFilters[i]}
-                        on:change={handleFilterChange}
+                        on:change={handleFilterUpdate}
                     />
                     <!-- Allow this here as the label would just close the dropdown menu -->
                     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
