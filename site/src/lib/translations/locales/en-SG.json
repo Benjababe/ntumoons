@@ -62,5 +62,12 @@
         }
     },
 
-    "Courses": {}
+    "Components": {
+        "Search": {
+            "FilterButton": {
+                "Filter By": "Filter By {{name}}",
+                "Search filters...": "Search filters..."
+            }
+        }
+    }
 }
