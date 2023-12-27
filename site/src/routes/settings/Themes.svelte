@@ -1,7 +1,7 @@
 <script lang="ts">
     import { t } from '$lib/translations';
-    import moonIcon from '$lib/assets/moon.svg?raw';
-    import sunIcon from '$lib/assets/sun.svg?raw';
+    import Moon from '$lib/assets/images/Moon.svelte';
+    import Sun from '$lib/assets/images/Sun.svelte';
 
     import { onMount } from 'svelte';
 
@@ -28,7 +28,7 @@
             {$t('Settings.Theme.Toggle between dark and light themes')}
         </div>
         <div class="flex flex-row gap-2 items-center justify-center w-48">
-            {@html moonIcon}
+            <Moon />
             <input
                 type="checkbox"
                 value="light"
@@ -36,7 +36,7 @@
                 bind:checked={isLight}
                 on:change={toggleTheme}
             />
-            {@html sunIcon}
+            <Sun />
         </div>
     </div>
 </div>

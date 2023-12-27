@@ -1,5 +1,5 @@
 <script lang="ts">
-    import arrowDown from '$lib/assets/arrow-down.svg?raw';
+    import ArrowDown from '$lib/assets/images/ArrowDown.svelte';
     import { t } from '$lib/translations';
     import { createEventDispatcher } from 'svelte';
 
@@ -31,7 +31,7 @@
         class="focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
     >
         <span class="capitalize">{$t('Components.Search.FilterButton.Filter By', { name })}</span>
-        <div class="ml-2 h-4 w-4">{@html arrowDown}</div>
+        <div class="ml-2 h-4 w-4"><ArrowDown /></div>
     </div>
     <div
         class="dropdown-content menu p-2 shadow rounded-box w-64 mt-2 bg-base-100 border-2 border-solid border-primary"
