@@ -8,9 +8,14 @@
 
     export let data;
 
-    const schedules = data.module.index_numbers;
-    let indexNumber = '-1';
+    let indexNumbers: string[] = Object.keys(data.module.index_numbers);
+    let indexNumber: string = '-1';
     let lessons: Lesson[] = [];
+
+    $: {
+        indexNumbers = Object.keys(data.module.index_numbers);
+        lessons = [];
+    }
 
     function openModule(e: CustomEvent<string>) {
         const moduleCode = e.detail.match(/([A-Z]{2}[\d|\w]{4})/g);
@@ -78,8 +83,8 @@
                     bind:value={indexNumber}
                     on:change={updateIndex}
                 >
-                    <option value="-1">-Select one-</option>
-                    {#each Object.keys(schedules) as indexNumber}
+                    <!-- <option value="-1">-Select one-</option> -->
+                    {#each indexNumbers as indexNumber}
                         <option value={indexNumber}>{indexNumber}</option>
                     {/each}
                 </select>
