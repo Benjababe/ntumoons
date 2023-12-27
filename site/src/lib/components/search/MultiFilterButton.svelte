@@ -16,6 +16,11 @@
         return 'hidden';
     }
 
+    function clearFilters() {
+        filterList = filterList.map((f) => ({ ...f, enabled: false }));
+        handleFilterUpdate();
+    }
+
     function handleFilterUpdate() {
         const filtersEnabled = filterList
             .filter((f) => f.value !== '' && f.enabled)
@@ -43,7 +48,15 @@
             class="input input-bordered input-sm w-full max-w-xs"
             bind:value={filterSearch}
         />
-        <div class="divider my-1" />
+        <div class="flex justify-end mt-3 pr-1">
+            <button
+                class="btn btn-accent btn-xs"
+                on:click|preventDefault={clearFilters}
+            >
+                {$t('Components.Search.FilterButton.Clear filters')}
+            </button>
+        </div>
+        <div class="divider mt-0 mb-1" />
         <ol class="text-sm space-y-2 max-h-64 pr-1 overflow-y-scroll">
             {#each filterList as { value }, i (`${value}_${filterSearch}`)}
                 <li class="flex flex-row items-center {checkFilterSearch(value)}">
