@@ -1,5 +1,5 @@
 <script lang="ts">
-    import crossIcon from '$lib/assets/cross.svg?raw';
+    import Cross from '$lib/assets/images/Cross.svelte';
     import { semester } from '$lib/stores';
     import { t } from '$lib/translations';
     import { createEventDispatcher } from 'svelte';
@@ -27,7 +27,7 @@
             class="btn-outline rounded-full w-max h-max p-1"
             on:click|preventDefault={remove}
         >
-            {@html crossIcon}
+            <Cross />
         </button>
     </div>
     <a
