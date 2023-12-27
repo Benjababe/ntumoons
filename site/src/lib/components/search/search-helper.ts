@@ -7,16 +7,7 @@ export async function callSearchPath(
     activeFilters: { [key: string]: string[] } = {}
 ) {
     if (page === -1) {
-        if (found === 0) return -1;
-        page = Math.ceil(found / per_page);
-    }
-
-    let tsFilters: string[] = [];
-    for (const [name, filters] of Object.entries(activeFilters)) {
-        if (filters.length == 0) continue;
-
-        const filterStr = `[${filters.map((f) => `\`${f}\``).join(', ')}]`;
-        tsFilters = [...tsFilters, `${name}:=${filterStr}`];
+        page = found === 0 ? page : Math.ceil(found / per_page);
     }
 
     const res = await fetch(searchPath, {
@@ -29,9 +20,20 @@ export async function callSearchPath(
             q: searchValue,
             page,
             per_page: per_page,
-            filters: tsFilters.join(' && ')
+            filters: getFilters(activeFilters)
         })
     });
 
     return res;
+}
+
+function getFilters(activeFilters: { [key: string]: string[] }) {
+    let tsFilters: string[] = [];
+    for (const [name, filters] of Object.entries(activeFilters)) {
+        if (filters.length == 0) continue;
+
+        const filterStr = `[${filters.map((f) => `\`${f}\``).join(', ')}]`;
+        tsFilters = [...tsFilters, `${name}:=${filterStr}`];
+    }
+    return tsFilters.join(' && ');
 }

@@ -66,7 +66,9 @@
         "Search": {
             "FilterButton": {
                 "Filter By": "Filter By {{name}}",
-                "Search filters...": "Search filters..."
+                "Search filters...": "Search filters...",
+                "Results found": "{{found}} results found based on your query",
+                "No results found": "No results found for your query"
             }
         }
     }
