@@ -6,7 +6,7 @@
     export let name: string = '';
     export let filterList: string[] = [];
 
-    const dispatch = createEventDispatcher<{ filterUpdate: DispatchFilterUpdate }>();
+    const dispatch = createEventDispatcher<{ filterChange: DispatchFilterUpdate }>();
     let checkedFilters: boolean[] = new Array(filterList.length).fill(false);
     let filterSearch = '';
 
@@ -15,12 +15,12 @@
         return 'hidden';
     }
 
-    function handleFilterUpdate() {
+    function handleFilterChange() {
         const filtersEnabled = checkedFilters
             .map((f, i) => (f ? filterList[i] : ''))
             .filter((f) => f !== '');
 
-        dispatch('filterUpdate', { name, newFilters: filtersEnabled });
+        dispatch('filterChange', { name, newFilters: filtersEnabled });
     }
 </script>
 
@@ -30,7 +30,7 @@
         role="button"
         class="focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
     >
-        Filter by {name}
+        <span class="capitalize">{$t('Components.Search.FilterButton.Filter By', { name })}</span>
         <div class="ml-2 h-4 w-4">{@html arrowDown}</div>
     </div>
     <div
@@ -51,7 +51,7 @@
                         type="checkbox"
                         class="w-1/6 h-4 rounded"
                         bind:checked={checkedFilters[i]}
-                        on:change={handleFilterUpdate}
+                        on:change={handleFilterChange}
                     />
                     <!-- Allow this here as the label would just close the dropdown menu -->
                     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->

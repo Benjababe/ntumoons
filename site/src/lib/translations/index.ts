@@ -2,7 +2,12 @@ import i18n from 'sveltekit-i18n';
 import type { Config } from 'sveltekit-i18n';
 import lang from './lang.json';
 
-export const config: Config<{ found: number }> = {
+type TranslationPayload = {
+    found?: number;
+    name?: string;
+};
+
+export const config: Config<TranslationPayload> = {
     fallbackLocale: 'en',
     translations: {
         en: { lang },
