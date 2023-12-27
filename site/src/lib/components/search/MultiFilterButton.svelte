@@ -1,24 +1,25 @@
 <script lang="ts">
     import ArrowDown from '$lib/assets/images/ArrowDown.svelte';
     import { t } from '$lib/translations';
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount } from 'svelte';
 
     export let name: string = '';
-    export let filterList: string[] = [];
+    export let filters: string[] = [];
+
+    let filterList = filters.map((f) => ({ value: f, enabled: false }));
 
     const dispatch = createEventDispatcher<{ filterUpdate: DispatchFilterUpdate }>();
-    let checkedFilters: boolean[] = new Array(filterList.length).fill(false);
     let filterSearch = '';
 
-    function checkFilterSearch(filter: string) {
-        if (filter.toLowerCase().includes(filterSearch.toLowerCase())) return '';
+    function checkFilterSearch(filterValue: string) {
+        if (filterValue.toLowerCase().includes(filterSearch.toLowerCase())) return '';
         return 'hidden';
     }
 
     function handleFilterUpdate() {
-        const filtersEnabled = checkedFilters
-            .map((f, i) => (f ? filterList[i] : ''))
-            .filter((f) => f !== '');
+        const filtersEnabled = filterList
+            .filter((f) => f.value !== '' && f.enabled)
+            .map((f) => f.value);
 
         dispatch('filterUpdate', { name, newFilters: filtersEnabled });
     }
@@ -44,24 +45,24 @@
         />
         <div class="divider my-1" />
         <ol class="text-sm space-y-2 max-h-64 pr-1 overflow-y-scroll">
-            {#each filterList as filter, i (`${filter}_${filterSearch}`)}
-                <li class="flex flex-row items-center {checkFilterSearch(filter)}">
+            {#each filterList as { value }, i (`${value}_${filterSearch}`)}
+                <li class="flex flex-row items-center {checkFilterSearch(value)}">
                     <input
-                        id="chk_{filter}"
+                        id="chk_{value}"
                         type="checkbox"
                         class="w-1/6 h-4 rounded"
-                        bind:checked={checkedFilters[i]}
+                        bind:checked={filterList[i].enabled}
                         on:change={handleFilterUpdate}
                     />
                     <!-- Allow this here as the label would just close the dropdown menu -->
                     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                     <label
-                        for="chk_{filter}"
+                        for="chk_{value}"
                         class="w-5/6 px-1 py-1 text-sm font-medium"
                         on:mousedown|preventDefault={() => {}}
                         on:keydown|preventDefault={() => {}}
                     >
-                        {filter}
+                        {value}
                     </label>
                 </li>
             {/each}
