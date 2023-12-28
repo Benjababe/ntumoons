@@ -4,7 +4,7 @@
 </script>
 
 <TypesenseSearch
-    searchPath="/search/typesense/modules"
+    collection="modules"
     searchPlaceholder={$t('Modules.Search.Enter course code, name or descriptions')}
     let:hit
 >

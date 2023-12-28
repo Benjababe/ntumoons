@@ -1,14 +1,11 @@
 <script lang="ts">
     import TypesenseSearch from '$lib/components/search/TypesenseSearch.svelte';
     import { t } from '$lib/translations';
-
-    export let data;
 </script>
 
 <TypesenseSearch
+    collection="staff"
     searchPlaceholder={$t('Staff.Search.Enter name or description')}
-    searchPath="/search/typesense/staff"
-    searchFilters={data}
     let:hit
 >
     <div class="flex gap-4 mt-8 mb-4">

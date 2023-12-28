@@ -1,12 +1,12 @@
 <script lang="ts">
     import ArrowDown from '$lib/assets/images/ArrowDown.svelte';
     import { t } from '$lib/translations';
-    import { createEventDispatcher, onMount } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+    import type { DispatchFilterUpdate } from './search-helper';
+    import type { Filter } from '$lib/types/Typesense';
 
     export let name: string = '';
-    export let filters: string[] = [];
-
-    let filterList = filters.map((f) => ({ value: f, enabled: false }));
+    export let filters: Filter[] = [];
 
     const dispatch = createEventDispatcher<{ filterUpdate: DispatchFilterUpdate }>();
     let filterSearch = '';
@@ -17,15 +17,12 @@
     }
 
     function clearFilters() {
-        filterList = filterList.map((f) => ({ ...f, enabled: false }));
+        filters = filters.map((f) => ({ ...f, enabled: false }));
         handleFilterUpdate();
     }
 
     function handleFilterUpdate() {
-        const filtersEnabled = filterList
-            .filter((f) => f.value !== '' && f.enabled)
-            .map((f) => f.value);
-
+        const filtersEnabled = filters.filter((f) => f.enabled);
         dispatch('filterUpdate', { name, newFilters: filtersEnabled });
     }
 </script>
@@ -58,24 +55,24 @@
         </div>
         <div class="divider mt-0 mb-1" />
         <ol class="text-sm space-y-2 max-h-64 pr-1 overflow-y-scroll">
-            {#each filterList as { value }, i (`${value}_${filterSearch}`)}
-                <li class="flex flex-row items-center {checkFilterSearch(value)}">
+            {#each filters as { name, count }, i (`${name}_${filterSearch}`)}
+                <li class="flex flex-row items-center {checkFilterSearch(name)}">
                     <input
-                        id="chk_{value}"
+                        id="chk_{name}"
                         type="checkbox"
                         class="w-1/6 h-4 rounded"
-                        bind:checked={filterList[i].enabled}
+                        bind:checked={filters[i].enabled}
                         on:change={handleFilterUpdate}
                     />
                     <!-- Allow this here as the label would just close the dropdown menu -->
                     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
                     <label
-                        for="chk_{value}"
+                        for="chk_{name}"
                         class="w-5/6 px-1 py-1 text-sm font-medium"
                         on:mousedown|preventDefault={() => {}}
                         on:keydown|preventDefault={() => {}}
                     >
-                        {value}
+                        {name} ({count})
                     </label>
                 </li>
             {/each}

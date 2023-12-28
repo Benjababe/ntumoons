@@ -3,20 +3,25 @@
     import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
     import { onMount } from 'svelte';
-    import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
+    import type {
+        SearchResponse,
+        SearchResponseFacetCountSchema,
+        SearchResponseHit
+    } from 'typesense/lib/Typesense/Documents';
     import MultiFilterButton from './MultiFilterButton.svelte';
-    import { callSearchPath } from './search-helper';
+    import { callSearchPath, type DispatchFilterUpdate } from './search-helper';
+    import type { Docs, Filter, FilterMap } from '$lib/types/Typesense';
 
+    export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
-    export let searchPath: string = '';
-    export let searchFilters: { [key: string]: string[] } = {};
 
     const TYPESENSE_PER_PAGE = 10;
     const PAGINATOR_WIDTH = 5;
 
-    let hits: SearchResponseHit<TypesenseStaffDoc | TypesenseModuleDoc>[] = [];
+    let hits: SearchResponseHit<Docs>[] = [];
     let searchValue = '';
-    let activeFilters: { [key: string]: string[] } = {};
+    let searchFilters: FilterMap = {};
+    let activeFilters: FilterMap = {};
     let searching = false;
     let found = 0;
     let activePage = 1;
@@ -24,7 +29,7 @@
     let timeout: NodeJS.Timeout;
 
     onMount(() => {
-        search();
+        search({ initCall: true });
     });
 
     function reset() {
@@ -43,12 +48,13 @@
         timeout = setTimeout(search, 500);
     }
 
-    async function search(page = 1) {
+    async function search({ page = 1, initCall = false } = {}) {
         searching = true;
 
         const res = await callSearchPath(
-            searchPath,
+            collection,
             searchValue,
+            initCall,
             page,
             found,
             TYPESENSE_PER_PAGE,
@@ -62,7 +68,11 @@
         }
 
         const resJson = await res.json();
-        const tsRes: SearchResponse<TypesenseStaffDoc | TypesenseModuleDoc> = resJson['tsRes'];
+        const tsRes: SearchResponse<Docs> = resJson['tsRes'];
+
+        if (initCall && tsRes.facet_counts !== undefined) {
+            handleFacets(tsRes.facet_counts);
+        }
 
         if (tsRes.hits === undefined) {
             searching = false;
@@ -77,6 +87,19 @@
 
         document.body.scrollIntoView();
         searching = false;
+    }
+
+    function handleFacets(facetCounts: SearchResponseFacetCountSchema<Docs>[]) {
+        for (const facet of facetCounts) {
+            const filters: Filter[] = facet.counts
+                .filter(({ value }) => value !== '')
+                .map(({ value, count }) => ({
+                    name: value,
+                    count,
+                    enabled: false
+                }));
+            searchFilters[facet.field_name] = filters;
+        }
     }
 
     function updatePaginator(page: number, found: number) {
@@ -129,7 +152,7 @@
         <Paginator
             {pages}
             {activePage}
-            on:pageChange={(e) => search(e.detail)}
+            on:pageChange={(e) => search({ page: e.detail })}
         />
     {/if}
 </div>

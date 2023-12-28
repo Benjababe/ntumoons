@@ -51,26 +51,6 @@ type Semester = {
     semester_num: string;
 };
 
-type TypesenseModuleDoc = {
-    code: string;
-    description: string;
-    id: string;
-    name: string;
-    name_pretty: string;
-    year: string;
-    semester_num: string;
-};
-
-type TypesenseStaffDoc = {
-    email: string;
-    title: string;
-    description: string;
-    keywords: string[];
-    profile_pic_url: string;
-    appointments: string[];
-    tag: string;
-};
-
 type DispatchRemoveModule = {
     code: string;
 };
@@ -78,9 +58,4 @@ type DispatchRemoveModule = {
 type DispatchUpdateIndex = {
     code: string;
     index: string;
-};
-
-type DispatchFilterUpdate = {
-    name: string;
-    newFilters: string[];
 };
