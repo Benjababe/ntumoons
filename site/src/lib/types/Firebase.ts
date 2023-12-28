@@ -40,6 +40,22 @@ export type Lesson = {
     venue_name: string;
 };
 
+export type Staff = {
+    title: string;
+    email: string;
+    tag: string;
+    url: string;
+    personal_url: string;
+    profile_pic_url: string;
+    description: string;
+    biography: string;
+    appointments: string;
+    interests: string[];
+    keywords: string[];
+    research_interests: string[];
+    current_grants: string[];
+};
+
 export type Semester = {
     id: string;
     active: boolean;

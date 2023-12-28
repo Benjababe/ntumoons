@@ -1,11 +1,12 @@
-import { db } from '$lib/search/firebase';
+import { COLL_MODULES, db } from '$lib/search/firebase';
+import type { Module } from '$lib/types/Firebase.js';
 import { error } from '@sveltejs/kit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 export async function load({ params }) {
     const { moduleCode, year, semesterNum } = params;
 
-    const modulesCollection = collection(db, 'modules');
+    const modulesCollection = collection(db, COLL_MODULES);
     const modulesQuery = query(
         modulesCollection,
         where('code', '==', moduleCode),

@@ -1,6 +1,7 @@
 <script lang="ts">
     import TypesenseSearch from '$lib/components/search/TypesenseSearch.svelte';
     import { t } from '$lib/translations';
+    import DOMPurify from 'dompurify';
 </script>
 
 <TypesenseSearch
@@ -23,15 +24,21 @@
                 href="/staff/{hit.document.email}"
                 class="text-primary text-xl"
             >
-                {@html hit.highlight.title ? hit.highlight.title.snippet : hit.document.title}
+                {@html DOMPurify.sanitize(
+                    hit.highlight.title && hit.highlight.title.snippet
+                        ? hit.highlight.title.snippet
+                        : hit.document.title
+                )}
             </a>
             <div>{hit.document.tag}</div>
             <div class="divider mt-0 mb-2" />
             <div>
                 {#if hit.document.description !== ''}
-                    {@html hit.highlight.description
-                        ? hit.highlight.description.snippet
-                        : hit.document.description}
+                    {@html DOMPurify.sanitize(
+                        hit.highlight.description && hit.highlight.description.snippet
+                            ? hit.highlight.description.snippet
+                            : hit.document.description
+                    )}
                 {:else}
                     {$t('Staff.Search.No description provided')}
                 {/if}

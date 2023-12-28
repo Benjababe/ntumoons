@@ -32,3 +32,8 @@ if (!getApps().length) {
 }
 
 export const db = getFirestore(firebaseApp);
+
+export const COLL_SEMESTER = 'semester';
+export const COLL_MODULES = 'modules';
+export const COLL_STAFF = 'staff';
+export const COLL_VENUES = 'venues';
