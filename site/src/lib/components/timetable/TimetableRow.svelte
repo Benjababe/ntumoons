@@ -1,5 +1,7 @@
 <script lang="ts">
+    import { timetableClashes } from '$lib/stores/timetable';
     import type { Lesson } from '$lib/types/Firebase';
+    import type { Day } from '$lib/types/Timetable';
     import TimetableCell from './TimetableCell.svelte';
     import {
         calculateCellLeftOffsets,
@@ -11,7 +13,7 @@
     } from './day-helper';
 
     export let lessons: Lesson[];
-    export let day: string;
+    export let day: Day;
     export let startTime: number = 830;
 
     // Percentage of width for every hour
@@ -24,6 +26,23 @@
         const intervals = getIntervals(cells);
         groups = intervalsToGroups(intervals);
         groups = calculateCellLeftOffsets(groups);
+
+        checkClashes(intervals);
+    }
+
+    function checkClashes(intervals: RowCellDetails[][]) {
+        let dayClashes: string[][] = [];
+        for (const interval of intervals) {
+            let intervalClashes: string[] = [];
+            for (const cell of interval) {
+                if (cell.clashing) {
+                    intervalClashes = [...intervalClashes, cell.lesson.module_code];
+                }
+            }
+            if (intervalClashes.length > 0) dayClashes = [...dayClashes, intervalClashes];
+        }
+
+        $timetableClashes[day] = [...dayClashes];
     }
 </script>
 
@@ -39,7 +58,7 @@
                         left={cellDetails.left}
                         width={cellDetails.width}
                         lesson={cellDetails.lesson}
-                        overlap={cellDetails.overlap}
+                        clashing={cellDetails.clashing}
                     />
                 {/each}
             </div>

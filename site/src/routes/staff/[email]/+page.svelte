@@ -4,7 +4,6 @@
     export let data;
 
     const { staff } = data;
-    console.log(staff);
 </script>
 
 <div class="flex justify-center">

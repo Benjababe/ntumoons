@@ -1,5 +1,7 @@
 /** Contains types for Firebase documents */
 
+import type { Day } from './Timetable';
+
 export type Module = {
     code: string;
     name: string;
@@ -35,7 +37,7 @@ export type Lesson = {
     time: string;
     start_time: number;
     end_time: number;
-    day: string;
+    day: Day;
     type: string;
     venue_name: string;
 };

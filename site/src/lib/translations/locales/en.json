@@ -77,7 +77,8 @@
         },
         "Timetable": {
             "Timetable": {
-                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable"
+                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable",
+                "There are clashes between lessons in the timetable!": "There are clashes between lessons in the timetable!"
             }
         }
     }

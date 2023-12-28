@@ -40,7 +40,7 @@
                         top={cellDetails.top}
                         height={cellDetails.height}
                         lesson={cellDetails.lesson}
-                        overlap={cellDetails.overlap}
+                        clashing={cellDetails.clashing}
                     />
                 {/each}
             </div>

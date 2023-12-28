@@ -12,7 +12,7 @@ export type RowCellDetails = {
     left: number;
     width: number;
     lesson: Lesson;
-    overlap: boolean;
+    clashing: boolean;
     squeeze: boolean;
     accLeft?: number;
 };
@@ -22,7 +22,7 @@ export type ColCellDetails = {
     top: number;
     height: number;
     lesson: Lesson;
-    overlap: boolean;
+    clashing: boolean;
     squeeze: boolean;
     accTop?: number;
 };
@@ -45,7 +45,7 @@ export function getRowCells(dayLessons: Lesson[], dayDetails: DayDetails): RowCe
         // id is used as the cell component's key in svelte
         const id = generateRandomString(12) + left;
 
-        return { id, left, width, lesson, overlap: false, squeeze: false };
+        return { id, left, width, lesson, clashing: false, squeeze: false };
     });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
@@ -70,7 +70,7 @@ export function getColumnCells(dayLessons: Lesson[], dayDetails: DayDetails): Co
         // id is used as the cell component's key in svelte
         const id = generateRandomString(12) + top;
 
-        return { id, top, height, lesson, overlap: false, squeeze: false };
+        return { id, top, height, lesson, clashing: false, squeeze: false };
     });
 
     cells.sort((a, b) => a.lesson.start_time - b.lesson.start_time);
@@ -138,11 +138,11 @@ export function getIntervals<T extends RowCellDetails | ColCellDetails>(cells: T
 }
 
 /**
- * Checks time interval for lessons that may overlap one another, flags them accordingly.
+ * Checks time interval for lessons that may clash between one another, flags them accordingly.
  * Only considered clashing if their module codes are different.
  * Eg. CZ3004 has clashing lessons but they are all under 1 module.
  * @param interval An interval of time without any gaps between lessons.
- * @returns Interval updated with overlap information.
+ * @returns Interval updated with clashing information.
  */
 export function getLessonsClash<T extends RowCellDetails | ColCellDetails>(interval: T[]) {
     const uniqueCodes = new Set();
@@ -150,9 +150,9 @@ export function getLessonsClash<T extends RowCellDetails | ColCellDetails>(inter
         uniqueCodes.add(lesson.lesson.module_code);
     }
     for (let i = 0; i < interval.length; i++) {
-        interval[i].overlap = uniqueCodes.size > 1;
+        interval[i].clashing = uniqueCodes.size > 1;
         interval[i].squeeze = interval.length > 2;
-        interval[i].id += interval[i].overlap ? 'o' : 'n';
+        interval[i].id += interval[i].clashing ? 'o' : 'n';
     }
     return interval;
 }
