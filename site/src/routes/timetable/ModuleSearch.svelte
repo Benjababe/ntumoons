@@ -1,8 +1,8 @@
 <script lang="ts">
-    import modules from '$lib/modules/modulesBasic.json';
     import { semester, timetableModules } from '$lib/stores';
     import { t } from '$lib/translations';
 
+    export let modules: ModulesBasic = [];
     let moduleResults: ModulesBasic = [];
     let searchHidden = false;
     let searchValue = '';

@@ -1,8 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { t } from '$lib/translations';
+    import { hideSaturday } from '$lib/stores';
+    import Info from '$lib/assets/images/Info.svelte';
     import TimetableRow from './TimetableRow.svelte';
     import TimetableColumn from './TimetableColumn.svelte';
-    import { hideSaturday } from '$lib/stores';
+    import HiddenLessons from './HiddenLessons.svelte';
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
@@ -12,6 +15,7 @@
         : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     let times = ['0830'];
     let dayLessons: { [key: string]: Lesson[] } = {};
+    let hiddenLessons: Lesson[] = [];
 
     onMount(() => {
         while (times[times.length - 1] != '1930') {
@@ -23,14 +27,22 @@
 
     $: {
         dayLessons = {};
+        hiddenLessons = [];
+
         for (const day of days) dayLessons[day] = [];
         for (const lesson of lessons) {
-            if (lesson.day === '' || (lesson.day === 'SAT' && $hideSaturday)) continue;
+            if (lesson.day === '' || (lesson.day === 'SAT' && $hideSaturday)) {
+                hiddenLessons = [...hiddenLessons, lesson];
+                continue;
+            }
+
             const lessonArr = [...dayLessons[lesson.day], lesson];
             dayLessons[lesson.day] = lessonArr;
         }
     }
 </script>
+
+<HiddenLessons {hiddenLessons} />
 
 {#if orientation == 'landscape'}
     <div class="mb-8">

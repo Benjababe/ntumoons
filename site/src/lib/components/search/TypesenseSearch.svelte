@@ -1,0 +1,153 @@
+<script lang="ts">
+    import Spinner from '$lib/components/generic/Spinner.svelte';
+    import Paginator from '$lib/components/search/Paginator.svelte';
+    import { t } from '$lib/translations';
+    import { onMount } from 'svelte';
+    import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
+    import MultiFilterButton from './MultiFilterButton.svelte';
+    import {
+        callSearchPath,
+        parseFacets,
+        type DispatchFilterUpdate,
+        PER_PAGE
+    } from './search-helper';
+    import type { Docs, FilterMap } from '$lib/types/Typesense';
+
+    export let collection: 'modules' | 'staff';
+    export let searchPlaceholder: string = '';
+
+    let hits: SearchResponseHit<Docs>[] = [];
+    let searchValue = '';
+    let searchFilters: FilterMap = {};
+    let activeFilters: FilterMap = {};
+    let searching = false;
+    let found = 0;
+    let activePage = 1;
+    let pages: number[] = [];
+    let timeout: NodeJS.Timeout;
+
+    onMount(() => {
+        search({ initCall: true });
+    });
+
+    function reset() {
+        updatePaginator(1, 0);
+        hits = [];
+        found = 0;
+        searching = false;
+    }
+
+    function handleFilterUpdate({ name, newFilters }: DispatchFilterUpdate) {
+        activeFilters[name] = newFilters;
+        search();
+    }
+
+    function handleSearch() {
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(search, 500);
+    }
+
+    async function search({ page = 1, initCall = false } = {}) {
+        searching = true;
+
+        const res = await callSearchPath(
+            collection,
+            searchValue,
+            initCall,
+            page,
+            PER_PAGE,
+            activeFilters
+        );
+
+        if (!res.ok) {
+            reset();
+            return;
+        }
+
+        const resJson = await res.json();
+        const tsRes: SearchResponse<Docs> = resJson['tsRes'];
+
+        if (initCall && tsRes.facet_counts !== undefined) {
+            searchFilters = parseFacets(tsRes.facet_counts);
+        }
+
+        if (tsRes.hits === undefined) {
+            reset();
+            return;
+        }
+
+        updatePaginator(tsRes.page, tsRes.found);
+        hits = tsRes.hits;
+        found = tsRes.found;
+
+        document.body.scrollIntoView();
+        searching = false;
+    }
+
+    function updatePaginator(page: number, found: number) {
+        const PAGINATOR_WIDTH = 5;
+        const totalPages = Math.ceil(found / PER_PAGE);
+        const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH / 2));
+        const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH / 2));
+
+        activePage = page;
+        pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    }
+</script>
+
+<div class="flex flex-col justify-center items-center max-w-1200">
+    <input
+        type="text"
+        placeholder={searchPlaceholder}
+        class="input input-bordered w-full max-w-xl"
+        disabled={searching}
+        bind:value={searchValue}
+        on:input={handleSearch}
+    />
+
+    <div>
+        {#each Object.entries(searchFilters) as [name, filters]}
+            <MultiFilterButton
+                {name}
+                {filters}
+                on:filterUpdate={(e) => handleFilterUpdate(e.detail)}
+            />
+        {/each}
+    </div>
+
+    <div class="mt-4 mb-2">
+        {#if found > 0}
+            {$t('Components.Search.FilterButton.Results found', { found })}
+        {:else if searchValue != '' || Object.entries(activeFilters).length > 0}
+            {$t('Components.Search.FilterButton.No results found')}
+        {/if}
+    </div>
+
+    <div class="search-results max-w-4xl">
+        {#if searching}
+            <Spinner />
+        {:else}
+            {#each hits as hit (hit.document)}
+                <slot {hit} />
+            {/each}
+        {/if}
+    </div>
+
+    {#if !searching && found > 0}
+        <Paginator
+            {pages}
+            {activePage}
+            lastPage={Math.ceil(found / PER_PAGE)}
+            on:pageChange={(e) => search({ page: e.detail })}
+        />
+    {/if}
+</div>
+
+<style>
+    :global(.search-results > * mark) {
+        color: var(--bc);
+        background-color: inherit;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+</style>

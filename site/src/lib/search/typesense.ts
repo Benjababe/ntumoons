@@ -17,5 +17,5 @@ export const typesense = new Typesense.Client({
     apiKey: SECRET_TYPESENSE_API_KEY
 });
 
-export const COLLECTION_MODULE = 'modules';
+export const COLLECTION_MODULES = 'modules';
 export const COLLECTION_STAFF = 'staff';

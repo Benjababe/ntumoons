@@ -1,6 +1,6 @@
 <script lang="ts">
     import '../app.css';
-    import logoIcon from '$lib/assets/logo.svg?raw';
+    import Logo from '$lib/assets/images/Logo.svelte';
     import { Link, Settings } from '$lib/components/navbar';
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
@@ -27,7 +27,7 @@
             href="/"
         >
             <div class="mr-2 group-hover:scale-120 transition-transform duration-300">
-                {@html logoIcon}
+                <Logo />
             </div>
             NTUMoons
         </Link>

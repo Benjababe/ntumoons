@@ -5,7 +5,7 @@ import requests
 from requests.adapters import HTTPAdapter, Retry
 
 from data.firestore import write_fs, write_fs_list
-from data.json import write_json, write_json_invidivual
+from data.json import write_json, write_json_invidivual, write_json_list
 from ntu.course_module import (
     get_course_categories,
     get_sem_title,
@@ -57,9 +57,9 @@ async def scrape_modules():
     modules = insert_module_exams(sess, semester, exam_plan_num, modules)
 
     write_json_invidivual(modules, f"{semester}/modules", "code")
-    write_json(modules, "modulesBasic", ["name_pretty", "code"], "code")
-    write_json(categories, "courseCategories")
-    write_json(venues, "venues")
+    write_json_list(modules, "modulesBasic", ["name_pretty", "code"], "code")
+    write_json_list(categories, "courseCategories")
+    write_json_list(venues, "venues")
 
     semester_prepend = f"{semester}_"
 
@@ -92,7 +92,8 @@ async def scrape_staff():
     staff_list = get_all_staff(sess)
     metadata = get_metadata(staff_list)
 
-    write_json(staff_list, "staff")
+    write_json_list(staff_list, "staff")
+    write_json(metadata, "staffMetadata")
 
     typesense_upsert(TS_COLL_STAFF, "email", staff_list, TS_ATTRS_STAFF)
 

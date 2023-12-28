@@ -1,5 +1,5 @@
 <script lang="ts">
-    import crossIcon from '$lib/assets/cross.svg?raw';
+    import Cross from '$lib/assets/images/Cross.svelte';
     import { semester } from '$lib/stores';
     import { t } from '$lib/translations';
     import { createEventDispatcher } from 'svelte';
@@ -7,14 +7,17 @@
     export let mod: Module;
     let activeIndexNumber = mod.active_index_number;
 
-    const removeDispatch = createEventDispatcher<{ remove: { code: string } }>();
+    const dispatch = createEventDispatcher<{
+        remove: DispatchRemoveModule;
+        updateIndex: DispatchUpdateIndex;
+    }>();
+
     function remove() {
-        removeDispatch('remove', { code: mod.code });
+        dispatch('remove', { code: mod.code });
     }
 
-    const idxDispatch = createEventDispatcher<{ updateIndex: { code: string; index: string } }>();
     function updateIndex() {
-        idxDispatch('updateIndex', { code: mod.code, index: activeIndexNumber });
+        dispatch('updateIndex', { code: mod.code, index: activeIndexNumber });
     }
 </script>
 
@@ -24,7 +27,7 @@
             class="btn-outline rounded-full w-max h-max p-1"
             on:click|preventDefault={remove}
         >
-            {@html crossIcon}
+            <Cross />
         </button>
     </div>
     <a

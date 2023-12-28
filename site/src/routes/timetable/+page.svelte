@@ -4,6 +4,7 @@
     import { Timetable } from '$lib/components/timetable';
     import { timetableModules } from '$lib/stores';
 
+    export let data;
     let lessons: Lesson[] = [];
 
     $: {
@@ -18,6 +19,6 @@
 
 <div class="flex flex-col justify-center relative max-w-full">
     <Timetable {lessons} />
-    <ModuleSearch />
+    <ModuleSearch modules={data.modules} />
     <ModuleTable />
 </div>

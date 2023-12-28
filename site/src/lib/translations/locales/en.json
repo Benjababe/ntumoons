@@ -35,8 +35,7 @@
 
     "Modules": {
         "Search": {
-            "Enter course code, name or descriptions": "Enter course code, name or descriptions",
-            "TotalFound": "{{found}} modules found based off your search"
+            "Enter course code, name or descriptions": "Enter course code, name or descriptions"
         },
         "Details": {
             "Credits": "Credits: ",
@@ -57,7 +56,6 @@
     "Staff": {
         "Search": {
             "Enter name or description": "Enter name or description",
-            "Total Found": "{{found}} staff found based off your search",
             "No description provided": "No description provided"
         }
     },
@@ -65,7 +63,16 @@
     "Components": {
         "Search": {
             "FilterButton": {
-                "Search filters...": "Search filters..."
+                "Filter By": "Filter By {{name}}",
+                "Search filters...": "Search filters...",
+                "Clear filters": "Clear filters",
+                "Results found": "{{found}} results found based on your query",
+                "No results found": "No results found for your query"
+            }
+        },
+        "Timetable": {
+            "Timetable": {
+                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable"
             }
         }
     }

@@ -112,7 +112,7 @@ def scrape_category_modules(
         print(f"Scraping {category_name}", end="\r")
 
         # category code split into 4 parts split by ';'
-        # <course code> ; <secondary code> ; <year of study> ; <part/full time>
+        # <course code/category code> ; <secondary code> ; <year of study> ; <part/full time>
         category_code = category.code
         category_codes = category.code.split(";")
 

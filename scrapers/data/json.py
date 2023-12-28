@@ -4,7 +4,27 @@ import os
 from util.structs import Dictable
 
 
-def write_json(
+def write_json(data: dict, filename: str):
+    """Writes dict data into a JSON file
+
+    Args:
+        data (dict): Data to save
+        filename (str): Filename of the output JSON file
+    """
+
+    filepath = f"export/{filename}.json"
+    if not os.path.exists(filepath):
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+
+    if os.path.exists(filepath):
+        print(f"{filepath} already exists")
+        return
+
+    with open(filepath, "w") as file:
+        json.dump(data, file, indent=2)
+
+
+def write_json_list(
     data_list: list[Dictable],
     filename: str,
     keep_attrs: list[str] = None,

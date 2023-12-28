@@ -4,13 +4,11 @@
     import ModuleTableCell from './ModuleTableCell.svelte';
     import { scale } from 'svelte/transition';
 
-    function removeModule(e: CustomEvent<{ code: string }>) {
-        $timetableModules = $timetableModules.filter((tm) => tm.code !== e.detail.code);
+    function removeModule({ code }: DispatchRemoveModule) {
+        $timetableModules = $timetableModules.filter((tm) => tm.code !== code);
     }
 
-    function updateIndex(e: CustomEvent<{ code: string; index: string }>) {
-        const { code, index } = e.detail;
-
+    function updateIndex({ code, index }: DispatchUpdateIndex) {
         $timetableModules = $timetableModules.map((tm) => {
             if (tm.code === code) tm.active_index_number = index;
             return tm;
@@ -28,8 +26,8 @@
         >
             <ModuleTableCell
                 {mod}
-                on:remove={removeModule}
-                on:updateIndex={updateIndex}
+                on:remove={(e) => removeModule(e.detail)}
+                on:updateIndex={(e) => updateIndex(e.detail)}
             />
         </div>
     {/each}
