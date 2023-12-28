@@ -51,14 +51,14 @@
                 />
             {/if}
             {#if data.module.mutex.length > 0}
-                <div class="mt-8">
+                <div class="first:mt-0 mt-8">
                     <Mutex
                         mutex={data.module.mutex}
                         on:moduleStr={openModule}
                     />
                 </div>
             {/if}
-            <div class="mt-8">
+            <div class="first:mt-0 mt-8">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
                 <div>{@html data.module.description}</div>
