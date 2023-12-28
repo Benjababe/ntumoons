@@ -1,4 +1,4 @@
-import { typesense, COLLECTION_MODULE } from '$lib/search/typesense';
+import { typesense, COLLECTION_MODULES } from '$lib/search/typesense';
 import { error, json } from '@sveltejs/kit';
 
 export async function POST({ request }) {
@@ -10,7 +10,7 @@ export async function POST({ request }) {
         per_page,
         snippet_threshold: 5000
     };
-    const tsRes = await typesense.collections(COLLECTION_MODULE).documents().search(queryParams);
+    const tsRes = await typesense.collections(COLLECTION_MODULES).documents().search(queryParams);
     if (tsRes.hits === undefined || tsRes.hits.length === 0) return error(404, 'No modules found');
 
     return json({ tsRes });

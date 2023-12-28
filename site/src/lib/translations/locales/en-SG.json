@@ -35,8 +35,7 @@
 
     "Modules": {
         "Search": {
-            "Enter course code, name or descriptions": "Course code, name or description also can find one",
-            "TotalFound": "Found {{found}} modules, zhun bo?"
+            "Enter course code, name or descriptions": "Course code, name or description also can find one"
         },
         "Details": {
             "Credits": "Credits: ",
@@ -57,7 +56,6 @@
     "Staff": {
         "Search": {
             "Enter name or description": "Name or description also can, will find your favourite prof one",
-            "Total Found": "{{found}} staff found based off your search",
             "No description provided": "Kosong"
         }
     },
@@ -66,7 +64,14 @@
         "Search": {
             "FilterButton": {
                 "Filter By": "Filter By {{name}}",
-                "Search filters...": "Search filters..."
+                "Search filters...": "Search filters...",
+                "Results found": "{{found}} results found, zhun bo?",
+                "No results found": "No results found, make your query better can?"
+            }
+        },
+        "Timetable": {
+            "Timetable": {
+                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable"
             }
         }
     }
