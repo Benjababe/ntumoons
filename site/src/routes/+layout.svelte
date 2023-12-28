@@ -20,6 +20,9 @@
     }
 </script>
 
+<svelte:head>
+    <title>{$t('NTUMoons')}</title>
+</svelte:head>
 <nav class="navbar py-0 bg-base-300">
     <div class="flex-1">
         <Link
