@@ -59,6 +59,9 @@
         "Search": {
             "Enter name or description": "Name or description also can, will find your favourite prof one",
             "No description provided": "Kosong"
+        },
+        "Details": {
+            "Biography": "Biography"
         }
     },
 

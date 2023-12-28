@@ -59,6 +59,9 @@
         "Search": {
             "Enter name or description": "Enter name or description",
             "No description provided": "No description provided"
+        },
+        "Details": {
+            "Biography": "Biography"
         }
     },
 
