@@ -68,6 +68,11 @@
                 "Results found": "{{found}} results found, zhun bo?",
                 "No results found": "No results found, make your query better can?"
             }
+        },
+        "Timetable": {
+            "Timetable": {
+                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable"
+            }
         }
     }
 }

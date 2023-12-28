@@ -69,6 +69,11 @@
                 "Results found": "{{found}} results found based on your query",
                 "No results found": "No results found for your query"
             }
+        },
+        "Timetable": {
+            "Timetable": {
+                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable"
+            }
         }
     }
 }
