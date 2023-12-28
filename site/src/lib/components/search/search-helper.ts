@@ -1,19 +1,21 @@
-import type { Filter, FilterMap } from '$lib/types/Typesense';
+import type { Docs, Filter, FilterMap } from '$lib/types/Typesense';
+import type { SearchResponseFacetCountSchema } from 'typesense/lib/Typesense/Documents';
 
 export type DispatchFilterUpdate = {
     name: string;
     newFilters: Filter[];
 };
 
+export const PER_PAGE = 10;
+
 /**
  * Helper function to call the typesense route
- * @param collection
- * @param searchValue
- * @param initCall
- * @param page
- * @param found
- * @param per_page
- * @param activeFilters
+ * @param collection Name of collection to search in
+ * @param searchValue Query value
+ * @param initCall Flag whether it is the initial page load
+ * @param page Page number offset of the query
+ * @param per_page Number of results per page
+ * @param activeFilters Filters to be used in the query
  * @returns
  */
 export async function callSearchPath(
@@ -21,14 +23,9 @@ export async function callSearchPath(
     searchValue: string,
     initCall: boolean,
     page = 1,
-    found = 0,
-    per_page = 10,
+    per_page = PER_PAGE,
     activeFilters: FilterMap = {}
 ) {
-    if (page === -1) {
-        page = found === 0 ? page : Math.ceil(found / per_page);
-    }
-
     const res = await fetch('/search/typesense', {
         method: 'POST',
         headers: {
@@ -64,4 +61,22 @@ function getFilters(activeFilters: FilterMap) {
         });
 
     return tsFilters.join(' && ');
+}
+
+/**
+ * Converts facets returned from initial query into a clearer known structure
+ */
+export function parseFacets(facetCounts: SearchResponseFacetCountSchema<Docs>[]) {
+    const tmpFilters: FilterMap = {};
+    for (const facet of facetCounts) {
+        const filters: Filter[] = facet.counts
+            .filter(({ value }) => value !== '')
+            .map(({ value, count }) => ({
+                name: value,
+                count,
+                enabled: false
+            }));
+        tmpFilters[facet.field_name] = filters;
+    }
+    return tmpFilters;
 }

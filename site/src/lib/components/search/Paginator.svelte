@@ -7,6 +7,7 @@
 
     export let pages: number[];
     export let activePage: number;
+    export let lastPage: number;
 </script>
 
 {#if pages.length > 0}
@@ -30,7 +31,7 @@
         {#if activePage !== pages[pages.length - 1]}
             <button
                 class="join-item btn btn-md"
-                on:click|preventDefault={() => dispatch('pageChange', -1)}
+                on:click|preventDefault={() => dispatch('pageChange', lastPage)}
             >
                 {DOUBLE_RIGHT}
             </button>

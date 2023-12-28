@@ -3,20 +3,18 @@
     import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
     import { onMount } from 'svelte';
-    import type {
-        SearchResponse,
-        SearchResponseFacetCountSchema,
-        SearchResponseHit
-    } from 'typesense/lib/Typesense/Documents';
+    import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
     import MultiFilterButton from './MultiFilterButton.svelte';
-    import { callSearchPath, type DispatchFilterUpdate } from './search-helper';
-    import type { Docs, Filter, FilterMap } from '$lib/types/Typesense';
+    import {
+        callSearchPath,
+        parseFacets,
+        type DispatchFilterUpdate,
+        PER_PAGE
+    } from './search-helper';
+    import type { Docs, FilterMap } from '$lib/types/Typesense';
 
     export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
-
-    const TYPESENSE_PER_PAGE = 10;
-    const PAGINATOR_WIDTH = 5;
 
     let hits: SearchResponseHit<Docs>[] = [];
     let searchValue = '';
@@ -36,6 +34,7 @@
         updatePaginator(1, 0);
         hits = [];
         found = 0;
+        searching = false;
     }
 
     function handleFilterUpdate({ name, newFilters }: DispatchFilterUpdate) {
@@ -56,13 +55,11 @@
             searchValue,
             initCall,
             page,
-            found,
-            TYPESENSE_PER_PAGE,
+            PER_PAGE,
             activeFilters
         );
 
         if (!res.ok) {
-            searching = false;
             reset();
             return;
         }
@@ -71,41 +68,29 @@
         const tsRes: SearchResponse<Docs> = resJson['tsRes'];
 
         if (initCall && tsRes.facet_counts !== undefined) {
-            handleFacets(tsRes.facet_counts);
+            searchFilters = parseFacets(tsRes.facet_counts);
         }
 
         if (tsRes.hits === undefined) {
-            searching = false;
             reset();
             return;
         }
 
         updatePaginator(tsRes.page, tsRes.found);
         hits = tsRes.hits;
-        activePage = page;
         found = tsRes.found;
 
         document.body.scrollIntoView();
         searching = false;
     }
 
-    function handleFacets(facetCounts: SearchResponseFacetCountSchema<Docs>[]) {
-        for (const facet of facetCounts) {
-            const filters: Filter[] = facet.counts
-                .filter(({ value }) => value !== '')
-                .map(({ value, count }) => ({
-                    name: value,
-                    count,
-                    enabled: false
-                }));
-            searchFilters[facet.field_name] = filters;
-        }
-    }
-
     function updatePaginator(page: number, found: number) {
-        const totalPages = Math.ceil(found / TYPESENSE_PER_PAGE);
+        const PAGINATOR_WIDTH = 5;
+        const totalPages = Math.ceil(found / PER_PAGE);
         const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH / 2));
         const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH / 2));
+
+        activePage = page;
         pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
     }
 </script>
@@ -152,6 +137,7 @@
         <Paginator
             {pages}
             {activePage}
+            lastPage={Math.ceil(found / PER_PAGE)}
             on:pageChange={(e) => search({ page: e.detail })}
         />
     {/if}
