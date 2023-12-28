@@ -1,4 +1,6 @@
 <script lang="ts">
+    import type { Lesson } from '$lib/types/Firebase';
+
     export let left: string | number | undefined = undefined;
     export let width: string | number | undefined = undefined;
     export let top: string | number | undefined = undefined;

@@ -1,3 +1,5 @@
+/** Contains types for Typesense query & documents */
+
 export type CollectionNames = 'modules' | 'staff';
 
 export type Filter = { name: string; count: number; enabled: boolean };

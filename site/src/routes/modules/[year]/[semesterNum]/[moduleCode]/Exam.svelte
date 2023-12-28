@@ -1,5 +1,6 @@
 <script lang="ts">
     import { t } from '$lib/translations';
+    import type { Exam } from '$lib/types/Firebase';
     export let exam: Exam;
 </script>
 

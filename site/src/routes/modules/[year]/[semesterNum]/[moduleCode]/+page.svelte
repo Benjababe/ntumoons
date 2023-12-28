@@ -2,6 +2,7 @@
     import { goto } from '$app/navigation';
     import Timetable from '$lib/components/timetable/Timetable.svelte';
     import { t } from '$lib/translations';
+    import type { Lesson } from '$lib/types/Firebase';
     import Exam from './Exam.svelte';
     import Mutex from './Mutex.svelte';
     import Prerequisites from './Prerequisites.svelte';

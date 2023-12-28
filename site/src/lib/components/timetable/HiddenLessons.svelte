@@ -1,6 +1,7 @@
 <script lang="ts">
     import { t } from '$lib/translations';
     import Info from '$lib/assets/images/Info.svelte';
+    import type { Lesson } from '$lib/types/Firebase';
     export let hiddenLessons: Lesson[];
 </script>
 

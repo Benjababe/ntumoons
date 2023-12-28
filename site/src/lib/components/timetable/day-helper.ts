@@ -1,3 +1,4 @@
+import type { Lesson } from '$lib/types/Firebase';
 import { generateRandomString } from '$lib/util';
 
 export type DayDetails = {

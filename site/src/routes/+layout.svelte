@@ -5,6 +5,7 @@
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
     import { semester } from '$lib/stores';
+    import type { Semester } from '$lib/types/Firebase';
 
     onMount(async () => {
         const initLocale = localStorage.locale ?? 'en';

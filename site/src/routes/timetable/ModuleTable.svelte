@@ -3,6 +3,7 @@
     import { flip } from 'svelte/animate';
     import ModuleTableCell from './ModuleTableCell.svelte';
     import { scale } from 'svelte/transition';
+    import type { DispatchRemoveModule, DispatchUpdateIndex } from '$lib/types/Dispatch';
 
     function removeModule({ code }: DispatchRemoveModule) {
         $timetableModules = $timetableModules.filter((tm) => tm.code !== code);

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import type { Lesson } from '$lib/types/Firebase';
     import TimetableCell from './TimetableCell.svelte';
     import {
         getColumnCells,

@@ -4,6 +4,7 @@
     import TimetableRow from './TimetableRow.svelte';
     import TimetableColumn from './TimetableColumn.svelte';
     import HiddenLessons from './HiddenLessons.svelte';
+    import type { Lesson } from '$lib/types/Firebase';
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';

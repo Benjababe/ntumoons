@@ -3,6 +3,7 @@
     import ModuleTable from './ModuleTable.svelte';
     import { Timetable } from '$lib/components/timetable';
     import { timetableModules } from '$lib/stores';
+    import type { Lesson } from '$lib/types/Firebase';
 
     export let data;
     let lessons: Lesson[] = [];
