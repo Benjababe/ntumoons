@@ -1,8 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { t } from '$lib/translations';
     import { hideSaturday } from '$lib/stores';
-    import Info from '$lib/assets/images/Info.svelte';
     import TimetableRow from './TimetableRow.svelte';
     import TimetableColumn from './TimetableColumn.svelte';
     import HiddenLessons from './HiddenLessons.svelte';
