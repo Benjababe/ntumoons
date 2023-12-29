@@ -1,7 +1,9 @@
 <script lang="ts">
     import { t, locale, locales } from '$lib/translations';
 
-    const localeDisplay: { [key: string]: string } = {
+    let localeDisplay: Partial<Record<string, string>>;
+
+    $: localeDisplay = {
         en: $t('Settings.Locale.Languages.English'),
         'en-SG': $t('Settings.Locale.Languages.Singlish')
     };

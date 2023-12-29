@@ -5,7 +5,6 @@
     import HiddenLessons from './HiddenLessons.svelte';
     import TimetableColumn from './TimetableColumn.svelte';
     import TimetableRow from './TimetableRow.svelte';
-    import { timetableClashes } from '$lib/stores/timetable';
     import type { Day } from '$lib/types/Timetable';
     import ClashingLessons from './ClashingLessons.svelte';
 
