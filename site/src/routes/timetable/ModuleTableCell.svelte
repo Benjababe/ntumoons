@@ -2,6 +2,8 @@
     import Cross from '$lib/assets/images/Cross.svelte';
     import { semester } from '$lib/stores';
     import { t } from '$lib/translations';
+    import type { DispatchRemoveModule, DispatchUpdateIndex } from '$lib/types/Dispatch';
+    import type { Module } from '$lib/types/Firebase';
     import { createEventDispatcher } from 'svelte';
 
     export let mod: Module;

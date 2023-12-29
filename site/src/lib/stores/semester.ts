@@ -1,3 +1,4 @@
+import type { Semester } from '$lib/types/Firebase';
 import { persisted } from 'svelte-persisted-store';
 
 const key = 'semester';

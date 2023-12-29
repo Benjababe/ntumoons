@@ -1,9 +1,8 @@
-type ModulesBasic = Array<{
-    name_pretty: string;
-    code: string;
-}>;
+/** Contains types for Firebase documents */
 
-type Module = {
+import type { Day } from './Timetable';
+
+export type Module = {
     code: string;
     name: string;
     name_pretty: string;
@@ -20,7 +19,7 @@ type Module = {
     active_index_number: string;
 };
 
-type Exam = {
+export type Exam = {
     module_code: string;
     duration: string;
     date: string;
@@ -30,7 +29,7 @@ type Exam = {
     hr_time: string;
 };
 
-type Lesson = {
+export type Lesson = {
     module_code: string;
     index: string;
     remark: string;
@@ -38,24 +37,31 @@ type Lesson = {
     time: string;
     start_time: number;
     end_time: number;
-    day: string;
+    day: Day;
     type: string;
     venue_name: string;
 };
 
-type Semester = {
+export type Staff = {
+    title: string;
+    email: string;
+    tag: string;
+    url: string;
+    personal_url: string;
+    profile_pic_url: string;
+    description: string;
+    biography: string;
+    appointments: string;
+    interests: string[];
+    keywords: string[];
+    research_interests: string[];
+    current_grants: string[];
+};
+
+export type Semester = {
     id: string;
     active: boolean;
     title: string;
     year: string;
     semester_num: string;
-};
-
-type DispatchRemoveModule = {
-    code: string;
-};
-
-type DispatchUpdateIndex = {
-    code: string;
-    index: string;
 };

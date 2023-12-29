@@ -1,4 +1,5 @@
 <script lang="ts">
+    import type { Lesson } from '$lib/types/Firebase';
     import TimetableCell from './TimetableCell.svelte';
     import {
         getColumnCells,
@@ -27,11 +28,11 @@
     }
 </script>
 
-<li class="tt-day">
+<li class="tt-day rounded-lg">
     <div class="tt-day-header border-neutral border-opacity-50 {lastColumn ? '' : 'border-r'}">
         {day}
     </div>
-    <div class="flex relative h-full bg-tt-alternate-v bg-tt-loop pl-1">
+    <div class="flex relative h-full bg-tt-alternate-v bg-tt-loop pl-1 rounded-lg">
         {#each groups as group}
             <div class="flex flex-col">
                 {#each group as cellDetails}
@@ -39,7 +40,7 @@
                         top={cellDetails.top}
                         height={cellDetails.height}
                         lesson={cellDetails.lesson}
-                        overlap={cellDetails.overlap}
+                        clashing={cellDetails.clashing}
                     />
                 {/each}
             </div>

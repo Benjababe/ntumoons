@@ -1,10 +1,12 @@
 <script lang="ts">
+    import type { Lesson } from '$lib/types/Firebase';
+
     export let left: string | number | undefined = undefined;
     export let width: string | number | undefined = undefined;
     export let top: string | number | undefined = undefined;
     export let height: string | number | undefined = undefined;
     export let lesson: Lesson;
-    export let overlap: boolean;
+    export let clashing: boolean;
 
     const landscapeStyle =
         left !== undefined && width !== undefined
@@ -17,7 +19,7 @@
 </script>
 
 <div
-    class="tt-cell {overlap ? 'border-3 border-solid border-error' : 'border border-neutral'}"
+    class="tt-cell {clashing ? 'border-3 border-solid border-error' : 'border border-neutral'}"
     style="{landscapeStyle} {portraitStyle}"
 >
     <div class="text-center text-gray-700">

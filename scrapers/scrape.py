@@ -60,6 +60,7 @@ async def scrape_modules():
     write_json_list(modules, "modulesBasic", ["name_pretty", "code"], "code")
     write_json_list(categories, "courseCategories")
     write_json_list(venues, "venues")
+    write_json([venue.name for venue in venues], "venuesBasic")
 
     semester_prepend = f"{semester}_"
 

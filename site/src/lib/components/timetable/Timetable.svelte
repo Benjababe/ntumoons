@@ -1,20 +1,21 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import { t } from '$lib/translations';
     import { hideSaturday } from '$lib/stores';
-    import Info from '$lib/assets/images/Info.svelte';
-    import TimetableRow from './TimetableRow.svelte';
-    import TimetableColumn from './TimetableColumn.svelte';
+    import type { Lesson } from '$lib/types/Firebase';
+    import { onMount } from 'svelte';
     import HiddenLessons from './HiddenLessons.svelte';
+    import TimetableColumn from './TimetableColumn.svelte';
+    import TimetableRow from './TimetableRow.svelte';
+    import type { Day } from '$lib/types/Timetable';
+    import ClashingLessons from './ClashingLessons.svelte';
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
 
-    const days = $hideSaturday
+    const days: Day[] = $hideSaturday
         ? ['MON', 'TUE', 'WED', 'THU', 'FRI']
         : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     let times = ['0830'];
-    let dayLessons: { [key: string]: Lesson[] } = {};
+    let dayLessons: Partial<Record<Day, Lesson[]>> = {};
     let hiddenLessons: Lesson[] = [];
 
     onMount(() => {
@@ -36,13 +37,14 @@
                 continue;
             }
 
-            const lessonArr = [...dayLessons[lesson.day], lesson];
+            const lessonArr = [...(dayLessons[lesson.day] ?? []), lesson];
             dayLessons[lesson.day] = lessonArr;
         }
     }
 </script>
 
 <HiddenLessons {hiddenLessons} />
+<ClashingLessons />
 
 {#if orientation == 'landscape'}
     <div class="mb-8">
@@ -55,7 +57,7 @@
         <ol class="border border-b-1 border-solid border-neutral rounded-lg border-opacity-50">
             {#each days as day}
                 <TimetableRow
-                    lessons={dayLessons[day]}
+                    lessons={dayLessons[day] ?? []}
                     {day}
                     startTime={parseInt(times[0])}
                 />
@@ -76,7 +78,7 @@
         >
             {#each days as day, i}
                 <TimetableColumn
-                    lessons={dayLessons[day]}
+                    lessons={dayLessons[day] ?? []}
                     {day}
                     startTime={parseInt(times[0])}
                     lastColumn={i === days.length - 1}

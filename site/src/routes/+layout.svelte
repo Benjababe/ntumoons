@@ -5,6 +5,7 @@
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
     import { semester } from '$lib/stores';
+    import type { Semester } from '$lib/types/Firebase';
 
     onMount(async () => {
         const initLocale = localStorage.locale ?? 'en';
@@ -20,6 +21,9 @@
     }
 </script>
 
+<svelte:head>
+    <title>{$t('NTUMoons')}</title>
+</svelte:head>
 <nav class="navbar py-0 bg-base-300">
     <div class="flex-1">
         <Link

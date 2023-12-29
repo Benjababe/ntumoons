@@ -12,6 +12,7 @@
         PER_PAGE
     } from './search-helper';
     import type { Docs, FilterMap } from '$lib/types/Typesense';
+    import { goto, pushState } from '$app/navigation';
 
     export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
@@ -27,7 +28,8 @@
     let timeout: NodeJS.Timeout;
 
     onMount(() => {
-        search({ initCall: true });
+        parseParams();
+        search({ page: activePage, initCall: true });
     });
 
     function reset() {
@@ -80,6 +82,8 @@
         hits = tsRes.hits;
         found = tsRes.found;
 
+        if (!initCall) updateUrl();
+
         document.body.scrollIntoView();
         searching = false;
     }
@@ -92,6 +96,26 @@
 
         activePage = page;
         pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    }
+
+    function parseParams() {
+        const params = new URLSearchParams(window.location.search);
+        const paramPage = params.get('page');
+        const paramSearchValue = params.get('searchValue');
+
+        if (paramPage) activePage = parseInt(paramPage);
+        if (paramSearchValue) searchValue = paramSearchValue;
+    }
+
+    function updateUrl() {
+        let filters: string[] = [];
+        for (const [facetName, facets] of Object.entries(activeFilters)) {
+            let facetValues = facets.map((f) => `${facetName}=${f.name}`);
+            filters = [...filters, `${facetValues.join('&')}`];
+        }
+
+        const url = `?page=${activePage}&searchValue=${searchValue}&${filters.join('&')}`;
+        goto(url);
     }
 </script>
 

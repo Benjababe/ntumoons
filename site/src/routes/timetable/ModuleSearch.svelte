@@ -1,6 +1,8 @@
 <script lang="ts">
     import { semester, timetableModules } from '$lib/stores';
     import { t } from '$lib/translations';
+    import type { ModulesBasic } from '$lib/types/Data';
+    import type { Module } from '$lib/types/Firebase';
 
     export let modules: ModulesBasic = [];
     let moduleResults: ModulesBasic = [];

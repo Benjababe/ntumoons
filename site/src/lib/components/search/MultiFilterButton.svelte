@@ -1,7 +1,7 @@
 <script lang="ts">
     import ArrowDown from '$lib/assets/images/ArrowDown.svelte';
     import { t } from '$lib/translations';
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount } from 'svelte';
     import type { DispatchFilterUpdate } from './search-helper';
     import type { Filter } from '$lib/types/Typesense';
 
@@ -25,6 +25,24 @@
         const filtersEnabled = filters.filter((f) => f.enabled);
         dispatch('filterUpdate', { name, newFilters: filtersEnabled });
     }
+
+    onMount(() => {
+        let updated = false;
+        const params = new URLSearchParams(window.location.search);
+        const filterNames = params.getAll(name);
+
+        for (const filterName of filterNames) {
+            for (let i = 0; i < filters.length; i++) {
+                if (filters[i].name === filterName) {
+                    filters[i].enabled = true;
+                    updated = true;
+                    break;
+                }
+            }
+        }
+
+        if (updated) handleFilterUpdate();
+    });
 </script>
 
 <div class="dropdown {$$props.class}">

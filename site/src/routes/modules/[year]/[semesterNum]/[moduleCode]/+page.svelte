@@ -2,6 +2,8 @@
     import { goto } from '$app/navigation';
     import Timetable from '$lib/components/timetable/Timetable.svelte';
     import { t } from '$lib/translations';
+    import type { Lesson } from '$lib/types/Firebase';
+    import DOMPurify from 'dompurify';
     import Exam from './Exam.svelte';
     import Mutex from './Mutex.svelte';
     import Prerequisites from './Prerequisites.svelte';
@@ -51,17 +53,17 @@
                 />
             {/if}
             {#if data.module.mutex.length > 0}
-                <div class="mt-8">
+                <div class="first:mt-0 mt-8">
                     <Mutex
                         mutex={data.module.mutex}
                         on:moduleStr={openModule}
                     />
                 </div>
             {/if}
-            <div class="mt-8">
+            <div class="first:mt-0 mt-8">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
-                <div>{@html data.module.description}</div>
+                <div>{@html DOMPurify.sanitize(data.module.description)}</div>
             </div>
             <div class="mt-10">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Exam')}</h2>
