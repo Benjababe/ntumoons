@@ -1,9 +1,12 @@
 <script lang="ts">
     import Header from './Header.svelte';
     import InfoBar from './InfoBar.svelte';
+    import Keywords from './Keywords.svelte';
+    import MiscCategories from './MiscCategories.svelte';
     export let data;
 
     const { staff } = data;
+    console.log(staff);
 </script>
 
 <div class="flex justify-center">
@@ -13,6 +16,14 @@
         </div>
         <div class="flex justify-center mt-6 w-full">
             <InfoBar {staff} />
+        </div>
+        <div class="flex w-full gap-x-8">
+            <div class="w-1/3">
+                <Keywords {staff} />
+            </div>
+            <div class="w-2/3">
+                <MiscCategories {staff} />
+            </div>
         </div>
     </div>
 </div>

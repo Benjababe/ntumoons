@@ -18,6 +18,9 @@ export default {
             borderWidth: {
                 3: '3px'
             },
+            fontSize: {
+                xxs: ['0.5rem', '0.75rem']
+            },
             gridTemplateColumns: {
                 info: '2fr 5fr'
             },

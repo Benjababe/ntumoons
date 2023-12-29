@@ -70,7 +70,10 @@
             "No description provided": "No description provided"
         },
         "Details": {
-            "Biography": "Biography"
+            "Biography": "Biography",
+            "Keywords": "Keywords",
+            "Research Interests": "Research Interests",
+            "Current Grants": "Current Grants"
         }
     },
 
