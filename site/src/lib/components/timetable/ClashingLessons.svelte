@@ -4,10 +4,7 @@
     import { t } from '$lib/translations';
 
     let hasClash: boolean;
-    $: {
-        hasClash = Object.values($timetableClashes).some((arr) => arr.length > 0);
-        console.log($timetableClashes);
-    }
+    $: hasClash = Object.values($timetableClashes).some((arr) => arr.length > 0);
 </script>
 
 {#if hasClash}

@@ -17,7 +17,7 @@
                 <a
                     class="btn btn-primary btn-xs text-xs text-left h-fit w-full py-0.5"
                     target="_blank"
-                    href="/staff"
+                    href="/staff?keywords={keyword}"
                 >
                     {keyword}
                 </a>
