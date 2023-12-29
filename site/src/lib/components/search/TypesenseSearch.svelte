@@ -29,7 +29,7 @@
 
     onMount(() => {
         parseParams();
-        search({ initCall: true });
+        search({ page: activePage, initCall: true });
     });
 
     function reset() {
