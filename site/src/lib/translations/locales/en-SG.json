@@ -27,6 +27,15 @@
                 "English": "🇬🇧 English",
                 "Singlish": "🇸🇬 Singlish"
             }
+        },
+
+        "ClearStorage": {
+            "Clear Storage": "Clear Storage",
+            "Removes all data stored": "Removes all data stored",
+            "Clear": "Clear",
+            "Are You Sure?": "Sure boh?",
+            "All your data will be wiped": "Your settings, theme and timetable will be wiped ah, dun say I never tell you hor.",
+            "Close": "Close"
         }
     },
 

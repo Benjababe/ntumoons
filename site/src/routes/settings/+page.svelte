@@ -3,6 +3,7 @@
     import Themes from './Themes.svelte';
     import Locales from './Locales.svelte';
     import Saturday from './Saturday.svelte';
+    import ClearStorage from './ClearStorage.svelte';
 </script>
 
 <div class="flex justify-center">
@@ -16,6 +17,8 @@
         <Themes />
         <div class="divider" />
         <Locales />
+        <div class="divider" />
+        <ClearStorage />
         <div class="divider" />
     </div>
 </div>
