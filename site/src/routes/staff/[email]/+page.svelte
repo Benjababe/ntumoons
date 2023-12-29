@@ -6,18 +6,17 @@
     export let data;
 
     const { staff } = data;
-    console.log(staff);
 </script>
 
 <div class="flex justify-center">
-    <div class="flex flex-col justify-center items-center w-3/4">
+    <div class="flex flex-col justify-center items-center max-w-1200">
         <div class="flex flex-row gap-8 m-auto w-full max-h-96">
             <Header {staff} />
         </div>
         <div class="flex justify-center mt-6 w-full">
             <InfoBar {staff} />
         </div>
-        <div class="flex w-full gap-x-8">
+        <div class="flex w-full mt-8 gap-x-8">
             <div class="w-1/3">
                 <Keywords {staff} />
             </div>

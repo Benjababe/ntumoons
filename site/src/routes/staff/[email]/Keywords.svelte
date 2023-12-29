@@ -10,23 +10,28 @@
 <p class="font-bold underline text-lg mb-2">
     {$t('Staff.Details.Keywords')}
 </p>
-<div class="flex flex-wrap flex-1 gap-x-2 gap-y-1">
-    {#each reservedKeywords as keyword}
-        <a
-            class="btn btn-primary btn-xs text-xs whitespace-nowrap"
-            target="_blank"
-            href="/staff"
-        >
-            {keyword}
-        </a>
-    {/each}
-    {#each freeKeywords as keyword}
-        <a
-            class="btn btn-neutral btn-xs text-xs whitespace-nowrap"
-            target="_blank"
-            href="/staff"
-        >
-            {keyword}
-        </a>
-    {/each}
+<div class="flex flex-col">
+    <div class="flex flex-wrap flex-1 gap-x-2 gap-y-1">
+        {#each reservedKeywords as keyword}
+            <button>
+                <a
+                    class="btn btn-primary btn-xs text-xs text-left h-fit w-full py-0.5"
+                    target="_blank"
+                    href="/staff"
+                >
+                    {keyword}
+                </a>
+            </button>
+        {/each}
+    </div>
+    <div class="divider my-1" />
+    <div class="flex flex-wrap flex-1 gap-x-2 gap-y-1">
+        {#each freeKeywords as keyword}
+            <button>
+                <span class="btn btn-neutral btn-xs text-xs text-left h-fit w-full py-0.5">
+                    {keyword}
+                </span>
+            </button>
+        {/each}
+    </div>
 </div>
