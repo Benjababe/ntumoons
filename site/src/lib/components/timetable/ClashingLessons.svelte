@@ -8,7 +8,7 @@
 </script>
 
 {#if hasClash}
-    <div class="flex justify-center mb-4">
+    <div class="flex justify-center mb-4 {$$props.class}">
         <div class="collapse collapse-arrow w-2/3 bg-error text-error-content rounded-md">
             <input type="checkbox" />
             <div class="collapse-title flex justify-center items-center gap-2 font-semibold">

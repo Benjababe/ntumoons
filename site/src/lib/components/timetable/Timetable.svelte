@@ -6,7 +6,6 @@
     import TimetableColumn from './TimetableColumn.svelte';
     import TimetableRow from './TimetableRow.svelte';
     import type { Day } from '$lib/types/Timetable';
-    import ClashingLessons from './ClashingLessons.svelte';
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
@@ -44,10 +43,9 @@
 </script>
 
 <HiddenLessons {hiddenLessons} />
-<ClashingLessons />
 
 {#if orientation == 'landscape'}
-    <div class="mb-8">
+    <div>
         <div class="flex justify-between ml-14">
             {#each times as time}
                 <span class="-translate-x-1/2">{time}</span>
@@ -65,7 +63,7 @@
         </ol>
     </div>
 {:else}
-    <div class="flex mb-8">
+    <div class="flex">
         <div class="flex flex-col justify-between mr-4 mt-14">
             {#each times as time}
                 <span class="-translate-y-1/2">{time}</span>

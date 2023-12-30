@@ -4,6 +4,7 @@
     import { Timetable } from '$lib/components/timetable';
     import { timetableModules } from '$lib/stores';
     import type { Lesson } from '$lib/types/Firebase';
+    import ClashingLessons from '$lib/components/timetable/ClashingLessons.svelte';
 
     export let data;
     let lessons: Lesson[] = [];
@@ -20,6 +21,7 @@
 
 <div class="flex flex-col justify-center relative max-w-full">
     <Timetable {lessons} />
+    <ClashingLessons class="mt-4" />
     <ModuleSearch modules={data.modules} />
     <ModuleTable />
 </div>
