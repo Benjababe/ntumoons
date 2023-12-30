@@ -15,7 +15,7 @@
         {#each reservedKeywords as keyword}
             <button>
                 <a
-                    class="btn btn-primary btn-xs text-xs text-left h-fit w-full py-0.5"
+                    class="btn btn-primary text-primary-content btn-xs text-xs text-left h-fit w-full py-0.5"
                     target="_blank"
                     href="/staff?keywords={keyword}"
                 >

@@ -44,11 +44,12 @@ export default {
                 light: {
                     'color-scheme': 'light',
                     primary: '#3b82f6',
+                    'primary-content': '#ffffff',
                     secondary: 'oklch(69.71% 0.329 342.55)',
                     'secondary-content': 'oklch(98.71% 0.0106 342.55)',
                     accent: '#2563eb',
                     neutral: '#9ca3af',
-                    'neutral-content': '#D7DDE4',
+                    'neutral-content': '#ffffff',
                     'base-100': 'oklch(100% 0 0)',
                     'base-200': '#F2F2F2',
                     'base-300': '#E5E6E6',
