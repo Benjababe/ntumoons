@@ -3,7 +3,6 @@
     import Timetable from '$lib/components/timetable/Timetable.svelte';
     import { t } from '$lib/translations';
     import type { Lesson } from '$lib/types/Firebase';
-    import DOMPurify from 'dompurify';
     import Exam from './Exam.svelte';
     import Mutex from './Mutex.svelte';
     import Prerequisites from './Prerequisites.svelte';
@@ -63,7 +62,7 @@
             <div class="first:mt-0 mt-8">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
-                <div>{@html DOMPurify.sanitize(data.module.description)}</div>
+                <div>{@html data.module.description}</div>
             </div>
             <div class="mt-10">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Exam')}</h2>
