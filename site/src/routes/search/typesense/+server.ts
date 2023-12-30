@@ -9,7 +9,7 @@ const queryFields = {
 };
 
 export async function POST({ request }) {
-    const { initCall, coll, q, page, per_page, filters } = await request.json();
+    const { coll, q, page, per_page, filters } = await request.json();
 
     let collection: CollectionNames;
     if (coll === 'modules') {
@@ -20,18 +20,16 @@ export async function POST({ request }) {
         return error(400, 'No collection provided!');
     }
 
-    let queryParams: SearchParams = {
+    const queryParams: SearchParams = {
         q,
         query_by: queryFields[collection],
         page,
         per_page,
         snippet_threshold: 5000,
-        filter_by: filters
+        filter_by: filters,
+        facet_by: '*',
+        max_facet_values: 50
     };
-
-    if (initCall) {
-        queryParams = { ...queryParams, facet_by: '*', max_facet_values: 50 };
-    }
 
     const tsRes = await typesense.collections(collection).documents().search(queryParams);
     if (tsRes.hits === undefined || tsRes.hits.length === 0) return error(404, 'No staff found');

@@ -52,14 +52,7 @@
     async function search({ page = 1, initCall = false } = {}) {
         searching = true;
 
-        const res = await callSearchPath(
-            collection,
-            searchValue,
-            initCall,
-            page,
-            PER_PAGE,
-            activeFilters
-        );
+        const res = await callSearchPath(collection, searchValue, page, PER_PAGE, activeFilters);
 
         if (!res.ok) {
             reset();
@@ -69,8 +62,8 @@
         const resJson = await res.json();
         const tsRes: SearchResponse<Docs> = resJson['tsRes'];
 
-        if (initCall && tsRes.facet_counts !== undefined) {
-            searchFilters = parseFacets(tsRes.facet_counts);
+        if (tsRes.facet_counts !== undefined) {
+            searchFilters = parseFacets(searchFilters, tsRes.facet_counts);
         }
 
         if (tsRes.hits === undefined) {
@@ -129,7 +122,7 @@
         on:input={handleSearch}
     />
 
-    <div>
+    <div class="mt-3">
         {#each Object.entries(searchFilters) as [name, filters]}
             <MultiFilterButton
                 {name}

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Confetti } from 'svelte-confetti';
     import Header from './Header.svelte';
     import InfoBar from './InfoBar.svelte';
     import Keywords from './Keywords.svelte';
@@ -7,6 +8,22 @@
 
     const { staff } = data;
 </script>
+
+{#if staff.email === 'yrloke@ntu.edu.sg'}
+    <div
+        class="fixed -top-14 left-0 h-screen w-screen flex justify-center overflow-hidden pointer-events-none"
+    >
+        <Confetti
+            x={[-5, 5]}
+            y={[0, 5]}
+            delay={[500, 3000]}
+            duration={6000}
+            amount={1000}
+            size={20}
+            fallDistance="100vh"
+        />
+    </div>
+{/if}
 
 <div class="flex justify-center">
     <div class="flex flex-col justify-center items-center max-w-1200">

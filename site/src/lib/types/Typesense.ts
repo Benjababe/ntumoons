@@ -3,7 +3,7 @@
 export type CollectionNames = 'modules' | 'staff';
 
 export type Filter = { name: string; count: number; enabled: boolean };
-export type FilterMap = { [key: string]: Filter[] };
+export type FilterMap = Record<string, Filter[]>;
 
 export type ModuleDoc = {
     code: string;

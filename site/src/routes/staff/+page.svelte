@@ -2,7 +2,6 @@
     import NewTab from '$lib/assets/images/NewTab.svelte';
     import TypesenseSearch from '$lib/components/search/TypesenseSearch.svelte';
     import { t } from '$lib/translations';
-    import DOMPurify from 'dompurify';
 </script>
 
 <TypesenseSearch
@@ -17,7 +16,7 @@
                 target="_blank"
             >
                 <img
-                    class="w-full aspect-staff-photo object-cover object-center"
+                    class="w-full aspect-staff-photo object-cover object-center rounded-md"
                     src={hit.document.profile_pic_url}
                     alt={hit.document.title}
                 />
@@ -29,22 +28,18 @@
                 target="_blank"
                 class="flex items-center gap-x-1 fill-primary text-primary text-xl"
             >
-                {@html DOMPurify.sanitize(
-                    hit.highlight.title && hit.highlight.title.snippet
-                        ? hit.highlight.title.snippet
-                        : hit.document.title
-                )}
+                {@html hit.highlight.title && hit.highlight.title.snippet
+                    ? hit.highlight.title.snippet
+                    : hit.document.title}
                 <NewTab />
             </a>
             <div>{hit.document.tag}</div>
             <div class="divider mt-0 mb-2" />
             <div>
                 {#if hit.document.description !== ''}
-                    {@html DOMPurify.sanitize(
-                        hit.highlight.description && hit.highlight.description.snippet
-                            ? hit.highlight.description.snippet
-                            : hit.document.description
-                    )}
+                    {@html hit.highlight.description && hit.highlight.description.snippet
+                        ? hit.highlight.description.snippet
+                        : hit.document.description}
                 {:else}
                     {$t('Staff.Search.No description provided')}
                 {/if}
