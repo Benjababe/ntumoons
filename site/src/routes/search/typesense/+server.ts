@@ -4,7 +4,7 @@ import { error, json } from '@sveltejs/kit';
 import type { SearchParams } from 'typesense/lib/Typesense/Documents';
 
 const queryFields = {
-    modules: ['code', 'name'],
+    modules: ['code', 'name_pretty', 'description'],
     staff: ['title', 'description']
 };
 
