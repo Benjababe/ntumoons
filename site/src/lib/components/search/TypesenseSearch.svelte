@@ -11,13 +11,18 @@
         type DispatchFilterUpdate,
         PER_PAGE
     } from './search-helper';
-    import type { Docs, FilterMap } from '$lib/types/Typesense';
+    import type { Docs, FilterMap, ModuleDoc, StaffDoc } from '$lib/types/Typesense';
     import { goto } from '$app/navigation';
 
     export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
 
-    let hits: SearchResponseHit<Docs>[] = [];
+    // A workaround way to return hits in their proper typing to the parent.
+    // Ideally it would just be 1 'hits' variable with union types for all possible docs.
+    // But typescript doesn't play well with svelte and a single type cannot be chosen as output.
+    export let staffHits: SearchResponseHit<StaffDoc>[] = [];
+    export let moduleHits: SearchResponseHit<ModuleDoc>[] = [];
+
     let searchValue = '';
     let searchFilters: FilterMap = {};
     let activeFilters: FilterMap = {};
@@ -34,7 +39,8 @@
 
     function reset() {
         updatePaginator(1, 0);
-        hits = [];
+        staffHits = [];
+        moduleHits = [];
         found = 0;
         searching = false;
     }
@@ -72,8 +78,10 @@
         }
 
         updatePaginator(tsRes.page, tsRes.found);
-        hits = tsRes.hits;
         found = tsRes.found;
+
+        staffHits = tsRes.hits as SearchResponseHit<StaffDoc>[];
+        moduleHits = tsRes.hits as SearchResponseHit<ModuleDoc>[];
 
         if (!initCall) updateUrl();
 
@@ -144,9 +152,7 @@
         {#if searching}
             <Spinner />
         {:else}
-            {#each hits as hit (hit.document)}
-                <slot {hit} />
-            {/each}
+            <slot name="results" />
         {/if}
     </div>
 

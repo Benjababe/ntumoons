@@ -67,10 +67,14 @@
     "Staff": {
         "Search": {
             "Enter name or description": "Name or description also can, will find your favourite prof one",
-            "No description provided": "Kosong"
+            "No description provided": "Description kosong one",
+            "Appointments: ": "Appointments: "
         },
         "Details": {
-            "Biography": "Biography"
+            "Biography": "Biography",
+            "Keywords": "Keywords",
+            "Research Interests": "Research Interests",
+            "Current Grants": "Current Grants"
         }
     },
 
@@ -79,13 +83,15 @@
             "FilterButton": {
                 "Filter By": "Filter By {{name}}",
                 "Search filters...": "Search filters...",
+                "Clear filters": "Clear filters",
                 "Results found": "{{found}} results found, zhun bo?",
                 "No results found": "No results found, make your query better can?"
             }
         },
         "Timetable": {
             "Timetable": {
-                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable"
+                "Some lessons were hidden from the timetable": "Some lessons were hidden from the timetable",
+                "There are clashes between lessons in the timetable!": "Eh your timetable got some clash ah"
             }
         }
     }
