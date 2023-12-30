@@ -19,13 +19,15 @@
             >
                 Email
             </a>
-            <a
-                class="flex gap-1 btn btn-sm btn-neutral"
-                target="_blank"
-                href={staff.personal_url}
-            >
-                Personal Website <NewTab />
-            </a>
+            {#if staff.personal_url}
+                <a
+                    class="flex gap-1 btn btn-sm btn-neutral"
+                    target="_blank"
+                    href={staff.personal_url}
+                >
+                    Personal Website <NewTab />
+                </a>
+            {/if}
             <a
                 class="flex gap-1 btn btn-sm btn-neutral"
                 target="_blank"
