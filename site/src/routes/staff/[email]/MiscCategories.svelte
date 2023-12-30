@@ -31,7 +31,7 @@
         <div class="collapse-content w-full mx-auto bg-base-200 pt-4 px-8">
             <ol class="list-disc">
                 {#each staff.current_grants as grant}
-                    <li>{grant.replaceAll('‐', '')}</li>
+                    <li>{grant}</li>
                 {/each}
             </ol>
         </div>
