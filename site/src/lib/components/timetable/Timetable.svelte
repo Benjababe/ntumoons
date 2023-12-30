@@ -42,8 +42,6 @@
     }
 </script>
 
-<HiddenLessons {hiddenLessons} />
-
 {#if orientation == 'landscape'}
     <div>
         <div class="flex justify-between ml-14">
@@ -62,7 +60,9 @@
             {/each}
         </ol>
     </div>
+    <HiddenLessons {hiddenLessons} />
 {:else}
+    <HiddenLessons {hiddenLessons} />
     <div class="flex">
         <div class="flex flex-col justify-between mr-4 mt-14">
             {#each times as time}
