@@ -1,4 +1,5 @@
 <script lang="ts">
+    import StaffFallbackImage from '$lib/assets/images/StaffFallbackImage.svelte';
     import NewTab from '$lib/assets/images/NewTab.svelte';
     import TypesenseSearch from '$lib/components/search/TypesenseSearch.svelte';
     import { t } from '$lib/translations';
@@ -15,11 +16,17 @@
                 href="/staff/{hit.document.email}"
                 target="_blank"
             >
-                <img
-                    class="w-full aspect-staff-photo object-cover object-center rounded-md"
-                    src={hit.document.profile_pic_url}
-                    alt={hit.document.title}
-                />
+                {#if hit.document.profile_pic_url}
+                    <img
+                        class="w-full aspect-staff-photo object-cover object-center rounded-md"
+                        src={hit.document.profile_pic_url}
+                        alt={hit.document.title}
+                    />
+                {:else}
+                    <div class="w-full object-cover object-center rounded-xl">
+                        <StaffFallbackImage class="fill-neutral" />
+                    </div>
+                {/if}
             </a>
         </div>
         <div class="w-5/6 text-sm">

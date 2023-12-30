@@ -12,7 +12,7 @@
         PER_PAGE
     } from './search-helper';
     import type { Docs, FilterMap } from '$lib/types/Typesense';
-    import { goto, pushState } from '$app/navigation';
+    import { goto } from '$app/navigation';
 
     export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
@@ -122,7 +122,7 @@
         on:input={handleSearch}
     />
 
-    <div class="mt-3">
+    <div class="mt-3 z-10">
         {#each Object.entries(searchFilters) as [name, filters]}
             <MultiFilterButton
                 {name}
@@ -140,7 +140,7 @@
         {/if}
     </div>
 
-    <div class="search-results max-w-4xl">
+    <div class="search-results max-w-4xl z-0">
         {#if searching}
             <Spinner />
         {:else}

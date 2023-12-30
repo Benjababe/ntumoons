@@ -53,8 +53,8 @@ function getFilters(activeFilters: FilterMap) {
         .filter(([, filters]) => filters.length > 0)
         .map(([facet, filters]) => {
             filters = filters.filter((f) => f.enabled);
-            const filterStr = `[${filters.map((f) => `\`${f.name}\``).join(', ')}]`;
-            return `${facet}:=${filterStr}`;
+            const filterStr = `${filters.map((f) => `${facet}:='${f.name}'`).join(' && ')}`;
+            return `${filterStr}`;
         });
 
     return tsFilters.join(' && ');
