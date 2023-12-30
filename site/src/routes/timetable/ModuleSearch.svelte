@@ -14,6 +14,7 @@
     function handleSearch() {
         moduleResults = modules.filter((mod) => {
             return (
+                !$timetableModules.some((tm) => tm.mutex.includes(mod.code)) &&
                 !$timetableModules.some((tm) => tm.code === mod.code) &&
                 (mod.code.toUpperCase().includes(searchValue.toUpperCase()) ||
                     mod.name_pretty.toUpperCase().includes(searchValue.toUpperCase()))
