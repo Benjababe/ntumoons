@@ -21,7 +21,7 @@
 
 <div class="flex flex-col justify-center relative max-w-full">
     <Timetable {lessons} />
-    <ClashingLessons class="mt-4" />
+    <ClashingLessons />
     <ModuleSearch modules={data.modules} />
     <ModuleTable />
 </div>

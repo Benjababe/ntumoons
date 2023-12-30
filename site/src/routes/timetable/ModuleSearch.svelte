@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Spinner from '$lib/components/generic/Spinner.svelte';
     import { semester, timetableModules } from '$lib/stores';
     import { t } from '$lib/translations';
     import type { ModulesBasic } from '$lib/types/Data';
@@ -8,6 +9,7 @@
     let moduleResults: ModulesBasic = [];
     let searchHidden = false;
     let searchValue = '';
+    let searching = false;
 
     function handleSearch() {
         moduleResults = modules.filter((mod) => {
@@ -20,6 +22,8 @@
     }
 
     async function addModuleTimetable(moduleCode: string) {
+        searchValue = '';
+        searching = true;
         const newModule = await fetchModule(moduleCode);
 
         if (newModule !== -1) {
@@ -28,7 +32,7 @@
             console.error(`Failed to retrieve module ${moduleCode}`);
         }
 
-        searchValue = '';
+        searching = false;
     }
 
     async function fetchModule(moduleCode: string) {
@@ -52,11 +56,17 @@
         type="text"
         placeholder={$t('Timetable.Course code or name')}
         class="input input-bordered w-full h-10"
+        disabled={searching}
         bind:value={searchValue}
         on:input={handleSearch}
         on:focus={() => (searchHidden = false)}
         on:blur={() => (searchHidden = true)}
     />
+    {#if searching}
+        <div class="w-full flex justify-center">
+            <Spinner />
+        </div>
+    {/if}
     {#if moduleResults.length > 0 && !searchHidden && searchValue.length > 0}
         <ol
             class="absolute w-full max-h-48 top-11 border border-neutral border-opacity-50 overflow-y-scroll rounded-sm z-10"

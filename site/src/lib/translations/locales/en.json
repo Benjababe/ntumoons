@@ -67,7 +67,8 @@
     "Staff": {
         "Search": {
             "Enter name or description": "Enter name or description",
-            "No description provided": "No description provided"
+            "No description provided": "No description provided",
+            "Appointments: ": "Appointments: "
         },
         "Details": {
             "Biography": "Biography",

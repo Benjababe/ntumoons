@@ -10,11 +10,11 @@
 
     const landscapeStyle =
         left !== undefined && width !== undefined
-            ? `margin-left: calc(${left}% + 4px); width: calc(${width}% - 2px);`
+            ? `margin-left: calc(${left}% + 4px); width: calc(${width}% - 4px);`
             : '';
     const portraitStyle =
         top !== undefined && height !== undefined
-            ? `position: absolute; top: calc(${top}% + 4px); height: calc(${height}% - 2px); width: 95%`
+            ? `position: absolute; top: calc(${top}% + 4px); height: calc(${height}% - 4px); width: 95%`
             : '';
 </script>
 

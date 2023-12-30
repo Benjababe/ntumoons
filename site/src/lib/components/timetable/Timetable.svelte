@@ -60,7 +60,9 @@
             {/each}
         </ol>
     </div>
-    <HiddenLessons {hiddenLessons} />
+    <div class="mt-4">
+        <HiddenLessons {hiddenLessons} />
+    </div>
 {:else}
     <HiddenLessons {hiddenLessons} />
     <div class="flex">
