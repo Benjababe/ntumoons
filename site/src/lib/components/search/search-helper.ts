@@ -12,7 +12,6 @@ export const PER_PAGE = 10;
  * Helper function to call the typesense route
  * @param collection Name of collection to search in
  * @param searchValue Query value
- * @param initCall Flag whether it is the initial page load
  * @param page Page number offset of the query
  * @param per_page Number of results per page
  * @param activeFilters Filters to be used in the query
@@ -21,7 +20,6 @@ export const PER_PAGE = 10;
 export async function callSearchPath(
     collection: string,
     searchValue: string,
-    initCall: boolean,
     page = 1,
     per_page = PER_PAGE,
     activeFilters: FilterMap = {}
@@ -33,7 +31,6 @@ export async function callSearchPath(
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            initCall,
             coll: collection,
             q: searchValue,
             page,
@@ -66,16 +63,25 @@ function getFilters(activeFilters: FilterMap) {
 /**
  * Converts facets returned from initial query into a clearer known structure
  */
-export function parseFacets(facetCounts: SearchResponseFacetCountSchema<Docs>[]) {
+export function parseFacets(
+    searchFilters: FilterMap,
+    facetCounts: SearchResponseFacetCountSchema<Docs>[]
+) {
     const tmpFilters: FilterMap = {};
     for (const facet of facetCounts) {
         const filters: Filter[] = facet.counts
             .filter(({ value }) => value !== '')
-            .map(({ value, count }) => ({
-                name: value,
-                count,
-                enabled: false
-            }));
+            .map(({ value, count }) => {
+                let enabled = false;
+                const oldFacet = searchFilters[facet.field_name];
+                if (oldFacet) enabled = oldFacet.some((f) => f.name === value && f.enabled);
+
+                return {
+                    name: value,
+                    count,
+                    enabled
+                };
+            });
         tmpFilters[facet.field_name] = filters;
     }
     return tmpFilters;

@@ -17,7 +17,7 @@
                 target="_blank"
             >
                 <img
-                    class="w-full aspect-staff-photo object-cover object-center"
+                    class="w-full aspect-staff-photo object-cover object-center rounded-md"
                     src={hit.document.profile_pic_url}
                     alt={hit.document.title}
                 />
