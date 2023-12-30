@@ -18,6 +18,9 @@ export default {
             borderWidth: {
                 3: '3px'
             },
+            fill: {
+                gh: 'var(--gh)'
+            },
             fontSize: {
                 xxs: ['0.5rem', '0.75rem']
             },
@@ -50,7 +53,8 @@ export default {
                     'base-200': '#F2F2F2',
                     'base-300': '#E5E6E6',
                     'base-content': '#1f2937',
-                    '--tt-alternate': '#dddddd'
+                    '--tt-alternate': '#dddddd',
+                    '--gh': '#24292f'
                 },
                 dark: {
                     'color-scheme': 'dark',
@@ -63,7 +67,8 @@ export default {
                     success: '#4ade80',
                     warning: '#fbbf24',
                     error: '#ef4444',
-                    '--tt-alternate': '#1a1e2c'
+                    '--tt-alternate': '#1a1e2c',
+                    '--gh': '#ffffff'
                 }
             }
         ]
