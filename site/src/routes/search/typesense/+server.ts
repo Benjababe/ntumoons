@@ -32,7 +32,8 @@ export async function POST({ request }) {
     };
 
     const tsRes = await typesense.collections(collection).documents().search(queryParams);
-    if (tsRes.hits === undefined || tsRes.hits.length === 0) return error(404, 'No staff found');
+    if (tsRes.hits === undefined || tsRes.hits.length === 0)
+        return error(404, 'No documents found');
 
     return json({ tsRes });
 }
