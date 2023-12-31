@@ -1,18 +1,18 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     import Spinner from '$lib/components/generic/Spinner.svelte';
     import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
+    import type { Docs, FilterMap, ModuleDoc, StaffDoc } from '$lib/types/Typesense';
     import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
     import MultiFilterButton from './MultiFilterButton.svelte';
     import {
+        PER_PAGE,
         callSearchPath,
         parseFacets,
-        type DispatchFilterUpdate,
-        PER_PAGE
+        type DispatchFilterUpdate
     } from './search-helper';
-    import type { Docs, FilterMap, ModuleDoc, StaffDoc } from '$lib/types/Typesense';
-    import { goto } from '$app/navigation';
 
     export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
@@ -143,7 +143,7 @@
     <div class="mt-4 mb-2">
         {#if found > 0}
             {$t('Components.Search.FilterButton.Results found', { found })}
-        {:else if searchValue != '' || Object.entries(activeFilters).length > 0}
+        {:else if !searching && (searchValue != '' || Object.entries(activeFilters).length > 0)}
             {$t('Components.Search.FilterButton.No results found')}
         {/if}
     </div>
