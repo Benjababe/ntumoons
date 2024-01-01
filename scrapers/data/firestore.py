@@ -1,4 +1,5 @@
 import asyncio
+from typing import Callable
 
 import firebase_admin
 from firebase_admin import credentials, firestore_async
@@ -28,7 +29,19 @@ async def write_fs_list(
     data_list: str,
     doc_id_prepend: str = "",
     override: bool = True,
+    override_func: Callable[[dict, dict], dict] = None,
 ):
+    """_summary_
+
+    Args:
+        fs_coll (str): _description_
+        doc_id_key (str): _description_
+        data_list (str): _description_
+        doc_id_prepend (str, optional): _description_. Defaults to "".
+        override (bool, optional): _description_. Defaults to True.
+
+    """
+
     """Writes a list of data to firestore.
 
     Args:
@@ -37,6 +50,7 @@ async def write_fs_list(
         data_list (list[Dictable]): List of data to upload.
         doc_id_prepend (str, optional): String to prepend document id with. Defaults to "".
         override (bool, optional): Flag whether to replace existing documents. Defaults to True.
+        override_func (Callable[[dict, dict], dict], optional): Function to execute if document exists and override it with its returned value. Defaults to None.
     """
 
     async def write(data: Dictable):
@@ -48,6 +62,9 @@ async def write_fs_list(
             doc = db.collection(fs_coll).document(doc_id)
             actual_doc = await doc.get()
             if not actual_doc.exists:
+                await doc.set(data_dict)
+            elif override_func is not None:
+                data_dict = override_func(data_dict, actual_doc.to_dict())
                 await doc.set(data_dict)
 
         else:

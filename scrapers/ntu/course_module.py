@@ -199,7 +199,7 @@ def scrape_category_modules(
             lat=DEFAULT_LAT,
             lng=DEFAULT_LNG,
             floor=-1,
-            lessons=list(lessons),
+            lessons={semester: list(lessons)},
         )
         venues.append(venue)
 

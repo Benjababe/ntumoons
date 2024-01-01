@@ -177,3 +177,8 @@ def get_sem_title(semester: str, tidy: bool) -> str:
         return f"AY 20{ay}/{ay+1} Semester {sem_num}"
     else:
         return f"AY20{ay}-{ay+1} SEM {sem_num}"
+
+
+def merge_venue(venue: dict, stored_venue: dict):
+    stored_venue["lessons"].update(venue["lessons"])
+    return stored_venue

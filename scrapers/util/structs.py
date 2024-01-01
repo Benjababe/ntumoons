@@ -85,7 +85,7 @@ class Venue(Dictable):
     lat: float
     lng: float
     floor: int
-    lessons: list[Lesson]
+    lessons: dict[str, list[Lesson]]
 
 
 @dataclass

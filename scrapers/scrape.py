@@ -10,7 +10,7 @@ from data.json import write_json, write_json_invidivual, write_json_list
 from ntu.course_module import get_course_categories, scrape_category_modules
 from ntu.exam import get_exam_plan_num, insert_module_exams
 from ntu.staff import get_all_staff, get_metadata
-from util.helper import get_sem_title
+from util.helper import get_sem_title, merge_venue
 from util.typesense import init_typesense, typesense_upsert
 
 FS_COLL_SEM = "semester"
@@ -64,7 +64,7 @@ async def scrape_modules(force_semester: str):
 
     semester_prepend = f"{semester}_"
 
-    typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
+    # typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
 
     sem_obj = {
         "active": True,
@@ -73,10 +73,16 @@ async def scrape_modules(force_semester: str):
         "year": semester.split(";")[0],
         "semester_num": semester.split(";")[1],
     }
-    await write_fs(FS_COLL_SEM, semester, sem_obj)
-    await write_fs_list(FS_COLL_MODULE, "code", modules, semester_prepend)
-    await write_fs_list(FS_COLL_COURSE_CATEGORY, "code", categories, semester_prepend)
-    await write_fs_list(FS_COLL_VENUE, "name", venues, override=False)
+    # await write_fs(FS_COLL_SEM, semester, sem_obj)
+    # await write_fs_list(
+    #     FS_COLL_MODULE, "code", modules, doc_id_prepend=semester_prepend
+    # )
+    # await write_fs_list(
+    #     FS_COLL_COURSE_CATEGORY, "code", categories, doc_id_prepend=semester_prepend
+    # )
+    await write_fs_list(
+        FS_COLL_VENUE, "name", venues, override=False, override_func=merge_venue
+    )
 
 
 async def scrape_staff():
@@ -104,7 +110,7 @@ async def scrape_staff():
 
 async def scrape(force_semester: str):
     await scrape_modules(force_semester)
-    await scrape_staff()
+    # await scrape_staff()
 
 
 if __name__ == "__main__":
