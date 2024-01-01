@@ -3,7 +3,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from requests import Session
 
-from util.helper import session_post_cache
+from util.helper import get_sem_title, session_post_cache
 from util.structs import Exam, Module
 
 EXAM_SEMSTER_PAGE = "https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.MainSubmit"
@@ -12,21 +12,24 @@ EXAM_TIMETABLE_PAGE = "https://wis.ntu.edu.sg/webexe/owa/exam_timetable_und.Get_
 OPT_GENERAL = 1
 
 
-def get_exam_plan_num(sess: Session) -> str:
+def get_exam_plan_num(sess: Session, semester: str) -> str:
     """Retrieves latest exam plan number.
 
     Args:
         sess (Session): Persistent session of scraper.
+        semester (str): Semester in YYYY;S format.
 
     Returns:
         str: Latest exam plan number.
     """
+    sem_title = get_sem_title(semester, False)
 
     data = {"p_opt": OPT_GENERAL, "p_type": "UE", "bOption": "Next"}
     res = session_post_cache(sess, EXAM_SEMSTER_PAGE, data)
 
     soup = BeautifulSoup(res.text, "lxml")
-    plan_num = soup.find_all("input", {"name": "p_plan_no"})[-1]
+    sem_options = soup.find_all("input", {"name": "p_plan_no"})
+    plan_num = next((s for s in sem_options if s.next.strip() == sem_title), None)
 
     return plan_num["value"]
 

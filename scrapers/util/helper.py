@@ -1,5 +1,6 @@
 import os
 import pickle
+import re
 import time
 from typing import Any, cast
 
@@ -165,3 +166,14 @@ def merge_dicts_sets(dict1: dict[str, set], dict2: dict[str, set]):
         else:
             merged[key] = value
     return merged
+
+
+def get_sem_title(semester: str, tidy: bool) -> str:
+    pattern = r"\d{2}(\d{2});(\d{1})"
+    matches = re.search(pattern, semester)
+    ay, sem_num = int(matches.group(1)), matches.group(2)
+
+    if tidy:
+        return f"AY 20{ay}/{ay+1} Semester {sem_num}"
+    else:
+        return f"AY20{ay}-{ay+1} SEM {sem_num}"

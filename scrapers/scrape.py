@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import platform
 
@@ -6,13 +7,10 @@ from requests.adapters import HTTPAdapter, Retry
 
 from data.firestore import write_fs, write_fs_list
 from data.json import write_json, write_json_invidivual, write_json_list
-from ntu.course_module import (
-    get_course_categories,
-    get_sem_title,
-    scrape_category_modules,
-)
+from ntu.course_module import get_course_categories, scrape_category_modules
 from ntu.exam import get_exam_plan_num, insert_module_exams
 from ntu.staff import get_all_staff, get_metadata
+from util.helper import get_sem_title
 from util.typesense import init_typesense, typesense_upsert
 
 FS_COLL_SEM = "semester"
@@ -40,7 +38,7 @@ sess = requests.Session()
 sess.mount("https://", HTTPAdapter(max_retries=retries))
 
 
-async def scrape_modules():
+async def scrape_modules(force_semester: str):
     """
     Steps:
     - Gets all course categories from the class schedule page.
@@ -51,16 +49,18 @@ async def scrape_modules():
     - Uploads course categories, modules and venues onto firebase.
     """
 
-    semester, categories = get_course_categories(sess)
+    semester, categories = get_course_categories(sess, force_semester)
     categories, modules, venues = scrape_category_modules(sess, semester, categories)
-    exam_plan_num = get_exam_plan_num(sess)
+    exam_plan_num = get_exam_plan_num(sess, semester)
     modules = insert_module_exams(sess, semester, exam_plan_num, modules)
 
     write_json_invidivual(modules, f"{semester}/modules", "code")
-    write_json_list(modules, "modulesBasic", ["name_pretty", "code"], "code")
-    write_json_list(categories, "courseCategories")
-    write_json_list(venues, "venues")
-    write_json([venue.name for venue in venues], "venuesBasic")
+    write_json_list(
+        modules, f"{semester}/modulesBasic", ["name_pretty", "code"], "code"
+    )
+    write_json_list(categories, f"{semester}/courseCategories")
+    write_json_list(venues, f"{semester}/venues")
+    write_json([venue.name for venue in venues], f"{semester}/venuesBasic")
 
     semester_prepend = f"{semester}_"
 
@@ -69,7 +69,7 @@ async def scrape_modules():
     sem_obj = {
         "active": True,
         "id": semester,
-        "title": get_sem_title(semester),
+        "title": get_sem_title(semester, True),
         "year": semester.split(";")[0],
         "semester_num": semester.split(";")[1],
     }
@@ -102,15 +102,30 @@ async def scrape_staff():
     await write_fs_list(FS_COLL_STAFF, "email", staff_list)
 
 
-async def scrape():
-    await scrape_modules()
+async def scrape(force_semester: str):
+    await scrape_modules(force_semester)
     await scrape_staff()
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Scrape modules for a specific semester."
+    )
+    parser.add_argument(
+        "-s",
+        "--semester",
+        metavar="semester",
+        type=str,
+        help="Semester in YYYY;S format.",
+        nargs="?",
+        default="",
+    )
+    args = parser.parse_args()
+    semester = args.semester
+
     if platform.system() == "Windows":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
     init_typesense()
 
-    asyncio.run(scrape())
+    asyncio.run(scrape(semester))
