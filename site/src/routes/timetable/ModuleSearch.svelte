@@ -14,8 +14,8 @@
     function handleSearch() {
         moduleResults = modules.filter((mod) => {
             return (
-                !$timetableModules.some((tm) => tm.mutex.includes(mod.code)) &&
-                !$timetableModules.some((tm) => tm.code === mod.code) &&
+                !$timetableModules[$activeSemester.id].some((tm) => tm.mutex.includes(mod.code)) &&
+                !$timetableModules[$activeSemester.id].some((tm) => tm.code === mod.code) &&
                 (mod.code.toUpperCase().includes(searchValue.toUpperCase()) ||
                     mod.name_pretty.toUpperCase().includes(searchValue.toUpperCase()))
             );
@@ -28,7 +28,10 @@
         const newModule = await fetchModule(moduleCode);
 
         if (newModule !== -1) {
-            $timetableModules = [...$timetableModules, newModule];
+            $timetableModules[$activeSemester.id] = [
+                ...$timetableModules[$activeSemester.id],
+                newModule
+            ];
         } else {
             console.error(`Failed to retrieve module ${moduleCode}`);
         }
@@ -37,7 +40,7 @@
     }
 
     async function fetchModule(moduleCode: string) {
-        if ($timetableModules.some((tm) => tm.code === moduleCode)) return -1;
+        if ($timetableModules[$activeSemester.id].some((tm) => tm.code === moduleCode)) return -1;
 
         const res = await fetch('/search/firebase/module', {
             method: 'POST',
