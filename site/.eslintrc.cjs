@@ -12,7 +12,8 @@ module.exports = {
     parserOptions: {
         sourceType: 'module',
         ecmaVersion: 2020,
-        extraFileExtensions: ['.svelte']
+        extraFileExtensions: ['.svelte'],
+        tsconfigRootDir: __dirname,
     },
     env: {
         browser: true,
@@ -30,5 +31,5 @@ module.exports = {
     ],
     globals: {
         NodeJS: true
-    }
+    },
 };
