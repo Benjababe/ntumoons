@@ -1,6 +1,6 @@
 <script lang="ts">
     import Cross from '$lib/assets/images/Cross.svelte';
-    import { semester } from '$lib/stores';
+    import { activeSemester } from '$lib/stores';
     import { t } from '$lib/translations';
     import type { DispatchRemoveModule, DispatchUpdateIndex } from '$lib/types/Dispatch';
     import type { Module } from '$lib/types/Firebase';
@@ -33,7 +33,7 @@
         </button>
     </div>
     <a
-        href="/modules/{$semester.year}/{$semester.semester_num}/{mod.code}"
+        href="/modules/{$activeSemester.year}/{$activeSemester.semester_num}/{mod.code}"
         class="capitalize text-primary"
     >
         {mod.code}

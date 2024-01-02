@@ -1,0 +1,3686 @@
+[
+    {
+        "name_pretty": "Decision Making With Programming & Analytics",
+        "code": "AB0403"
+    },
+    {
+        "name_pretty": "Communication Management Strategies",
+        "code": "AB0602"
+    },
+    {
+        "name_pretty": "Financial Management",
+        "code": "AB1201"
+    },
+    {
+        "name_pretty": "Statistics & Analysis",
+        "code": "AB1202"
+    },
+    {
+        "name_pretty": "Business Law",
+        "code": "AB1301"
+    },
+    {
+        "name_pretty": "Intermediate Excel",
+        "code": "AB1403"
+    },
+    {
+        "name_pretty": "Marketing",
+        "code": "AB1501"
+    },
+    {
+        "name_pretty": "Organisational Behaviour & Design",
+        "code": "AB1601"
+    },
+    {
+        "name_pretty": "Careers Future Forward",
+        "code": "AB2008"
+    },
+    {
+        "name_pretty": "Strategic Management",
+        "code": "AB3601"
+    },
+    {
+        "name_pretty": "Strategic Management",
+        "code": "AB3602"
+    },
+    {
+        "name_pretty": "Negotiate To Get What You Want: Strategy & Practice",
+        "code": "AB5601"
+    },
+    {
+        "name_pretty": "Leadership In Organisations",
+        "code": "AB5602"
+    },
+    {
+        "name_pretty": "Accounting I",
+        "code": "AC1103"
+    },
+    {
+        "name_pretty": "Accounting Ii",
+        "code": "AC1104"
+    },
+    {
+        "name_pretty": "Accounting Recognition & Measurement",
+        "code": "AC2101"
+    },
+    {
+        "name_pretty": "Assurance & Auditing",
+        "code": "AC2104"
+    },
+    {
+        "name_pretty": "Accounting For Decision Making & Control",
+        "code": "AC2105"
+    },
+    {
+        "name_pretty": "Principles Of Taxation",
+        "code": "AC2301"
+    },
+    {
+        "name_pretty": "Company Law & Corporate Governance",
+        "code": "AC2302"
+    },
+    {
+        "name_pretty": "Accounting Information Systems",
+        "code": "AC2401"
+    },
+    {
+        "name_pretty": "Risk Reporting & Analysis",
+        "code": "AC3102"
+    },
+    {
+        "name_pretty": "Accounting Analysis & Valuation",
+        "code": "AC3103"
+    },
+    {
+        "name_pretty": "Enterprise Risk Management & Sustainability",
+        "code": "AC3104"
+    },
+    {
+        "name_pretty": "Financial Accounting",
+        "code": "AD1101"
+    },
+    {
+        "name_pretty": "Financial Accounting",
+        "code": "AD1102"
+    },
+    {
+        "name_pretty": "Management Accounting",
+        "code": "AD2101"
+    },
+    {
+        "name_pretty": "Managerial Accounting",
+        "code": "AD2102"
+    },
+    {
+        "name_pretty": "Mathematics Of Finance",
+        "code": "BA2202"
+    },
+    {
+        "name_pretty": "Statistical Modelling",
+        "code": "BA2203"
+    },
+    {
+        "name_pretty": "Life Contingencies & Demography",
+        "code": "BA3201"
+    },
+    {
+        "name_pretty": "Actuarial Statistics",
+        "code": "BA3202"
+    },
+    {
+        "name_pretty": "Designing & Developing Databases",
+        "code": "BC2402"
+    },
+    {
+        "name_pretty": "Analytics I: Visual & Predictive Techniques",
+        "code": "BC2406"
+    },
+    {
+        "name_pretty": "Lean Operations & Analytics",
+        "code": "BC3405"
+    },
+    {
+        "name_pretty": "Ai In Accounting & Finance",
+        "code": "BC3409"
+    },
+    {
+        "name_pretty": "Lean Operations & Analytics",
+        "code": "BC3411"
+    },
+    {
+        "name_pretty": "Ai In Accounting & Finance",
+        "code": "BC3415"
+    },
+    {
+        "name_pretty": "Business Operations & Process",
+        "code": "BE1401"
+    },
+    {
+        "name_pretty": "Business Operations & Process",
+        "code": "BE1402"
+    },
+    {
+        "name_pretty": "International Business Environment",
+        "code": "BE2501"
+    },
+    {
+        "name_pretty": "Management Principles, Skills & Competencies",
+        "code": "BE2601"
+    },
+    {
+        "name_pretty": "Management Principles, Skills & Competencies",
+        "code": "BE2602"
+    },
+    {
+        "name_pretty": "Entrepreneurial Finance",
+        "code": "BE3201"
+    },
+    {
+        "name_pretty": "Ethics In The Investment Profession",
+        "code": "BF2100"
+    },
+    {
+        "name_pretty": "Investments",
+        "code": "BF2201"
+    },
+    {
+        "name_pretty": "Wealth Management",
+        "code": "BF2206"
+    },
+    {
+        "name_pretty": "Derivative Securities",
+        "code": "BF2209"
+    },
+    {
+        "name_pretty": "Introduction To Compliance",
+        "code": "BF2213"
+    },
+    {
+        "name_pretty": "Fintech In Investment Management",
+        "code": "BF2214"
+    },
+    {
+        "name_pretty": "Trade Incoterms & Ship Chartering",
+        "code": "BF2216"
+    },
+    {
+        "name_pretty": "Commodity Markets",
+        "code": "BF2218"
+    },
+    {
+        "name_pretty": "Investments",
+        "code": "BF2219"
+    },
+    {
+        "name_pretty": "Wealth Management",
+        "code": "BF2220"
+    },
+    {
+        "name_pretty": "Derivative Securities & Hedging Strategies",
+        "code": "BF2221"
+    },
+    {
+        "name_pretty": "Introduction To Compliance",
+        "code": "BF2222"
+    },
+    {
+        "name_pretty": "Fintech In Investment Management",
+        "code": "BF2223"
+    },
+    {
+        "name_pretty": "Relationship Management",
+        "code": "BF2225"
+    },
+    {
+        "name_pretty": "Trade Incoterms & Ship Chartering",
+        "code": "BF2226"
+    },
+    {
+        "name_pretty": "Commodity Markets",
+        "code": "BF2227"
+    },
+    {
+        "name_pretty": "Sustainable Finance",
+        "code": "BF2228"
+    },
+    {
+        "name_pretty": "Global Financial Markets & Institutions",
+        "code": "BF2229"
+    },
+    {
+        "name_pretty": "International Tax & Trading Law",
+        "code": "BF2302"
+    },
+    {
+        "name_pretty": "Corporate Finance & Strategy",
+        "code": "BF3201"
+    },
+    {
+        "name_pretty": "Fixed Income Securities",
+        "code": "BF3202"
+    },
+    {
+        "name_pretty": "Equity Securities",
+        "code": "BF3203"
+    },
+    {
+        "name_pretty": "Financial Modelling",
+        "code": "BF3204"
+    },
+    {
+        "name_pretty": "Alternative Investments",
+        "code": "BF3207"
+    },
+    {
+        "name_pretty": "Trade, Structured & Supply Chain Finance",
+        "code": "BF3212"
+    },
+    {
+        "name_pretty": "Enterprise Risk Management In Commodity Markets",
+        "code": "BF3213"
+    },
+    {
+        "name_pretty": "Commodities Trading",
+        "code": "BF3214"
+    },
+    {
+        "name_pretty": "Corporate Finance & Strategy",
+        "code": "BF3215"
+    },
+    {
+        "name_pretty": "Fixed Income Securities",
+        "code": "BF3216"
+    },
+    {
+        "name_pretty": "Equity Valuation",
+        "code": "BF3217"
+    },
+    {
+        "name_pretty": "Financial Modelling",
+        "code": "BF3218"
+    },
+    {
+        "name_pretty": "Alternative Investments",
+        "code": "BF3219"
+    },
+    {
+        "name_pretty": "Strategic Management In Commodity Market",
+        "code": "BF3226"
+    },
+    {
+        "name_pretty": "Cellular & Molecular Biology For Bioengineers",
+        "code": "BG1141"
+    },
+    {
+        "name_pretty": "Anatomy & Physiology",
+        "code": "BG2119"
+    },
+    {
+        "name_pretty": "Biomaterials",
+        "code": "BG2131"
+    },
+    {
+        "name_pretty": "Biological Thermodynamics",
+        "code": "BG2142"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking",
+        "code": "BG2211"
+    },
+    {
+        "name_pretty": "Control In Biosystems",
+        "code": "BG3102"
+    },
+    {
+        "name_pretty": "Biomedical Imaging",
+        "code": "BG3104"
+    },
+    {
+        "name_pretty": "Biomedical Instrumentation",
+        "code": "BG3105"
+    },
+    {
+        "name_pretty": "Cardiovascular Engineering",
+        "code": "BG3112"
+    },
+    {
+        "name_pretty": "Medical Device Design",
+        "code": "BG4102"
+    },
+    {
+        "name_pretty": "Biomedical Project Design &  Management",
+        "code": "BG4103"
+    },
+    {
+        "name_pretty": "Medical Device Design",
+        "code": "BG4122"
+    },
+    {
+        "name_pretty": "Biomedical Nanotechnology",
+        "code": "BG4215"
+    },
+    {
+        "name_pretty": "Advanced Biomaterials",
+        "code": "BG4231"
+    },
+    {
+        "name_pretty": "Fundamentals Of Intellectual Property In Biomedical Engineer",
+        "code": "BG4341"
+    },
+    {
+        "name_pretty": "Strategic Hr Management & Consulting",
+        "code": "BH2601"
+    },
+    {
+        "name_pretty": "Talent Sourcing & Acquisition",
+        "code": "BH2603"
+    },
+    {
+        "name_pretty": "Strategic Human Resource Management & Consulting",
+        "code": "BH2605"
+    },
+    {
+        "name_pretty": "Talent Sourcing & Acquisition",
+        "code": "BH2607"
+    },
+    {
+        "name_pretty": "Talent Development & Management",
+        "code": "BH3601"
+    },
+    {
+        "name_pretty": "Cultural Intelligence At Work",
+        "code": "BH3603"
+    },
+    {
+        "name_pretty": "Managing Organizational Change",
+        "code": "BH3604"
+    },
+    {
+        "name_pretty": "Talent Development & Management",
+        "code": "BH3605"
+    },
+    {
+        "name_pretty": "Negotiation & Dispute Resolution",
+        "code": "BL5304"
+    },
+    {
+        "name_pretty": "Market Behaviour",
+        "code": "BM2501"
+    },
+    {
+        "name_pretty": "Market Intelligence",
+        "code": "BM2502"
+    },
+    {
+        "name_pretty": "Integrated Marketing Communications",
+        "code": "BM2504"
+    },
+    {
+        "name_pretty": "Digital Marketing:Connecting With Customers In Today'S World",
+        "code": "BM2506"
+    },
+    {
+        "name_pretty": "Marketing Analytics",
+        "code": "BM2507"
+    },
+    {
+        "name_pretty": "Consumer Insights",
+        "code": "BM2509"
+    },
+    {
+        "name_pretty": "Market Intelligence",
+        "code": "BM2510"
+    },
+    {
+        "name_pretty": "Integrated Marketing Communications",
+        "code": "BM2512"
+    },
+    {
+        "name_pretty": "Digital Marketing",
+        "code": "BM2514"
+    },
+    {
+        "name_pretty": "Marketing Analytics",
+        "code": "BM2515"
+    },
+    {
+        "name_pretty": "Strategic Brand Management",
+        "code": "BM3506"
+    },
+    {
+        "name_pretty": "Strategic Brand Management",
+        "code": "BM3509"
+    },
+    {
+        "name_pretty": "Quantitative Analysis",
+        "code": "BR2207"
+    },
+    {
+        "name_pretty": "Foundation Of Risk Management",
+        "code": "BR2208"
+    },
+    {
+        "name_pretty": "Operational Risk Management",
+        "code": "BR3208"
+    },
+    {
+        "name_pretty": "Operational Risk & Resiliency",
+        "code": "BR3211"
+    },
+    {
+        "name_pretty": "Valuation & Risk Models",
+        "code": "BR3213"
+    },
+    {
+        "name_pretty": "Introduction To Data Science",
+        "code": "BS0004"
+    },
+    {
+        "name_pretty": "Introductory Biology",
+        "code": "BS1001"
+    },
+    {
+        "name_pretty": "Biostatistics",
+        "code": "BS1008"
+    },
+    {
+        "name_pretty": "Foundations Of Chemistry I",
+        "code": "BS1012"
+    },
+    {
+        "name_pretty": "Physiology",
+        "code": "BS1016"
+    },
+    {
+        "name_pretty": "Basics Of Tcm",
+        "code": "BS1101"
+    },
+    {
+        "name_pretty": "Microbiology",
+        "code": "BS2002"
+    },
+    {
+        "name_pretty": "Biochemistry Ii",
+        "code": "BS2003"
+    },
+    {
+        "name_pretty": "Equations Of Life",
+        "code": "BS2011"
+    },
+    {
+        "name_pretty": "Regulatory Control Of Healthcare Products & Medical Devices",
+        "code": "BS2023"
+    },
+    {
+        "name_pretty": "Evolution In Health & Disease",
+        "code": "BS2024"
+    },
+    {
+        "name_pretty": "Instrumentation For The Analysis Of Biological Systems",
+        "code": "BS2028"
+    },
+    {
+        "name_pretty": "Molecular & Cell Biology Techniques Level 2",
+        "code": "BS2100"
+    },
+    {
+        "name_pretty": "Anatomy",
+        "code": "BS2101"
+    },
+    {
+        "name_pretty": "Chinese Materia Medica",
+        "code": "BS2102"
+    },
+    {
+        "name_pretty": "Tcm Diagnostics",
+        "code": "BS2103"
+    },
+    {
+        "name_pretty": "Developmental Biology",
+        "code": "BS3003"
+    },
+    {
+        "name_pretty": "Cancer Biology & Therapy",
+        "code": "BS3004"
+    },
+    {
+        "name_pretty": "Plant Biology",
+        "code": "BS3018"
+    },
+    {
+        "name_pretty": "Bioimaging Techniques In Em",
+        "code": "BS3021"
+    },
+    {
+        "name_pretty": "Light & Biomolecule Behavior In Health & Disease",
+        "code": "BS3027"
+    },
+    {
+        "name_pretty": "Virology",
+        "code": "BS3037"
+    },
+    {
+        "name_pretty": "Intellectual Property Rights Related To Biobusiness",
+        "code": "BS3038"
+    },
+    {
+        "name_pretty": "Treatise On Exogenous Febrile Diseases",
+        "code": "BS3101"
+    },
+    {
+        "name_pretty": "Tcm Internship Ii",
+        "code": "BS3103"
+    },
+    {
+        "name_pretty": "Acupuncture & Moxibustion",
+        "code": "BS3108"
+    },
+    {
+        "name_pretty": "Intellectual Property Rights Rel To Biobusiness & Their Appn",
+        "code": "BS3201"
+    },
+    {
+        "name_pretty": "Commercialization Of Molecular & Cell Biology Techniques",
+        "code": "BS3202"
+    },
+    {
+        "name_pretty": "Uaeb Ii - Effect Of Anti-Mitotic Drugs On Cancer Cells",
+        "code": "BS3338"
+    },
+    {
+        "name_pretty": "Synthetic Biology",
+        "code": "BS4010"
+    },
+    {
+        "name_pretty": "Molecular Basis Of Diseases",
+        "code": "BS4014"
+    },
+    {
+        "name_pretty": "Plant Biotechnology",
+        "code": "BS4015"
+    },
+    {
+        "name_pretty": "High-Throughput Bioinformatics",
+        "code": "BS4017"
+    },
+    {
+        "name_pretty": "Services Operations Management",
+        "code": "BT2403"
+    },
+    {
+        "name_pretty": "Services Operations Management",
+        "code": "BT2404"
+    },
+    {
+        "name_pretty": "Accounting: A User Perspective",
+        "code": "BU5101"
+    },
+    {
+        "name_pretty": "Fundamentals Of Management",
+        "code": "BU5601"
+    },
+    {
+        "name_pretty": "Cultural Intelligence: How To Be An Explorer Of The World",
+        "code": "BU5641"
+    },
+    {
+        "name_pretty": "Introduction To Chemical & Biomedical Engineering",
+        "code": "CB1102"
+    },
+    {
+        "name_pretty": "Introduction To Biomolecular Engineering",
+        "code": "CB1131"
+    },
+    {
+        "name_pretty": "Inquiry & Communication In An Interdisciplinary World",
+        "code": "CC0001"
+    },
+    {
+        "name_pretty": "Navigating The Digital World",
+        "code": "CC0002"
+    },
+    {
+        "name_pretty": "Ethics & Civics In A Multicultural World",
+        "code": "CC0003"
+    },
+    {
+        "name_pretty": "Healthy Living & Wellbeing",
+        "code": "CC0005"
+    },
+    {
+        "name_pretty": "Sustainability: Society, Economy & Environment",
+        "code": "CC0006"
+    },
+    {
+        "name_pretty": "Science & Technology For Humanity",
+        "code": "CC0007"
+    },
+    {
+        "name_pretty": "Linear Algebra For Computing",
+        "code": "CE1104"
+    },
+    {
+        "name_pretty": "Digital Systems Design",
+        "code": "CE2003"
+    },
+    {
+        "name_pretty": "Software Engineering",
+        "code": "CE2006"
+    },
+    {
+        "name_pretty": "Probability & Statistics For Computing",
+        "code": "CE2100"
+    },
+    {
+        "name_pretty": "Advanced Computer Architecture",
+        "code": "CE3001"
+    },
+    {
+        "name_pretty": "Sensors, Interfacing & Digital Control",
+        "code": "CE3002"
+    },
+    {
+        "name_pretty": "Computer Network",
+        "code": "CE3005"
+    },
+    {
+        "name_pretty": "Signals, Systems & Transforms",
+        "code": "CE3102"
+    },
+    {
+        "name_pretty": "Embedded Programming",
+        "code": "CE3103"
+    },
+    {
+        "name_pretty": "Computer Vision",
+        "code": "CE4003"
+    },
+    {
+        "name_pretty": "Applied Cryptography",
+        "code": "CE4010"
+    },
+    {
+        "name_pretty": "Advanced Topics In Algorithms",
+        "code": "CE4016"
+    },
+    {
+        "name_pretty": "Wireless & Mobile Networks",
+        "code": "CE4022"
+    },
+    {
+        "name_pretty": "Advanced Computer Networks",
+        "code": "CE4023"
+    },
+    {
+        "name_pretty": "Data Analytics & Mining",
+        "code": "CE4032"
+    },
+    {
+        "name_pretty": "Machine Learning",
+        "code": "CE4041"
+    },
+    {
+        "name_pretty": "Neural Network & Deep Learning",
+        "code": "CE4042"
+    },
+    {
+        "name_pretty": "Natural Language Processing",
+        "code": "CE4045"
+    },
+    {
+        "name_pretty": "Computer Security",
+        "code": "CE4062"
+    },
+    {
+        "name_pretty": "Security Management",
+        "code": "CE4064"
+    },
+    {
+        "name_pretty": "Cyber Threat Intelligence",
+        "code": "CE4070"
+    },
+    {
+        "name_pretty": "Blockchain Technology",
+        "code": "CE4153"
+    },
+    {
+        "name_pretty": "Engineering Statistics",
+        "code": "CH2010"
+    },
+    {
+        "name_pretty": "Fluid Systems",
+        "code": "CH2103"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking",
+        "code": "CH2107"
+    },
+    {
+        "name_pretty": "Thermodynamics",
+        "code": "CH2108"
+    },
+    {
+        "name_pretty": "Biochemical Engineering",
+        "code": "CH3104"
+    },
+    {
+        "name_pretty": "Decision Tools For Engineering Business",
+        "code": "CH3109"
+    },
+    {
+        "name_pretty": "Process Control & Dynamics",
+        "code": "CH3111"
+    },
+    {
+        "name_pretty": "Chemical, Biological & Plant Safety",
+        "code": "CH3121"
+    },
+    {
+        "name_pretty": "Unit Operations: Fluid-Fluid Separation",
+        "code": "CH3140"
+    },
+    {
+        "name_pretty": "Project Management For Engineers",
+        "code": "CH4102"
+    },
+    {
+        "name_pretty": "Formulation Of Active Pharmaceutical Ingredients Dosage Form",
+        "code": "CH4106"
+    },
+    {
+        "name_pretty": "Numerical Methods & Data Analytics",
+        "code": "CH4244"
+    },
+    {
+        "name_pretty": "Bioanalytical Techniques",
+        "code": "CH4306"
+    },
+    {
+        "name_pretty": "Fundamentals Of Intellectual Property In Chemical Eng",
+        "code": "CH4341"
+    },
+    {
+        "name_pretty": "Independent Research Project 1",
+        "code": "CH4702"
+    },
+    {
+        "name_pretty": "Independent Research Project 2",
+        "code": "CH4703"
+    },
+    {
+        "name_pretty": "Final Year Design Project",
+        "code": "CH4801"
+    },
+    {
+        "name_pretty": "Food Industry Seminar Series",
+        "code": "CH5221"
+    },
+    {
+        "name_pretty": "Future Foods - Introduction To Advanced Meat Alternatives",
+        "code": "CH5222"
+    },
+    {
+        "name_pretty": "Foundations Of Chemistry I",
+        "code": "CM1001"
+    },
+    {
+        "name_pretty": "Analytical Chemistry",
+        "code": "CM2011"
+    },
+    {
+        "name_pretty": "Inorganic & Bioinorganic Chemistry",
+        "code": "CM2021"
+    },
+    {
+        "name_pretty": "Chemistry & Biological Chemistry Laboratory 1",
+        "code": "CM2061"
+    },
+    {
+        "name_pretty": "Chemical Spectroscopy & Applications",
+        "code": "CM3011"
+    },
+    {
+        "name_pretty": "Organometallic Chemistry",
+        "code": "CM3021"
+    },
+    {
+        "name_pretty": "Organic Reaction Mechanisms & Synthesis",
+        "code": "CM3031"
+    },
+    {
+        "name_pretty": "Physical & Biophysical Chemistry 2",
+        "code": "CM3041"
+    },
+    {
+        "name_pretty": "Chemistry & Biological Chemistry Laboratory 4",
+        "code": "CM3062"
+    },
+    {
+        "name_pretty": "Structural Determination",
+        "code": "CM4012"
+    },
+    {
+        "name_pretty": "Biomedical Imaging & Sensing",
+        "code": "CM4017"
+    },
+    {
+        "name_pretty": "Molecular Modelling:Principles & Applications",
+        "code": "CM4043"
+    },
+    {
+        "name_pretty": "Artificial Intelligence In Chemistry",
+        "code": "CM4044"
+    },
+    {
+        "name_pretty": "Pharmaceutical Chemistry",
+        "code": "CM4053"
+    },
+    {
+        "name_pretty": "Polymer Chemistry",
+        "code": "CM4062"
+    },
+    {
+        "name_pretty": "Nanoscience & Nanotechnology",
+        "code": "CM4063"
+    },
+    {
+        "name_pretty": "Making Sense Of Big Data",
+        "code": "CS0102"
+    },
+    {
+        "name_pretty": "Foundations Of Communication Studies",
+        "code": "CS0201"
+    },
+    {
+        "name_pretty": "Basic Media Writing",
+        "code": "CS0204"
+    },
+    {
+        "name_pretty": "Media Law, Ethics & Policy",
+        "code": "CS0209"
+    },
+    {
+        "name_pretty": "Fundamentals Of Research",
+        "code": "CS2008"
+    },
+    {
+        "name_pretty": "News Reporting & Writing",
+        "code": "CS2021"
+    },
+    {
+        "name_pretty": "Print & Digital Publications",
+        "code": "CS2023"
+    },
+    {
+        "name_pretty": "Web Design & Technologies",
+        "code": "CS2024"
+    },
+    {
+        "name_pretty": "Image & Sound Production",
+        "code": "CS2025"
+    },
+    {
+        "name_pretty": "Broadcast Journalism: Concepts &  Applications",
+        "code": "CS2029"
+    },
+    {
+        "name_pretty": "Audio In Media",
+        "code": "CS2030"
+    },
+    {
+        "name_pretty": "Corporate Communications Management",
+        "code": "CS2033"
+    },
+    {
+        "name_pretty": "Photojournalism",
+        "code": "CS2044"
+    },
+    {
+        "name_pretty": "Organisational Communication",
+        "code": "CS2055"
+    },
+    {
+        "name_pretty": "Integrated Marketing Communication",
+        "code": "CS2058"
+    },
+    {
+        "name_pretty": "Public Relations Writing",
+        "code": "CS2101"
+    },
+    {
+        "name_pretty": "Foundation Of Information Analytics",
+        "code": "CS2400"
+    },
+    {
+        "name_pretty": "Telling Stories With Data",
+        "code": "CS2403"
+    },
+    {
+        "name_pretty": "Data Mining",
+        "code": "CS2405"
+    },
+    {
+        "name_pretty": "Specialised Journalism:Business & Economics",
+        "code": "CS4018"
+    },
+    {
+        "name_pretty": "Social Media Mining",
+        "code": "CS4022"
+    },
+    {
+        "name_pretty": "Advanced Photojournalism",
+        "code": "CS4023"
+    },
+    {
+        "name_pretty": "Writing For Cinema & Tv",
+        "code": "CS4024"
+    },
+    {
+        "name_pretty": "Documentary Production: Concepts & Applications",
+        "code": "CS4026"
+    },
+    {
+        "name_pretty": "Advertising Creativity & Copywriting",
+        "code": "CS4029"
+    },
+    {
+        "name_pretty": "Crisis Management",
+        "code": "CS4030"
+    },
+    {
+        "name_pretty": "Communication Campaigns",
+        "code": "CS4032"
+    },
+    {
+        "name_pretty": "Audience Research Methods",
+        "code": "CS4037"
+    },
+    {
+        "name_pretty": "Advanced Research Methods",
+        "code": "CS4042"
+    },
+    {
+        "name_pretty": "Specialised Journalism:Science & Health  Reporting",
+        "code": "CS4043"
+    },
+    {
+        "name_pretty": "Bayesian Data Analysis & Its Applications",
+        "code": "CS4050"
+    },
+    {
+        "name_pretty": "Popular Cinema",
+        "code": "CS4053"
+    },
+    {
+        "name_pretty": "Public Opinion",
+        "code": "CS4059"
+    },
+    {
+        "name_pretty": "Global Media Issues &  Policy",
+        "code": "CS4061"
+    },
+    {
+        "name_pretty": "Consumer Behavior",
+        "code": "CS4074"
+    },
+    {
+        "name_pretty": "Selected Topics In Pr:Evaluating & Producing Campaign Result",
+        "code": "CS4075"
+    },
+    {
+        "name_pretty": "Going Overseas For Advanced Reporting",
+        "code": "CS4090"
+    },
+    {
+        "name_pretty": "New Media &  Society",
+        "code": "CS4092"
+    },
+    {
+        "name_pretty": "Overseas Film Festival",
+        "code": "CS4093"
+    },
+    {
+        "name_pretty": "Health Communication",
+        "code": "CS4150"
+    },
+    {
+        "name_pretty": "Impression Management & Self-Presentation Online",
+        "code": "CS4196"
+    },
+    {
+        "name_pretty": "War & Cinema",
+        "code": "CS4197"
+    },
+    {
+        "name_pretty": "Effects Of Virtual Reality Technologies",
+        "code": "CS4267"
+    },
+    {
+        "name_pretty": "Promoting Sustainability",
+        "code": "CS4311"
+    },
+    {
+        "name_pretty": "Programming In Python",
+        "code": "CS4313"
+    },
+    {
+        "name_pretty": "Social Media, Self & Society",
+        "code": "CS4315"
+    },
+    {
+        "name_pretty": "Performative Documentary",
+        "code": "CS4317"
+    },
+    {
+        "name_pretty": "Automation & Macro-Communication",
+        "code": "CS4318"
+    },
+    {
+        "name_pretty": "Telling The Story In Multimedia",
+        "code": "CS4319"
+    },
+    {
+        "name_pretty": "Financial Communication: Media, Fintech, & Financial Markets",
+        "code": "CS4322"
+    },
+    {
+        "name_pretty": "Introduction To Data Science & Artificial Intelligence",
+        "code": "CV0003"
+    },
+    {
+        "name_pretty": "Mechanics Of Materials",
+        "code": "CV1011"
+    },
+    {
+        "name_pretty": "Fluid Mechanics",
+        "code": "CV1012"
+    },
+    {
+        "name_pretty": "Structural Analysis I",
+        "code": "CV2011"
+    },
+    {
+        "name_pretty": "Engineering Geology & Soil Mechanics",
+        "code": "CV2013"
+    },
+    {
+        "name_pretty": "Civil Engineering Laboratory A",
+        "code": "CV2711"
+    },
+    {
+        "name_pretty": "Reinforced Concrete Design",
+        "code": "CV3011"
+    },
+    {
+        "name_pretty": "Foundation Engineering",
+        "code": "CV3013"
+    },
+    {
+        "name_pretty": "Transportation Engineering",
+        "code": "CV3014"
+    },
+    {
+        "name_pretty": "Urban Water Circularity",
+        "code": "CV3017"
+    },
+    {
+        "name_pretty": "Project Planning & Management",
+        "code": "CV4011"
+    },
+    {
+        "name_pretty": "Project Planning & Management",
+        "code": "CV4012"
+    },
+    {
+        "name_pretty": "Structural Analysis Iii",
+        "code": "CV4101"
+    },
+    {
+        "name_pretty": "Advanced Steel Design",
+        "code": "CV4102"
+    },
+    {
+        "name_pretty": "Engineering Economics & Finance",
+        "code": "CV4107"
+    },
+    {
+        "name_pretty": "Excavation & Retaining Walls",
+        "code": "CV4110"
+    },
+    {
+        "name_pretty": "Traffic Engineering",
+        "code": "CV4112"
+    },
+    {
+        "name_pretty": "Inland & Coastal Flood Management",
+        "code": "CV4121"
+    },
+    {
+        "name_pretty": "Seminars & Site Visits",
+        "code": "CV4711"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking & Programming",
+        "code": "CZ1103"
+    },
+    {
+        "name_pretty": "Digital Logic",
+        "code": "CZ1105"
+    },
+    {
+        "name_pretty": "Computer Organisation & Architecture",
+        "code": "CZ1106"
+    },
+    {
+        "name_pretty": "Data Structures & Algorithms",
+        "code": "CZ1107"
+    },
+    {
+        "name_pretty": "Physics For Computing",
+        "code": "CZ1113"
+    },
+    {
+        "name_pretty": "Object Oriented Design & Programming",
+        "code": "CZ2002"
+    },
+    {
+        "name_pretty": "Computer Graphics & Visualisation",
+        "code": "CZ2003"
+    },
+    {
+        "name_pretty": "Human Computer Interaction",
+        "code": "CZ2004"
+    },
+    {
+        "name_pretty": "Operating Systems",
+        "code": "CZ2005"
+    },
+    {
+        "name_pretty": "Software Engineering",
+        "code": "CZ2006"
+    },
+    {
+        "name_pretty": "Introduction To Databases",
+        "code": "CZ2007"
+    },
+    {
+        "name_pretty": "Probability & Statistics For Computing",
+        "code": "CZ2100"
+    },
+    {
+        "name_pretty": "Algorithm Design & Analysis",
+        "code": "CZ2101"
+    },
+    {
+        "name_pretty": "Advanced Computer Architecture",
+        "code": "CZ3001"
+    },
+    {
+        "name_pretty": "Advanced Software Engineering",
+        "code": "CZ3002"
+    },
+    {
+        "name_pretty": "Artificial Intelligence",
+        "code": "CZ3005"
+    },
+    {
+        "name_pretty": "Computer Network",
+        "code": "CZ3006"
+    },
+    {
+        "name_pretty": "Compiler Techniques",
+        "code": "CZ3007"
+    },
+    {
+        "name_pretty": "Computer Vision",
+        "code": "CZ4003"
+    },
+    {
+        "name_pretty": "Applied Cryptography",
+        "code": "CZ4010"
+    },
+    {
+        "name_pretty": "Advanced Topics In Algorithms",
+        "code": "CZ4016"
+    },
+    {
+        "name_pretty": "Wireless & Mobile Networks",
+        "code": "CZ4022"
+    },
+    {
+        "name_pretty": "Advanced Computer Networks",
+        "code": "CZ4023"
+    },
+    {
+        "name_pretty": "Database System Principles",
+        "code": "CZ4031"
+    },
+    {
+        "name_pretty": "Data Analytics & Mining",
+        "code": "CZ4032"
+    },
+    {
+        "name_pretty": "Machine Learning",
+        "code": "CZ4041"
+    },
+    {
+        "name_pretty": "Neural Network & Deep Learning",
+        "code": "CZ4042"
+    },
+    {
+        "name_pretty": "Natural Language Processing",
+        "code": "CZ4045"
+    },
+    {
+        "name_pretty": "Computer Security",
+        "code": "CZ4062"
+    },
+    {
+        "name_pretty": "Security Management",
+        "code": "CZ4064"
+    },
+    {
+        "name_pretty": "Cyber Threat Intelligence",
+        "code": "CZ4070"
+    },
+    {
+        "name_pretty": "Data Visualisation",
+        "code": "CZ4124"
+    },
+    {
+        "name_pretty": "Developing Data Products",
+        "code": "CZ4125"
+    },
+    {
+        "name_pretty": "Blockchain Technology",
+        "code": "CZ4153"
+    },
+    {
+        "name_pretty": "Thinking & Communicating Visually I",
+        "code": "DA1000"
+    },
+    {
+        "name_pretty": "Thinking & Communicating Visually Ii",
+        "code": "DA2002"
+    },
+    {
+        "name_pretty": "Exhibition Design",
+        "code": "DA2004"
+    },
+    {
+        "name_pretty": "Thinking & Communicating Visually Iii",
+        "code": "DA3000"
+    },
+    {
+        "name_pretty": "Information Visualization",
+        "code": "DD0003"
+    },
+    {
+        "name_pretty": "Introduction To The Histories Of Art I: Western Art History",
+        "code": "DD1003"
+    },
+    {
+        "name_pretty": "Visualization Of Cultural Heritage",
+        "code": "DD2013"
+    },
+    {
+        "name_pretty": "Research Methods In Art & Design",
+        "code": "DD3012"
+    },
+    {
+        "name_pretty": "History Of Design",
+        "code": "DD3016"
+    },
+    {
+        "name_pretty": "Media Art Interdisciplinary Seminar",
+        "code": "DD4005"
+    },
+    {
+        "name_pretty": "Design Art Interdisciplinary Seminar",
+        "code": "DD4006"
+    },
+    {
+        "name_pretty": "Digital Film Production I",
+        "code": "DF2000"
+    },
+    {
+        "name_pretty": "Survey Of Experimental Film",
+        "code": "DF2002"
+    },
+    {
+        "name_pretty": "Cinematography  I",
+        "code": "DF2003"
+    },
+    {
+        "name_pretty": "Writing For Film",
+        "code": "DF2005"
+    },
+    {
+        "name_pretty": "The Art Of Lighting",
+        "code": "DF2007"
+    },
+    {
+        "name_pretty": "History Of World Cinema",
+        "code": "DF2009"
+    },
+    {
+        "name_pretty": "Sound For Film",
+        "code": "DF2011"
+    },
+    {
+        "name_pretty": "Film Music In Theory & Practice",
+        "code": "DF2013"
+    },
+    {
+        "name_pretty": "Experimental Film Production",
+        "code": "DF3010"
+    },
+    {
+        "name_pretty": "Film Directing",
+        "code": "DF3012"
+    },
+    {
+        "name_pretty": "Producing For Film & Media",
+        "code": "DF3013"
+    },
+    {
+        "name_pretty": "Interactive I",
+        "code": "DM2000"
+    },
+    {
+        "name_pretty": "Programming For Interaction",
+        "code": "DM2008"
+    },
+    {
+        "name_pretty": "Explorations In A.I. Generated Art",
+        "code": "DM2012"
+    },
+    {
+        "name_pretty": "Generative Art",
+        "code": "DM3008"
+    },
+    {
+        "name_pretty": "Interactive Spaces",
+        "code": "DM3013"
+    },
+    {
+        "name_pretty": "Interactive Devices",
+        "code": "DM3014"
+    },
+    {
+        "name_pretty": "Foundation Drawing",
+        "code": "DN1001"
+    },
+    {
+        "name_pretty": "Foundation 2D",
+        "code": "DN1002"
+    },
+    {
+        "name_pretty": "Foundation 3D",
+        "code": "DN1003"
+    },
+    {
+        "name_pretty": "Foundation 4D",
+        "code": "DN1004"
+    },
+    {
+        "name_pretty": "Digital Photography",
+        "code": "DP2001"
+    },
+    {
+        "name_pretty": "History Of Photography",
+        "code": "DP2002"
+    },
+    {
+        "name_pretty": "Principles Of Lighting",
+        "code": "DP2006"
+    },
+    {
+        "name_pretty": "Experimental Photography",
+        "code": "DP2008"
+    },
+    {
+        "name_pretty": "Photographic Media & Presentation",
+        "code": "DP3000"
+    },
+    {
+        "name_pretty": "Socially Engaged Photography",
+        "code": "DP3003"
+    },
+    {
+        "name_pretty": "Moving Image For Media Artists",
+        "code": "DP3010"
+    },
+    {
+        "name_pretty": "Product Design I",
+        "code": "DR2001"
+    },
+    {
+        "name_pretty": "Emerging Product Design Practices",
+        "code": "DR2002"
+    },
+    {
+        "name_pretty": "Computer Aided Design Workshop I",
+        "code": "DR2005"
+    },
+    {
+        "name_pretty": "Body-Centric Design",
+        "code": "DR2014"
+    },
+    {
+        "name_pretty": "Product Design Iii",
+        "code": "DR3006"
+    },
+    {
+        "name_pretty": "Studies In Form",
+        "code": "DR3007"
+    },
+    {
+        "name_pretty": "Basic Principles Of Motion",
+        "code": "DT2000"
+    },
+    {
+        "name_pretty": "3D Production",
+        "code": "DT2001"
+    },
+    {
+        "name_pretty": "Lighting & Rendering Pipeline",
+        "code": "DT2005"
+    },
+    {
+        "name_pretty": "History & Culture Of Animation, Vfx & Game",
+        "code": "DT2007"
+    },
+    {
+        "name_pretty": "Storyboarding & Production Design",
+        "code": "DT2009"
+    },
+    {
+        "name_pretty": "Digital Compositing",
+        "code": "DT2010"
+    },
+    {
+        "name_pretty": "Stop Motion Principles",
+        "code": "DT2011"
+    },
+    {
+        "name_pretty": "Advanced 3D Production",
+        "code": "DT2015"
+    },
+    {
+        "name_pretty": "Writing For Animation",
+        "code": "DT2017"
+    },
+    {
+        "name_pretty": "Animation For Games I",
+        "code": "DT2018"
+    },
+    {
+        "name_pretty": "Game Design I",
+        "code": "DT2020"
+    },
+    {
+        "name_pretty": "Cinematic Concepts & Motion Capture Applications",
+        "code": "DT3009"
+    },
+    {
+        "name_pretty": "Animation Seminar",
+        "code": "DT3013"
+    },
+    {
+        "name_pretty": "Game Seminar",
+        "code": "DT3017"
+    },
+    {
+        "name_pretty": "Typography I",
+        "code": "DV2000"
+    },
+    {
+        "name_pretty": "Visual Communication I",
+        "code": "DV2001"
+    },
+    {
+        "name_pretty": "Illustration For Designers",
+        "code": "DV2002"
+    },
+    {
+        "name_pretty": "Beyond The Logo: Introduction To Branding",
+        "code": "DV2003"
+    },
+    {
+        "name_pretty": "Interface Design",
+        "code": "DV2008"
+    },
+    {
+        "name_pretty": "Visual Communication Iii",
+        "code": "DV3010"
+    },
+    {
+        "name_pretty": "Typography Iii",
+        "code": "DV3011"
+    },
+    {
+        "name_pretty": "Physics Foundation For Electrical & Electronic Engineering",
+        "code": "EE1102"
+    },
+    {
+        "name_pretty": "Electrical Devices & Machines",
+        "code": "EE2005"
+    },
+    {
+        "name_pretty": "Introduction To Eee Design & Project",
+        "code": "EE2073"
+    },
+    {
+        "name_pretty": "Circuit Analysis",
+        "code": "EE2101"
+    },
+    {
+        "name_pretty": "Analog Electronics",
+        "code": "EE2102"
+    },
+    {
+        "name_pretty": "Semiconductor Fundamentals",
+        "code": "EE2103"
+    },
+    {
+        "name_pretty": "Modelling & Control",
+        "code": "EE3011"
+    },
+    {
+        "name_pretty": "Semiconductor Devices & Processing",
+        "code": "EE3013"
+    },
+    {
+        "name_pretty": "Power Systems & Conversion",
+        "code": "EE3015"
+    },
+    {
+        "name_pretty": "Introduction To Photonics",
+        "code": "EE3018"
+    },
+    {
+        "name_pretty": "Integrated Electronics",
+        "code": "EE3019"
+    },
+    {
+        "name_pretty": "Engineering Electromagnetics",
+        "code": "EE3101"
+    },
+    {
+        "name_pretty": "Design & Innovation Project",
+        "code": "EE3180"
+    },
+    {
+        "name_pretty": "Control Engineering Design",
+        "code": "EE4207"
+    },
+    {
+        "name_pretty": "Robotics & Automation",
+        "code": "EE4268"
+    },
+    {
+        "name_pretty": "Mixed-Signal Ic Design",
+        "code": "EE4303"
+    },
+    {
+        "name_pretty": "Advanced Analog Circuits",
+        "code": "EE4341"
+    },
+    {
+        "name_pretty": "Power Engineering Design",
+        "code": "EE4503"
+    },
+    {
+        "name_pretty": "Power System Analysis & Control",
+        "code": "EE4530"
+    },
+    {
+        "name_pretty": "Power Electronics & Drives",
+        "code": "EE4532"
+    },
+    {
+        "name_pretty": "Cmos Process & Device Simulation",
+        "code": "EE4613"
+    },
+    {
+        "name_pretty": "Microelectronic Devices",
+        "code": "EE4647"
+    },
+    {
+        "name_pretty": "Physiological Systems Analysis",
+        "code": "EE4903"
+    },
+    {
+        "name_pretty": "Computer Networks",
+        "code": "EE6108"
+    },
+    {
+        "name_pretty": "Smart Biosensors & Systems For Healthcare",
+        "code": "EE6301"
+    },
+    {
+        "name_pretty": "Engineers & Society",
+        "code": "EG0001"
+    },
+    {
+        "name_pretty": "Engineers In Society",
+        "code": "EG1001"
+    },
+    {
+        "name_pretty": "Mathematics A",
+        "code": "EG2810"
+    },
+    {
+        "name_pretty": "Environmental Chemistry",
+        "code": "EN1001"
+    },
+    {
+        "name_pretty": "Geo-Environment & Soil Mechanics",
+        "code": "EN2004"
+    },
+    {
+        "name_pretty": "Environmental Engineering Laboratory A",
+        "code": "EN2711"
+    },
+    {
+        "name_pretty": "Solid & Hazardous Waste Management",
+        "code": "EN3001"
+    },
+    {
+        "name_pretty": "Wastewater Engineering",
+        "code": "EN3002"
+    },
+    {
+        "name_pretty": "Air Pollution Control Engineering",
+        "code": "EN3004"
+    },
+    {
+        "name_pretty": "Energy Resources Engineering",
+        "code": "EN3006"
+    },
+    {
+        "name_pretty": "Environmental Impact Assessment & Monitoring",
+        "code": "EN4001"
+    },
+    {
+        "name_pretty": "Environmental Hydraulics",
+        "code": "EN4104"
+    },
+    {
+        "name_pretty": "Seminars & Site Visits",
+        "code": "EN4711"
+    },
+    {
+        "name_pretty": "Introduction To Scientific Writing",
+        "code": "ES0138"
+    },
+    {
+        "name_pretty": "E2S2: Environment & Society",
+        "code": "ES1001"
+    },
+    {
+        "name_pretty": "Computational Earth Systems Science",
+        "code": "ES2001"
+    },
+    {
+        "name_pretty": "Gis & The Earth System",
+        "code": "ES2802"
+    },
+    {
+        "name_pretty": "Introduction To Geochemistry",
+        "code": "ES3003"
+    },
+    {
+        "name_pretty": "Resilient Urban Systems",
+        "code": "ES3202"
+    },
+    {
+        "name_pretty": "Tropical Ecology",
+        "code": "ES3302"
+    },
+    {
+        "name_pretty": "Global Change Ecology",
+        "code": "ES3306"
+    },
+    {
+        "name_pretty": "Experimental Design & Analysis For Ecology",
+        "code": "ES3307"
+    },
+    {
+        "name_pretty": "Teaching In E2S2",
+        "code": "ES4010"
+    },
+    {
+        "name_pretty": "Conservation Biology & Biodiversity",
+        "code": "ES4301"
+    },
+    {
+        "name_pretty": "Marine & Aquatic Ecology",
+        "code": "ES4303"
+    },
+    {
+        "name_pretty": "Oceanography",
+        "code": "ES4901"
+    },
+    {
+        "name_pretty": "Geophysical Data Analysis",
+        "code": "ES4902"
+    },
+    {
+        "name_pretty": "Natural Hazards & Society",
+        "code": "ES5001"
+    },
+    {
+        "name_pretty": "Enterprise & Innovation",
+        "code": "ET0001"
+    },
+    {
+        "name_pretty": "An Introduction To Engineering & Practices",
+        "code": "FE1073"
+    },
+    {
+        "name_pretty": "Introduction To Film Studies",
+        "code": "FL5001"
+    },
+    {
+        "name_pretty": "Sustainability: Seeing Through The Haze",
+        "code": "GC0001"
+    },
+    {
+        "name_pretty": "Introduction To International Relations & Foreign Policy",
+        "code": "HA1001"
+    },
+    {
+        "name_pretty": "Introduction To Political Theory",
+        "code": "HA1002"
+    },
+    {
+        "name_pretty": "Fundamentals Of Politics",
+        "code": "HA1012"
+    },
+    {
+        "name_pretty": "Politics & Government In Southeast Asia",
+        "code": "HA2003"
+    },
+    {
+        "name_pretty": "Theories In International Relations",
+        "code": "HA2004"
+    },
+    {
+        "name_pretty": "Foreign Policy Analysis",
+        "code": "HA2017"
+    },
+    {
+        "name_pretty": "Research Methodology In Social Sciences",
+        "code": "HA2023"
+    },
+    {
+        "name_pretty": "Statistical Analysis For Public Affairs I",
+        "code": "HA2024"
+    },
+    {
+        "name_pretty": "Political Anthropology",
+        "code": "HA3002"
+    },
+    {
+        "name_pretty": "Mass Media & Public Policy",
+        "code": "HA3010"
+    },
+    {
+        "name_pretty": "Media & Politics",
+        "code": "HA3015"
+    },
+    {
+        "name_pretty": "Borderless Migration?",
+        "code": "HA3018"
+    },
+    {
+        "name_pretty": "China'S Re-Emergence In World Politics",
+        "code": "HA3024"
+    },
+    {
+        "name_pretty": "Crisis Leadership & Management",
+        "code": "HA3026"
+    },
+    {
+        "name_pretty": "Political Parties & Elections",
+        "code": "HA3028"
+    },
+    {
+        "name_pretty": "Asean In The 21St Century",
+        "code": "HA4001"
+    },
+    {
+        "name_pretty": "Public Administration: Past, Present, & Future",
+        "code": "HA4011"
+    },
+    {
+        "name_pretty": "European Union",
+        "code": "HA4014"
+    },
+    {
+        "name_pretty": "International Politics Of The Asia-Pacific",
+        "code": "HA4022"
+    },
+    {
+        "name_pretty": "Selected Topics In Health Care & Ageing",
+        "code": "HA4026"
+    },
+    {
+        "name_pretty": "Interstate Conflict",
+        "code": "HA4030"
+    },
+    {
+        "name_pretty": "Policy Values & Debates",
+        "code": "HA4044"
+    },
+    {
+        "name_pretty": "Culture, Arts & Politics",
+        "code": "HA4046"
+    },
+    {
+        "name_pretty": "Crisis Diplomacy",
+        "code": "HA4065"
+    },
+    {
+        "name_pretty": "War In Film",
+        "code": "HA4066"
+    },
+    {
+        "name_pretty": "Introduction To The Study Of Literature & Culture",
+        "code": "HC1001"
+    },
+    {
+        "name_pretty": "Introduction To Chinese Language",
+        "code": "HC1002"
+    },
+    {
+        "name_pretty": "Directed Readings Of Literary Works: Pre-Qin,Han,Wei & Jin",
+        "code": "HC2001"
+    },
+    {
+        "name_pretty": "Directed Readings Of Literary Works: Yuan, Ming & Qing",
+        "code": "HC2004"
+    },
+    {
+        "name_pretty": "General History Of China",
+        "code": "HC2005"
+    },
+    {
+        "name_pretty": "Introduction To Chinese History",
+        "code": "HC2006"
+    },
+    {
+        "name_pretty": "Book Culture, Chinese Print History, & Technology",
+        "code": "HC2018"
+    },
+    {
+        "name_pretty": "Confucian Thought",
+        "code": "HC2031"
+    },
+    {
+        "name_pretty": "Division & Integration: From Chunqiu To Wudai",
+        "code": "HC2032"
+    },
+    {
+        "name_pretty": "Understanding Classical Chinese Texts",
+        "code": "HC2054"
+    },
+    {
+        "name_pretty": "Chinese Education In Southeast Asia",
+        "code": "HC2060"
+    },
+    {
+        "name_pretty": "Chinese Literature In Singapore",
+        "code": "HC2063"
+    },
+    {
+        "name_pretty": "Southeast Asian Chinese",
+        "code": "HC3003"
+    },
+    {
+        "name_pretty": "Readings Of Classical Chinese Prose",
+        "code": "HC3016"
+    },
+    {
+        "name_pretty": "Chinese Ecological Thoughts & Philosophy",
+        "code": "HC3043"
+    },
+    {
+        "name_pretty": "Classical Chinese Literary Theory",
+        "code": "HC4010"
+    },
+    {
+        "name_pretty": "Comparative Literature Studies: Theory & Practice",
+        "code": "HC4016"
+    },
+    {
+        "name_pretty": "Chinese Literary Canon & Images Of Art",
+        "code": "HC4019"
+    },
+    {
+        "name_pretty": "Modern Chinese Intellectuals & Political Movements",
+        "code": "HC4030"
+    },
+    {
+        "name_pretty": "Chinese-English Contrastive Linguistics",
+        "code": "HC4059"
+    },
+    {
+        "name_pretty": "Special Topics In The Studies Of Ethnic Chinese",
+        "code": "HC4062"
+    },
+    {
+        "name_pretty": "History & Issues: Transcultural Chinese Theatre In Singapore",
+        "code": "HC4064"
+    },
+    {
+        "name_pretty": "Overseas Chinese In The United States",
+        "code": "HC4065"
+    },
+    {
+        "name_pretty": "Microeconomics I",
+        "code": "HE1001"
+    },
+    {
+        "name_pretty": "Macroeconomics I",
+        "code": "HE1002"
+    },
+    {
+        "name_pretty": "Mathematics For Economists",
+        "code": "HE1004"
+    },
+    {
+        "name_pretty": "Econometrics I",
+        "code": "HE2003"
+    },
+    {
+        "name_pretty": "Development Economics",
+        "code": "HE2010"
+    },
+    {
+        "name_pretty": "Labour Economics & Labour Relations",
+        "code": "HE2011"
+    },
+    {
+        "name_pretty": "Macroeconomic Issues & Policies In Contemporary China",
+        "code": "HE2015"
+    },
+    {
+        "name_pretty": "Public Economics",
+        "code": "HE2021"
+    },
+    {
+        "name_pretty": "Microeconomics Iii",
+        "code": "HE3001"
+    },
+    {
+        "name_pretty": "Macroeconomics Iii",
+        "code": "HE3002"
+    },
+    {
+        "name_pretty": "Mathematics For Economists Ii",
+        "code": "HE3004"
+    },
+    {
+        "name_pretty": "Environmental Economics",
+        "code": "HE3005"
+    },
+    {
+        "name_pretty": "Money & Banking",
+        "code": "HE3010"
+    },
+    {
+        "name_pretty": "Development Economics",
+        "code": "HE3021"
+    },
+    {
+        "name_pretty": "Public Economics",
+        "code": "HE3022"
+    },
+    {
+        "name_pretty": "Labour Economics",
+        "code": "HE3023"
+    },
+    {
+        "name_pretty": "Environmental Economics",
+        "code": "HE3024"
+    },
+    {
+        "name_pretty": "Housing Economics",
+        "code": "HE3027"
+    },
+    {
+        "name_pretty": "Industrial Organization & Business Strategies",
+        "code": "HE3031"
+    },
+    {
+        "name_pretty": "Game Theory",
+        "code": "HE3032"
+    },
+    {
+        "name_pretty": "The Chinese Economy",
+        "code": "HE3033"
+    },
+    {
+        "name_pretty": "Monetary Economics",
+        "code": "HE3111"
+    },
+    {
+        "name_pretty": "Economics Of Mental Health & Well-Being",
+        "code": "HE3125"
+    },
+    {
+        "name_pretty": "Mathematical Economics",
+        "code": "HE3601"
+    },
+    {
+        "name_pretty": "Game Theory",
+        "code": "HE3602"
+    },
+    {
+        "name_pretty": "The Chinese Economy",
+        "code": "HE3603"
+    },
+    {
+        "name_pretty": "Advanced Microeconomics",
+        "code": "HE4001"
+    },
+    {
+        "name_pretty": "Advanced International Finance",
+        "code": "HE4003"
+    },
+    {
+        "name_pretty": "Behavioral Economics",
+        "code": "HE4040"
+    },
+    {
+        "name_pretty": "Growth Theory & Empirics",
+        "code": "HE4044"
+    },
+    {
+        "name_pretty": "Experimental Economics",
+        "code": "HE4140"
+    },
+    {
+        "name_pretty": "Principles Of Economics",
+        "code": "HE5091"
+    },
+    {
+        "name_pretty": "Mind & Meaning",
+        "code": "HG1001"
+    },
+    {
+        "name_pretty": "Morphology & Syntax",
+        "code": "HG2001"
+    },
+    {
+        "name_pretty": "Semantics & Pragmatics",
+        "code": "HG2002"
+    },
+    {
+        "name_pretty": "Father-&-Mother-Tongues: Languages Of Se Asia",
+        "code": "HG2017"
+    },
+    {
+        "name_pretty": "Neurodiversity & Communicative Disabilities",
+        "code": "HG2018"
+    },
+    {
+        "name_pretty": "Language In Society",
+        "code": "HG2020"
+    },
+    {
+        "name_pretty": "X-Rated Linguistics: Language, Sexuality & Desire",
+        "code": "HG2024"
+    },
+    {
+        "name_pretty": "Globalisation & World Englishes",
+        "code": "HG2032"
+    },
+    {
+        "name_pretty": "Structure Of Modern English",
+        "code": "HG2034"
+    },
+    {
+        "name_pretty": "Language & The Computer",
+        "code": "HG2051"
+    },
+    {
+        "name_pretty": "Analysing Spoken Discourse",
+        "code": "HG2092"
+    },
+    {
+        "name_pretty": "Statistics For Psycholinguistics",
+        "code": "HG3005"
+    },
+    {
+        "name_pretty": "Methods In Sociolinguistics",
+        "code": "HG3031"
+    },
+    {
+        "name_pretty": "Language & The Brain",
+        "code": "HG4011"
+    },
+    {
+        "name_pretty": "Multilingualism Across The Lifespan",
+        "code": "HG4013"
+    },
+    {
+        "name_pretty": "Linguistic Ethnography",
+        "code": "HG4025"
+    },
+    {
+        "name_pretty": "Multimodality In Situated Contexts",
+        "code": "HG4031"
+    },
+    {
+        "name_pretty": "Advanced Conversation Analysis",
+        "code": "HG4033"
+    },
+    {
+        "name_pretty": "Speech Synthesis & Recognition",
+        "code": "HG4052"
+    },
+    {
+        "name_pretty": "Language, Culture & Society In Southeast Asia",
+        "code": "HG4062"
+    },
+    {
+        "name_pretty": "Experimental Phonetics",
+        "code": "HG4070"
+    },
+    {
+        "name_pretty": "What Is History?",
+        "code": "HH1001"
+    },
+    {
+        "name_pretty": "Asia-Pacific In Global History: Pre-1800",
+        "code": "HH1002"
+    },
+    {
+        "name_pretty": "History & Archaeology: An Introduction",
+        "code": "HH1125"
+    },
+    {
+        "name_pretty": "Singapore: The Making Of A Cosmopolitan City-State",
+        "code": "HH2001"
+    },
+    {
+        "name_pretty": "The Islamicate World",
+        "code": "HH2004"
+    },
+    {
+        "name_pretty": "Health & Illness In History",
+        "code": "HH2007"
+    },
+    {
+        "name_pretty": "Feasting And Fasting: Food & Drink In History",
+        "code": "HH2008"
+    },
+    {
+        "name_pretty": "History Of Food In China",
+        "code": "HH2031"
+    },
+    {
+        "name_pretty": "Urban History",
+        "code": "HH2046"
+    },
+    {
+        "name_pretty": "Special Topics In History I",
+        "code": "HH2090"
+    },
+    {
+        "name_pretty": "Historiography: Theory & Methods",
+        "code": "HH3001"
+    },
+    {
+        "name_pretty": "World Environmental History",
+        "code": "HH3017"
+    },
+    {
+        "name_pretty": "History Of The Body",
+        "code": "HH3019"
+    },
+    {
+        "name_pretty": "Global History Of Capitalism",
+        "code": "HH3028"
+    },
+    {
+        "name_pretty": "Maritime Asia In The Longue Duree",
+        "code": "HH3039"
+    },
+    {
+        "name_pretty": "International History Of The Cold War",
+        "code": "HH4007"
+    },
+    {
+        "name_pretty": "Anticolonial Resistance In The British Empire",
+        "code": "HH4010"
+    },
+    {
+        "name_pretty": "The Urban Coast",
+        "code": "HH4046"
+    },
+    {
+        "name_pretty": "Special Topics In History- World History",
+        "code": "HH4092"
+    },
+    {
+        "name_pretty": "Images Of Singapore: Literature, Film & Culture",
+        "code": "HL0201"
+    },
+    {
+        "name_pretty": "Introduction To The Study Of Literature",
+        "code": "HL1001"
+    },
+    {
+        "name_pretty": "Survey Of English Literature 1",
+        "code": "HL1002"
+    },
+    {
+        "name_pretty": "Renaissance Literature",
+        "code": "HL2002"
+    },
+    {
+        "name_pretty": "Restoration & Eighteenth Century Literature",
+        "code": "HL2003"
+    },
+    {
+        "name_pretty": "Sensibility & Romanticism",
+        "code": "HL2004"
+    },
+    {
+        "name_pretty": "Singapore Literature & Culture",
+        "code": "HL2008"
+    },
+    {
+        "name_pretty": "Southeast Asian Literature & Culture",
+        "code": "HL2009"
+    },
+    {
+        "name_pretty": "South Asian Literature",
+        "code": "HL2022"
+    },
+    {
+        "name_pretty": "Early American Literature",
+        "code": "HL2027"
+    },
+    {
+        "name_pretty": "Asian Historical Fiction",
+        "code": "HL2041"
+    },
+    {
+        "name_pretty": "Children'S Literature",
+        "code": "HL2042"
+    },
+    {
+        "name_pretty": "Film Theory",
+        "code": "HL3001"
+    },
+    {
+        "name_pretty": "Film, Politics & Ethics",
+        "code": "HL3002"
+    },
+    {
+        "name_pretty": "Science Fiction:Origins To Parody",
+        "code": "HL3011"
+    },
+    {
+        "name_pretty": "Latin American Literature",
+        "code": "HL3014"
+    },
+    {
+        "name_pretty": "Theatre Of The Absurd",
+        "code": "HL3038"
+    },
+    {
+        "name_pretty": "Gothic Literature",
+        "code": "HL3042"
+    },
+    {
+        "name_pretty": "Modernist Soundscapes",
+        "code": "HL3043"
+    },
+    {
+        "name_pretty": "Advanced Studies In Literature & Culture",
+        "code": "HL4013"
+    },
+    {
+        "name_pretty": "Advanced Studies In Film",
+        "code": "HL4014"
+    },
+    {
+        "name_pretty": "Advanced Studies In Medieval Literature",
+        "code": "HL4015"
+    },
+    {
+        "name_pretty": "Advanced Studies In Victorian Literature",
+        "code": "HL4019"
+    },
+    {
+        "name_pretty": "Advanced Studies In American Literature",
+        "code": "HL4023"
+    },
+    {
+        "name_pretty": "Advanced Studies In Contemporary Literature",
+        "code": "HL4024"
+    },
+    {
+        "name_pretty": "Major Author Study: James Joyce",
+        "code": "HL4033"
+    },
+    {
+        "name_pretty": "Advanced Studies In Postcolonial Literature",
+        "code": "HL4038"
+    },
+    {
+        "name_pretty": "Introduction To Psychology",
+        "code": "HP1000"
+    },
+    {
+        "name_pretty": "Fundamentals Of Social Science Research",
+        "code": "HP1100"
+    },
+    {
+        "name_pretty": "Biological Psychology",
+        "code": "HP2200"
+    },
+    {
+        "name_pretty": "Personality & Individual Differences",
+        "code": "HP2500"
+    },
+    {
+        "name_pretty": "The Psychology Of Everyday Design",
+        "code": "HP3003"
+    },
+    {
+        "name_pretty": "Applied Statistical Methods For Psychological Research",
+        "code": "HP3101"
+    },
+    {
+        "name_pretty": "Evolutionary Psychology",
+        "code": "HP3201"
+    },
+    {
+        "name_pretty": "An Ape'S Guide To Human Language",
+        "code": "HP3204"
+    },
+    {
+        "name_pretty": "Animal Behavior",
+        "code": "HP3205"
+    },
+    {
+        "name_pretty": "Geropsychology",
+        "code": "HP3303"
+    },
+    {
+        "name_pretty": "Psychology Of Emotion",
+        "code": "HP3502"
+    },
+    {
+        "name_pretty": "Child Psychopathology",
+        "code": "HP3702"
+    },
+    {
+        "name_pretty": "Biopsychosocial Criminology",
+        "code": "HP3708"
+    },
+    {
+        "name_pretty": "Cultural Psychology",
+        "code": "HP3901"
+    },
+    {
+        "name_pretty": "Laboratory In Developmental Psychology",
+        "code": "HP4031"
+    },
+    {
+        "name_pretty": "Laboratory In Social Psychology",
+        "code": "HP4041"
+    },
+    {
+        "name_pretty": "Laboratory In Cognitive Psychology",
+        "code": "HP4061"
+    },
+    {
+        "name_pretty": "Research Lab In Language In Perception & Thought",
+        "code": "HP4063"
+    },
+    {
+        "name_pretty": "Laboratory In Industrial & Organizational Psychology",
+        "code": "HP4081"
+    },
+    {
+        "name_pretty": "Trauma Psychology & Crisis Management",
+        "code": "HP4102"
+    },
+    {
+        "name_pretty": "Forensic & Criminal Psychology",
+        "code": "HP4103"
+    },
+    {
+        "name_pretty": "Industrial-Organisational Psychology In Practice",
+        "code": "HP4107"
+    },
+    {
+        "name_pretty": "Psychological Therapies & Counselling",
+        "code": "HP4108"
+    },
+    {
+        "name_pretty": "Seminar In Selected Topics: Technology & Social Behaviour",
+        "code": "HP4201"
+    },
+    {
+        "name_pretty": "Advanced Topics In Social Cognition",
+        "code": "HP4242"
+    },
+    {
+        "name_pretty": "Seminar In Perceptual & Cognitive Neurosciences",
+        "code": "HP4261"
+    },
+    {
+        "name_pretty": "Multisensory Integration",
+        "code": "HP4262"
+    },
+    {
+        "name_pretty": "The Last Dance: Perspectives Of Death, Dying & Bereavement",
+        "code": "HP4274"
+    },
+    {
+        "name_pretty": "Seminar In Selected Topics: Psychology Of Leadership",
+        "code": "HP4281"
+    },
+    {
+        "name_pretty": "Ways Of Seeing: Exploring Visual Culture",
+        "code": "HR1001"
+    },
+    {
+        "name_pretty": "Introduction To The Histories Of Southeast Asian Art",
+        "code": "HR2001"
+    },
+    {
+        "name_pretty": "Survey Of New Media",
+        "code": "HR2005"
+    },
+    {
+        "name_pretty": "Contemporary Curating",
+        "code": "HR2009"
+    },
+    {
+        "name_pretty": "Introduction To Museum Studies",
+        "code": "HR2010"
+    },
+    {
+        "name_pretty": "Cities,Bodies,Memories,Art & Everyday Life In Contemp Spore",
+        "code": "HR3001"
+    },
+    {
+        "name_pretty": "Issues In Global Contemporary Art",
+        "code": "HR3002"
+    },
+    {
+        "name_pretty": "20Th Century Southeast Asian Art: Being Modern",
+        "code": "HR3006"
+    },
+    {
+        "name_pretty": "Japanese Art: Edo To Contemporary",
+        "code": "HR3007"
+    },
+    {
+        "name_pretty": "Aesthetic Manifestations Of Buddhist Devotion & Practice",
+        "code": "HR3008"
+    },
+    {
+        "name_pretty": "Weird Art Writing",
+        "code": "HR3010"
+    },
+    {
+        "name_pretty": "Digital Literacy, Culture & Society",
+        "code": "HS0101"
+    },
+    {
+        "name_pretty": "Person & Society",
+        "code": "HS1001"
+    },
+    {
+        "name_pretty": "Singapore Society In Transition",
+        "code": "HS1002"
+    },
+    {
+        "name_pretty": "Social Problems In A Global Context",
+        "code": "HS1003"
+    },
+    {
+        "name_pretty": "Classical Social Theory",
+        "code": "HS2001"
+    },
+    {
+        "name_pretty": "Social Class & Inequality",
+        "code": "HS2008"
+    },
+    {
+        "name_pretty": "Sociology Of The Life Course",
+        "code": "HS2009"
+    },
+    {
+        "name_pretty": "Ethnicity & Ethnic Relations",
+        "code": "HS2011"
+    },
+    {
+        "name_pretty": "Population & Society",
+        "code": "HS2022"
+    },
+    {
+        "name_pretty": "Understanding Social Statistics",
+        "code": "HS3002"
+    },
+    {
+        "name_pretty": "Cities & Urban Life",
+        "code": "HS3004"
+    },
+    {
+        "name_pretty": "Societies In Comparative Perspective",
+        "code": "HS3016"
+    },
+    {
+        "name_pretty": "Social Psychology",
+        "code": "HS3054"
+    },
+    {
+        "name_pretty": "Research Practicum I: Qualitative Social Research",
+        "code": "HS4001"
+    },
+    {
+        "name_pretty": "Research Practicum Ii: Quantitative Social Research",
+        "code": "HS4002"
+    },
+    {
+        "name_pretty": "Sociology Of Reproduction",
+        "code": "HS4015"
+    },
+    {
+        "name_pretty": "Gods,Ghosts & Ancestors:Explorations In Chinese Religions",
+        "code": "HS4026"
+    },
+    {
+        "name_pretty": "Cultural Politics Of Development & The Environment",
+        "code": "HS4027"
+    },
+    {
+        "name_pretty": "Who Are We? Science &  Identity In The 21St Century",
+        "code": "HS4036"
+    },
+    {
+        "name_pretty": "Medical Sociology",
+        "code": "HS4039"
+    },
+    {
+        "name_pretty": "Research Practicum Ii: Quantitative Social Research",
+        "code": "HS4902"
+    },
+    {
+        "name_pretty": "Introduction To Academic Communication",
+        "code": "HW0001"
+    },
+    {
+        "name_pretty": "Academic Communication In The Humanities",
+        "code": "HW0205"
+    },
+    {
+        "name_pretty": "Academic Communication In Chinese Studies",
+        "code": "HW0206"
+    },
+    {
+        "name_pretty": "Academic Communication In Linguistics",
+        "code": "HW0207"
+    },
+    {
+        "name_pretty": "Academic Communication In The Social Sciences",
+        "code": "HW0208"
+    },
+    {
+        "name_pretty": "Communication Across The Sciences",
+        "code": "HW0218"
+    },
+    {
+        "name_pretty": "Engineering Communication",
+        "code": "HW0288"
+    },
+    {
+        "name_pretty": "Ethics & Moral Reasoning",
+        "code": "HY0001"
+    },
+    {
+        "name_pretty": "Introduction To Philosophy",
+        "code": "HY1001"
+    },
+    {
+        "name_pretty": "Symbolic Logic",
+        "code": "HY1002"
+    },
+    {
+        "name_pretty": "Moral Philosophy",
+        "code": "HY2002"
+    },
+    {
+        "name_pretty": "Political Philosophy",
+        "code": "HY2005"
+    },
+    {
+        "name_pretty": "Philosophy Of Well-Being",
+        "code": "HY2015"
+    },
+    {
+        "name_pretty": "Political Philosophy",
+        "code": "HY2905"
+    },
+    {
+        "name_pretty": "Philosophy Of Science",
+        "code": "HY3010"
+    },
+    {
+        "name_pretty": "Philosophy Of Technology",
+        "code": "HY3012"
+    },
+    {
+        "name_pretty": "Philosophy Of Race & Gender",
+        "code": "HY3021"
+    },
+    {
+        "name_pretty": "Philosophy Of Science",
+        "code": "HY3910"
+    },
+    {
+        "name_pretty": "Philosophy Of Technology",
+        "code": "HY3912"
+    },
+    {
+        "name_pretty": "Advanced Moral Philosophy",
+        "code": "HY4008"
+    },
+    {
+        "name_pretty": "Philosophical Methodologies",
+        "code": "HY4015"
+    },
+    {
+        "name_pretty": "Ethics & Public Policy",
+        "code": "HY4025"
+    },
+    {
+        "name_pretty": "Special Topics In Ethics",
+        "code": "HY4111"
+    },
+    {
+        "name_pretty": "Special Topics In Chinese Philosophy",
+        "code": "HY4113"
+    },
+    {
+        "name_pretty": "Phenomenology",
+        "code": "HY4116"
+    },
+    {
+        "name_pretty": "Introduction To Data Science & Artificial Intelligence",
+        "code": "IE0005"
+    },
+    {
+        "name_pretty": "From Computational Thinking To Programming",
+        "code": "IE1005"
+    },
+    {
+        "name_pretty": "Digital Electronics",
+        "code": "IE2104"
+    },
+    {
+        "name_pretty": "Engineering Mathematics I",
+        "code": "IE2106"
+    },
+    {
+        "name_pretty": "Engineering Mathematics Ii",
+        "code": "IE2107"
+    },
+    {
+        "name_pretty": "Data Structures & Algorithms In Python",
+        "code": "IE2108"
+    },
+    {
+        "name_pretty": "Signals & Systems",
+        "code": "IE2110"
+    },
+    {
+        "name_pretty": "Communication Principles",
+        "code": "IE3012"
+    },
+    {
+        "name_pretty": "Digital Signal Processing",
+        "code": "IE3014"
+    },
+    {
+        "name_pretty": "Computer Communications",
+        "code": "IE3017"
+    },
+    {
+        "name_pretty": "Microprocessors",
+        "code": "IE3102"
+    },
+    {
+        "name_pretty": "Optical Communication System Design",
+        "code": "IE4110"
+    },
+    {
+        "name_pretty": "Digital & Telecommunications Systems",
+        "code": "IE4154"
+    },
+    {
+        "name_pretty": "Image Processing & Computer Vision",
+        "code": "IE4476"
+    },
+    {
+        "name_pretty": "Artificial Intelligence & Data Mining",
+        "code": "IE4483"
+    },
+    {
+        "name_pretty": "Web Application Design",
+        "code": "IE4717"
+    },
+    {
+        "name_pretty": "Information Security",
+        "code": "IE4758"
+    },
+    {
+        "name_pretty": "Design & Innovation Project",
+        "code": "IM3180"
+    },
+    {
+        "name_pretty": "Arabic Language Level 3",
+        "code": "LA5003"
+    },
+    {
+        "name_pretty": "Chinese Language Level 3",
+        "code": "LC5003"
+    },
+    {
+        "name_pretty": "Chinese Language Level 4",
+        "code": "LC5004"
+    },
+    {
+        "name_pretty": "Business Chinese",
+        "code": "LC5101"
+    },
+    {
+        "name_pretty": "French Language Level 3",
+        "code": "LF5003"
+    },
+    {
+        "name_pretty": "French Language Level 4",
+        "code": "LF5004"
+    },
+    {
+        "name_pretty": "French Language Level 5",
+        "code": "LF5005"
+    },
+    {
+        "name_pretty": "French Language Level 6",
+        "code": "LF5006"
+    },
+    {
+        "name_pretty": "German Language Level 3",
+        "code": "LG5003"
+    },
+    {
+        "name_pretty": "German Language Level 4",
+        "code": "LG5004"
+    },
+    {
+        "name_pretty": "German Language Level 5",
+        "code": "LG5005"
+    },
+    {
+        "name_pretty": "Japanese Language Level 3",
+        "code": "LJ5003"
+    },
+    {
+        "name_pretty": "Japanese Language Level 4",
+        "code": "LJ5004"
+    },
+    {
+        "name_pretty": "Japanese Language Level 5",
+        "code": "LJ5005"
+    },
+    {
+        "name_pretty": "Japanese Language Level 6",
+        "code": "LJ5006"
+    },
+    {
+        "name_pretty": "Japanese Language Level 7",
+        "code": "LJ5007"
+    },
+    {
+        "name_pretty": "Korean Language Level 3",
+        "code": "LK5003"
+    },
+    {
+        "name_pretty": "Korean Language Level 4",
+        "code": "LK5004"
+    },
+    {
+        "name_pretty": "Korean Language Level 5",
+        "code": "LK5005"
+    },
+    {
+        "name_pretty": "Korean Language Level 6",
+        "code": "LK5006"
+    },
+    {
+        "name_pretty": "Malay Language Level 3",
+        "code": "LM5003"
+    },
+    {
+        "name_pretty": "Malay Language Level 4",
+        "code": "LM5004"
+    },
+    {
+        "name_pretty": "Malay Level 5",
+        "code": "LM5005"
+    },
+    {
+        "name_pretty": "Russian Language Level 3",
+        "code": "LR5003"
+    },
+    {
+        "name_pretty": "Spanish Language Level 3",
+        "code": "LS5003"
+    },
+    {
+        "name_pretty": "Spanish Language Level 4",
+        "code": "LS5004"
+    },
+    {
+        "name_pretty": "Spanish Language Level 5",
+        "code": "LS5005"
+    },
+    {
+        "name_pretty": "Thai Language Level 3",
+        "code": "LT5003"
+    },
+    {
+        "name_pretty": "Introduction To Data Science & Artificial Intelligence",
+        "code": "MA0218"
+    },
+    {
+        "name_pretty": "Dynamics",
+        "code": "MA1001"
+    },
+    {
+        "name_pretty": "Fundamental Engineering Materials",
+        "code": "MA1002"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking",
+        "code": "MA1008"
+    },
+    {
+        "name_pretty": "Mechanics Of Materials",
+        "code": "MA2001"
+    },
+    {
+        "name_pretty": "Theory Of Mechanism",
+        "code": "MA2002"
+    },
+    {
+        "name_pretty": "Introduction To Thermo-Fluids",
+        "code": "MA2003"
+    },
+    {
+        "name_pretty": "Manufacturing Processes",
+        "code": "MA2004"
+    },
+    {
+        "name_pretty": "Engineering Graphics",
+        "code": "MA2005"
+    },
+    {
+        "name_pretty": "Engineering Mathematics",
+        "code": "MA2006"
+    },
+    {
+        "name_pretty": "Thermodynamics",
+        "code": "MA2007"
+    },
+    {
+        "name_pretty": "Introduction To Electrical Circuits & Electronic Devices",
+        "code": "MA2009"
+    },
+    {
+        "name_pretty": "Introduction To Mechatronics Systems Design",
+        "code": "MA2012"
+    },
+    {
+        "name_pretty": "Product Presentation",
+        "code": "MA2014"
+    },
+    {
+        "name_pretty": "Engineering Materials & Manufacturing Processes",
+        "code": "MA2024"
+    },
+    {
+        "name_pretty": "Laboratory Experiments (Me)",
+        "code": "MA2071"
+    },
+    {
+        "name_pretty": "Laboratory Experiments (Ae)",
+        "code": "MA2072"
+    },
+    {
+        "name_pretty": "Flight Performance",
+        "code": "MA2701"
+    },
+    {
+        "name_pretty": "Machine Element Design",
+        "code": "MA3001"
+    },
+    {
+        "name_pretty": "Solid Mechanics & Vibration",
+        "code": "MA3002"
+    },
+    {
+        "name_pretty": "Heat Transfer",
+        "code": "MA3003"
+    },
+    {
+        "name_pretty": "Mathematical Methods In Engineering",
+        "code": "MA3004"
+    },
+    {
+        "name_pretty": "Control Theory",
+        "code": "MA3005"
+    },
+    {
+        "name_pretty": "Fluid Mechanics",
+        "code": "MA3006"
+    },
+    {
+        "name_pretty": "Thermodynamics & Heat Transfer",
+        "code": "MA3010"
+    },
+    {
+        "name_pretty": "Engineering Experiments (Me)",
+        "code": "MA3071"
+    },
+    {
+        "name_pretty": "Engineering Experiments (Ae)",
+        "code": "MA3072"
+    },
+    {
+        "name_pretty": "Aircraft Structures I",
+        "code": "MA3700"
+    },
+    {
+        "name_pretty": "Aerodynamics",
+        "code": "MA3701"
+    },
+    {
+        "name_pretty": "Aircraft Propulsion",
+        "code": "MA3702"
+    },
+    {
+        "name_pretty": "Flight Dynamics",
+        "code": "MA3703"
+    },
+    {
+        "name_pretty": "Aircraft Electrical Devices",
+        "code": "MA3704"
+    },
+    {
+        "name_pretty": "Aerospace Control Theory",
+        "code": "MA3705"
+    },
+    {
+        "name_pretty": "Engineering Design",
+        "code": "MA4001"
+    },
+    {
+        "name_pretty": "Fluid Dynamics",
+        "code": "MA4002"
+    },
+    {
+        "name_pretty": "Engineering Product Design",
+        "code": "MA4011"
+    },
+    {
+        "name_pretty": "Mechatronics Engineering Design",
+        "code": "MA4012"
+    },
+    {
+        "name_pretty": "Aircraft Design",
+        "code": "MA4701"
+    },
+    {
+        "name_pretty": "Aircraft Structures Ii",
+        "code": "MA4702"
+    },
+    {
+        "name_pretty": "Aeroelasticity",
+        "code": "MA4704"
+    },
+    {
+        "name_pretty": "Aircraft Navigation & Flight Computers",
+        "code": "MA4705"
+    },
+    {
+        "name_pretty": "Optimization Theory & Applications",
+        "code": "MA4804"
+    },
+    {
+        "name_pretty": "Psychrometry & Air Conditioning",
+        "code": "MA4811"
+    },
+    {
+        "name_pretty": "Computational Fluid Dynamics",
+        "code": "MA4814"
+    },
+    {
+        "name_pretty": "Measurements & Sensing Systems",
+        "code": "MA4822"
+    },
+    {
+        "name_pretty": "Robotics",
+        "code": "MA4825"
+    },
+    {
+        "name_pretty": "Microprocessor Systems",
+        "code": "MA4832"
+    },
+    {
+        "name_pretty": "Engineering Metrology &  Materials Characterization",
+        "code": "MA4842"
+    },
+    {
+        "name_pretty": "Operations Research",
+        "code": "MA4849"
+    },
+    {
+        "name_pretty": "Supply Chain & Logistics Management",
+        "code": "MA4850"
+    },
+    {
+        "name_pretty": "Naval Architecture & Marine Engineering",
+        "code": "MA4856"
+    },
+    {
+        "name_pretty": "Product Design",
+        "code": "MA4858"
+    },
+    {
+        "name_pretty": "Air Traffic Management",
+        "code": "MA4881"
+    },
+    {
+        "name_pretty": "Advanced Manufacturing & Materials Processing",
+        "code": "MA4882"
+    },
+    {
+        "name_pretty": "Systems Thinking & Systems Engineering",
+        "code": "MA4884"
+    },
+    {
+        "name_pretty": "Calculus I",
+        "code": "MH1100"
+    },
+    {
+        "name_pretty": "Linear Algebra I",
+        "code": "MH1200"
+    },
+    {
+        "name_pretty": "Foundations Of Mathematics",
+        "code": "MH1300"
+    },
+    {
+        "name_pretty": "Calculus For The Sciences",
+        "code": "MH1802"
+    },
+    {
+        "name_pretty": "Calculus",
+        "code": "MH1805"
+    },
+    {
+        "name_pretty": "Mathematics 1",
+        "code": "MH1810"
+    },
+    {
+        "name_pretty": "Mathematics 2",
+        "code": "MH1811"
+    },
+    {
+        "name_pretty": "Discrete Mathematics",
+        "code": "MH1812"
+    },
+    {
+        "name_pretty": "Calculus Iii",
+        "code": "MH2100"
+    },
+    {
+        "name_pretty": "Probability & Introduction To Statistics",
+        "code": "MH2500"
+    },
+    {
+        "name_pretty": "Linear Algebra For Scientists",
+        "code": "MH2802"
+    },
+    {
+        "name_pretty": "Mathematics Ii",
+        "code": "MH2811"
+    },
+    {
+        "name_pretty": "Probability & Statistics",
+        "code": "MH2814"
+    },
+    {
+        "name_pretty": "Complex Analysis",
+        "code": "MH3101"
+    },
+    {
+        "name_pretty": "Algebra Ii",
+        "code": "MH3220"
+    },
+    {
+        "name_pretty": "Graph Theory",
+        "code": "MH3300"
+    },
+    {
+        "name_pretty": "Regression Analysis",
+        "code": "MH3510"
+    },
+    {
+        "name_pretty": "Stochastic Processes",
+        "code": "MH3512"
+    },
+    {
+        "name_pretty": "Combinatorics",
+        "code": "MH4300"
+    },
+    {
+        "name_pretty": "Cryptography",
+        "code": "MH4311"
+    },
+    {
+        "name_pretty": "Computational Economics",
+        "code": "MH4320"
+    },
+    {
+        "name_pretty": "Statistical Learning & Data Mining",
+        "code": "MH4510"
+    },
+    {
+        "name_pretty": "Sampling & Survey",
+        "code": "MH4511"
+    },
+    {
+        "name_pretty": "Survival Analysis",
+        "code": "MH4513"
+    },
+    {
+        "name_pretty": "Simulation Techniques In Finance",
+        "code": "MH4518"
+    },
+    {
+        "name_pretty": "Numerical Analysis Ii",
+        "code": "MH4700"
+    },
+    {
+        "name_pretty": "Mathematical Programming",
+        "code": "MH4701"
+    },
+    {
+        "name_pretty": "Career Power Up!",
+        "code": "ML0002"
+    },
+    {
+        "name_pretty": "Kickstart Your Career Success",
+        "code": "ML0003"
+    },
+    {
+        "name_pretty": "Career & Innovative Enterprise For The Future World",
+        "code": "ML0004"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking",
+        "code": "MS1008"
+    },
+    {
+        "name_pretty": "Materials Chemistry I",
+        "code": "MS1013"
+    },
+    {
+        "name_pretty": "Thermodynamics Of Materials",
+        "code": "MS1016"
+    },
+    {
+        "name_pretty": "Introduction To Materials Science",
+        "code": "MS1017"
+    },
+    {
+        "name_pretty": "Introduction To Manufacturing Processes",
+        "code": "MS2012"
+    },
+    {
+        "name_pretty": "Materials Structure & Defects",
+        "code": "MS2014"
+    },
+    {
+        "name_pretty": "Mechanical Behaviour Of Materials",
+        "code": "MS2015"
+    },
+    {
+        "name_pretty": "Introduction To Metallurgy",
+        "code": "MS2016"
+    },
+    {
+        "name_pretty": "Electronics & Magnetic Properties Of Materials",
+        "code": "MS2018"
+    },
+    {
+        "name_pretty": "Laboratory On Structure-Property Relationship In Polymers",
+        "code": "MS2083"
+    },
+    {
+        "name_pretty": "Metallic & Ceramic Materials",
+        "code": "MS3011"
+    },
+    {
+        "name_pretty": "Micro/Nanoelectronic Materials Processing",
+        "code": "MS3012"
+    },
+    {
+        "name_pretty": "Electrochemical Corrosion",
+        "code": "MS3013"
+    },
+    {
+        "name_pretty": "Analysis Of Materials",
+        "code": "MS3014"
+    },
+    {
+        "name_pretty": "Industrial Design",
+        "code": "MS3015"
+    },
+    {
+        "name_pretty": "Design Lab",
+        "code": "MS3082"
+    },
+    {
+        "name_pretty": "Quality Control",
+        "code": "MS4012"
+    },
+    {
+        "name_pretty": "Biomaterials",
+        "code": "MS4013"
+    },
+    {
+        "name_pretty": "Nanomaterials: Fundamentals & Applications",
+        "code": "MS4014"
+    },
+    {
+        "name_pretty": "Advanced Biomaterials",
+        "code": "MS4610"
+    },
+    {
+        "name_pretty": "Wearable Sensors For Healthcare",
+        "code": "MS4613"
+    },
+    {
+        "name_pretty": "Polymer Technology",
+        "code": "MS4620"
+    },
+    {
+        "name_pretty": "Selected Topics On Applied Polymer Materials",
+        "code": "MS4621"
+    },
+    {
+        "name_pretty": "Corrosion Engineering",
+        "code": "MS4631"
+    },
+    {
+        "name_pretty": "Advanced Analysis Of Materials",
+        "code": "MS4640"
+    },
+    {
+        "name_pretty": "Additive Manufacturing Of Materials",
+        "code": "MS4642"
+    },
+    {
+        "name_pretty": "Thin Film Technology",
+        "code": "MS4651"
+    },
+    {
+        "name_pretty": "Fundamentals Of Intellectual Property In Matls Sci & Eng",
+        "code": "MS4660"
+    },
+    {
+        "name_pretty": "Engineering Solutions By Design Thinking",
+        "code": "MS4663"
+    },
+    {
+        "name_pretty": "Environmental Degradation Of Plastics",
+        "code": "MS4666"
+    },
+    {
+        "name_pretty": "Introduction To Sustainable Materials",
+        "code": "MS4667"
+    },
+    {
+        "name_pretty": "Shipping & The Environment",
+        "code": "MT0001"
+    },
+    {
+        "name_pretty": "Mathematics I For Maritime Studies",
+        "code": "MT1001"
+    },
+    {
+        "name_pretty": "Trade Practice & Incoterms",
+        "code": "MT1003"
+    },
+    {
+        "name_pretty": "Shipping Economics",
+        "code": "MT2002"
+    },
+    {
+        "name_pretty": "Maritime Technology",
+        "code": "MT2003"
+    },
+    {
+        "name_pretty": "Shipping Logistics",
+        "code": "MT4001"
+    },
+    {
+        "name_pretty": "Essentials Of Project Management",
+        "code": "MT4002"
+    },
+    {
+        "name_pretty": "Intermodal Transportation",
+        "code": "MT4101"
+    },
+    {
+        "name_pretty": "Information Technology Management",
+        "code": "MT4104"
+    },
+    {
+        "name_pretty": "Physics",
+        "code": "PH1011"
+    },
+    {
+        "name_pretty": "Physics A",
+        "code": "PH1012"
+    },
+    {
+        "name_pretty": "Mechanics",
+        "code": "PH1104"
+    },
+    {
+        "name_pretty": "Optics, Vibrations & Waves",
+        "code": "PH1105"
+    },
+    {
+        "name_pretty": "Relativity & Quantum Physics",
+        "code": "PH1107"
+    },
+    {
+        "name_pretty": "Physics Laboratory Ia",
+        "code": "PH1198"
+    },
+    {
+        "name_pretty": "Electromagnetism",
+        "code": "PH2102"
+    },
+    {
+        "name_pretty": "Thermal Physics",
+        "code": "PH2103"
+    },
+    {
+        "name_pretty": "Analytical Mechanics",
+        "code": "PH2104"
+    },
+    {
+        "name_pretty": "Physics Laboratory Iia",
+        "code": "PH2198"
+    },
+    {
+        "name_pretty": "Quantum Mechanics Ii",
+        "code": "PH3101"
+    },
+    {
+        "name_pretty": "Condensed Matter Physics I",
+        "code": "PH3102"
+    },
+    {
+        "name_pretty": "Technological Applications Of Quantum Mechanics",
+        "code": "PH3103"
+    },
+    {
+        "name_pretty": "Physics Lab Iiia",
+        "code": "PH3199"
+    },
+    {
+        "name_pretty": "Astrophysics & Cosmology",
+        "code": "PH3403"
+    },
+    {
+        "name_pretty": "Fabrication Of Micro-& Nanoelectronic Devices",
+        "code": "PH3601"
+    },
+    {
+        "name_pretty": "Photonics",
+        "code": "PH3602"
+    },
+    {
+        "name_pretty": "Surfaces & Interfaces",
+        "code": "PH4403"
+    },
+    {
+        "name_pretty": "Nuclear Physics",
+        "code": "PH4408"
+    },
+    {
+        "name_pretty": "Introduction To Experimental Particle Physics",
+        "code": "PH4411"
+    },
+    {
+        "name_pretty": "Biomedical Imaging & Sensing",
+        "code": "PH4607"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking",
+        "code": "PS0001"
+    },
+    {
+        "name_pretty": "Communicating As A 21St Century Engineer",
+        "code": "RE0003"
+    },
+    {
+        "name_pretty": "Writing Across The Disciplines",
+        "code": "RE0011"
+    },
+    {
+        "name_pretty": "Mathematics I",
+        "code": "RE1011"
+    },
+    {
+        "name_pretty": "Materials & Manufacturing",
+        "code": "RE1013"
+    },
+    {
+        "name_pretty": "Electronic & Information Engineering",
+        "code": "RE1014"
+    },
+    {
+        "name_pretty": "Chemical & Bio Engineering Fundamentals & Applications",
+        "code": "RE1015"
+    },
+    {
+        "name_pretty": "Fundamentals Of Management",
+        "code": "RE1101"
+    },
+    {
+        "name_pretty": "Renaissance Design I",
+        "code": "RE2011"
+    },
+    {
+        "name_pretty": "Introduction To Computational Thinking & Programming",
+        "code": "SC1003"
+    },
+    {
+        "name_pretty": "Linear Algebra For Computing",
+        "code": "SC1004"
+    },
+    {
+        "name_pretty": "Digital Logic",
+        "code": "SC1005"
+    },
+    {
+        "name_pretty": "Computer Organisation & Architecture",
+        "code": "SC1006"
+    },
+    {
+        "name_pretty": "Data Structures & Algorithms",
+        "code": "SC1007"
+    },
+    {
+        "name_pretty": "Physics For Computing",
+        "code": "SC1013"
+    },
+    {
+        "name_pretty": "Probability & Statistics For Computing",
+        "code": "SC2000"
+    },
+    {
+        "name_pretty": "Algorithm Design & Analysis",
+        "code": "SC2001"
+    },
+    {
+        "name_pretty": "Object Oriented Design & Programming",
+        "code": "SC2002"
+    },
+    {
+        "name_pretty": "Operating Systems",
+        "code": "SC2005"
+    },
+    {
+        "name_pretty": "Software Engineering",
+        "code": "SC2006"
+    },
+    {
+        "name_pretty": "Computer Network",
+        "code": "SC2008"
+    },
+    {
+        "name_pretty": "Sensors, Interfacing & Digital Control",
+        "code": "SC2104"
+    },
+    {
+        "name_pretty": "Microprocessor System Design & Development",
+        "code": "SC2107"
+    },
+    {
+        "name_pretty": "Introduction To Databases",
+        "code": "SC2207"
+    },
+    {
+        "name_pretty": "Artificial Intelligence",
+        "code": "SC3000"
+    },
+    {
+        "name_pretty": "Computer Security",
+        "code": "SC3010"
+    },
+    {
+        "name_pretty": "Database System Principles",
+        "code": "SC3020"
+    },
+    {
+        "name_pretty": "Advanced Computer Networks",
+        "code": "SC3030"
+    },
+    {
+        "name_pretty": "Advanced Software Engineering",
+        "code": "SC3040"
+    },
+    {
+        "name_pretty": "Advanced Computer Architecture",
+        "code": "SC3050"
+    },
+    {
+        "name_pretty": "Computer Graphics & Visualisation",
+        "code": "SC3060"
+    },
+    {
+        "name_pretty": "Human Computer Interaction",
+        "code": "SC3061"
+    },
+    {
+        "name_pretty": "Signals, Systems & Transforms",
+        "code": "SC3102"
+    },
+    {
+        "name_pretty": "Embedded Programming",
+        "code": "SC3103"
+    },
+    {
+        "name_pretty": "Machine Learning",
+        "code": "SC4000"
+    },
+    {
+        "name_pretty": "Neural Network & Deep Learning",
+        "code": "SC4001"
+    },
+    {
+        "name_pretty": "Natural Language Processing",
+        "code": "SC4002"
+    },
+    {
+        "name_pretty": "Applied Cryptography",
+        "code": "SC4010"
+    },
+    {
+        "name_pretty": "Security Management",
+        "code": "SC4011"
+    },
+    {
+        "name_pretty": "Cyber Threat Intelligence",
+        "code": "SC4016"
+    },
+    {
+        "name_pretty": "Data Analytics & Mining",
+        "code": "SC4020"
+    },
+    {
+        "name_pretty": "Data Visualisation",
+        "code": "SC4024"
+    },
+    {
+        "name_pretty": "Developing Data Products",
+        "code": "SC4025"
+    },
+    {
+        "name_pretty": "Wireless & Mobile Networks",
+        "code": "SC4030"
+    },
+    {
+        "name_pretty": "Advanced Topics In Algorithms",
+        "code": "SC4040"
+    },
+    {
+        "name_pretty": "Blockchain Technology",
+        "code": "SC4053"
+    },
+    {
+        "name_pretty": "Computer Vision",
+        "code": "SC4061"
+    },
+    {
+        "name_pretty": "Compiler Techniques",
+        "code": "SC4242"
+    },
+    {
+        "name_pretty": "Science & Technology For Humanity",
+        "code": "SP0061"
+    }
+]

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Info from '$lib/assets/images/Info.svelte';
+    import sanitizeHtml from 'sanitize-html';
     import { goto } from '$app/navigation';
     import Timetable from '$lib/components/timetable/Timetable.svelte';
     import { t } from '$lib/translations';
@@ -62,7 +64,8 @@
             <div class="first:mt-0 mt-8">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
-                <div>{@html data.module.description}</div>
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                <div>{@html sanitizeHtml(data.module.description)}</div>
             </div>
             <div class="mt-10">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Exam')}</h2>
@@ -77,23 +80,33 @@
         <div class="pl-8 ml-4">
             <h2 class="text-xl font-medium">{$t('Modules.Details.Schedule')}</h2>
             <div class="divider mt-0 mb-4" />
-            <div class="flex justify-center items-center pb-4">
-                <span>{$t('Modules.Details.Index Number')}</span>
-                <select
-                    class="select border border-solid border-neutral ml-4"
-                    bind:value={indexNumber}
-                    on:change={updateIndex}
+            {#if !data.currentSemester}
+                <div
+                    role="alert"
+                    class="alert alert-warning flex justify-center font-semibold mb-4"
                 >
-                    <!-- <option value="-1">-Select one-</option> -->
-                    {#each indexNumbers as indexNumber}
-                        <option value={indexNumber}>{indexNumber}</option>
-                    {/each}
-                </select>
-            </div>
-            <Timetable
-                {lessons}
-                orientation="portrait"
-            />
+                    <Info />
+                    <span>{data.module.code} is not offered in {data.semesterTitle}</span>
+                </div>
+            {:else}
+                <div class="flex justify-center items-center pb-4">
+                    <span>{$t('Modules.Details.Index Number')}</span>
+                    <select
+                        class="select border border-solid border-neutral ml-4"
+                        bind:value={indexNumber}
+                        on:change={updateIndex}
+                    >
+                        <!-- <option value="-1">-Select one-</option> -->
+                        {#each indexNumbers as indexNumber}
+                            <option value={indexNumber}>{indexNumber}</option>
+                        {/each}
+                    </select>
+                </div>
+                <Timetable
+                    {lessons}
+                    orientation="portrait"
+                />
+            {/if}
         </div>
     </div>
 </div>

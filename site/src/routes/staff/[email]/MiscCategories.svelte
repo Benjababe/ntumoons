@@ -1,4 +1,5 @@
 <script lang="ts">
+    import sanitizeHtml from 'sanitize-html';
     import { t } from '$lib/translations';
     import type { Staff } from '$lib/types/Firebase';
     export let staff: Staff;
@@ -14,7 +15,8 @@
         </div>
         <div class="collapse-content w-full mx-auto bg-base-200 pt-4">
             {#each staff.research_interests as interest}
-                <div>{@html interest}</div>
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                <div>{@html sanitizeHtml(interest)}</div>
             {/each}
         </div>
     </div>

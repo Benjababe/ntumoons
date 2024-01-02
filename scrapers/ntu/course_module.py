@@ -17,6 +17,9 @@ from util.structs import CourseCategory, CourseInfo, Lesson, Module, Venue
 
 CACHE_FILENAME = "modules"
 SCHEDULE_SELECT_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main"
+SCHEDULE_SELECT_PAGE_SEM = (
+    "https://wish.wis.ntu.edu.sg/webexe/owa/AUS_SCHEDULE.main_display"
+)
 COURSE_DETAIL_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/AUS_SCHEDULE.main_display1"
 COURSE_INFO_PAGE = "https://wis.ntu.edu.sg/webexe/owa/AUS_SUBJ_CONT.main_display1"
 
@@ -37,7 +40,21 @@ def get_course_categories(
     Returns:
         tuple[str, list[CourseCategory]]: Semester string and list of course categories.
     """
-    res = session_get_cache(sess, SCHEDULE_SELECT_PAGE)
+    if force_semester:
+        res = session_post_cache(
+            sess,
+            SCHEDULE_SELECT_PAGE_SEM,
+            {
+                "acadsem": force_semester,
+                "staff_access": False,
+                "r_subj_code": "Enter Keywords or Course Code",
+                "r_search_type": "F",
+                "boption": "x",
+            },
+        )
+    else:
+        res = session_get_cache(sess, SCHEDULE_SELECT_PAGE)
+
     soup = BeautifulSoup(res.text, "lxml")
 
     if force_semester == "":
@@ -182,7 +199,7 @@ def scrape_category_modules(
             lat=DEFAULT_LAT,
             lng=DEFAULT_LNG,
             floor=-1,
-            lessons=list(lessons),
+            lessons={semester: list(lessons)},
         )
         venues.append(venue)
 
@@ -377,10 +394,3 @@ def get_category_modules_venues(
         modules.append(module)
 
     return modules, venues
-
-
-def get_sem_title(semester: str) -> str:
-    pattern = r"\d{2}(\d{2});(\d{1})"
-    matches = re.search(pattern, semester)
-    ay, sem_num = int(matches.group(1)), matches.group(2)
-    return f"AY 20{ay}/{ay+1} Semester {sem_num}"

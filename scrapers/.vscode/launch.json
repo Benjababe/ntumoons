@@ -11,7 +11,11 @@
             "program": "${workspaceFolder}/scrape.py",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}",
-            "justMyCode": true
+            "justMyCode": true,
+            "args": [
+                // "--semester",
+                // "2023;1"
+            ]
         },
     ]
 }

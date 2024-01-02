@@ -4,8 +4,13 @@ import { error, json } from '@sveltejs/kit';
 import type { SearchParams } from 'typesense/lib/Typesense/Documents';
 
 const queryFields = {
-    modules: ['code', 'name'],
+    modules: ['code', 'name_pretty', 'description'],
     staff: ['title', 'description']
+};
+
+const sortBy = {
+    modules: '_text_match:desc, code:asc',
+    staff: ''
 };
 
 export async function POST({ request }) {
@@ -23,6 +28,7 @@ export async function POST({ request }) {
     const queryParams: SearchParams = {
         q,
         query_by: queryFields[collection],
+        sort_by: sortBy[collection],
         page,
         per_page,
         snippet_threshold: 5000,
@@ -32,7 +38,8 @@ export async function POST({ request }) {
     };
 
     const tsRes = await typesense.collections(collection).documents().search(queryParams);
-    if (tsRes.hits === undefined || tsRes.hits.length === 0) return error(404, 'No staff found');
+    if (tsRes.hits === undefined || tsRes.hits.length === 0)
+        return error(404, 'No documents found');
 
     return json({ tsRes });
 }

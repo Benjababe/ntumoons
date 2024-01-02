@@ -4,7 +4,7 @@ import { persisted } from 'svelte-persisted-store';
 import { writable } from 'svelte/store';
 
 const key = 'timetableModules';
-export const timetableModules = persisted<Module[]>(key, []);
+export const timetableModules = persisted<Record<string, Module[]>>(key, {});
 
 type TimetableClashes = Partial<Record<Day, string[][]>>;
 const defaultDayClashes: TimetableClashes = {};
