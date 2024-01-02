@@ -15,9 +15,11 @@
     });
 
     async function getSemester() {
-        console.log('Fetching latest semester...');
-        const semData = (await (await fetch('/search/firebase/semester')).json()) as Semester;
-        return semData;
+        const semRes = (await (await fetch('/search/firebase/semester')).json()) as Semester[];
+        for (let i = 0; i < semRes.length; i++) {
+            if (semRes[i].active) return semRes[i];
+        }
+        return $activeSemester;
     }
 </script>
 
