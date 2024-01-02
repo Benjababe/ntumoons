@@ -22,7 +22,12 @@ FS_COLL_STAFF = "staff"
 TS_COLL_MODULE = "modules"
 TS_COLL_STAFF = "staff"
 
-TS_ATTRS_MODULE = ["name", "name_pretty", "code", "year", "semester_num", "description"]
+TS_ATTRS_MODULE = [
+    "name",
+    "name_pretty",
+    "code",
+    "description",
+]
 TS_ATTRS_STAFF = [
     "title",
     "email",
@@ -64,7 +69,7 @@ async def scrape_modules(force_semester: str):
 
     semester_prepend = f"{semester}_"
 
-    # typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE, semester_prepend)
+    typesense_upsert(TS_COLL_MODULE, "code", modules, TS_ATTRS_MODULE)
 
     sem_obj = {
         "active": True,
@@ -73,13 +78,13 @@ async def scrape_modules(force_semester: str):
         "year": semester.split(";")[0],
         "semester_num": semester.split(";")[1],
     }
-    # await write_fs(FS_COLL_SEM, semester, sem_obj)
-    # await write_fs_list(
-    #     FS_COLL_MODULE, "code", modules, doc_id_prepend=semester_prepend
-    # )
-    # await write_fs_list(
-    #     FS_COLL_COURSE_CATEGORY, "code", categories, doc_id_prepend=semester_prepend
-    # )
+    await write_fs(FS_COLL_SEM, semester, sem_obj)
+    await write_fs_list(
+        FS_COLL_MODULE, "code", modules, doc_id_prepend=semester_prepend
+    )
+    await write_fs_list(
+        FS_COLL_COURSE_CATEGORY, "code", categories, doc_id_prepend=semester_prepend
+    )
     await write_fs_list(
         FS_COLL_VENUE, "name", venues, override=False, override_func=merge_venue
     )
@@ -110,7 +115,7 @@ async def scrape_staff():
 
 async def scrape(force_semester: str):
     await scrape_modules(force_semester)
-    # await scrape_staff()
+    await scrape_staff()
 
 
 if __name__ == "__main__":

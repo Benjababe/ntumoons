@@ -74,8 +74,6 @@ def init_typesense():
         [
             desc_field,
             {"name": "name", "type": "string"},
-            {"name": "year", "type": "string"},
-            {"name": "semester_num", "type": "string"},
             {"name": "name_pretty", "type": "string"},
             {"name": "code", "type": "string"},
         ],
