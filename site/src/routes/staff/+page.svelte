@@ -42,6 +42,7 @@
                         target="_blank"
                         class="flex items-center gap-x-1 fill-primary text-primary text-xl"
                     >
+                        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                         {@html hit.highlight.title && hit.highlight.title.snippet
                             ? sanitizeHtml(hit.highlight.title.snippet)
                             : sanitizeHtml(hit.document.title)}
@@ -51,6 +52,7 @@
                     <div class="divider mt-0 mb-2" />
                     <div>
                         {#if hit.document.description !== ''}
+                            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                             {@html hit.highlight.description && hit.highlight.description.snippet
                                 ? sanitizeHtml(hit.highlight.description.snippet)
                                 : sanitizeHtml(hit.document.description)}

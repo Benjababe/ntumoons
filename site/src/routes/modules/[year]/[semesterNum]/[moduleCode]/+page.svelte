@@ -63,6 +63,7 @@
             <div class="first:mt-0 mt-8">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 <div>{@html sanitizeHtml(data.module.description)}</div>
             </div>
             <div class="mt-10">

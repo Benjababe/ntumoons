@@ -15,6 +15,7 @@
         </div>
         <div class="collapse-content w-full mx-auto bg-base-200 pt-4">
             {#each staff.research_interests as interest}
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 <div>{@html sanitizeHtml(interest)}</div>
             {/each}
         </div>
