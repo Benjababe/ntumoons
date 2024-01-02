@@ -21,10 +21,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
-          cache: 'yarn'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
       - name: install
-        run: yarn install
-      - name: ESLint
-        run: yarn run fix .
-      - name: Prettier
-        run: yarn prettier --write .
+        working-directory: site
+        run: npm install
+
+      - name: lint
+        working-directory: site
+        run: npm run lint
