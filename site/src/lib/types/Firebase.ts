@@ -59,6 +59,7 @@ export type Staff = {
 };
 
 export type Semester = {
+    default: boolean;
     id: string;
     active: boolean;
     title: string;

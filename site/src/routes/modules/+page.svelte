@@ -4,8 +4,15 @@
     import { t } from '$lib/translations';
     import type { ModuleDoc } from '$lib/types/Typesense';
     import type { SearchResponseHit } from 'typesense/lib/Typesense/Documents';
+    import { activeSemester } from '$lib/stores';
 
     let hits: SearchResponseHit<ModuleDoc>[] = [];
+    let activeYear: string;
+    let activeSemesterNum: string;
+    $: {
+        activeYear = $activeSemester.year;
+        activeSemesterNum = $activeSemester.semester_num;
+    }
 </script>
 
 <TypesenseSearch
@@ -17,8 +24,7 @@
         {#each hits as hit}
             <div class="mt-8 mb-4">
                 <a
-                    href="/modules/{hit.document.year}/{hit.document.semester_num}/{hit.document
-                        .code}"
+                    href="/modules/{activeYear}/{activeSemesterNum}/{hit.document.code}"
                     class="text-primary text-xl"
                 >
                     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
