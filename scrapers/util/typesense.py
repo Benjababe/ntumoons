@@ -75,7 +75,7 @@ def init_typesense():
             desc_field,
             {"name": "name", "type": "string"},
             {"name": "name_pretty", "type": "string"},
-            {"name": "code", "type": "string"},
+            {"name": "code", "type": "string", "sort": True},
         ],
     )
     create_collection(
