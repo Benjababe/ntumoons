@@ -1,4 +1,5 @@
 <script lang="ts">
+    import sanitizeHtml from 'sanitize-html';
     import { t } from '$lib/translations';
     import StaffFallbackImage from '$lib/assets/images/StaffFallbackImage.svelte';
     import NewTab from '$lib/assets/images/NewTab.svelte';
@@ -42,8 +43,8 @@
                         class="flex items-center gap-x-1 fill-primary text-primary text-xl"
                     >
                         {@html hit.highlight.title && hit.highlight.title.snippet
-                            ? hit.highlight.title.snippet
-                            : hit.document.title}
+                            ? sanitizeHtml(hit.highlight.title.snippet)
+                            : sanitizeHtml(hit.document.title)}
                         <NewTab />
                     </a>
                     <div>{hit.document.tag}</div>
@@ -51,8 +52,8 @@
                     <div>
                         {#if hit.document.description !== ''}
                             {@html hit.highlight.description && hit.highlight.description.snippet
-                                ? hit.highlight.description.snippet
-                                : hit.document.description}
+                                ? sanitizeHtml(hit.highlight.description.snippet)
+                                : sanitizeHtml(hit.document.description)}
                         {:else}
                             {$t('Staff.Search.No description provided')}
                         {/if}
