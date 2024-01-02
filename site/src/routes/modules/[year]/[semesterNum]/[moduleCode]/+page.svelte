@@ -1,4 +1,5 @@
 <script lang="ts">
+    import sanitizeHtml from 'sanitize-html';
     import { goto } from '$app/navigation';
     import Timetable from '$lib/components/timetable/Timetable.svelte';
     import { t } from '$lib/translations';
@@ -62,7 +63,8 @@
             <div class="first:mt-0 mt-8">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
                 <div class="divider my-0" />
-                <div>{@html data.module.description}</div>
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                <div>{@html sanitizeHtml(data.module.description)}</div>
             </div>
             <div class="mt-10">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Exam')}</h2>
