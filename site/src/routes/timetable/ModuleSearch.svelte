@@ -1,6 +1,6 @@
 <script lang="ts">
     import Spinner from '$lib/components/generic/Spinner.svelte';
-    import { semester, timetableModules } from '$lib/stores';
+    import { activeSemester, timetableModules } from '$lib/stores';
     import { t } from '$lib/translations';
     import type { ModulesBasic } from '$lib/types/Data';
     import type { Module } from '$lib/types/Firebase';
@@ -41,7 +41,7 @@
 
         const res = await fetch('/search/firebase/module', {
             method: 'POST',
-            body: JSON.stringify({ code: moduleCode, semesterId: $semester.id })
+            body: JSON.stringify({ code: moduleCode, semesterId: $activeSemester.id })
         });
 
         if (!res.ok) return -1;

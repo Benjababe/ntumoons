@@ -1,5 +1,5 @@
 import { timetableModules } from './timetable';
-import { semester } from './semester';
+import { activeSemester } from './semester';
 import { hideSaturday } from './misc';
 
-export { timetableModules, semester, hideSaturday };
+export { timetableModules, activeSemester, hideSaturday };

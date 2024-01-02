@@ -2,7 +2,7 @@
     import '../app.css';
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
-    import { semester } from '$lib/stores';
+    import { activeSemester } from '$lib/stores';
     import type { Semester } from '$lib/types/Firebase';
     import Header from './Header.svelte';
     import Footer from './Footer.svelte';
@@ -11,7 +11,7 @@
         const initLocale = localStorage.locale ?? 'en';
         await loadTranslations(initLocale);
 
-        if (!$semester.active) $semester = await getSemester();
+        if ($activeSemester.default) $activeSemester = await getSemester();
     });
 
     async function getSemester() {
