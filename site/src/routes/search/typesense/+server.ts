@@ -8,6 +8,11 @@ const queryFields = {
     staff: ['title', 'description']
 };
 
+const sortBy = {
+    modules: '_text_match:desc, code:asc',
+    staff: ''
+};
+
 export async function POST({ request }) {
     const { coll, q, page, per_page, filters } = await request.json();
 
@@ -23,6 +28,7 @@ export async function POST({ request }) {
     const queryParams: SearchParams = {
         q,
         query_by: queryFields[collection],
+        sort_by: sortBy[collection],
         page,
         per_page,
         snippet_threshold: 5000,
