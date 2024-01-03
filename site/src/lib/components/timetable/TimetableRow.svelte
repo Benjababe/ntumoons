@@ -15,6 +15,7 @@
     export let lessons: Lesson[];
     export let day: Day;
     export let startTime: number = 830;
+    export let showIndex: boolean = false;
 
     // Percentage of width for every hour
     let widthIntervalPercent = 8.33;
@@ -59,6 +60,7 @@
                         width={cellDetails.width}
                         lesson={cellDetails.lesson}
                         clashing={cellDetails.clashing}
+                        {showIndex}
                     />
                 {/each}
             </div>

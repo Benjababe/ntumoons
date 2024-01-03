@@ -6,6 +6,7 @@ type TranslationPayload = {
     found?: number;
     name?: string;
     planLimit?: number;
+    iterLimit?: number;
 };
 
 export const config: Config<TranslationPayload> = {

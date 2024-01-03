@@ -19,8 +19,9 @@
         dispatch('remove', { code: mod.code });
     }
 
-    function updateIndex() {
-        dispatch('updateIndex', { code: mod.code, index: activeIndexNumber });
+    function updateIndex(e: Event) {
+        const select = e.target as HTMLSelectElement;
+        dispatch('updateIndex', { code: mod.code, index: select.value });
     }
 </script>
 
@@ -56,7 +57,7 @@
         <span>Index Number: </span>
         <select
             class="ml-2 rounded-sm bg-base-300"
-            bind:value={activeIndexNumber}
+            value={activeIndexNumber}
             on:change={updateIndex}
         >
             <option value="-1">-Select one-</option>
