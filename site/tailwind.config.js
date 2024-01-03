@@ -35,6 +35,9 @@ export default {
             },
             scale: {
                 120: '1.2'
+            },
+            width: {
+                'screen-80': '80vw'
             }
         }
     },

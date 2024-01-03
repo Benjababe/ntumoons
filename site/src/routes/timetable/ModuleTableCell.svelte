@@ -7,7 +7,8 @@
     import { createEventDispatcher } from 'svelte';
 
     export let mod: Module;
-    let activeIndexNumber = mod.active_index_number;
+
+    $: activeIndexNumber = mod.active_index_number;
 
     const dispatch = createEventDispatcher<{
         remove: DispatchRemoveModule;
