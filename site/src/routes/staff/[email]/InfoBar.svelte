@@ -1,6 +1,7 @@
 <script lang="ts">
+    import { t } from '$lib/translations';
     import type { Staff } from '$lib/types/Firebase';
-    import NewTab from '$lib/assets/images/NewTab.svelte';
+    import NewTabLink from '$lib/components/generic/NewTabLink.svelte';
     export let staff: Staff;
 </script>
 
@@ -17,24 +18,20 @@
                 class="flex gap-1 btn btn-sm btn-neutral"
                 href="mailto:{staff.email}"
             >
-                Email
+                {$t('Staff.Details.Email')}
             </a>
             {#if staff.personal_url}
-                <a
-                    class="flex gap-1 btn btn-sm btn-neutral"
-                    target="_blank"
-                    href={staff.personal_url}
-                >
-                    Personal Website <NewTab />
-                </a>
+                <NewTabLink
+                    class="btn btn-sm btn-neutral"
+                    url={staff.personal_url}
+                    text={$t('Staff.Details.Personal Website')}
+                />
             {/if}
-            <a
-                class="flex gap-1 btn btn-sm btn-neutral"
-                target="_blank"
-                href={staff.url}
-            >
-                NTU Website <NewTab />
-            </a>
+            <NewTabLink
+                class="btn btn-sm btn-neutral"
+                url={staff.url}
+                text={$t('Staff.Details.NTU Website')}
+            />
         </div>
     </div>
 </div>

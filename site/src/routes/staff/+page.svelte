@@ -2,10 +2,10 @@
     import sanitizeHtml from 'sanitize-html';
     import { t } from '$lib/translations';
     import StaffFallbackImage from '$lib/assets/images/StaffFallbackImage.svelte';
-    import NewTab from '$lib/assets/images/NewTab.svelte';
     import TypesenseSearch from '$lib/components/search/TypesenseSearch.svelte';
     import type { SearchResponseHit } from 'typesense/lib/Typesense/Documents';
     import type { StaffDoc } from '$lib/types/Typesense';
+    import NewTabLink from '$lib/components/generic/NewTabLink.svelte';
 
     let hits: SearchResponseHit<StaffDoc>[] = [];
 </script>
@@ -37,17 +37,14 @@
                     </a>
                 </div>
                 <div class="w-5/6 text-sm">
-                    <a
-                        href="/staff/{hit.document.email}"
-                        target="_blank"
-                        class="flex items-center gap-x-1 fill-primary text-primary text-xl"
-                    >
-                        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                        {@html hit.highlight.title && hit.highlight.title.snippet
-                            ? sanitizeHtml(hit.highlight.title.snippet)
-                            : sanitizeHtml(hit.document.title)}
-                        <NewTab />
-                    </a>
+                    <NewTabLink
+                        class="fill-primary text-primary text-xl"
+                        url="/staff/{hit.document.email}"
+                        text={hit.highlight.title && hit.highlight.title.snippet
+                            ? hit.highlight.title.snippet
+                            : hit.document.title}
+                        isRawHtml={true}
+                    />
                     <div>{hit.document.tag}</div>
                     <div class="divider mt-0 mb-2" />
                     <div>
