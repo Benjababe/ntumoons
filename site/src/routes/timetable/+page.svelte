@@ -5,6 +5,7 @@
     import { timetableModules, activeSemester } from '$lib/stores';
     import type { Lesson } from '$lib/types/Firebase';
     import ClashingLessons from '$lib/components/timetable/ClashingLessons.svelte';
+    import GenerateTimetable from '$lib/components/generate-timetable/GenerateTimetable.svelte';
 
     export let data;
     let lessons: Lesson[] = [];
@@ -23,6 +24,7 @@
 </script>
 
 <div class="flex flex-col justify-center relative max-w-full">
+    <GenerateTimetable />
     <Timetable {lessons} />
     <ClashingLessons />
     <ModuleSearch modules={data.modules[$activeSemester.id]} />
