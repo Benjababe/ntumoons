@@ -7,6 +7,7 @@
     export let height: string | number | undefined = undefined;
     export let lesson: Lesson;
     export let clashing: boolean;
+    export let showIndex: boolean = false;
 
     const landscapeStyle =
         left !== undefined && width !== undefined
@@ -23,6 +24,7 @@
     style="{landscapeStyle} {portraitStyle}"
 >
     <div class="text-center text-gray-700">
+        {#if showIndex}<div>{lesson.index}</div>{/if}
         <div>{lesson.module_code} {lesson.type}</div>
         <div>{lesson.venue_name}</div>
         <div>{lesson.time}</div>

@@ -13,7 +13,7 @@ export async function load({ params }) {
     const documents = querySnapshot.docs;
 
     if (documents.length == 0) {
-        error(404, { message: `Staff with email ${email} not found!` });
+        error(404, { message: `Staff with email "${email}" not found!` });
     } else {
         const staff = querySnapshot.docs.map((doc) => doc.data())[0] as Staff;
         return { staff };

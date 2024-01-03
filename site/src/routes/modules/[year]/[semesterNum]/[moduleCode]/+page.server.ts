@@ -12,7 +12,7 @@ export async function load({ params }) {
     if (documents.length == 0) {
         documents = await getModuleDocs(moduleCode);
 
-        if (documents.length == 0) error(404, { message: `Module ${moduleCode} not found!` });
+        if (documents.length == 0) error(404, { message: `Module "${moduleCode}" not found!` });
         else {
             const module = documents.map((doc) => doc.data())[0] as Module;
             return { year, semesterNum, module, semesterTitle, currentSemester: false };

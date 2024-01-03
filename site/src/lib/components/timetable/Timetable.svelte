@@ -9,6 +9,7 @@
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
+    export let showIndex: boolean = false;
 
     const days: Day[] = $hideSaturday
         ? ['MON', 'TUE', 'WED', 'THU', 'FRI']
@@ -56,6 +57,7 @@
                     lessons={dayLessons[day] ?? []}
                     {day}
                     startTime={parseInt(times[0])}
+                    {showIndex}
                 />
             {/each}
         </ol>
@@ -82,6 +84,7 @@
                     {day}
                     startTime={parseInt(times[0])}
                     lastColumn={i === days.length - 1}
+                    {showIndex}
                 />
             {/each}
         </ol>
