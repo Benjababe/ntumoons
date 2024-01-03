@@ -80,6 +80,9 @@
             "Appointments: ": "Appointments: "
         },
         "Details": {
+            "Email": "Email",
+            "Personal Website": "Personal Website",
+            "NTU Website": "NTU Website",
             "Biography": "Biography",
             "Keywords": "Keywords",
             "Research Interests": "Research Interests",
@@ -103,5 +106,14 @@
                 "There are clashes between lessons in the timetable!": "Eh your timetable got some clash ah"
             }
         }
+    },
+
+    "Error": {
+        "Status:": "Status:",
+        "Oops!": "Oops!",
+        "Bad request, the server could not fulfill the request": "Bad request, the server could not fulfill the request",
+        "The page you are looking for doesnt exist": "The page you are looking for doesnt exist",
+        "If this is unexpected, raise an issue on GitHub": "If this is unexpected, raise an issue on GitHub",
+        "Raise Issue": "Raise Issue"
     }
 }
