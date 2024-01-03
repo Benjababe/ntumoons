@@ -3,8 +3,11 @@
     import { t } from '$lib/translations';
     import { timetableModules, activeSemester } from '$lib/stores';
     import type { Lesson, Module } from '$lib/types/Firebase';
-    import { generateTimetable, PLAN_LIMIT } from './helper';
+    import { generateTimetable, PLAN_LIMIT } from '../../../routes/timetable/generate/helper';
+    import Error from '$lib/assets/images/Error.svelte';
+    import Spinner from '../generic/Spinner.svelte';
 
+    let generating: boolean = false;
     let modules: Module[];
     let dialog: HTMLDialogElement;
     let plans: Lesson[][] = [];
@@ -85,15 +88,24 @@
                 </div>
             {/if}
             <Timetable lessons={plans[planIndex]} />
+        {:else}
+            <div class="flex justify-center">
+                <div class="alert alert-error font-semibold mb-4 w-fit">
+                    <Error />
+                    {$t('Timetable.No combination was found without clashes')}
+                </div>
+            </div>
         {/if}
         <div class="modal-action !justify-center">
             <form method="dialog">
-                <button
-                    class="btn btn-primary"
-                    on:click={setTimetable}
-                >
-                    {$t('Timetable.Apply')}
-                </button>
+                {#if plans.length > 0}
+                    <button
+                        class="btn btn-primary"
+                        on:click={setTimetable}
+                    >
+                        {$t('Timetable.Apply')}
+                    </button>
+                {/if}
                 <button class="btn ml-2">{$t('Timetable.Close')}</button>
             </form>
         </div>

@@ -1,19 +1,37 @@
 import type { Lesson, Module } from '$lib/types/Firebase';
 
 export const PLAN_LIMIT = 5000;
+export const ITER_LIMIT = 10000;
+
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 let plans: Lesson[][] = [];
+let iters = 0;
 
-export function generateTimetable(modules: Module[]) {
+type TimetableResponse = {
+    generatedPlans: Lesson[][];
+    planLimit: boolean;
+    iterLimit: boolean;
+};
+
+export async function generateTimetable(modules: Module[]) {
     plans = [];
-    iterateModules(modules, [], []);
-    return plans;
+    iters = 0;
+
+    return new Promise<TimetableResponse>((resolve) => {
+        iterateModules(modules, [], []);
+        resolve({
+            generatedPlans: plans,
+            planLimit: plans.length >= PLAN_LIMIT,
+            iterLimit: iters >= ITER_LIMIT
+        });
+    });
 }
 
 function iterateModules(modules: Module[], indexes: string[], plan: Lesson[]) {
-    if (plans.length >= PLAN_LIMIT) return;
+    if (plans.length >= PLAN_LIMIT || iters >= ITER_LIMIT) return;
 
     if (modules.length === 0) {
+        iters++;
         if (checkValid(plan)) plans = [...plans, plan];
         return;
     }
