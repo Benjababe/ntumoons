@@ -44,7 +44,7 @@
     <div class="text-sm">
         {#if mod.exam !== null}
             <span>
-                Exam:
+                {$t('Timetable.Exam')}:
                 {mod.exam.date}
                 {mod.exam.time}
             </span>
@@ -54,13 +54,13 @@
         <span>-- {mod.credits} AU</span>
     </div>
     <div class="text-sm mt-2">
-        <span>Index Number: </span>
+        <span>{$t('Timetable.Index Number')}: </span>
         <select
             class="ml-2 rounded-sm bg-base-300"
             value={activeIndexNumber}
             on:change={updateIndex}
         >
-            <option value="-1">-Select one-</option>
+            <option value="-1">{$t('Timetable.--Select one--')}</option>
             {#each Object.keys(mod.index_numbers) as idx}
                 <option value={idx}>{idx}</option>
             {/each}
