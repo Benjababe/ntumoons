@@ -5,6 +5,7 @@ import lang from './lang.json';
 type TranslationPayload = {
     found?: number;
     name?: string;
+    planLimit?: number;
 };
 
 export const config: Config<TranslationPayload> = {

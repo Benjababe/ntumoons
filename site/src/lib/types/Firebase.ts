@@ -15,7 +15,7 @@ export type Module = {
     mutex: string[];
     semester: string;
     grading: string;
-    index_numbers: { [key: string]: Lesson[] };
+    index_numbers: Record<string, Lesson[]>;
     active_index_number: string;
 };
 

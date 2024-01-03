@@ -40,6 +40,13 @@
     },
 
     "Timetable": {
+        "Generate Timetable": "Generate Timetable",
+        "Timetable Generation": "Timetable Generation",
+        "Prev": "Prev",
+        "Next": "Next",
+        "Over x possible timetable combinations have been found": "Over {{planLimit}} possible timetable combinations have been found. You shouldn't need this tool to find a valid timetable",
+        "Apply": "Apply",
+        "Close": "Close",
         "Course code or name": "Course code or name",
         "No exam for this module.": "Swee la no exam this one."
     },
