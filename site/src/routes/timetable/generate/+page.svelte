@@ -102,7 +102,10 @@
                         </div>
                     </div>
                 {/if}
-                <Timetable lessons={plans[planIndex]} />
+                <Timetable
+                    lessons={plans[planIndex]}
+                    showIndex={true}
+                />
                 <div class="flex justify-center">
                     <button
                         class="btn btn-primary"
