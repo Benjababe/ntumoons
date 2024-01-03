@@ -86,7 +86,12 @@
                     class="alert alert-warning flex justify-center font-semibold mb-4"
                 >
                     <Info />
-                    <span>{data.module.code} is not offered in {data.semesterTitle}</span>
+                    <span>
+                        {$t('Modules.Details.Module is not offered in semester', {
+                            code: data.module.code,
+                            semesterTitle: data.semesterTitle
+                        })}
+                    </span>
                 </div>
             {:else}
                 <div class="flex justify-center items-center pb-4">

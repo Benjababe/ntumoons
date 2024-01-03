@@ -57,6 +57,6 @@
         method="dialog"
         class="modal-backdrop"
     >
-        <button class="cursor-default">Close but this shouldn't be seen xd</button>
+        <button class="cursor-default"></button>
     </form>
 </dialog>

@@ -50,7 +50,10 @@
         "Apply": "Apply",
         "Close": "Close",
         "Course code or name": "Course code or name",
-        "No exam for this module.": "No exam for this module."
+        "Exam": "Exam",
+        "No exam for this module.": "No exam for this module.",
+        "Index Number": "Index Number",
+        "--Select one--": "--Select one--"
     },
 
     "Modules": {
@@ -69,6 +72,7 @@
             "ExamDuration": "Exam Duration: ",
             "ExamTime": "Exam Time: ",
             "Schedule": "Schedule",
+            "Module is not offered in semester": "{{code}} is not offered in {{semesterTitle}}",
             "Index Number": "Index Number: "
         }
     },
