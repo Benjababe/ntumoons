@@ -2,14 +2,23 @@ import asyncio
 from typing import Callable
 
 import firebase_admin
-from firebase_admin import credentials, firestore_async
-from google.cloud.firestore import AsyncDocumentReference
+from firebase_admin import App, credentials, firestore_async
+from google.cloud.firestore import AsyncClient, AsyncDocumentReference
 
 from util.structs import Dictable
 
-creds = credentials.Certificate("serviceAccountKeyDev.json")
-app = firebase_admin.initialize_app(creds)
-db = firestore_async.client()
+creds: credentials.Certificate = None
+app: App = None
+db: AsyncClient = None
+
+
+def init_firestore(prod: bool = False):
+    global creds, app, db
+
+    name = "Prod" if prod else "Dev"
+    creds = credentials.Certificate(f"serviceAccountKey{name}.json")
+    app = firebase_admin.initialize_app(creds)
+    db = firestore_async.client()
 
 
 async def write_fs(fs_coll: str, doc_id: str, data: dict):
@@ -20,7 +29,7 @@ async def write_fs(fs_coll: str, doc_id: str, data: dict):
         doc_id (str): Document id to write as
         data (dict): Data for the document
     """
-
+    global db
     await db.collection(fs_coll).document(doc_id).set(data)
 
 
@@ -28,8 +37,8 @@ async def write_fs_list(
     fs_coll: str,
     doc_id_key: str,
     data_list: str,
-    override: bool = True,
-    override_func: Callable[[dict, dict], dict] = None,
+    overwrite: bool = True,
+    overwrite_func: Callable[[dict, dict], dict] = None,
     subcoll_key: str = "",
 ):
     """Writes a list of data to firestore.
@@ -38,12 +47,14 @@ async def write_fs_list(
         fs_coll (str): Name of firestore collection to write to.
         doc_id_key (str): Key of data to use as firestore document id.
         data_list (list[Dictable]): List of data to upload.
-        override (bool, optional): Flag whether to replace existing documents. Defaults to True.
-        override_func (Callable[[dict, dict], dict], optional): Function to execute if document exists and override it with its returned value. Defaults to None.
+        overwrite (bool, optional): Flag whether to replace existing documents. Defaults to True.
+        overwrite_func (Callable[[dict, dict], dict], optional): Function to execute if document exists and override it with its returned value. Defaults to None.
         subcollection_key (str, optional): Key of dictable to use as a subcollection. Value must be a dict. Defaults to ""
     """
 
     async def write(data: Dictable):
+        global db
+
         data_dict = data.to_dict()
         doc_id = data_dict[doc_id_key]
         subcollection_val = None
@@ -59,7 +70,7 @@ async def write_fs_list(
                 await subcollection_ref.document(doc_id).set(val)
 
         # does not insert if document exists
-        if not override:
+        if not overwrite:
             doc = db.collection(fs_coll).document(doc_id)
             actual_doc = await doc.get()
             if not actual_doc.exists:
@@ -70,8 +81,8 @@ async def write_fs_list(
                 await doc.set(data_dict)
                 await write_subcollection(doc, subcollection_val)
 
-            elif override_func is not None:
-                data_dict = override_func(data_dict, actual_doc.to_dict())
+            elif overwrite_func is not None:
+                data_dict = overwrite_func(data_dict, actual_doc.to_dict())
                 if subcoll_key != "":
                     subcollection_val = data_dict[subcoll_key]
                     del data_dict[subcoll_key]

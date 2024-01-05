@@ -225,6 +225,7 @@ def get_category_modules_info(
     """Parses scraped module grading and description.
 
     Args:
+        semester (str): Semester in YYYY;S format.
         module_codes (list[Module]): Modules for the current category.
         html (str): HTTP response text.
 
@@ -248,6 +249,10 @@ def get_category_modules_info(
             continue
 
         i = module_codes.index(code)
+
+        if modules[i].code == "CZ4046":
+            pass
+
         modules[i].verified = True
 
         # update name again because class schedule includes symbols
@@ -410,11 +415,28 @@ def get_category_modules_venues(
 
 
 def add_module_map(semester: str, module_map: dict[str, Module], module: Module):
+    """Updates `module_map` with either a new module or updates an already added module
+
+    Args:
+        semester (str): Semester in YYYY;S format.
+        module_map (dict[str, Module]): Map of modules, key being the module code.
+        module (Module): Module to insert/update.
+
+    Returns:
+        dict[str, Module]: `module_map` with the inserted/updated module.
+    """
+
     if module.code in module_map:
         stored_index = module_map[module.code].semesters[semester].index_numbers
         stored_index.update(module.semesters[semester].index_numbers)
         module_map[module.code].semesters[semester].index_numbers = stored_index
-        module_map[module.code].verified |= module.verified
+
+        # Update information if unverified module was added previously
+        if not module_map[module.code].verified and module.verified:
+            module_map[module.code].verified = module.verified
+            module_map[module.code].name = module.name
+            module_map[module.code].name_pretty = module.name_pretty
+            module_map[module.code].description = module.description
     else:
         module_map[module.code] = module
 

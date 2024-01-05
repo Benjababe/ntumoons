@@ -10,8 +10,8 @@
             "cwd": "${workspaceFolder}",
             "justMyCode": true,
             "args": [
-                // "--semester",
-                // "2023;1",
+                "--semester",
+                "2022;1",
             ]
         },
     ]
