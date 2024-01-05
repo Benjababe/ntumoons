@@ -31,7 +31,7 @@ def get_exam_plan_num(sess: Session, semester: str) -> str:
     sem_options = soup.find_all("input", {"name": "p_plan_no"})
     plan_num = next((s for s in sem_options if s.next.strip() == sem_title), None)
 
-    return plan_num["value"]
+    return plan_num["value"] if plan_num is not None else None
 
 
 def process_exams(modules: list[Module], html: str) -> list[Exam]:
