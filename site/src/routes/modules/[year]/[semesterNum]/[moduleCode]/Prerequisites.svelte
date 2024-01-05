@@ -18,7 +18,7 @@
             <div class="flex justify-center items-center bg-neutral rounded-md p-2 w-max">
                 {#each prerequisites.split(' & ') as moduleCode, i}
                     <button
-                        class="btn py-1 px-2"
+                        class="btn py-1 px-2 capitalize"
                         on:click|preventDefault={() => openModule(moduleCode)}
                     >
                         {moduleCode}
