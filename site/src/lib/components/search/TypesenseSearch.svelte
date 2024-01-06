@@ -23,9 +23,20 @@
     export let staffHits: SearchResponseHit<StaffDoc>[] = [];
     export let moduleHits: SearchResponseHit<ModuleDoc>[] = [];
 
-    let searchValue = '';
+    /**
+     * Filters are stored key-value pairs,
+     * each pair being each selectable filter and its values.
+     *
+     * Eg.
+     * {
+     *   'keyword': [Filter(), Filter(), ...],
+     *   'tag': [Filter(), Filter()]
+     * }
+     */
     let searchFilters: FilterMap = {};
     let activeFilters: FilterMap = {};
+
+    let searchValue = '';
     let searching = false;
     let found = 0;
     let activePage = 1;
@@ -90,15 +101,18 @@
     }
 
     function updatePaginator(page: number, found: number) {
-        const PAGINATOR_WIDTH = 5;
+        const PAGINATOR_MAX_WIDTH = 5;
         const totalPages = Math.ceil(found / PER_PAGE);
-        const start = Math.max(1, page - Math.floor(PAGINATOR_WIDTH / 2));
-        const end = Math.min(totalPages, page + Math.floor(PAGINATOR_WIDTH / 2));
+        const start = Math.max(1, page - Math.floor(PAGINATOR_MAX_WIDTH / 2));
+        const end = Math.min(totalPages, page + Math.floor(PAGINATOR_MAX_WIDTH / 2));
 
         activePage = page;
         pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
     }
 
+    /**
+     * Evaluates parameters provided in the url and sets the input as such.
+     */
     function parseParams() {
         const params = new URLSearchParams(window.location.search);
         const paramPage = params.get('page');
@@ -108,6 +122,10 @@
         if (paramSearchValue) searchValue = paramSearchValue;
     }
 
+    /**
+     * On input updates, add the input values to the url parameters
+     * so the url can be reloaded with the same state.
+     */
     function updateUrl() {
         let filters: string[] = [];
         for (const [facetName, facets] of Object.entries(activeFilters)) {

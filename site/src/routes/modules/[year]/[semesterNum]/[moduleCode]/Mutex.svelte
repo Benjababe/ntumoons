@@ -16,7 +16,7 @@
     <div class="flex flex-wrap gap-4 mt-2">
         {#each mutex as moduleCode}
             <button
-                class="btn py-1 px-3"
+                class="btn py-1 px-3 capitalize"
                 on:click|preventDefault={() => openModule(moduleCode)}
             >
                 {moduleCode}

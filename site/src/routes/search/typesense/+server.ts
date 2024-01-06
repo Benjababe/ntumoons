@@ -13,6 +13,11 @@ const sortBy = {
     staff: ''
 };
 
+const forceFilter = {
+    modules: 'verified:true ',
+    staff: ''
+};
+
 export async function POST({ request }) {
     const { coll, q, page, per_page, filters } = await request.json();
 
@@ -32,7 +37,7 @@ export async function POST({ request }) {
         page,
         per_page,
         snippet_threshold: 5000,
-        filter_by: filters,
+        filter_by: `${forceFilter[collection]} ${filters === '' ? '' : ', '}${filters}`,
         facet_by: '*',
         max_facet_values: 50
     };

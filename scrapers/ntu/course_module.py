@@ -13,7 +13,16 @@ from util.helper import (
     session_post_cache,
     write_cache,
 )
-from util.structs import CourseCategory, CourseInfo, Lesson, Module, Venue
+from util.structs import (
+    CourseCategory,
+    CourseCategorySemester,
+    CourseInfo,
+    Lesson,
+    Module,
+    ModuleReduced,
+    ModuleSemester,
+    Venue,
+)
 
 CACHE_FILENAME = "modules"
 SCHEDULE_SELECT_PAGE = "https://wish.wis.ntu.edu.sg/webexe/owa/aus_schedule.main"
@@ -64,7 +73,7 @@ def get_course_categories(
         active_semester = semester_selector.find("option", {"selected": True})
         active_semester = cast(bs4.element.Tag, active_semester)
 
-        semester = active_semester["value"]
+        semester = str(active_semester["value"])
     else:
         semester = force_semester
 
@@ -85,7 +94,7 @@ def get_course_categories(
                 code=c["value"],
                 name=c.text.strip(),
                 name_pretty=c.text.strip().title(),
-                modules=[],
+                semesters={},
             ),
             categories,
         )
@@ -112,17 +121,16 @@ def scrape_category_modules(
         return cache["categories"], cache["modules"], cache["venues"]
 
     # keep track of all modules scraped as well
-    all_modules: list[Module] = []
-    added_codes = set()
+    module_map: dict[str, Module] = {}
 
     # just a dict, key=course code, value=set of lessons
     # will be converted to list of Venue objects at the end
     venue_dict: dict[str, set(Lesson)] = {}
     venues = []
 
-    for i, category in enumerate(categories):
-        category_module_codes = set()
+    categories = categories
 
+    for i, category in enumerate(categories):
         category_name = category.name
 
         sys.stdout.write("\033[K")
@@ -166,31 +174,28 @@ def scrape_category_modules(
         res = session_post_cache(sess, COURSE_INFO_PAGE, data)
 
         if res.ok:
-            modules = get_category_modules_info(modules, res.text)
+            modules = get_category_modules_info(semester, modules, res.text)
         else:
             print(f"Error with scraping {category_name}")
             continue
 
-        # add modules which have not already been added
         for module in modules:
-            category_module_codes.add(module.code)
+            # add or merge modules which have not already been added
+            module_map = add_module_map(semester, module_map, module)
 
-            if not module.verified or module.code in added_codes:
-                continue
-            else:
-                all_modules.append(module)
-                added_codes.add(module.code)
-
-        # add category code to module if this category offers it
-        for j, module in enumerate(all_modules):
-            if module.code in category_module_codes:
-                course_info = CourseInfo(code=category_code, name=category_name)
-                all_modules[j].courses_offered.append(course_info)
+            # add course categories to modules
+            course_info = CourseInfo(code=category_code, name=category_name)
+            module_map[module.code].semesters[semester].courses_offered.append(
+                course_info
+            )
 
         # include module codes offered into category
-        category.modules = list(
-            map(lambda m: {"name": m.name, "code": m.code}, modules)
+        category.semesters[semester] = CourseCategorySemester(
+            modules=list(
+                map(lambda m: ModuleReduced(name=m.name, code=m.code), modules)
+            )
         )
+
         categories[i] = category
 
     for v_name, lessons in venue_dict.items():
@@ -206,18 +211,21 @@ def scrape_category_modules(
     # cache results in case of reuse
     cache_val = {
         "categories": categories,
-        "modules": all_modules,
+        "modules": list(module_map.values()),
         "venues": venues,
     }
     write_cache(CACHE_FILENAME, cache_key, cache_val)
 
-    return categories, all_modules, venues
+    return categories, list(module_map.values()), venues
 
 
-def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
+def get_category_modules_info(
+    semester: str, modules: list[Module], html: str
+) -> list[Module]:
     """Parses scraped module grading and description.
 
     Args:
+        semester (str): Semester in YYYY;S format.
         module_codes (list[Module]): Modules for the current category.
         html (str): HTTP response text.
 
@@ -241,6 +249,10 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
             continue
 
         i = module_codes.index(code)
+
+        if modules[i].code == "CZ4046":
+            pass
+
         modules[i].verified = True
 
         # update name again because class schedule includes symbols
@@ -260,17 +272,17 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
             if "grade type" in header_cell.text.lower():
                 active_header = "grade type"
                 grading = cells[1].text.strip()
-                modules[i].grading = grading
+                modules[i].semesters[semester].grading = grading
 
             elif "prerequisite" in header_cell.text.lower():
                 active_header = "prerequisite"
                 prereqs = cells[1].text.strip().replace("OR", "")
-                modules[i].prerequisites.append(prereqs)
+                modules[i].semesters[semester].prerequisites.append(prereqs)
 
             elif "mutually exclusive" in header_cell.text.lower():
                 active_header = "mutex"
                 mutex = cells[1].text.strip().split(",")
-                modules[i].mutex = [m.strip() for m in mutex]
+                modules[i].semesters[semester].mutex = [m.strip() for m in mutex]
 
             # prerequisite format is retarded and uses multiple rows
             elif header_cell.text.strip() == "" and active_header == "prerequisite":
@@ -278,7 +290,7 @@ def get_category_modules_info(modules: list[Module], html: str) -> list[Module]:
                     continue
 
                 prereqs = cells[1].text.strip().replace("OR", "")
-                modules[i].prerequisites.append(prereqs)
+                modules[i].semesters[semester].prerequisites.append(prereqs)
 
     return modules
 
@@ -300,7 +312,7 @@ def get_category_modules_venues(
         and its relevant scheduled lessons.
     """
 
-    modules = []
+    modules: list[Module] = []
     venues: dict[str, set[Lesson]] = {}
 
     soup = BeautifulSoup(course_page_text, "lxml")
@@ -318,24 +330,29 @@ def get_category_modules_venues(
         res = re.search(r"(\d+);(\d+)", semester)
         year, semester_num = res.group(1), res.group(2)
 
-        module = Module(
-            verified=False,
+        moduleSemester = ModuleSemester(
             semester=semester,
-            year=year,
             semester_num=semester_num,
-            code=module_code,
+            year=year,
             courses_offered=[],
-            credits=module_credits,
-            description="",
-            grading="",
-            prerequisites=[],
-            mutex=[],
-            name=module_name,
-            name_pretty=module_name.title(),
             index_numbers={},
             exam=None,
+            prerequisites=[],
+            mutex=[],
+            credits=module_credits,
+            grading="",
         )
 
+        module = Module(
+            verified=False,
+            code=module_code,
+            name=module_name,
+            name_pretty=module_name.title(),
+            description="",
+            semesters={semester: moduleSemester},
+        )
+
+        index_numbers = {}
         time_table = tbl_header.find_next_sibling()
         time_slots = time_table.find_all("tr")
         index_num = "-1"
@@ -380,10 +397,10 @@ def get_category_modules_venues(
                 venue_name=l_venue,
                 remark=l_remark,
             )
-            if index_num in module.index_numbers:
-                module.index_numbers[index_num].append(lesson)
+            if index_num in index_numbers:
+                index_numbers[index_num].append(lesson)
             else:
-                module.index_numbers[index_num] = [lesson]
+                index_numbers[index_num] = [lesson]
 
             if len(l_venue) > 0:
                 if l_venue in venues:
@@ -391,6 +408,36 @@ def get_category_modules_venues(
                 else:
                     venues[l_venue] = set([lesson])
 
+        module.semesters[semester].index_numbers = index_numbers
         modules.append(module)
 
     return modules, venues
+
+
+def add_module_map(semester: str, module_map: dict[str, Module], module: Module):
+    """Updates `module_map` with either a new module or updates an already added module
+
+    Args:
+        semester (str): Semester in YYYY;S format.
+        module_map (dict[str, Module]): Map of modules, key being the module code.
+        module (Module): Module to insert/update.
+
+    Returns:
+        dict[str, Module]: `module_map` with the inserted/updated module.
+    """
+
+    if module.code in module_map:
+        stored_index = module_map[module.code].semesters[semester].index_numbers
+        stored_index.update(module.semesters[semester].index_numbers)
+        module_map[module.code].semesters[semester].index_numbers = stored_index
+
+        # Update information if unverified module was added previously
+        if not module_map[module.code].verified and module.verified:
+            module_map[module.code].verified = module.verified
+            module_map[module.code].name = module.name
+            module_map[module.code].name_pretty = module.name_pretty
+            module_map[module.code].description = module.description
+    else:
+        module_map[module.code] = module
+
+    return module_map
