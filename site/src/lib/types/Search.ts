@@ -1,5 +1,5 @@
 export type TypesenseSearch = {
-    coll: string;
+    coll?: string;
     q: string;
     page: number;
     per_page: number;
