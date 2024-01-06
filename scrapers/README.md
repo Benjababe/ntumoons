@@ -21,7 +21,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Ensure `serviceAccountKeyDev.json` or `serviceAccountKeyProd.json` exists in the root directory. If not, it can be exported from firebase. Refer to `serviceAccountKeyDev.example.json` for reference. The account key should be generated off a development/production instance of the Firebase project.
+Ensure `serviceAccountKeyDev.json` or `serviceAccountKeyProd.json` exists in the root directory. If not, it can be exported from firebase. Refer to `serviceAccountKey.example.json` for reference. The account key should be generated off a development/production instance of the Firebase project.
 
 ### Typesense Uploader
 
