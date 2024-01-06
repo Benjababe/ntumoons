@@ -37,3 +37,4 @@ export const COLL_SEMESTER = 'semester';
 export const COLL_MODULES = 'modules';
 export const COLL_STAFF = 'staff';
 export const COLL_VENUES = 'venues';
+export const SUB_COLL_SEMESTERS = 'semesters';
