@@ -49,9 +49,13 @@
 
         if (!res.ok) return -1;
 
-        const mod: Module = await res.json();
-        mod.active_index_number = '-1';
-        return mod;
+        try {
+            const { mod } = (await res.json()) as { mod: Module };
+            mod.active_index_number = '-1';
+            return mod;
+        } catch (ex) {
+            return -1;
+        }
     }
 </script>
 
