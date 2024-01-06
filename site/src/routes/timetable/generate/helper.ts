@@ -1,7 +1,7 @@
 import type { Lesson, Module } from '$lib/types/Firebase';
 
-export const PLAN_LIMIT = 5000;
-export const ITER_LIMIT = 10000;
+export const PLAN_LIMIT = 10000;
+export const ITER_LIMIT = 50000;
 
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 let plans: Lesson[][] = [];

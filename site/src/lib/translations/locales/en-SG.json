@@ -48,6 +48,7 @@
         "Timetable generation has stopped after x combinations": "Timetable generation has stopped after {{iterLimit}} combinations to prevent resource locks",
         "No combination was found without clashes": "No combination was found without clashes",
         "Apply": "Apply",
+        "Return": "Return",
         "Close": "Close",
         "Course code or name": "Course code or name",
         "Exam": "Exam",
