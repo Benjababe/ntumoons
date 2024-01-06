@@ -41,3 +41,4 @@ export const SUB_COLL_SEMESTERS = 'semesters';
 
 export { semesterIdToSemYear, getSemesterTitle } from './helper';
 export { getModuleDoc } from './module';
+export { getSemesters } from './semester';
