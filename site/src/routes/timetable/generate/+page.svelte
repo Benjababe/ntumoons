@@ -8,6 +8,7 @@
     import Info from '$lib/assets/images/Info.svelte';
     import Spinner from '$lib/components/generic/Spinner.svelte';
     import { goto } from '$app/navigation';
+    import type { GeneratePlanLimits } from '$lib/types/Timetable';
 
     let modules: Module[];
     let plans: Lesson[][] = [];
@@ -26,7 +27,7 @@
         const { generatedPlans, planLimit, iterLimit } = await res.json();
         plans = generatedPlans;
         movePlanIndex(0);
-        return { planLimit, iterLimit } as { planLimit: boolean; iterLimit: boolean };
+        return { planLimit, iterLimit } as GeneratePlanLimits;
     }
 
     function setTimetable() {
@@ -39,6 +40,10 @@
         }
 
         $timetableModules[$activeSemester.id] = newModules;
+        returnTimetable();
+    }
+
+    function returnTimetable() {
         goto('/timetable');
     }
 
@@ -58,9 +63,10 @@
         <h3 class="font-bold text-center text-2xl underline mb-4">
             {$t('Timetable.Timetable Generation')}
         </h3>
-
         {#await getPlans()}
-            <Spinner />
+            <div class="flex justify-center">
+                <Spinner />
+            </div>
         {:then data}
             {#if data.iterLimit}
                 <div class="flex justify-center">
@@ -106,12 +112,18 @@
                     lessons={plans[planIndex]}
                     showIndex={true}
                 />
-                <div class="flex justify-center">
+                <div class="flex justify-center gap-x-4">
                     <button
                         class="btn btn-primary"
                         on:click={setTimetable}
                     >
                         {$t('Timetable.Apply')}
+                    </button>
+                    <button
+                        class="btn"
+                        on:click={returnTimetable}
+                    >
+                        {$t('Timetable.Return')}
                     </button>
                 </div>
             {:else}
