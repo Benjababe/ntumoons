@@ -11,7 +11,7 @@ from data.json import write_json, write_json_invidivual, write_json_list
 from ntu.course_module import get_course_categories, scrape_category_modules
 from ntu.exam import get_exam_plan_num, insert_module_exams
 from ntu.staff import get_all_staff, get_metadata
-from util.helper import get_sem_title, merge_course_category, merge_venue
+from util.helper import get_sem_title, merge_venue
 from util.typesense import init_typesense, typesense_upsert
 
 FS_COLL_SEM = "semester"
@@ -62,28 +62,28 @@ async def scrape_modules(force_semester: str):
     if exam_plan_num is not None:
         modules = insert_module_exams(sess, semester, exam_plan_num, modules)
 
-    # write_json_invidivual(modules, f"{semester}/modules", "code")
-    # write_json_list(
-    #     modules, f"{semester}/modulesBasic", ["name_pretty", "code"], "code"
-    # )
-    # write_json_list(categories, f"{semester}/courseCategories")
-    # write_json_list(venues, f"{semester}/venues")
-    # write_json([venue.name for venue in venues], f"{semester}/venuesBasic")
+    write_json_invidivual(modules, f"{semester}/modules", "code")
+    write_json_list(
+        modules, f"{semester}/modulesBasic", ["name_pretty", "code"], "code"
+    )
+    write_json_list(categories, f"{semester}/courseCategories")
+    write_json_list(venues, f"{semester}/venues")
+    write_json([venue.name for venue in venues], f"{semester}/venuesBasic")
 
     # Only insert verified modules into Typesense
     # Unverfied modules usually don't have description or actual pretty names
-    # verified_modules = list(filter(lambda m: m.verified, modules))
-    # typesense_upsert(TS_COLL_MODULE, "code", verified_modules, TS_ATTRS_MODULE)
+    verified_modules = list(filter(lambda m: m.verified, modules))
+    typesense_upsert(TS_COLL_MODULE, "code", verified_modules, TS_ATTRS_MODULE)
 
-    # sem_obj = {
-    #     "active": False,
-    #     "id": semester,
-    #     "title": get_sem_title(semester, True),
-    #     "year": semester.split(";")[0],
-    #     "semester_num": semester.split(";")[1],
-    #     "shown": True,
-    # }
-    # await write_fs(FS_COLL_SEM, semester, sem_obj)
+    sem_obj = {
+        "active": False,
+        "id": semester,
+        "title": get_sem_title(semester, True),
+        "year": semester.split(";")[0],
+        "semester_num": semester.split(";")[1],
+        "shown": True,
+    }
+    await write_fs(FS_COLL_SEM, semester, sem_obj)
     await write_fs_list(FS_COLL_MODULE, "code", modules, subcoll_key="semesters")
     await write_fs_list(FS_COLL_COURSE_CAT, "code", categories, subcoll_key="semesters")
     await write_fs_list(
@@ -116,7 +116,7 @@ async def scrape_staff():
 
 async def scrape(force_semester: str):
     await scrape_modules(force_semester)
-    # await scrape_staff()
+    await scrape_staff()
 
 
 if __name__ == "__main__":
