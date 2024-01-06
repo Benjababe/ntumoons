@@ -146,6 +146,8 @@ __pycache__
 *.pyc
 .vagrant
 
-serviceAccountKey.json
+serviceAccountKeyDev.json
+serviceAccountKeyProd.json
 cache/*
 export/*
+*.prof

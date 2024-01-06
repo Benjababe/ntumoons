@@ -76,6 +76,7 @@ def init_typesense():
             {"name": "name", "type": "string"},
             {"name": "name_pretty", "type": "string"},
             {"name": "code", "type": "string", "sort": True},
+            {"name": "verified", "type": "bool"},
         ],
     )
     create_collection(

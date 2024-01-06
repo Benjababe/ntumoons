@@ -106,22 +106,38 @@ class CourseInfo(Dictable):
 
 
 @dataclass
-class Module(Dictable):
-    verified: bool
+class ModuleSemester(Dictable):
     semester: str
-    year: str
     semester_num: str
-    code: str
+    year: str
     courses_offered: list[CourseInfo]
-    credits: str
-    description: str
-    grading: str
-    prerequisites: list[str]
-    mutex: list[str]
-    name: str
-    name_pretty: str
     index_numbers: dict[str, list[Lesson]]
     exam: Exam
+    prerequisites: list[str]
+    mutex: list[str]
+    credits: str
+    grading: str
+
+
+@dataclass
+class Module(Dictable):
+    verified: bool
+    code: str
+    name: str
+    name_pretty: str
+    description: str
+    semesters: dict[str, ModuleSemester]
+
+
+@dataclass
+class ModuleReduced(Dictable):
+    code: str
+    name: str
+
+
+@dataclass
+class CourseCategorySemester(Dictable):
+    modules: list[ModuleReduced]
 
 
 @dataclass
@@ -129,4 +145,4 @@ class CourseCategory(Dictable):
     code: str
     name: str
     name_pretty: str
-    modules: list[Module]
+    semesters: dict[str, CourseCategorySemester]

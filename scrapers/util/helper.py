@@ -182,3 +182,8 @@ def get_sem_title(semester: str, tidy: bool) -> str:
 def merge_venue(venue: dict, stored_venue: dict):
     stored_venue["lessons"].update(venue["lessons"])
     return stored_venue
+
+
+def merge_course_category(category: dict, stored_category: dict):
+    stored_category["semester_modules"].update(category["semester_modules"])
+    return stored_category
