@@ -4,7 +4,6 @@
     import StaffFallbackImage from '$lib/assets/images/StaffFallbackImage.svelte';
 
     export let staff: Staff;
-    console.log(staff.profile_pic_url);
 </script>
 
 {#if staff.profile_pic_url}
