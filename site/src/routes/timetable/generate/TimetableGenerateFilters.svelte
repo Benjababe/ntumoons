@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { Day } from '$lib/types/Timetable';
+    import type { Day, DayTimeRangesStr } from '$lib/types/Timetable';
     import { t } from '$lib/translations';
-    import { onMount } from 'svelte';
+    import { DAYS_FULL } from '$lib/util';
 
-    export let dayFilters: Record<Day, string[]>;
+    export let dayFilters: DayTimeRangesStr;
 
     const timeRanges: string[] = generateTimeRanges();
-    const days: Day[] = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const days: Day[] = DAYS_FULL;
     let dayIndex = 0;
     $: curDay = days[dayIndex];
 
@@ -53,13 +53,13 @@
     }
 </script>
 
-<div class="w-4/5 mb-6">
+<div class="mb-6">
     <div class="collapse collapse-arrow w-full rounded-lg bg-base-300">
         <input type="checkbox" />
         <div class="collapse-title text-xl text-center font-medium">
-            <span>{$t('Timetable.Generate.Generate Filters')}</span>
+            <span>{$t('Timetable.Generate.Choose Times Without Lessons')}</span>
         </div>
-        <div class="collapse-content">
+        <div class="collapse-content px-12">
             <div class="flex flex-col items-center justify-center">
                 <div class="flex justify-center items-center gap-x-4 mb-4">
                     <button
@@ -80,7 +80,7 @@
                         {'>'}
                     </button>
                 </div>
-                <div class="grid grid-cols-6 gap-x-8 gap-y-4 mb-4">
+                <div class="grid grid-cols-4 gap-x-8 gap-y-4 mb-6">
                     {#each timeRanges as timeRange}
                         <div>
                             <label class="label cursor-pointer">

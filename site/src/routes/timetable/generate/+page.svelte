@@ -8,32 +8,32 @@
     import Info from '$lib/assets/images/Info.svelte';
     import Spinner from '$lib/components/generic/Spinner.svelte';
     import { goto } from '$app/navigation';
-    import type { GeneratePlanLimits, Day } from '$lib/types/Timetable';
+    import type { GeneratePlanLimits, DayTimeRangesStr } from '$lib/types/Timetable';
     import TimetableGenerateFilters from './TimetableGenerateFilters.svelte';
+    import Reload from '$lib/assets/images/Reload.svelte';
+    import { DAYS_FULL } from '$lib/util';
 
-    let modules: Module[];
+    let getPlansPromise: Promise<GeneratePlanLimits>;
+    let modules: Module[] = [];
     let plans: Lesson[][] = [];
     let planIndex: number = 0;
     let moduleIndexes: Record<string, string> = {};
-    let dayFilters: Record<Day, string[]> = {
-        MON: [],
-        TUE: [],
-        WED: [],
-        THU: [],
-        FRI: [],
-        SAT: []
-    };
+    let dayFiltersStr: DayTimeRangesStr = DAYS_FULL.reduce((obj, day) => {
+        obj[day] = [];
+        return obj;
+    }, {} as DayTimeRangesStr);
 
-    $: modules = $timetableModules[$activeSemester.id] ?? [];
-
-    $: console.log(dayFilters);
+    $: {
+        modules = $timetableModules[$activeSemester.id] ?? [];
+        getPlansPromise = getPlans();
+    }
 
     async function getPlans() {
         planIndex = 0;
         const res = await fetch('/timetable/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ modules, dayFilters })
+            body: JSON.stringify({ modules, dayFiltersStr })
         });
         const { generatedPlans, planLimit, iterLimit } = await res.json();
         plans = generatedPlans;
@@ -69,15 +69,24 @@
     }
 </script>
 
-<div class="">
-    <div class="">
+<div>
+    <div class="flex flex-col justify-center items-center">
         <h3 class="font-bold text-center text-2xl underline mb-4">
             {$t('Timetable.Generate.Timetable Generation')}
         </h3>
-        <div class="flex justify-center">
-            <TimetableGenerateFilters bind:dayFilters />
+        <div class="flex justify-center w-full">
+            <TimetableGenerateFilters bind:dayFilters={dayFiltersStr} />
         </div>
-        {#await getPlans()}
+        <button
+            class="btn btn-accent w-fit mb-6"
+            on:click|preventDefault={() => {
+                getPlansPromise = getPlans();
+            }}
+        >
+            <Reload />
+            <span class="mx-1">{$t('Timetable.Generate.Refresh')}</span>
+        </button>
+        {#await getPlansPromise}
             <div class="flex justify-center">
                 <Spinner />
             </div>
@@ -96,10 +105,10 @@
                 </div>
             {/if}
             {#if plans.length > 0}
-                <div class="flex justify-center items-center gap-4 mb-4">
+                <div class="flex items-center gap-4 mb-4">
                     <button
-                        class="btn"
-                        on:click={() => movePlanIndex(-1)}
+                        class="btn btn-neutral"
+                        on:click|preventDefault={() => movePlanIndex(-1)}
                     >
                         {$t('Timetable.Generate.Prev')}
                     </button>
@@ -107,14 +116,14 @@
                         {planIndex + 1} of {plans.length}
                     </span>
                     <button
-                        class="btn"
-                        on:click={() => movePlanIndex(1)}
+                        class="btn btn-neutral"
+                        on:click|preventDefault={() => movePlanIndex(1)}
                     >
                         {$t('Timetable.Generate.Next')}
                     </button>
                 </div>
                 {#if data.planLimit}
-                    <div class="flex justify-center">
+                    <div class="">
                         <div class="alert alert-warning font-semibold mb-4 w-fit">
                             {$t(
                                 'Timetable.Generate.Over x possible timetable combinations have been found',
@@ -125,11 +134,13 @@
                         </div>
                     </div>
                 {/if}
-                <Timetable
-                    lessons={plans[planIndex]}
-                    showIndex={true}
-                />
-                <div class="flex justify-center gap-x-4">
+                <div class="w-full">
+                    <Timetable
+                        lessons={plans[planIndex]}
+                        showIndex={true}
+                    />
+                </div>
+                <div class="flex gap-x-4 mb-4">
                     <button
                         class="btn btn-primary"
                         on:click={setTimetable}
@@ -144,11 +155,9 @@
                     </button>
                 </div>
             {:else}
-                <div class="flex justify-center">
-                    <div class="alert alert-error font-semibold mb-4 w-fit">
-                        <Error />
-                        {$t('Timetable.No combination was found without clashes')}
-                    </div>
+                <div class="alert alert-error font-semibold mb-4 w-fit">
+                    <Error />
+                    {$t('Timetable.Generate.No combination was found without clashes')}
                 </div>
             {/if}
         {/await}

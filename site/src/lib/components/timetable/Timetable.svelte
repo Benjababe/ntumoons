@@ -6,14 +6,13 @@
     import TimetableColumn from './TimetableColumn.svelte';
     import TimetableRow from './TimetableRow.svelte';
     import type { Day } from '$lib/types/Timetable';
+    import { DAYS_FULL, DAYS_SHORT } from '$lib/util';
 
     export let lessons: Lesson[];
     export let orientation: 'landscape' | 'portrait' = 'landscape';
     export let showIndex: boolean = false;
 
-    const days: Day[] = $hideSaturday
-        ? ['MON', 'TUE', 'WED', 'THU', 'FRI']
-        : ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const days: Day[] = $hideSaturday ? DAYS_SHORT : DAYS_FULL;
     let times = ['0830'];
     let dayLessons: Partial<Record<Day, Lesson[]>> = {};
     let hiddenLessons: Lesson[] = [];
