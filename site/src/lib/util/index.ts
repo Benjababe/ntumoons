@@ -1,3 +1,5 @@
+import type { Day } from '$lib/types/Timetable';
+
 export function generateRandomString(length: number) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -6,3 +8,6 @@ export function generateRandomString(length: number) {
     }
     return result;
 }
+
+export const DAYS_SHORT: Day[] = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
+export const DAYS_FULL: Day[] = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

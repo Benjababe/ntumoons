@@ -9,6 +9,8 @@ type TranslationPayload = {
     iterLimit?: number;
     code?: string;
     semesterTitle?: string;
+    planIndex?: number;
+    planLen?: number;
 };
 
 export const config: Config<TranslationPayload> = {

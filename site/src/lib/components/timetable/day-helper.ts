@@ -1,4 +1,5 @@
 import type { Lesson } from '$lib/types/Firebase';
+import type { Day, DayTimeRanges, DayTimeRangesStr, TimeRange } from '$lib/types/Timetable';
 import { generateRandomString } from '$lib/util';
 
 export type DayDetails = {
@@ -237,4 +238,58 @@ export function calculateCellTopOffsets(groups: ColCellDetails[][]) {
         );
     });
     return groups;
+}
+
+/**
+ * Converts time ranges in string into an interval with start and end.
+ * @param dayFilters Filters for each day, each containing an array of times. Eg. { 'MON': ['0830 - '0900', '1030 - 1100'] }
+ * @returns Array of strings compressed into time intervals
+ */
+export function dayTimeRangesStrToTime(dayFilters: DayTimeRangesStr) {
+    const dayTimeRanges: DayTimeRanges = {};
+
+    for (const [day, ranges] of Object.entries(dayFilters)) {
+        const d = day as Day;
+
+        dayTimeRanges[d] = [];
+        if (ranges.length === 0) continue;
+
+        let curInterval = rangeStrToInterval(ranges[0]);
+
+        for (let i = 1; i < ranges.length; i++) {
+            const newInterval = rangeStrToInterval(ranges[i]);
+
+            if (curInterval.start <= newInterval.start && curInterval.end >= newInterval.start)
+                curInterval.end = newInterval.end;
+            else {
+                dayTimeRanges[d] = [...dayTimeRanges[d]!, getFinalInterval(curInterval)];
+                curInterval = { ...newInterval };
+            }
+        }
+        dayTimeRanges[d] = [...dayTimeRanges[d]!, getFinalInterval(curInterval)];
+    }
+
+    return dayTimeRanges;
+}
+
+/**
+ * Offset the timings to account for overlaps.
+ * Eg. You don't want an interval of '1030 - 1130' to consider a lesson from '1130 - 1230' as invalid.
+ * So '1030 - 1130' is converted into '1031 - 1129'.
+ * @param interval Interval to finally append into dayTimeRanges
+ * @returns Interval with times offset a little
+ */
+function getFinalInterval(interval: TimeRange) {
+    return {
+        start: interval.start + 1,
+        end: interval.end - 1
+    };
+}
+
+function rangeStrToInterval(range: string) {
+    const rangeSpl = range.trim().split('-');
+    return {
+        start: parseInt(rangeSpl[0]),
+        end: parseInt(rangeSpl[1])
+    } as TimeRange;
 }
