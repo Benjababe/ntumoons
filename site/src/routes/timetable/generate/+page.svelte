@@ -95,12 +95,7 @@
                 <div class="flex justify-center">
                     <div class="alert alert-warning font-semibold mb-4 w-fit">
                         <Info />
-                        {$t(
-                            'Timetable.Generate.Timetable generation has stopped after x combinations',
-                            {
-                                iterLimit: ITER_LIMIT
-                            }
-                        )}
+                        {$t('Timetable.Generate.Iter Limit', { iterLimit: ITER_LIMIT })}
                     </div>
                 </div>
             {/if}
@@ -112,8 +107,21 @@
                     >
                         {$t('Timetable.Generate.Prev')}
                     </button>
-                    <span>
-                        {planIndex + 1} of {plans.length}
+                    <span class="flex items-center">
+                        {$t('Timetable.Generate.Plan X of Y', {
+                            planIndex: planIndex + 1,
+                            planLen: plans.length
+                        })}
+                        {#if data.planLimit}
+                            <span
+                                class="ml-1 fill-warning tooltip tooltip-bottom tooltip-warning"
+                                data-tip={$t('Timetable.Generate.Plan Limit', {
+                                    planLimit: PLAN_LIMIT
+                                })}
+                            >
+                                <Info class="h-3 w-3" />
+                            </span>
+                        {/if}
                     </span>
                     <button
                         class="btn btn-neutral"
@@ -122,18 +130,6 @@
                         {$t('Timetable.Generate.Next')}
                     </button>
                 </div>
-                {#if data.planLimit}
-                    <div class="">
-                        <div class="alert alert-warning font-semibold mb-4 w-fit">
-                            {$t(
-                                'Timetable.Generate.Over x possible timetable combinations have been found',
-                                {
-                                    planLimit: PLAN_LIMIT
-                                }
-                            )}
-                        </div>
-                    </div>
-                {/if}
                 <div class="w-full">
                     <Timetable
                         lessons={plans[planIndex]}
