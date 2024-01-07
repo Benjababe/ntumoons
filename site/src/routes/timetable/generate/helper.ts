@@ -26,7 +26,6 @@ export async function generateTimetable(modules: Module[], dayFiltersStr: DayTim
     iters = 0;
 
     const dayFilters = dayTimeRangesStrToTime(dayFiltersStr);
-    console.log(dayFilters);
 
     return new Promise<TimetableResponse>((resolve) => {
         iterateModules(modules, dayFilters, [], []);
