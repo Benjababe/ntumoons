@@ -8,21 +8,32 @@
     import Info from '$lib/assets/images/Info.svelte';
     import Spinner from '$lib/components/generic/Spinner.svelte';
     import { goto } from '$app/navigation';
-    import type { GeneratePlanLimits } from '$lib/types/Timetable';
+    import type { GeneratePlanLimits, Day } from '$lib/types/Timetable';
+    import TimetableGenerateFilters from './TimetableGenerateFilters.svelte';
 
     let modules: Module[];
     let plans: Lesson[][] = [];
     let planIndex: number = 0;
     let moduleIndexes: Record<string, string> = {};
+    let dayFilters: Record<Day, string[]> = {
+        MON: [],
+        TUE: [],
+        WED: [],
+        THU: [],
+        FRI: [],
+        SAT: []
+    };
 
     $: modules = $timetableModules[$activeSemester.id] ?? [];
+
+    $: console.log(dayFilters);
 
     async function getPlans() {
         planIndex = 0;
         const res = await fetch('/timetable/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ modules })
+            body: JSON.stringify({ modules, dayFilters })
         });
         const { generatedPlans, planLimit, iterLimit } = await res.json();
         plans = generatedPlans;
@@ -61,8 +72,11 @@
 <div class="">
     <div class="">
         <h3 class="font-bold text-center text-2xl underline mb-4">
-            {$t('Timetable.Timetable Generation')}
+            {$t('Timetable.Generate.Timetable Generation')}
         </h3>
+        <div class="flex justify-center">
+            <TimetableGenerateFilters bind:dayFilters />
+        </div>
         {#await getPlans()}
             <div class="flex justify-center">
                 <Spinner />
@@ -72,9 +86,12 @@
                 <div class="flex justify-center">
                     <div class="alert alert-warning font-semibold mb-4 w-fit">
                         <Info />
-                        {$t('Timetable.Timetable generation has stopped after x combinations', {
-                            iterLimit: ITER_LIMIT
-                        })}
+                        {$t(
+                            'Timetable.Generate.Timetable generation has stopped after x combinations',
+                            {
+                                iterLimit: ITER_LIMIT
+                            }
+                        )}
                     </div>
                 </div>
             {/if}
@@ -84,7 +101,7 @@
                         class="btn"
                         on:click={() => movePlanIndex(-1)}
                     >
-                        {$t('Timetable.Prev')}
+                        {$t('Timetable.Generate.Prev')}
                     </button>
                     <span>
                         {planIndex + 1} of {plans.length}
@@ -93,14 +110,14 @@
                         class="btn"
                         on:click={() => movePlanIndex(1)}
                     >
-                        {$t('Timetable.Next')}
+                        {$t('Timetable.Generate.Next')}
                     </button>
                 </div>
                 {#if data.planLimit}
                     <div class="flex justify-center">
                         <div class="alert alert-warning font-semibold mb-4 w-fit">
                             {$t(
-                                'Timetable.Over x possible timetable combinations have been found',
+                                'Timetable.Generate.Over x possible timetable combinations have been found',
                                 {
                                     planLimit: PLAN_LIMIT
                                 }
@@ -117,13 +134,13 @@
                         class="btn btn-primary"
                         on:click={setTimetable}
                     >
-                        {$t('Timetable.Apply')}
+                        {$t('Timetable.Generate.Apply')}
                     </button>
                     <button
                         class="btn"
                         on:click={returnTimetable}
                     >
-                        {$t('Timetable.Return')}
+                        {$t('Timetable.Generate.Return')}
                     </button>
                 </div>
             {:else}

@@ -41,20 +41,26 @@
 
     "Timetable": {
         "Generate Timetable": "Generate Timetable",
-        "Timetable Generation": "Timetable Generation",
-        "Prev": "Prev",
-        "Next": "Next",
-        "Over x possible timetable combinations have been found": "Over {{planLimit}} possible timetable combinations have been found. You shouldn't need this tool to find a valid timetable",
-        "Timetable generation has stopped after x combinations": "Timetable generation has stopped after {{iterLimit}} combinations to prevent resource locks",
-        "No combination was found without clashes": "No combination was found without clashes",
-        "Apply": "Apply",
-        "Return": "Return",
-        "Close": "Close",
         "Course code or name": "Course code or name",
         "Exam": "Exam",
         "No exam for this module.": "Swee la no exam this one.",
         "Index Number": "Index Number",
-        "--Select one--": "--Select one--"
+        "--Select one--": "--Select one--",
+
+        "Generate": {
+            "Timetable Generation": "Timetable Generation",
+            "Generate Filters": "Generate Filters",
+            "Select All": "Lepak Day Please",
+            "Clear": "Chiong Today",
+            "Prev": "Prev",
+            "Next": "Next",
+            "Over x possible timetable combinations have been found": "Over {{planLimit}} possible timetable combinations have been found. You shouldn't need this tool to find a valid timetable",
+            "Timetable generation has stopped after x combinations": "Timetable generation has stopped after {{iterLimit}} combinations to prevent resource locks",
+            "No combination was found without clashes": "No combination was found without clashes",
+            "Apply": "Apply",
+            "Return": "Return",
+            "Close": "Close"
+        }
     },
 
     "Modules": {
