@@ -24,14 +24,16 @@
 </script>
 
 <div class="flex flex-col justify-center relative max-w-full">
-    <div class="flex justify-center mb-4">
-        <a
-            class="btn btn-primary"
-            href="/timetable/generate"
-        >
-            {$t('Timetable.Generate Timetable')}
-        </a>
-    </div>
+    {#if $timetableModules[$activeSemester.id].length > 0}
+        <div class="flex justify-center mb-4">
+            <a
+                class="btn btn-primary"
+                href="/timetable/generate"
+            >
+                {$t('Timetable.Generate Timetable')}
+            </a>
+        </div>
+    {/if}
     <Timetable {lessons} />
     <ClashingLessons />
     <ModuleSearch modules={data.modules[$activeSemester.id]} />

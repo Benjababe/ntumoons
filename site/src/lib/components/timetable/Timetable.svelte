@@ -67,7 +67,7 @@
     </div>
 {:else}
     <HiddenLessons {hiddenLessons} />
-    <div class="flex">
+    <div class="flex mb-4">
         <div class="flex flex-col justify-between mr-4 mt-14">
             {#each times as time}
                 <span class="-translate-y-1/2">{time}</span>
