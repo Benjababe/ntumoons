@@ -44,7 +44,7 @@
         <Link href="/staff">{$t('Nav.Staff')}</Link>
     </div>
     <select
-        class="select"
+        class="select mr-4"
         value={$activeSemester.id}
         on:change={activeSemesterUpdate}
     >

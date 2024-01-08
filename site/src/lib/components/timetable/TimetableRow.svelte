@@ -72,7 +72,7 @@
     .tt-row {
         display: flex;
         position: relative;
-        min-height: 5rem;
+        min-height: 3.5rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
     }

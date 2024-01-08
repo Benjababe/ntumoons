@@ -41,20 +41,27 @@
 
     "Timetable": {
         "Generate Timetable": "Generate Timetable",
-        "Timetable Generation": "Timetable Generation",
-        "Prev": "Prev",
-        "Next": "Next",
-        "Over x possible timetable combinations have been found": "Over {{planLimit}} possible timetable combinations have been found. You shouldn't need this tool to find a valid timetable",
-        "Timetable generation has stopped after x combinations": "Timetable generation has stopped after {{iterLimit}} combinations to prevent resource locks",
-        "No combination was found without clashes": "No combination was found without clashes",
-        "Apply": "Apply",
-        "Return": "Return",
-        "Close": "Close",
         "Course code or name": "Course code or name",
         "Exam": "Exam",
         "No exam for this module.": "No exam for this module.",
         "Index Number": "Index Number",
-        "--Select one--": "--Select one--"
+        "--Select one--": "--Select one--",
+
+        "Generate": {
+            "Timetable Generation": "Timetable Generation",
+            "Choose Times Without Lessons": "Choose Times Without Lessons",
+            "Select All": "Select All",
+            "Clear": "Clear",
+            "Refresh": "Refresh",
+            "Prev": "Prev",
+            "Next": "Next",
+            "Plan X of Y": "Plan {{planIndex}} of {{planLen}}",
+            "Plan Limit": "Over {{planLimit}} possible timetable combinations have been found. You shouldn't need this tool to find a valid timetable",
+            "Iter Limit": "Timetable generation has stopped after {{iterLimit}} combinations to prevent resource locks",
+            "No combination was found without clashes": "No combination was found without clashes",
+            "Apply": "Apply",
+            "Return": "Return"
+        }
     },
 
     "Modules": {
