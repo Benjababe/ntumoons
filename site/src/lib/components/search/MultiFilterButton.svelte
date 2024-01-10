@@ -17,7 +17,8 @@
     }
 
     function clearFilters() {
-        filters = filters.map((f) => ({ ...f, enabled: false }));
+        // Do not use map here, bugs out
+        for (let i = 0; i < filters.length; i++) filters[i].enabled = false;
         handleFilterUpdate();
     }
 
@@ -26,6 +27,7 @@
         dispatch('filterUpdate', { name, newFilters: filtersEnabled });
     }
 
+    // On mount, check url for any filters to set initially.
     onMount(() => {
         let updated = false;
         const params = new URLSearchParams(window.location.search);
@@ -63,14 +65,16 @@
             class="input input-bordered input-sm w-full max-w-xs"
             bind:value={filterSearch}
         />
-        <div class="flex justify-end mt-3 pr-1">
-            <button
-                class="btn btn-accent btn-xs"
-                on:click|preventDefault={clearFilters}
-            >
-                {$t('Components.Search.FilterButton.Clear filters')}
-            </button>
-        </div>
+        {#if filters.some((f) => f.enabled)}
+            <div class="flex justify-end mt-3 pr-1">
+                <button
+                    class="btn btn-accent btn-xs"
+                    on:click|preventDefault={clearFilters}
+                >
+                    {$t('Components.Search.FilterButton.Clear filters')}
+                </button>
+            </div>
+        {/if}
         <div class="divider mt-0 mb-1" />
         <ol class="text-sm space-y-2 max-h-64 pr-1 overflow-y-scroll">
             {#each filters as { name, count }, i (`${name}_${filterSearch}`)}
