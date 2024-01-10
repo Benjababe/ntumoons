@@ -1,32 +1,14 @@
 import type { Lesson } from '$lib/types/Firebase';
-import type { Day, DayTimeRanges, DayTimeRangesStr, TimeRange } from '$lib/types/Timetable';
+import type {
+    ColCellDetails,
+    Day,
+    DayDetails,
+    DayTimeRanges,
+    DayTimeRangesStr,
+    RowCellDetails,
+    TimeRange
+} from '$lib/types/Timetable';
 import { generateRandomString } from '$lib/util';
-
-export type DayDetails = {
-    day: string;
-    startTime: number;
-    hourIntervalPercent: number;
-};
-
-export type RowCellDetails = {
-    id: string;
-    left: number;
-    width: number;
-    lesson: Lesson;
-    clashing: boolean;
-    squeeze: boolean;
-    accLeft?: number;
-};
-
-export type ColCellDetails = {
-    id: string;
-    top: number;
-    height: number;
-    lesson: Lesson;
-    clashing: boolean;
-    squeeze: boolean;
-    accTop?: number;
-};
 
 /**
  * Iterates through all lessons for the day in the timetable and does basic calculations
@@ -292,4 +274,23 @@ function rangeStrToInterval(range: string) {
         start: parseInt(rangeSpl[0]),
         end: parseInt(rangeSpl[1])
     } as TimeRange;
+}
+
+/**
+ * Go through lessons in a day and return all instances of clashing lessons.
+ * @param intervals Array of lesson intervals.
+ * @returns
+ */
+export function getDayClashes(intervals: RowCellDetails[][]) {
+    let dayClashes: string[][] = [];
+    for (const interval of intervals) {
+        let intervalClashes: string[] = [];
+        for (const cell of interval) {
+            if (cell.clashing) {
+                intervalClashes = [...intervalClashes, cell.lesson.module_code];
+            }
+        }
+        if (intervalClashes.length > 0) dayClashes = [...dayClashes, intervalClashes];
+    }
+    return [...dayClashes];
 }

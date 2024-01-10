@@ -5,15 +5,7 @@ declare global {
         // interface Error {}
         // interface Locals {}
         // interface PageData {}
-        interface Platform {
-            env: {
-                COUNTER: DurableObjectNamespace;
-            };
-            context: {
-                waitUntil(promise: Promise<unknown>): void;
-            };
-            caches: CacheStorage & { default: Cache };
-        }
+        // interface Platform {}
     }
 }
 

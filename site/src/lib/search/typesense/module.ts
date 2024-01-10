@@ -7,6 +7,11 @@ const queryFields = ['code', 'name_pretty', 'description'];
 const sortBy = '_text_match:desc, code:asc';
 const forceFilter = 'verified:true ';
 
+/**
+ * Make a query to Typesense based on parameters provided.
+ * @param p0 Query string, page number, number of results and facet filters.
+ * @returns All Typesense search results for the module query.
+ */
 export async function searchModules({ q, page, per_page, filters }: TypesenseSearch) {
     filters += filters.trim().length > 0 ? ', ' : '';
     filters += forceFilter;
