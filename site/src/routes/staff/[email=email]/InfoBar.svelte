@@ -5,14 +5,14 @@
     export let staff: Staff;
 </script>
 
-<div class="collapse collapse-arrow w-full rounded-lg">
+<div class="w-full rounded-lg collapse collapse-arrow">
     <input type="checkbox" />
     <div
-        class="collapse-title flex justify-around items-center h-12 text-xl bg-base-300 font-semibold"
+        class="flex items-center justify-around h-12 text-xl font-semibold collapse-title bg-base-300"
     >
         <span>{staff.title}</span>
     </div>
-    <div class="collapse-content w-full mx-auto bg-base-200 pt-4">
+    <div class="w-full pt-4 mx-auto collapse-content bg-base-200">
         <div class="flex items-center justify-evenly">
             <a
                 class="flex gap-1 btn btn-sm btn-neutral"

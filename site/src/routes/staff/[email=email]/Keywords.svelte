@@ -8,7 +8,7 @@
     const freeKeywords = staff.keywords.filter((kw) => !reservedKeywords.includes(kw));
 </script>
 
-<p class="font-bold underline text-lg mb-2">
+<p class="mb-2 text-lg font-bold underline">
     {$t('Staff.Details.Keywords')}
 </p>
 <div class="flex flex-col">
@@ -23,7 +23,7 @@
             </button>
         {/each}
     </div>
-    <div class="divider my-1" />
+    <div class="my-1 divider" />
     <div class="flex flex-wrap flex-1 gap-x-2 gap-y-1">
         {#each freeKeywords as keyword}
             <button>

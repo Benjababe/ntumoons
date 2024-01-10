@@ -70,15 +70,15 @@
 </script>
 
 <div>
-    <div class="flex flex-col justify-center items-center">
-        <h3 class="font-bold text-center text-2xl underline mb-4">
+    <div class="flex flex-col items-center justify-center">
+        <h3 class="mb-4 text-2xl font-bold text-center underline">
             {$t('Timetable.Generate.Timetable Generation')}
         </h3>
         <div class="flex justify-center w-full mb-6">
             <TimetableGenerateFilters bind:dayFilters={dayFiltersStr} />
         </div>
         <button
-            class="btn btn-accent w-fit mb-6"
+            class="mb-6 btn btn-accent w-fit"
             on:click|preventDefault={() => {
                 getPlansPromise = getPlans();
             }}
@@ -93,7 +93,7 @@
         {:then data}
             {#if data.iterLimit}
                 <div class="flex justify-center">
-                    <div class="alert alert-warning font-semibold mb-4 w-fit">
+                    <div class="mb-4 font-semibold alert alert-warning w-fit">
                         <Info />
                         {$t('Timetable.Generate.Iter Limit', { iterLimit: ITER_LIMIT })}
                     </div>
@@ -119,7 +119,7 @@
                                     planLimit: PLAN_LIMIT
                                 })}
                             >
-                                <Info class="h-3 w-3" />
+                                <Info class="w-3 h-3" />
                             </span>
                         {/if}
                     </span>
@@ -136,7 +136,7 @@
                         showIndex={true}
                     />
                 </div>
-                <div class="flex gap-x-4 mb-4">
+                <div class="flex mb-4 gap-x-4">
                     <button
                         class="btn btn-primary"
                         on:click={setTimetable}
@@ -151,7 +151,7 @@
                     </button>
                 </div>
             {:else}
-                <div class="alert alert-error font-semibold mb-4 w-fit">
+                <div class="mb-4 font-semibold alert alert-error w-fit">
                     <Error />
                     {$t('Timetable.Generate.No combination was found without clashes')}
                 </div>

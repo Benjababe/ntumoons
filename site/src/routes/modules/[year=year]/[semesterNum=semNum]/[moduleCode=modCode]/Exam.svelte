@@ -4,7 +4,7 @@
     export let exam: Exam;
 </script>
 
-<div class="grid grid-cols-info gap-4 pt-2">
+<div class="grid gap-4 pt-2 grid-cols-info">
     <span>{$t('Modules.Details.ExamDate')}</span>
     <span class="text-center">{exam.date}</span>
 

@@ -23,7 +23,7 @@
     }
 </script>
 
-<div class="flex flex-col justify-center relative max-w-full">
+<div class="relative flex flex-col justify-center max-w-full">
     {#if $timetableModules[$activeSemester.id].length > 0}
         <div class="flex justify-center mb-4">
             <a

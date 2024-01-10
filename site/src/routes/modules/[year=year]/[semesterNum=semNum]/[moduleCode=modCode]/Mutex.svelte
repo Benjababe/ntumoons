@@ -12,11 +12,11 @@
 
 <div>
     <h2 class="text-xl font-medium">{$t('Modules.Details.Mutex')}</h2>
-    <div class="divider my-0" />
+    <div class="my-0 divider" />
     <div class="flex flex-wrap gap-4 mt-2">
         {#each mutex as moduleCode}
             <button
-                class="btn py-1 px-3 capitalize"
+                class="px-3 py-1 capitalize btn"
                 on:click|preventDefault={() => openModule(moduleCode)}
             >
                 {moduleCode}

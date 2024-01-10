@@ -8,7 +8,7 @@
 
 <a
     {href}
-    class="fill-current p-3 rounded-lg hover:bg-base-content hover:bg-opacity-20 {fillColour}"
+    class="p-3 rounded-lg fill-current hover:bg-base-content hover:bg-opacity-20 {fillColour}"
 >
     <Gear />
 </a>

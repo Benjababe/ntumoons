@@ -29,7 +29,7 @@
 
 <div class="flex flex-col min-h-screen">
     <Header />
-    <div class="flex flex-1 justify-center pt-12 pb-24">
+    <div class="flex justify-center flex-1 pt-12 pb-24">
         <div class="w-4/5 max-w-1200">
             <slot />
         </div>
