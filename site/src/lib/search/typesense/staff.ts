@@ -7,6 +7,11 @@ const queryFields = ['title', 'description'];
 const sortBy = '';
 const forceFilter = '';
 
+/**
+ * Make a query to Typesense based on parameters provided.
+ * @param p0 Query string, page number, number of results and facet filters.
+ * @returns All Typesense search results for the staff query.
+ */
 export async function searchStaff({ q, page, per_page, filters }: TypesenseSearch) {
     filters += filters.trim().length > 0 ? ', ' : '';
     filters += forceFilter;

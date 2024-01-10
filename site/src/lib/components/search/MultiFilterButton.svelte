@@ -2,8 +2,8 @@
     import ArrowDown from '$lib/assets/images/ArrowDown.svelte';
     import { t } from '$lib/translations';
     import { createEventDispatcher, onMount } from 'svelte';
-    import type { DispatchFilterUpdate } from './search-helper';
     import type { Filter } from '$lib/types/Typesense';
+    import type { DispatchFilterUpdate } from '$lib/types/Dispatch';
 
     export let name: string = '';
     export let filters: Filter[] = [];
