@@ -7,7 +7,7 @@
 
 <a
     {href}
-    class="inline-flex items-center justify-center h-12 min-h-[3rem] px-4 font-semibold text-2xl underline-offset-4 bg-base-300 hover:underline {linkColour} {$$props.class}"
+    class="inline-flex items-center justify-center h-12 min-h-[3rem] font-semibold text-2xl underline-offset-4 bg-base-300 hover:underline {linkColour} {$$props.class}"
 >
     <slot />
 </a>
