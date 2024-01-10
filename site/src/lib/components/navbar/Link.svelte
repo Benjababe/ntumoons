@@ -7,26 +7,7 @@
 
 <a
     {href}
-    class="bg-base-300 {linkColour} {$$props.class}"
+    class="inline-flex items-center justify-center h-12 min-h-[3rem] font-semibold text-2xl underline-offset-4 bg-base-300 hover:underline {linkColour} {$$props.class}"
 >
     <slot />
 </a>
-
-<style>
-    a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 3rem;
-        min-height: 3rem;
-        padding-inline: 1rem;
-        font-weight: 600;
-        font-size: 1.5rem;
-        line-height: 2rem;
-        text-underline-offset: 4px;
-    }
-
-    a:hover {
-        text-decoration-line: underline;
-    }
-</style>

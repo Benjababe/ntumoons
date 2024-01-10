@@ -21,10 +21,12 @@
         top !== undefined && height !== undefined
             ? `position: absolute; top: calc(${top}% + 4px); height: calc(${height}% - 4px); width: 95%`
             : '';
+
+    const clashClass = clashing ? 'border-3 border-solid border-error' : 'border border-neutral';
 </script>
 
 <div
-    class="tt-cell {clashing ? 'border-3 border-solid border-error' : 'border border-neutral'}"
+    class="flex flex-col justify-center items-center p-1.5 text-xs bg-white rounded-lg {clashClass}"
     style="{landscapeStyle} {portraitStyle}"
 >
     <div class="text-center text-gray-700">
@@ -35,16 +37,3 @@
         <div>{lesson.remark}</div>
     </div>
 </div>
-
-<style>
-    .tt-cell {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0.375rem;
-        font-size: 0.75rem;
-        background-color: white;
-        border-radius: 0.5rem;
-    }
-</style>

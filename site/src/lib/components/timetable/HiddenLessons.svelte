@@ -6,7 +6,7 @@
 </script>
 
 {#if hiddenLessons.length > 0}
-    <div class="flex justify-center mb-4">
+    <div class="flex justify-center">
         <div class="collapse collapse-arrow w-2/3 bg-warning text-warning-content rounded-md">
             <input type="checkbox" />
             <div class="collapse-title flex justify-center items-center gap-2 font-semibold">

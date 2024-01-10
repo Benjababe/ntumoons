@@ -61,12 +61,18 @@
             {/each}
         </ol>
     </div>
-    <div class="mt-4">
-        <HiddenLessons {hiddenLessons} />
-    </div>
+    {#if hiddenLessons.length > 0}
+        <div class="mt-4">
+            <HiddenLessons {hiddenLessons} />
+        </div>
+    {/if}
 {:else}
-    <HiddenLessons {hiddenLessons} />
-    <div class="flex mb-4">
+    {#if hiddenLessons.length > 0}
+        <div class="mb-4">
+            <HiddenLessons {hiddenLessons} />
+        </div>
+    {/if}
+    <div class="flex">
         <div class="flex flex-col justify-between mr-4 mt-14">
             {#each times as time}
                 <span class="-translate-y-1/2">{time}</span>
