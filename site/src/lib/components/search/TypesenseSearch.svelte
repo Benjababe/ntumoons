@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+    import { pushState } from '$app/navigation';
     import Spinner from '$lib/components/generic/Spinner.svelte';
     import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
@@ -134,7 +134,7 @@
         }
 
         const url = `?page=${activePage}&searchValue=${searchValue}&${filters.join('&')}`;
-        goto(url);
+        pushState(url, {});
     }
 </script>
 
