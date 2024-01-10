@@ -9,7 +9,8 @@
         getIntervals,
         intervalsToGroups,
         type RowCellDetails,
-        type DayDetails
+        type DayDetails,
+        getDayClashes
     } from './day-helper';
 
     export let lessons: Lesson[];
@@ -28,22 +29,7 @@
         groups = intervalsToGroups(intervals);
         groups = calculateCellLeftOffsets(groups);
 
-        checkClashes(intervals);
-    }
-
-    function checkClashes(intervals: RowCellDetails[][]) {
-        let dayClashes: string[][] = [];
-        for (const interval of intervals) {
-            let intervalClashes: string[] = [];
-            for (const cell of interval) {
-                if (cell.clashing) {
-                    intervalClashes = [...intervalClashes, cell.lesson.module_code];
-                }
-            }
-            if (intervalClashes.length > 0) dayClashes = [...dayClashes, intervalClashes];
-        }
-
-        $timetableClashes[day] = [...dayClashes];
+        $timetableClashes[day] = getDayClashes(intervals);
     }
 </script>
 

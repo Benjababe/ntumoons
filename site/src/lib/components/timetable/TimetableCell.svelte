@@ -9,10 +9,14 @@
     export let clashing: boolean;
     export let showIndex: boolean = false;
 
+    // Use margin-left for rows because row heights will not wrap cells if cells are absolute.
     const landscapeStyle =
         left !== undefined && width !== undefined
             ? `margin-left: calc(${left}% + 4px); width: calc(${width}% - 4px);`
             : '';
+
+    // Use absolute positioning for columns as margins won't work properly here.
+    // Very important to ensure each column's initial width can fit the full cell.
     const portraitStyle =
         top !== undefined && height !== undefined
             ? `position: absolute; top: calc(${top}% + 4px); height: calc(${height}% - 4px); width: 95%`

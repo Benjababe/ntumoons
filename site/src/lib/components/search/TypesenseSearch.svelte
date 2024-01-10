@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
+    import { pushState } from '$app/navigation';
     import Spinner from '$lib/components/generic/Spinner.svelte';
     import Paginator from '$lib/components/search/Paginator.svelte';
     import { t } from '$lib/translations';
@@ -7,12 +7,8 @@
     import { onMount } from 'svelte';
     import type { SearchResponse, SearchResponseHit } from 'typesense/lib/Typesense/Documents';
     import MultiFilterButton from './MultiFilterButton.svelte';
-    import {
-        PER_PAGE,
-        callSearchPath,
-        parseFacets,
-        type DispatchFilterUpdate
-    } from './search-helper';
+    import { PER_PAGE, callSearchPath, parseFacets } from './search-helper';
+    import type { DispatchFilterUpdate } from '$lib/types/Dispatch';
 
     export let collection: 'modules' | 'staff';
     export let searchPlaceholder: string = '';
@@ -134,7 +130,7 @@
         }
 
         const url = `?page=${activePage}&searchValue=${searchValue}&${filters.join('&')}`;
-        goto(url);
+        pushState(url, {});
     }
 </script>
 

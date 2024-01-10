@@ -44,7 +44,7 @@
 
 {#if orientation == 'landscape'}
     <div>
-        <div class="flex justify-between ml-14">
+        <div class="time-row flex justify-between ml-14">
             {#each times as time}
                 <span class="-translate-x-1/2">{time}</span>
             {/each}

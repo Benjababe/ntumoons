@@ -1,11 +1,6 @@
 import type { Docs, Filter, FilterMap } from '$lib/types/Typesense';
 import type { SearchResponseFacetCountSchema } from 'typesense/lib/Typesense/Documents';
 
-export type DispatchFilterUpdate = {
-    name: string;
-    newFilters: Filter[];
-};
-
 export const PER_PAGE = 10;
 
 /**
