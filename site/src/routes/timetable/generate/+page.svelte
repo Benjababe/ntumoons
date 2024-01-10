@@ -74,7 +74,7 @@
         <h3 class="font-bold text-center text-2xl underline mb-4">
             {$t('Timetable.Generate.Timetable Generation')}
         </h3>
-        <div class="flex justify-center w-full">
+        <div class="flex justify-center w-full mb-6">
             <TimetableGenerateFilters bind:dayFilters={dayFiltersStr} />
         </div>
         <button

@@ -53,7 +53,7 @@
     }
 </script>
 
-<div class="mb-6">
+<div>
     <div class="collapse collapse-arrow w-full rounded-lg bg-base-300">
         <input type="checkbox" />
         <div class="collapse-title text-xl text-center font-medium">
