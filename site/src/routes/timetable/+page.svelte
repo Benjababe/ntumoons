@@ -35,7 +35,13 @@
         </div>
     {/if}
     <Timetable {lessons} />
-    <ClashingLessons />
-    <ModuleSearch modules={data.modules[$activeSemester.id]} />
-    <ModuleTable />
+    <div class="mt-4">
+        <ClashingLessons />
+    </div>
+    <div class="mt-4">
+        <ModuleSearch modules={data.modules[$activeSemester.id]} />
+    </div>
+    <div class="mt-4">
+        <ModuleTable />
+    </div>
 </div>

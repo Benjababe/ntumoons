@@ -59,7 +59,7 @@
     }
 </script>
 
-<div class="relative mb-4">
+<div class="relative">
     <input
         type="text"
         placeholder={$t('Timetable.Course code or name')}

@@ -22,12 +22,12 @@
             ? `position: absolute; top: calc(${top}% + 4px); height: calc(${height}% - 4px); width: 95%`
             : '';
 
-    const clashStyle = clashing ? 'border-3 border-solid border-error' : 'border border-neutral';
+    const clashClass = clashing ? 'border-3 border-solid border-error' : 'border border-neutral';
 </script>
 
 <div
-    class="flex flex-col justify-center items-center p-1.5 text-xs bg-white rounded-lg"
-    style="{landscapeStyle} {portraitStyle} {clashStyle}"
+    class="flex flex-col justify-center items-center p-1.5 text-xs bg-white rounded-lg {clashClass}"
+    style="{landscapeStyle} {portraitStyle}"
 >
     <div class="text-center text-gray-700">
         {#if showIndex}<div>{lesson.index}</div>{/if}

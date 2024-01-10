@@ -107,10 +107,12 @@
                         {/each}
                     </select>
                 </div>
-                <Timetable
-                    {lessons}
-                    orientation="portrait"
-                />
+                <div class="mb-4">
+                    <Timetable
+                        {lessons}
+                        orientation="portrait"
+                    />
+                </div>
             {/if}
         </div>
     </div>
