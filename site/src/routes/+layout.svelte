@@ -1,11 +1,15 @@
 <script lang="ts">
     import '../app.css';
+    import { dev } from '$app/environment';
+    import { inject } from '@vercel/analytics';
     import { loadTranslations, t } from '$lib/translations';
     import { onMount } from 'svelte';
     import { activeSemester } from '$lib/stores';
     import type { Semester } from '$lib/types/Firebase';
     import Header from './Header.svelte';
     import Footer from './Footer.svelte';
+
+    inject({ mode: dev ? 'development' : 'production' });
 
     onMount(async () => {
         const initLocale = localStorage.locale ?? 'en';
