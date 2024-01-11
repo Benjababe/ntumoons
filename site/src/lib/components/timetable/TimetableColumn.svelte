@@ -35,7 +35,7 @@
     >
         {day}
     </div>
-    <div class="flex relative h-full bg-tt-alternate-v bg-tt-loop pl-1 rounded-lg">
+    <div class="relative flex h-full pl-1 rounded-lg bg-tt-alternate-v bg-tt-loop">
         {#each groups as group}
             <div class="flex flex-col">
                 {#each group as cellDetails}

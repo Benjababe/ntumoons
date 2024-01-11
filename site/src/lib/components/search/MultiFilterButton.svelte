@@ -54,19 +54,19 @@
         class="focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
     >
         <span class="capitalize">{$t('Components.Search.FilterButton.Filter By', { name })}</span>
-        <div class="ml-2 h-4 w-4"><ArrowDown /></div>
+        <div class="w-4 h-4 ml-2"><ArrowDown /></div>
     </div>
     <div
-        class="dropdown-content menu p-2 shadow rounded-box w-64 mt-2 bg-base-100 border-2 border-solid border-primary"
+        class="w-64 p-2 mt-2 border-2 border-solid shadow dropdown-content menu rounded-box bg-base-100 border-primary"
     >
         <input
             type="text"
             placeholder={$t('Components.Search.FilterButton.Search filters...')}
-            class="input input-bordered input-sm w-full max-w-xs"
+            class="w-full max-w-xs input input-bordered input-sm"
             bind:value={filterSearch}
         />
         {#if filters.some((f) => f.enabled)}
-            <div class="flex justify-end mt-3 pr-1">
+            <div class="flex justify-end pr-1 mt-3">
                 <button
                     class="btn btn-accent btn-xs"
                     on:click|preventDefault={clearFilters}
@@ -75,8 +75,8 @@
                 </button>
             </div>
         {/if}
-        <div class="divider mt-0 mb-1" />
-        <ol class="text-sm space-y-2 max-h-64 pr-1 overflow-y-scroll">
+        <div class="mt-0 mb-1 divider" />
+        <ol class="pr-1 space-y-2 overflow-y-scroll text-sm max-h-64">
             {#each filters as { name, count }, i (`${name}_${filterSearch}`)}
                 <li class="flex flex-row items-center {checkFilterSearch(name)}">
                     <input

@@ -20,14 +20,14 @@
 </script>
 
 <div>
-    <h3 class="text-xl font-semibold mb-4">
+    <h3 class="mb-4 text-xl font-semibold">
         {$t('Settings.Theme.Toggle Theme')}
     </h3>
     <div class="flex">
         <div class="flex-1 m-auto">
             {$t('Settings.Theme.Toggle between dark and light themes')}
         </div>
-        <div class="flex flex-row gap-2 items-center justify-center w-48">
+        <div class="flex flex-row items-center justify-center w-48 gap-2">
             <Moon />
             <input
                 type="checkbox"

@@ -14,11 +14,11 @@
 {/if}
 
 <div class="flex justify-center">
-    <div class="flex flex-col justify-center items-center max-w-1200">
-        <div class="flex flex-row gap-8 m-auto w-full max-h-96">
+    <div class="flex flex-col items-center justify-center max-w-1200">
+        <div class="flex flex-row w-full gap-8 m-auto max-h-96">
             <Header {staff} />
         </div>
-        <div class="flex justify-center mt-6 w-full">
+        <div class="flex justify-center w-full mt-6">
             <InfoBar {staff} />
         </div>
         <div class="flex w-full mt-8 gap-x-8">

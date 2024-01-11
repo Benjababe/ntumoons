@@ -18,19 +18,19 @@
     <div slot="results">
         {#each hits as hit}
             <div class="flex gap-4 mt-8 mb-4">
-                <div class="m-auto w-1/6">
+                <div class="w-1/6 m-auto">
                     <a
                         href="/staff/{hit.document.email}"
                         target="_blank"
                     >
                         {#if hit.document.profile_pic_url}
                             <img
-                                class="w-full aspect-staff-photo object-cover object-center rounded-md"
+                                class="object-cover object-center w-full rounded-md aspect-staff-photo"
                                 src={hit.document.profile_pic_url}
                                 alt={hit.document.title}
                             />
                         {:else}
-                            <div class="w-full object-cover object-center rounded-xl">
+                            <div class="object-cover object-center w-full rounded-xl">
                                 <StaffFallbackImage class="fill-neutral" />
                             </div>
                         {/if}
@@ -38,7 +38,7 @@
                 </div>
                 <div class="w-5/6 text-sm">
                     <NewTabLink
-                        class="fill-primary text-primary text-xl"
+                        class="text-xl fill-primary text-primary"
                         url="/staff/{hit.document.email}"
                         text={hit.highlight.title && hit.highlight.title.snippet
                             ? hit.highlight.title.snippet
@@ -46,7 +46,7 @@
                         isRawHtml={true}
                     />
                     <div>{hit.document.tag}</div>
-                    <div class="divider mt-0 mb-2" />
+                    <div class="mt-0 mb-2 divider" />
                     <div>
                         {#if hit.document.description !== ''}
                             <!-- eslint-disable-next-line svelte/no-at-html-tags -->

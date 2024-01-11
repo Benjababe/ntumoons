@@ -11,7 +11,7 @@
 </script>
 
 {#if pages.length > 0}
-    <div class="join mt-8">
+    <div class="mt-8 join">
         {#if activePage > 1}
             <button
                 class="join-item btn btn-md"

@@ -3,7 +3,7 @@
 </script>
 
 <div
-    class="fixed -top-14 left-0 h-screen w-screen flex justify-center overflow-hidden pointer-events-none"
+    class="fixed left-0 flex justify-center w-screen h-screen overflow-hidden pointer-events-none -top-14"
 >
     <Confetti
         x={[-5, 5]}

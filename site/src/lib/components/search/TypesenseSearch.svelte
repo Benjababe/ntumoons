@@ -134,17 +134,17 @@
     }
 </script>
 
-<div class="flex flex-col justify-center items-center max-w-1200">
+<div class="flex flex-col items-center justify-center max-w-1200">
     <input
         type="text"
         placeholder={searchPlaceholder}
-        class="input input-bordered w-full max-w-xl"
+        class="w-full max-w-xl input input-bordered"
         disabled={searching}
         bind:value={searchValue}
         on:input={handleSearch}
     />
 
-    <div class="mt-3 z-10">
+    <div class="z-10 mt-3">
         {#each Object.entries(searchFilters) as [name, filters]}
             <MultiFilterButton
                 {name}
@@ -162,7 +162,7 @@
         {/if}
     </div>
 
-    <div class="search-results max-w-4xl z-0">
+    <div class="z-0 max-w-4xl search-results">
         {#if searching}
             <Spinner />
         {:else}

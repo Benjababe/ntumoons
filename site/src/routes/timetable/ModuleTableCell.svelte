@@ -26,9 +26,9 @@
 </script>
 
 <div>
-    <div class="float-right h-fit mt-1 ml-4 mr-4">
+    <div class="float-right mt-1 ml-4 mr-4 h-fit">
         <button
-            class="btn-outline rounded-full w-max h-max p-1"
+            class="p-1 rounded-full btn-outline w-max h-max"
             on:click|preventDefault={remove}
         >
             <Cross />
@@ -53,7 +53,7 @@
         {/if}
         <span>-- {mod.credits} AU</span>
     </div>
-    <div class="text-sm mt-2">
+    <div class="mt-2 text-sm">
         <span>{$t('Timetable.Index Number')}: </span>
         <select
             class="ml-2 rounded-sm bg-base-300"

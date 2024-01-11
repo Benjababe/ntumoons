@@ -25,7 +25,7 @@
             <div class="mt-8 mb-4">
                 <a
                     href="/modules/{activeYear}/{activeSemesterNum}/{hit.document.code}"
-                    class="text-primary text-xl"
+                    class="text-xl text-primary"
                 >
                     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                     {@html hit.highlight.code && hit.highlight.code.snippet
@@ -37,7 +37,7 @@
                         ? sanitizeHtml(hit.highlight.name_pretty.snippet)
                         : sanitizeHtml(hit.document.name_pretty)}
                 </a>
-                <div class="divider mt-0 mb-2" />
+                <div class="mt-0 mb-2 divider" />
                 <div class="module-results-desc">
                     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                     {@html hit.highlight.description && hit.highlight.description.snippet

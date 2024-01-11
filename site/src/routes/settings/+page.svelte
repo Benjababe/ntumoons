@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex justify-center">
-    <div class="w-full max-w-4xl flex flex-col justify-center">
+    <div class="flex flex-col justify-center w-full max-w-4xl">
         <h1 class="text-3xl font-bold">
             {$t('Settings.Settings')}
         </h1>

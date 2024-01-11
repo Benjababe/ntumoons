@@ -44,13 +44,13 @@
 
 {#if orientation == 'landscape'}
     <div>
-        <div class="time-row flex justify-between ml-14">
+        <div class="flex justify-between time-row ml-14">
             {#each times as time}
                 <span class="-translate-x-1/2">{time}</span>
             {/each}
             <span></span>
         </div>
-        <ol class="border border-b-1 border-solid border-neutral rounded-lg border-opacity-50">
+        <ol class="border border-opacity-50 border-solid rounded-lg border-b-1 border-neutral">
             {#each days as day}
                 <TimetableRow
                     lessons={dayLessons[day] ?? []}
@@ -81,7 +81,7 @@
         </div>
         <ol
             style:height="1280px"
-            class="flex border border-b-1 border-solid border-neutral rounded-lg border-opacity-50"
+            class="flex border border-opacity-50 border-solid rounded-lg border-b-1 border-neutral"
         >
             {#each days as day, i}
                 <TimetableColumn

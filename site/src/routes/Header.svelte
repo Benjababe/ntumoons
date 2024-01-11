@@ -29,14 +29,14 @@
 </script>
 
 <nav class="flex justify-center bg-base-300">
-    <div class="navbar py-0 max-w-1200">
+    <div class="py-0 navbar max-w-1200">
         <div class="flex-1">
             <div class="px-4">
                 <Link
                     class="group"
                     href="/"
                 >
-                    <div class="mr-2 group-hover:scale-120 transition-transform duration-300">
+                    <div class="mr-2 transition-transform duration-300 group-hover:scale-120">
                         <Logo />
                     </div>
                     NTUMoons
@@ -53,7 +53,7 @@
             </div>
         </div>
         <select
-            class="select mr-4"
+            class="mr-4 select"
             value={$activeSemester.id}
             on:change={activeSemesterUpdate}
         >

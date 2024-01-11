@@ -35,13 +35,13 @@
     class="flex relative min-h-[3.5rem] border-b border-solid border-neutral border-opacity-50 last:border-b-0"
 >
     <div
-        class="flex justify-center items-center w-14 font-semibold border-r border-solid border-neutral border-opacity-50"
+        class="flex items-center justify-center font-semibold border-r border-opacity-50 border-solid w-14 border-neutral"
     >
         {day}
     </div>
     <div class="relative w-full bg-tt-loop bg-tt-alternate-h">
         {#each groups as group}
-            <div class="flex py-1 relative">
+            <div class="relative flex py-1">
                 {#each group as cellDetails (cellDetails.id)}
                     <TimetableCell
                         left={cellDetails.left}

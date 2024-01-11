@@ -9,12 +9,12 @@
     };
 </script>
 
-<div class="flex flex-col items-center justify-center text-xl font-semibold h-full w-full">
-    <h1 class="text-5xl font-bold mb-8">
+<div class="flex flex-col items-center justify-center w-full h-full text-xl font-semibold">
+    <h1 class="mb-8 text-5xl font-bold">
         {$t('Error.Status:')}
         <span class="text-red-600">{$page.status}</span>
     </h1>
-    <div class="text-2xl mb-4">
+    <div class="mb-4 text-2xl">
         {$t('Error.Oops!')}
         <span class="text-3xl font-bold underline underline-offset-2">{$page.error?.message}</span>
     </div>
