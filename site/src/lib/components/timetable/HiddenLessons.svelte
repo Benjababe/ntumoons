@@ -6,14 +6,14 @@
 </script>
 
 {#if hiddenLessons.length > 0}
-    <div class="flex justify-center mb-4">
-        <div class="collapse collapse-arrow w-2/3 bg-warning text-warning-content rounded-md">
+    <div class="flex justify-center">
+        <div class="w-2/3 rounded-md collapse collapse-arrow bg-warning text-warning-content">
             <input type="checkbox" />
-            <div class="collapse-title flex justify-center items-center gap-2 font-semibold">
+            <div class="flex items-center justify-center gap-2 font-semibold collapse-title">
                 <Info />
                 {$t('Components.Timetable.Timetable.Some lessons were hidden from the timetable')}
             </div>
-            <div class="collapse-content flex flex-col mx-auto justify-center">
+            <div class="flex flex-col justify-center mx-auto collapse-content">
                 <ul class="list-disc">
                     {#each hiddenLessons as { module_code, index, day, type, venue_name, start_time, end_time, remark }}
                         <li>

@@ -29,23 +29,31 @@
 </script>
 
 <nav class="flex justify-center bg-base-300">
-    <div class="navbar py-0 max-w-1200">
+    <div class="py-0 navbar max-w-1200">
         <div class="flex-1">
-            <Link
-                class="group"
-                href="/"
-            >
-                <div class="mr-2 group-hover:scale-120 transition-transform duration-300">
-                    <Logo />
-                </div>
-                NTUMoons
-            </Link>
-            <Link href="/timetable">{$t('Nav.Timetable')}</Link>
-            <Link href="/modules">{$t('Nav.Modules')}</Link>
-            <Link href="/staff">{$t('Nav.Staff')}</Link>
+            <div class="px-4">
+                <Link
+                    class="group"
+                    href="/"
+                >
+                    <div class="mr-2 transition-transform duration-300 group-hover:scale-120">
+                        <Logo />
+                    </div>
+                    NTUMoons
+                </Link>
+            </div>
+            <div class="px-4">
+                <Link href="/timetable">{$t('Nav.Timetable')}</Link>
+            </div>
+            <div class="px-4">
+                <Link href="/modules">{$t('Nav.Modules')}</Link>
+            </div>
+            <div class="px-4">
+                <Link href="/staff">{$t('Nav.Staff')}</Link>
+            </div>
         </div>
         <select
-            class="select mr-4"
+            class="mr-4 select"
             value={$activeSemester.id}
             on:change={activeSemesterUpdate}
         >

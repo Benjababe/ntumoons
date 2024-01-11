@@ -53,15 +53,15 @@
     }
 </script>
 
-<div class="mb-6">
-    <div class="collapse collapse-arrow w-full rounded-lg bg-base-300">
+<div>
+    <div class="w-full rounded-lg collapse collapse-arrow bg-base-300">
         <input type="checkbox" />
-        <div class="collapse-title text-xl text-center font-medium">
+        <div class="text-xl font-medium text-center collapse-title">
             <span>{$t('Timetable.Generate.Choose Times Without Lessons')}</span>
         </div>
-        <div class="collapse-content px-12">
+        <div class="px-12 collapse-content">
             <div class="flex flex-col items-center justify-center">
-                <div class="flex justify-center items-center gap-x-4 mb-4">
+                <div class="flex items-center justify-center mb-4 gap-x-4">
                     <button
                         disabled={curDay === 'MON'}
                         class="btn btn-sm btn-neutral"
@@ -69,7 +69,7 @@
                     >
                         {'<'}
                     </button>
-                    <span class="font-semibold text-xl text-center w-16">
+                    <span class="w-16 text-xl font-semibold text-center">
                         {curDay}
                     </span>
                     <button
@@ -80,17 +80,17 @@
                         {'>'}
                     </button>
                 </div>
-                <div class="grid grid-cols-4 gap-x-8 gap-y-4 mb-6">
+                <div class="grid grid-cols-4 mb-6 gap-x-8 gap-y-4">
                     {#each timeRanges as timeRange}
                         <div>
-                            <label class="label cursor-pointer">
+                            <label class="cursor-pointer label">
                                 <input
                                     class="checkbox checkbox-xs checkbox-primary"
                                     type="checkbox"
                                     value={timeRange}
                                     bind:group={dayFilters[curDay]}
                                 />
-                                <span class="label-text ml-1">
+                                <span class="ml-1 label-text">
                                     {timeRange}
                                 </span>
                             </label>

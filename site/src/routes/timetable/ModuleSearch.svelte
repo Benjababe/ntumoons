@@ -59,11 +59,11 @@
     }
 </script>
 
-<div class="relative mb-4">
+<div class="relative">
     <input
         type="text"
         placeholder={$t('Timetable.Course code or name')}
-        class="input input-bordered w-full h-10"
+        class="w-full h-10 input input-bordered"
         disabled={searching}
         bind:value={searchValue}
         on:input={handleSearch}
@@ -71,18 +71,18 @@
         on:blur={() => (searchHidden = true)}
     />
     {#if searching}
-        <div class="w-full flex justify-center">
+        <div class="flex justify-center w-full">
             <Spinner />
         </div>
     {/if}
     {#if moduleResults.length > 0 && !searchHidden && searchValue.length > 0}
         <ol
-            class="absolute w-full max-h-48 top-11 border border-neutral border-opacity-50 overflow-y-scroll rounded-sm z-10"
+            class="absolute z-10 w-full overflow-y-scroll border border-opacity-50 rounded-sm max-h-48 top-11 border-neutral"
         >
             {#each moduleResults as mod}
                 <li class="hover:text-primary bg-base-100 hover:bg-base-300">
                     <button
-                        class="px-4 py-2 w-full text-left capitalize cursor-pointer"
+                        class="w-full px-4 py-2 text-left capitalize cursor-pointer"
                         on:mousedown|preventDefault|once={() => addModuleTimetable(mod.code)}
                         on:keydown|preventDefault|once={() => addModuleTimetable(mod.code)}
                     >

@@ -44,7 +44,7 @@
             <span class="text-center">{data.module.credits} AU</span>
         </div>
     </div>
-    <div class="divider mt-1" />
+    <div class="mt-1 divider" />
     <div class="flex">
         <div class="max-w-xl">
             {#if data.module.prerequisites.length > 0}
@@ -54,22 +54,22 @@
                 />
             {/if}
             {#if data.module.mutex.length > 0}
-                <div class="first:mt-0 mt-8">
+                <div class="mt-8 first:mt-0">
                     <Mutex
                         mutex={data.module.mutex}
                         on:moduleStr={openModule}
                     />
                 </div>
             {/if}
-            <div class="first:mt-0 mt-8">
+            <div class="mt-8 first:mt-0">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Description')}</h2>
-                <div class="divider my-0" />
+                <div class="my-0 divider" />
                 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
                 <div>{@html sanitizeHtml(data.module.description)}</div>
             </div>
             <div class="mt-10">
                 <h2 class="text-xl font-medium">{$t('Modules.Details.Exam')}</h2>
-                <div class="divider my-0" />
+                <div class="my-0 divider" />
                 {#if data.module.exam !== null}
                     <Exam exam={data.module.exam} />
                 {:else}
@@ -79,11 +79,11 @@
         </div>
         <div class="pl-8 ml-4">
             <h2 class="text-xl font-medium">{$t('Modules.Details.Schedule')}</h2>
-            <div class="divider mt-0 mb-4" />
+            <div class="mt-0 mb-4 divider" />
             {#if !data.currentSemester}
                 <div
                     role="alert"
-                    class="alert alert-warning flex justify-center font-semibold mb-4"
+                    class="flex justify-center mb-4 font-semibold alert alert-warning"
                 >
                     <Info />
                     <span>
@@ -94,10 +94,10 @@
                     </span>
                 </div>
             {:else}
-                <div class="flex justify-center items-center pb-4">
+                <div class="flex items-center justify-center pb-4">
                     <span>{$t('Modules.Details.Index Number')}</span>
                     <select
-                        class="select border border-solid border-neutral ml-4"
+                        class="ml-4 border border-solid select border-neutral"
                         bind:value={indexNumber}
                         on:change={updateIndex}
                     >
@@ -107,10 +107,12 @@
                         {/each}
                     </select>
                 </div>
-                <Timetable
-                    {lessons}
-                    orientation="portrait"
-                />
+                <div class="mb-4">
+                    <Timetable
+                        {lessons}
+                        orientation="portrait"
+                    />
+                </div>
             {/if}
         </div>
     </div>

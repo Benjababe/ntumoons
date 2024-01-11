@@ -1,13 +1,12 @@
 <script lang="ts">
     import type { Lesson } from '$lib/types/Firebase';
+    import type { ColCellDetails, DayDetails } from '$lib/types/Timetable';
     import TimetableCell from './TimetableCell.svelte';
     import {
         getColumnCells,
         calculateCellTopOffsets,
         getIntervals,
-        intervalsToGroups,
-        type ColCellDetails,
-        type DayDetails
+        intervalsToGroups
     } from './day-helper';
 
     export let lessons: Lesson[];
@@ -20,6 +19,7 @@
     let widthIntervalPercent = 8.33;
     let groups: ColCellDetails[][] = [];
     const dayDetails: DayDetails = { day, startTime, hourIntervalPercent: widthIntervalPercent };
+    const lastColClass = lastColumn ? '' : 'border-r';
 
     $: {
         const cells = getColumnCells(lessons, dayDetails);
@@ -29,11 +29,13 @@
     }
 </script>
 
-<li class="tt-day rounded-lg">
-    <div class="tt-day-header border-neutral border-opacity-50 {lastColumn ? '' : 'border-r'}">
+<li class="flex flex-col relative min-h-[3.5rem] min-w-[8rem] rounded-lg">
+    <div
+        class="flex justify-center items-center h-14 font-semibold border-solid border-b border-neutral border-opacity-50 {lastColClass}"
+    >
         {day}
     </div>
-    <div class="flex relative h-full bg-tt-alternate-v bg-tt-loop pl-1 rounded-lg">
+    <div class="relative flex h-full pl-1 rounded-lg bg-tt-alternate-v bg-tt-loop">
         {#each groups as group}
             <div class="flex flex-col">
                 {#each group as cellDetails}
@@ -50,23 +52,3 @@
         <div></div>
     </div>
 </li>
-
-<style>
-    .tt-day {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        min-height: 3.5rem;
-        min-width: 8rem;
-    }
-
-    .tt-day-header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 3.5rem;
-        font-weight: 600;
-        border-style: solid;
-        border-bottom-width: 1px;
-    }
-</style>

@@ -23,7 +23,7 @@
     }
 </script>
 
-<div class="flex flex-col justify-center relative max-w-full">
+<div class="relative flex flex-col justify-center max-w-full">
     {#if $timetableModules[$activeSemester.id].length > 0}
         <div class="flex justify-center mb-4">
             <a
@@ -35,7 +35,13 @@
         </div>
     {/if}
     <Timetable {lessons} />
-    <ClashingLessons />
-    <ModuleSearch modules={data.modules[$activeSemester.id]} />
-    <ModuleTable />
+    <div class="mt-4">
+        <ClashingLessons />
+    </div>
+    <div class="mt-4">
+        <ModuleSearch modules={data.modules[$activeSemester.id]} />
+    </div>
+    <div class="mt-4">
+        <ModuleTable />
+    </div>
 </div>

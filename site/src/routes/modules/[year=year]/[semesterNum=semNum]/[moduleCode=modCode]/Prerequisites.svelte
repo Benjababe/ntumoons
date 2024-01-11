@@ -12,13 +12,13 @@
 
 <div>
     <h2 class="text-xl font-medium">{$t('Modules.Details.Prerequisites')}</h2>
-    <div class="divider my-0" />
+    <div class="my-0 divider" />
     <div class="flex flex-wrap gap-4 mt-2">
         {#each prerequisitesArr as prerequisites}
-            <div class="flex justify-center items-center bg-neutral rounded-md p-2 w-max">
+            <div class="flex items-center justify-center p-2 rounded-md bg-neutral w-max">
                 {#each prerequisites.split(' & ') as moduleCode, i}
                     <button
-                        class="btn py-1 px-2 capitalize"
+                        class="px-2 py-1 capitalize btn"
                         on:click|preventDefault={() => openModule(moduleCode)}
                     >
                         {moduleCode}

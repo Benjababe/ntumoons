@@ -8,16 +8,16 @@
 </script>
 
 {#if hasClash}
-    <div class="flex justify-center mb-4 {$$props.class}">
-        <div class="collapse collapse-arrow w-2/3 bg-error text-error-content rounded-md">
+    <div class="flex justify-center {$$props.class}">
+        <div class="w-2/3 rounded-md collapse collapse-arrow bg-error text-error-content">
             <input type="checkbox" />
-            <div class="collapse-title flex justify-center items-center gap-2 font-semibold">
+            <div class="flex items-center justify-center gap-2 font-semibold collapse-title">
                 <Error />
                 {$t(
                     'Components.Timetable.Timetable.There are clashes between lessons in the timetable!'
                 )}
             </div>
-            <div class="collapse-content flex flex-col mx-auto justify-center font-semibold">
+            <div class="flex flex-col justify-center mx-auto font-semibold collapse-content">
                 <ul>
                     {#each Object.entries($timetableClashes) as [day, intervals]}
                         {#if intervals.length > 0}
