@@ -1,4 +1,6 @@
 import asyncio
+import os
+import sys
 from typing import Callable
 
 import firebase_admin
@@ -12,11 +14,19 @@ app: App = None
 db: AsyncClient = None
 
 
-def init_firestore(prod: bool = False):
+def init_firestore(env: str):
     global creds, app, db
+    cert_path = f"serviceAccountKey{env}.json"
 
-    name = "Prod" if prod else "Dev"
-    creds = credentials.Certificate(f"serviceAccountKey{name}.json")
+    if env not in ["Prod", "Staging", "Dev"]:
+        print("Environment provided must be 'Prod', 'Staging' or 'Dev'!")
+        sys.exit(0)
+
+    if not os.path.exists(cert_path):
+        print(f"File {cert_path} does not exist")
+        sys.exit(0)
+
+    creds = credentials.Certificate(cert_path)
     app = firebase_admin.initialize_app(creds)
     db = firestore_async.client()
 

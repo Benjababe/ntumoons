@@ -12,7 +12,7 @@ CACHE_MAP = {}
 
 
 SESS_TIMEOUT = 10000
-CACHE_TIMEOUT = 60 * 60 * 24 * 14
+CACHE_TIMEOUT = 60 * 60 * 24 * 28
 
 
 def session_get_cache(
@@ -156,7 +156,7 @@ def merge_dicts_sets(dict1: dict[str, set], dict2: dict[str, set]):
         dict2 (dict[str, set])
 
     Returns:
-        _type_: Single dict with equal keys merged in value
+        dict[str, set]: Single dict with equal keys merged in value
     """
 
     merged = dict1.copy()
@@ -179,11 +179,45 @@ def get_sem_title(semester: str, tidy: bool) -> str:
         return f"AY20{ay}-{ay+1} SEM {sem_num}"
 
 
-def merge_venue(venue: dict, stored_venue: dict):
-    stored_venue["lessons"].update(venue["lessons"])
+def merge_venue(venue: dict, stored_venue: dict) -> dict:
+    """Merges existing firebase venue with scraped venue
+
+    Args:
+        venue (dict): Scraped venue as a dict
+        stored_venue (dict): Firebase venue as a dict
+
+    Returns:
+        dict: Merged venue dict
+    """
+
+    stored_venue["semesters"].update(venue["semesters"])
     return stored_venue
 
 
-def merge_course_category(category: dict, stored_category: dict):
-    stored_category["semester_modules"].update(category["semester_modules"])
-    return stored_category
+def tidy_venue_name(v_name: str) -> str:
+    """Tries to clean up dumbass venue names
+
+    Args:
+        v_name (str): Venue name to be cleaned
+
+    Returns:
+        str: Cleaned venue name
+    """
+
+    v_name = v_name.strip()
+
+    # 'LT2A' -> LT2A
+    if len(v_name) >= 2 and v_name[0] == "'" and v_name[-1] == "'":
+        v_name = v_name[1:-1]
+
+    # SC-B4C-17. -> SC-B4C-17
+    if len(v_name) >= 1 and v_name[-1] == ".":
+        v_name = v_name[:-1]
+
+    # To standardise everything, use '-' instead of '_'
+    v_name = v_name.replace("_", "-")
+
+    # Get rid of unnecessary characters
+    v_name = v_name.replace("'", "").replace('"', "").replace("/", "")
+
+    return v_name

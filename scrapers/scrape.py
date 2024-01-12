@@ -11,6 +11,7 @@ from data.json import write_json, write_json_invidivual, write_json_list
 from ntu.course_module import get_course_categories, scrape_category_modules
 from ntu.exam import get_exam_plan_num, insert_module_exams
 from ntu.staff import get_all_staff, get_metadata
+from util.args import get_args
 from util.helper import get_sem_title, merge_venue
 from util.typesense import init_typesense, typesense_upsert
 
@@ -87,7 +88,12 @@ async def scrape_modules(force_semester: str):
     await write_fs_list(FS_COLL_MODULE, "code", modules, subcoll_key="semesters")
     await write_fs_list(FS_COLL_COURSE_CAT, "code", categories, subcoll_key="semesters")
     await write_fs_list(
-        FS_COLL_VENUE, "name", venues, overwrite=False, overwrite_func=merge_venue
+        FS_COLL_VENUE,
+        "name",
+        venues,
+        subcoll_key="semesters",
+        overwrite=False,
+        overwrite_func=merge_venue,
     )
 
 
@@ -116,39 +122,18 @@ async def scrape_staff():
 
 async def scrape(force_semester: str):
     await scrape_modules(force_semester)
-    await scrape_staff()
+    # await scrape_staff()
 
 
 if __name__ == "__main__":
     with cProfile.Profile() as pr:
-        parser = argparse.ArgumentParser(
-            description="Scrape modules for a specific semester."
-        )
-        parser.add_argument(
-            "-s",
-            "--semester",
-            metavar="semester",
-            type=str,
-            help="Semester in YYYY;S format.",
-            nargs="?",
-            default="",
-        )
-        parser.add_argument(
-            "-e",
-            "--environment",
-            metavar="environment",
-            type=str,
-            help="Environment to scrape for. Either 'Prod' or 'Dev'.",
-            nargs="?",
-            default="Dev",
-        )
-        args = parser.parse_args()
+        args = get_args()
         semester, environment = str(args.semester), str(args.environment)
 
         if platform.system() == "Windows":
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-        init_firestore(environment.strip().lower() == "prod")
+        init_firestore(environment.strip().title())
         init_typesense()
 
         asyncio.run(scrape(semester))

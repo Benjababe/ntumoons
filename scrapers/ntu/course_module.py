@@ -11,6 +11,7 @@ from util.helper import (
     read_cache,
     session_get_cache,
     session_post_cache,
+    tidy_venue_name,
     write_cache,
 )
 from util.structs import (
@@ -22,6 +23,7 @@ from util.structs import (
     ModuleReduced,
     ModuleSemester,
     Venue,
+    VenueSemester,
 )
 
 CACHE_FILENAME = "modules"
@@ -64,7 +66,7 @@ def get_course_categories(
     else:
         res = session_get_cache(sess, SCHEDULE_SELECT_PAGE)
 
-    soup = BeautifulSoup(res.text, "lxml")
+    soup = BeautifulSoup(res.content, "lxml")
 
     if force_semester == "":
         semester_selector = soup.find("select", {"name": "acadsem"})
@@ -192,19 +194,25 @@ def scrape_category_modules(
         # include module codes offered into category
         category.semesters[semester] = CourseCategorySemester(
             modules=list(
-                map(lambda m: ModuleReduced(name=m.name, code=m.code), modules)
+                map(
+                    lambda m: ModuleReduced(
+                        name=m.name, name_pretty=m.name_pretty, code=m.code
+                    ),
+                    modules,
+                )
             )
         )
 
         categories[i] = category
 
     for v_name, lessons in venue_dict.items():
+        venue_semester = VenueSemester(lessons=list(lessons))
         venue = Venue(
             name=v_name,
             lat=DEFAULT_LAT,
             lng=DEFAULT_LNG,
             floor=-1,
-            lessons={semester: list(lessons)},
+            semesters={semester: venue_semester},
         )
         venues.append(venue)
 
@@ -379,7 +387,7 @@ def get_category_modules_venues(
             ) = time_slot_cells[1:]
 
             # some locations are stupid and put unwanted characters
-            l_venue = l_venue.replace("/", "").replace('"', "")
+            l_venue = tidy_venue_name(l_venue)
 
             start_time, end_time = 0, 0
             if "-" in l_time:
