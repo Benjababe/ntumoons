@@ -149,5 +149,5 @@ __pycache__
 serviceAccountKeyDev.json
 serviceAccountKeyProd.json
 cache/*
-export/*
+export/**/modules/*.json
 *.prof
