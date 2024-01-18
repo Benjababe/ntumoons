@@ -85,9 +85,9 @@ async def scrape_modules(force_semester: str):
     }
 
     # For data, allow overwriting as the latest values would be preferred
-    # await write_fs(FS_COLL_SEM, semester, sem_obj)
-    # await write_fs_list(FS_COLL_MODULE, "code", modules, subcoll_key="semesters")
-    # await write_fs_list(FS_COLL_COURSE_CAT, "code", categories, subcoll_key="semesters")
+    await write_fs(FS_COLL_SEM, semester, sem_obj)
+    await write_fs_list(FS_COLL_MODULE, "code", modules, subcoll_key="semesters")
+    await write_fs_list(FS_COLL_COURSE_CAT, "code", categories, subcoll_key="semesters")
 
     # For venues, keep the old data apart from lessons as we don't want to overwrite the location
     await write_fs_list(
@@ -129,7 +129,7 @@ async def scrape_staff():
 
 async def scrape(force_semester: str):
     await scrape_modules(force_semester)
-    # await scrape_staff()
+    await scrape_staff()
 
 
 if __name__ == "__main__":
