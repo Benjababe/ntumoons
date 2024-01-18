@@ -58,8 +58,8 @@ async def write_fs_list(
         doc_id_key (str): Key of data to use as firestore document id.
         data_list (list[Dictable]): List of data to upload.
         overwrite (bool, optional): Flag whether to replace existing documents. Defaults to True.
-        overwrite_func (Callable[[dict, dict], dict], optional): Function to execute if document exists and override it with its returned value. Defaults to None.
-        subcollection_key (str, optional): Key of dictable to use as a subcollection. Value must be a dict. Defaults to ""
+        overwrite_func (Callable[[dict, dict], dict], optional): Function to execute if document exists and override it with its returned value. First argument will be the new value and second argument the currently stored value. Defaults to None.
+        subcoll_key (str, optional): Key of dictable to use as a subcollection. Value must be a dict. Defaults to ""
     """
 
     async def write(data: Dictable):
@@ -83,6 +83,7 @@ async def write_fs_list(
         if not overwrite:
             doc = db.collection(fs_coll).document(doc_id)
             actual_doc = await doc.get()
+
             if not actual_doc.exists:
                 if subcoll_key != "":
                     subcollection_val = data_dict[subcoll_key]

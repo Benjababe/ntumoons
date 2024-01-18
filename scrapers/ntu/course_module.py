@@ -3,6 +3,7 @@ import sys
 from typing import cast
 
 import bs4
+import cchardet
 from bs4 import BeautifulSoup
 from requests import Session
 
@@ -158,7 +159,7 @@ def scrape_category_modules(
         res = session_post_cache(sess, COURSE_DETAIL_PAGE, data)
 
         if res.ok:
-            modules, module_venues = get_category_modules_venues(semester, res.text)
+            modules, module_venues = get_category_modules_venues(semester, res.content)
             venue_dict = merge_dicts_sets(venue_dict, module_venues)
         else:
             print(f"Error with scraping {category_name}")
@@ -176,7 +177,7 @@ def scrape_category_modules(
         res = session_post_cache(sess, COURSE_INFO_PAGE, data)
 
         if res.ok:
-            modules = get_category_modules_info(semester, modules, res.text)
+            modules = get_category_modules_info(semester, modules, res.content)
         else:
             print(f"Error with scraping {category_name}")
             continue
@@ -228,14 +229,14 @@ def scrape_category_modules(
 
 
 def get_category_modules_info(
-    semester: str, modules: list[Module], html: str
+    semester: str, modules: list[Module], html: bytes
 ) -> list[Module]:
     """Parses scraped module grading and description.
 
     Args:
         semester (str): Semester in YYYY;S format.
         module_codes (list[Module]): Modules for the current category.
-        html (str): HTTP response text.
+        html (bytes): HTTP response body in bytes.
 
     Returns:
         list[Module]: Modules populated with additional information.
@@ -305,14 +306,14 @@ def get_category_modules_info(
 
 def get_category_modules_venues(
     semester: str,
-    course_page_text: str,
+    course_page_content: bytes,
 ) -> tuple[list[Module], dict[str, set[Lesson]]]:
     """Parses the "Load Content of Course" page with all the modules and returns a list
        of modules for the course in the given academic semester and a list of venues.
 
     Args:
         semester (str): Semester in YYYY;S format.
-        course_page_text (str): Text response from course detail POST request.
+        course_page_content (bytes): Byte response from course detail POST request.
 
     Returns:
         tuple[list[Module], dict[str, set[Lesson]]]:
@@ -323,7 +324,7 @@ def get_category_modules_venues(
     modules: list[Module] = []
     venues: dict[str, set[Lesson]] = {}
 
-    soup = BeautifulSoup(course_page_text, "lxml")
+    soup = BeautifulSoup(course_page_content, "lxml")
     tbl_headers = soup.find_all("table", {"border": False})
 
     # each tbl_header represents a module

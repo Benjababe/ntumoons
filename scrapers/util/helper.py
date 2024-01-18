@@ -179,21 +179,6 @@ def get_sem_title(semester: str, tidy: bool) -> str:
         return f"AY20{ay}-{ay+1} SEM {sem_num}"
 
 
-def merge_venue(venue: dict, stored_venue: dict) -> dict:
-    """Merges existing firebase venue with scraped venue
-
-    Args:
-        venue (dict): Scraped venue as a dict
-        stored_venue (dict): Firebase venue as a dict
-
-    Returns:
-        dict: Merged venue dict
-    """
-
-    stored_venue["semesters"].update(venue["semesters"])
-    return stored_venue
-
-
 def tidy_venue_name(v_name: str) -> str:
     """Tries to clean up dumbass venue names
 

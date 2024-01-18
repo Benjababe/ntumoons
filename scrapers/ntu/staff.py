@@ -1,6 +1,7 @@
 import re
 from collections import defaultdict
 
+import cchardet
 from bs4 import BeautifulSoup
 from requests import Session
 
@@ -64,7 +65,7 @@ def get_staff_details(sess: Session, url: str) -> Staff:
     res = session_get_cache(sess, url)
 
     if res.ok:
-        soup = BeautifulSoup(res.text, "lxml")
+        soup = BeautifulSoup(res.content, "lxml")
 
         p_url = soup.select_one("#personalsiteDiv a")
         details["personal_url"] = "" if p_url is None else p_url.attrs["href"]

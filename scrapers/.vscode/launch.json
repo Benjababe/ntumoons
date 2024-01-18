@@ -11,7 +11,7 @@
             "justMyCode": true,
             "args": [
                 "--semester",
-                "2022;1",
+                "2023;2",
                 "--environment",
                 "dev"
             ]
