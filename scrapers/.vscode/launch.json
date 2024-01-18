@@ -10,10 +10,10 @@
             "cwd": "${workspaceFolder}",
             "justMyCode": true,
             "args": [
-                // "--semester",
-                // "2023;2",
-                // "--environment",
-                // "prod"
+                "--semester",
+                "2023;2",
+                "--environment",
+                "dev"
             ]
         },
     ]

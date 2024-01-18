@@ -80,12 +80,17 @@ class Lesson(Dictable):
 
 
 @dataclass
+class VenueSemester(Dictable):
+    lessons: list[Lesson]
+
+
+@dataclass
 class Venue(Dictable):
     name: str
     lat: float
     lng: float
     floor: int
-    lessons: dict[str, list[Lesson]]
+    semesters: dict[str, VenueSemester]
 
 
 @dataclass
@@ -133,6 +138,7 @@ class Module(Dictable):
 class ModuleReduced(Dictable):
     code: str
     name: str
+    name_pretty: str
 
 
 @dataclass
