@@ -24,7 +24,9 @@
     placeholder={$t('Venues.Enter venue name')}
     bind:value={venueFilter}
 />
-<div class="grid grid-cols-3 gap-2 mt-4">
+<div
+    class="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] h-full gap-2 pr-1.5 mt-4 overflow-y-scroll"
+>
     {#each venues as venue}
         <button
             class="btn btn-primary"

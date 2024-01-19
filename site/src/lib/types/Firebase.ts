@@ -66,3 +66,11 @@ export type Semester = {
     year: string;
     semester_num: string;
 };
+
+export type Venue = {
+    floor: number;
+    lat: number;
+    lng: number;
+    name: string;
+    lessons: Lesson[];
+};

@@ -86,6 +86,11 @@
         }
     },
 
+    "Venues": {
+        "Enter venue name": "Enter venue name",
+        "Report Inaccurate Information": "Got Fuck Up I Wan Report"
+    },
+
     "Staff": {
         "Search": {
             "Enter name or description": "Name or description also can, will find your favourite prof one",
