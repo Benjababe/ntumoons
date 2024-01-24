@@ -4,6 +4,8 @@
     import Timetable from '$lib/components/timetable/Timetable.svelte';
     import { activeSemester } from '$lib/stores';
     import type { Venue } from '$lib/types/Firebase';
+    import Map from '$lib/components/generic/Map.svelte';
+    import Spinner from '$lib/components/generic/Spinner.svelte';
 
     export let activeVenueName = '';
     let activeVenue: Venue | undefined;
@@ -26,20 +28,32 @@
             activeVenue = undefined;
             return -1;
         }
+
+        return activeVenue;
     }
 </script>
 
-{#if activeVenueName === ''}
-    lol
-{:else if activeVenue !== undefined}
-    <div class="flex flex-col justify-center gap-4">
-        <Timetable lessons={activeVenue.lessons} />
-        <div class="flex justify-center">
-            <NewTabLink
-                class="btn btn-sm btn-neutral w-fit"
-                url="https://github.com/Benjababe/ntumoons/issues/new?title={issueTitle}"
-                text={$t('Venues.Report Inaccurate Information')}
-            ></NewTabLink>
-        </div>
+{#await getVenueLessons(activeVenueName)}
+    <div class="flex items-center justify-center w-full h-1/2">
+        <Spinner />
     </div>
-{/if}
+{:then activeVenue}
+    {#if activeVenue !== -1 && activeVenue !== undefined}
+        <div class="flex flex-col justify-center gap-4">
+            <h2 class="text-3xl font-bold">{activeVenue.name}</h2>
+            <span class="text-xl font-semibold">Level: {activeVenue.floor}</span>
+            <div class="h-[25rem]">
+                <Map markers={[[activeVenue.lat, activeVenue.lng]]} />
+            </div>
+            <div class="my-0 divider" />
+            <Timetable lessons={activeVenue.lessons} />
+            <div class="flex justify-center">
+                <NewTabLink
+                    class="btn btn-sm btn-neutral w-fit"
+                    url="https://github.com/Benjababe/ntumoons/issues/new?title={issueTitle}"
+                    text={$t('Venues.Report Inaccurate Information')}
+                ></NewTabLink>
+            </div>
+        </div>
+    {/if}
+{/await}
