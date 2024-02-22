@@ -43,7 +43,10 @@
             <h2 class="text-3xl font-bold">{activeVenue.name}</h2>
             <span class="text-xl font-semibold">Level: {activeVenue.floor}</span>
             <div class="h-[25rem]">
-                <Map markers={[[activeVenue.lat, activeVenue.lng]]} />
+                <Map
+                    initView={[activeVenue.lat, activeVenue.lng]}
+                    markers={[[activeVenue.lat, activeVenue.lng]]}
+                />
             </div>
             <div class="my-0 divider" />
             <Timetable lessons={activeVenue.lessons} />

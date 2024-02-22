@@ -5,6 +5,7 @@
     import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
     import { markerIcon } from '../map/icons';
 
+    export let initView: LatLngExpression = [1.346084, 103.680854];
     export let markers: LatLngExpression[] = [];
 
     const dispatch = createEventDispatcher();
@@ -14,7 +15,6 @@
         dark: 'https://www.onemap.gov.sg/maps/tiles/Night/{z}/{x}/{y}.png'
     };
 
-    const initialView: LatLngExpression = [1.346084, 103.680854];
     let mapElement: HTMLDivElement;
 
     const sw = L.latLng(1.144, 103.535);
@@ -46,7 +46,7 @@
             if (map) new L.Marker(marker, { icon: markerIcon }).addTo(map);
         });
 
-        map.setView(initialView, 18);
+        map.setView(initView, 18);
     });
 
     onDestroy(() => {
