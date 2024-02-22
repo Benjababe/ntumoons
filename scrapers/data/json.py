@@ -4,19 +4,20 @@ import os
 from util.structs import Dictable
 
 
-def write_json(data: dict, filename: str):
-    """Writes dict data into a JSON file
+def write_json(data: dict | list, filename: str, overwrite=False):
+    """Writes dict data into a JSON file.
 
     Args:
-        data (dict): Data to save
-        filename (str): Filename of the output JSON file
+        data (dict | list): Data to save.
+        filename (str): Filename of the output JSON file.
+        overwrite (bool): Flag whether to replace any existing file. Defaults to False.
     """
 
     filepath = f"export/{filename}.json"
     if not os.path.exists(filepath):
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
-    if os.path.exists(filepath):
+    if os.path.exists(filepath) and not overwrite:
         print(f"{filepath} already exists")
         return
 

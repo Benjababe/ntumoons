@@ -4,6 +4,7 @@
     "Nav": {
         "Timetable": "Timetable",
         "Modules": "Modules",
+        "Venues": "Venues",
         "Staff": "Staff"
     },
 
@@ -83,6 +84,11 @@
             "Module is not offered in semester": "{{code}} is not offered in {{semesterTitle}}",
             "Index Number": "Index Number: "
         }
+    },
+
+    "Venues": {
+        "Enter venue name": "Enter venue name",
+        "Report Inaccurate Information": "Report Inaccurate Information"
     },
 
     "Staff": {
