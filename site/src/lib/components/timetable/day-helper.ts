@@ -161,7 +161,6 @@ export function intervalsToGroups<T extends RowCellDetails | ColCellDetails>(int
             // else, check for earliest group that supports the cell
             // by checking the end time of the last cell in a group.
             // it's fine as intervals is already sorted.
-
             let stored = false;
             for (let j = 0; j < groups.length; j++) {
                 const group = groups[j];
@@ -212,8 +211,14 @@ export function calculateCellLeftOffsets(groups: RowCellDetails[][]) {
 export function calculateCellTopOffsets(groups: ColCellDetails[][]) {
     groups = groups.map((group) => {
         return group.reduce(
-            (acc, cell) => {
-                cell.accTop = cell.top + cell.height;
+            (acc, cell, i) => {
+                if (i === 0) {
+                    cell.accTop = cell.top + cell.height;
+                } else {
+                    const newtop = cell.top - (acc[i - 1].accTop ?? 0);
+                    cell.top = newtop;
+                    cell.accTop = (acc[i - 1].accTop ?? 0) + cell.top + cell.height;
+                }
                 return [...acc, cell];
             },
             <ColCellDetails[]>[]

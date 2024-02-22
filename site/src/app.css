@@ -2,11 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@supports (scrollbar-gutter: stable) {
-    html {
-        overflow-y: overlay;
-        scrollbar-gutter: stable;
-    }
+.leaflet-control-attribution {
+    display: inline-flex;
 }
 
 ::-webkit-scrollbar {

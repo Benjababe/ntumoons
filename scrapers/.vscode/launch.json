@@ -2,6 +2,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Generate Venues Basic",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/getVenues.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "Start Scraping",
             "type": "python",
             "request": "launch",
@@ -10,10 +18,10 @@
             "cwd": "${workspaceFolder}",
             "justMyCode": true,
             "args": [
-                // "--semester",
-                // "2023;2",
-                // "--environment",
-                // "prod"
+                "--semester",
+                "2023;2",
+                "--environment",
+                "dev"
             ]
         },
     ]

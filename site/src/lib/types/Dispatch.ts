@@ -15,3 +15,7 @@ export type DispatchFilterUpdate = {
     name: string;
     newFilters: Filter[];
 };
+
+export type DispatchActiveVenue = {
+    venue: string;
+};

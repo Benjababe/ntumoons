@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import cchardet
 from bs4 import BeautifulSoup
 from requests import Session
 
@@ -27,19 +28,19 @@ def get_exam_plan_num(sess: Session, semester: str) -> str:
     data = {"p_opt": OPT_GENERAL, "p_type": "UE", "bOption": "Next"}
     res = session_post_cache(sess, EXAM_SEMSTER_PAGE, data)
 
-    soup = BeautifulSoup(res.text, "lxml")
+    soup = BeautifulSoup(res.content, "lxml")
     sem_options = soup.find_all("input", {"name": "p_plan_no"})
     plan_num = next((s for s in sem_options if s.next.strip() == sem_title), None)
 
     return plan_num["value"] if plan_num is not None else None
 
 
-def process_exams(modules: list[Module], html: str) -> list[Exam]:
+def process_exams(modules: list[Module], html: bytes) -> list[Exam]:
     """Parse exam table rows and return structured list.
 
     Args:
         modules (list[Module]): List of all scraped modules.
-        html (str): Exam page html string.
+        html (bytes): Exam page html bytes.
 
     Returns:
         list[Module]: List of all modules with exam information.
@@ -115,5 +116,5 @@ def insert_module_exams(
         "bOption": "Next",
     }
     res = session_post_cache(sess, EXAM_TIMETABLE_PAGE, data)
-    modules = process_exams(modules, res.text)
+    modules = process_exams(modules, res.content)
     return modules

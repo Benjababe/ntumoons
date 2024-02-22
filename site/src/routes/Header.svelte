@@ -49,6 +49,9 @@
                 <Link href="/modules">{$t('Nav.Modules')}</Link>
             </div>
             <div class="px-4">
+                <Link href="/venues">{$t('Nav.Venues')}</Link>
+            </div>
+            <div class="px-4">
                 <Link href="/staff">{$t('Nav.Staff')}</Link>
             </div>
         </div>
