@@ -19,7 +19,7 @@
     // Very important to ensure each column's initial width can fit the full cell.
     const portraitStyle =
         top !== undefined && height !== undefined
-            ? `position: absolute; top: calc(${top}% + 4px); height: calc(${height}% - 4px); width: 95%`
+            ? `position: relative; top: calc(${top}% + 4px); height: calc(${height}% - 4px); width: 95%`
             : '';
 
     const clashClass = clashing ? 'border-3 border-solid border-error' : 'border border-neutral';
