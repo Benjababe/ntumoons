@@ -35,7 +35,7 @@
     >
         {day}
     </div>
-    <div class="relative flex h-full pl-1 rounded-lg bg-tt-alternate-v bg-tt-loop">
+    <div class="relative flex h-full min-w-full pl-1 rounded-lg bg-tt-alternate-v bg-tt-loop w-max">
         {#each groups as group}
             <div class="flex flex-col">
                 {#each group as cellDetails}
@@ -49,6 +49,5 @@
                 {/each}
             </div>
         {/each}
-        <div></div>
     </div>
 </li>
