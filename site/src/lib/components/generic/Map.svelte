@@ -1,8 +1,9 @@
 <script lang="ts">
     import type { Theme } from '$lib/types/Settings';
-    import L, { LatLng, type LatLngExpression } from 'leaflet';
+    import L, { type LatLngExpression } from 'leaflet';
     import 'leaflet/dist/leaflet.css';
-    import { createEventDispatcher, onDestroy, onMount, setContext, tick } from 'svelte';
+    import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
+    import { markerIcon } from '../map/icons';
 
     export let markers: LatLngExpression[] = [];
 
@@ -42,22 +43,16 @@
         }).addTo(map);
 
         markers.forEach((marker) => {
-            if (map) new L.Marker(marker).addTo(map);
+            if (map) new L.Marker(marker, { icon: markerIcon }).addTo(map);
         });
+
+        map.setView(initialView, 18);
     });
 
     onDestroy(() => {
         map?.remove();
         map = undefined;
     });
-
-    setContext('map', {
-        getMap: () => map
-    });
-
-    $: if (map) {
-        map.setView(initialView, 18);
-    }
 </script>
 
 <div
