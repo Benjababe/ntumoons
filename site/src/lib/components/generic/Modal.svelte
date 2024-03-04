@@ -3,6 +3,7 @@
 
     function showModal() {
         dialog.showModal();
+      console.log("hello");
     }
 </script>
 
