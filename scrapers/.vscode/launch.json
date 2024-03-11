@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Generate Venues Basic",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/getVenues.py",
             "console": "integratedTerminal",
@@ -11,7 +11,7 @@
         },
         {
             "name": "Start Scraping",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/scrape.py",
             "console": "integratedTerminal",
