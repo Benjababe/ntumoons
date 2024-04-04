@@ -1,10 +1,13 @@
 <script lang="ts">
     import type { Theme } from '$lib/types/Settings';
     import L, { type LatLngExpression } from 'leaflet';
+    import { GestureHandling } from 'leaflet-gesture-handling';
     import 'leaflet/dist/leaflet.css';
+    import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
     import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
     import { markerIcon } from '../map/icons';
 
+    export let ctrlScroll: boolean = false;
     export let initView: LatLngExpression = [1.346084, 103.680854];
     export let markers: LatLngExpression[] = [];
 
@@ -24,7 +27,11 @@
     let map: L.Map | undefined;
 
     onMount(() => {
-        map = L.map(mapElement)
+        L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+        const mapOptions = (ctrlScroll) ? { gestureHandling: true } : {}
+
+        // Cast to any because TypeScript doesn't play well with `gestureHandling`
+        map = L.map(mapElement, mapOptions as any)
             .on('zoom', (e) => dispatch('zoom', e))
             .on('popupopen', async (e) => {
                 await tick();

@@ -6,6 +6,7 @@
     import type { Venue } from '$lib/types/Firebase';
     import Map from '$lib/components/generic/Map.svelte';
     import Spinner from '$lib/components/generic/Spinner.svelte';
+    import VenueSubmit from './VenueSubmit.svelte';
 
     export let activeVenueName = '';
     let activeVenue: Venue | undefined;
@@ -41,6 +42,7 @@
     {#if activeVenue !== -1 && activeVenue !== undefined}
         <div class="flex flex-col justify-center gap-4">
             <h2 class="text-3xl font-bold">{activeVenue.name}</h2>
+            {#if activeVenue.coord_confirmed}
             <span class="text-xl font-semibold">Level: {activeVenue.floor}</span>
             <div class="h-[25rem]">
                 <Map
@@ -48,6 +50,9 @@
                     markers={[[activeVenue.lat, activeVenue.lng]]}
                 />
             </div>
+            {:else}
+                <VenueSubmit venueName={activeVenue.name}/>
+            {/if}
             <div class="my-0 divider" />
             <Timetable lessons={activeVenue.lessons} />
             <div class="flex justify-center">

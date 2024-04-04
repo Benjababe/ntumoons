@@ -14,7 +14,7 @@
     class="modal modal-bottom sm:modal-middle"
     bind:this={dialog}
 >
-    <div class="modal-box">
+    <div class="!max-w-3xl modal-box ">
         <slot name="modal-body" />
     </div>
     <form
