@@ -2,8 +2,22 @@
     import { t } from '$lib/translations';
     import Modal from '$lib/components/generic/Modal.svelte';
     import Map from '$lib/components/generic/Map.svelte';
+    import type { Marker } from 'leaflet';
 
     export let venueName: string;
+    let floor: number;
+    let comments: string = '';
+    let userMarker: Marker;
+
+    async function submitVenue() {
+        if (floor === undefined || userMarker === undefined) return;
+
+        const { lat, lng } = userMarker.getLatLng();
+        const res = await fetch('/venues/submit', {
+            method: 'POST',
+            body: JSON.stringify({ name: venueName, floor, comments, lat, lng })
+        });
+    }
 </script>
 
 <div class="flex flex-col justify-center max-w-full gap-3">
@@ -34,8 +48,9 @@
                         </div>
                         <input
                             type="number"
-                            placeholder="{$t("Venues.Submit.Use negatives for basement")}"
+                            placeholder={$t('Venues.Submit.Use negatives for basement')}
                             class="input input-bordered w-full max-w-xs"
+                            bind:value={floor}
                         />
                     </div>
                     <div class="flex-none flex-grow-0 w-[45%] max-w-[45%]">
@@ -46,17 +61,26 @@
                         </div>
                         <input
                             type="text"
-                            placeholder="{$t("Venues.Submit.Anything to note about the venue")}"
+                            placeholder={$t('Venues.Submit.Anything to note about the venue')}
                             class="input input-bordered w-full max-w-xs"
+                            bind:value={comments}
                         />
                     </div>
                     <div class="w-full h-[28rem]">
-                        <Map ctrlScroll={true}/>
+                        <Map
+                            ctrlScroll={true}
+                            allowUserMarker={true}
+                            bind:userMarker
+                        />
                     </div>
                 </div>
                 <div class="modal-action">
                     <form method="dialog">
-                        <button class="btn btn-success">
+                        <button
+                            disabled={floor === undefined || userMarker === undefined}
+                            class="btn btn-success"
+                            on:click={submitVenue}
+                        >
                             {$t('Venues.Submit.Submit')}
                         </button>
                         <button class="ml-2 btn">{$t('Settings.ClearStorage.Close')}</button>

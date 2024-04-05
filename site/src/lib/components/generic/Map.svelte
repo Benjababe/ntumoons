@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Theme } from '$lib/types/Settings';
-    import L, { type LatLngExpression } from 'leaflet';
+    import L, { Marker, type LatLngExpression, type LeafletMouseEvent, marker } from 'leaflet';
     import { GestureHandling } from 'leaflet-gesture-handling';
     import 'leaflet/dist/leaflet.css';
     import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -10,6 +10,8 @@
     export let ctrlScroll: boolean = false;
     export let initView: LatLngExpression = [1.346084, 103.680854];
     export let markers: LatLngExpression[] = [];
+    export let allowUserMarker: boolean = false;
+    export let userMarker: Marker | undefined = undefined;
 
     const dispatch = createEventDispatcher();
 
@@ -26,9 +28,15 @@
 
     let map: L.Map | undefined;
 
+    function setUserMarker(e: LeafletMouseEvent) {
+        if (!map || !allowUserMarker) return;
+        if (userMarker) map.removeLayer(userMarker);
+        userMarker = L.marker(e.latlng, { draggable: true }).addTo(map);
+    }
+
     onMount(() => {
         L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
-        const mapOptions = (ctrlScroll) ? { gestureHandling: true } : {}
+        const mapOptions = ctrlScroll ? { gestureHandling: true } : {};
 
         // Cast to any because TypeScript doesn't play well with `gestureHandling`
         map = L.map(mapElement, mapOptions as any)
@@ -37,6 +45,8 @@
                 await tick();
                 e.popup.update();
             });
+
+        map.on('click', setUserMarker);
 
         map.attributionControl.setPrefix('');
         map.setMaxBounds(bounds);
