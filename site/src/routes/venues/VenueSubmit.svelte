@@ -15,7 +15,7 @@
         const { lat, lng } = userMarker.getLatLng();
         const res = await fetch('/venues/submit', {
             method: 'POST',
-            body: JSON.stringify({ name: venueName, floor, comments, lat, lng })
+            body: JSON.stringify({ venue: venueName, floor, comments, lat, lng })
         });
     }
 </script>

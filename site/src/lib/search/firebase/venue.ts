@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { COLL_VENUES, COLL_VENUE_SUBMISSIONS, SUB_COLL_SEMESTERS, db } from '.';
 import type { Lesson, Venue } from '$lib/types/Firebase';
-import type { VenueSubmissionStored } from '$lib/types/Venue';
+import type { VenueSubmissionStored, VenueSubmissionUpdate } from '$lib/types/Venue';
 
 /**
  * Tries to find the module with the provided parameters.
@@ -67,6 +67,29 @@ export async function getVenueSubmissions() {
     const venuesQuery = query(venuesSubsCollection, where('confirmed', '==', false));
     const querySnapshot = await getDocs(venuesQuery);
     const documents = querySnapshot.docs;
-    const venueSubmissions = documents.map((doc) => doc.data() as VenueSubmissionStored);
+    const venueSubmissions = documents.map((doc) => {
+        return { id: doc.id, ...doc.data() } as VenueSubmissionStored;
+    });
     return venueSubmissions;
+}
+
+export async function updateVenueSubmission(submissionUpdate: VenueSubmissionUpdate) {
+    const { approved, venue, lat, lng } = submissionUpdate;
+
+    const submissionRef = doc(db, COLL_VENUE_SUBMISSIONS, submissionUpdate.id);
+    const submissionDoc = await getDoc(submissionRef);
+    if (!submissionDoc.exists()) return false;
+
+    const updatedDoc = { ...submissionUpdate, confirmed: true };
+    await setDoc(submissionRef, updatedDoc);
+
+    if (approved) {
+        const venueRef = doc(db, COLL_VENUES, venue);
+        const venueDoc = await getDoc(venueRef);
+        if (!venueDoc.exists()) return false;
+        const updatedVenue = { ...venueDoc.data(), lat, lng, coord_confirmed: true } as Venue;
+        await setDoc(venueRef, updatedVenue);
+    }
+
+    return true;
 }

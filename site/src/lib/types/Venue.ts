@@ -1,16 +1,16 @@
 export type VenueSubmissionReq = {
-    name: string;
+    venue: string;
     lat: number;
     lng: number;
     floor: number;
     comments: string;
 };
 
-export type VenueSubmissionStored = {
-    venue: string;
-    lat: number;
-    lng: number;
-    floor: number;
+export type VenueSubmissionStored = VenueSubmissionReq & {
+    id: string;
     confirmed: boolean;
-    comments: string;
+};
+
+export type VenueSubmissionUpdate = VenueSubmissionStored & {
+    approved: boolean;
 };
