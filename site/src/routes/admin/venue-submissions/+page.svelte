@@ -51,11 +51,13 @@
             </div>
             <div class="w-3/4 max-w-screen-xl h-[30rem] flex gap-x-8">
                 <div class="h-full w-full">
-                    <Map
-                        ctrlScroll={true}
-                        markers={[marker]}
-                        initView={marker}
-                    />
+                    {#key marker}
+                        <Map
+                            ctrlScroll={true}
+                            markers={[marker]}
+                            initView={marker}
+                        />
+                    {/key}
                 </div>
                 <div class="h-full min-w-48 flex flex-col gap-y-6 text-lg">
                     <div class="bg-base-200 p-4 rounded-lg flex justify-evenly">
