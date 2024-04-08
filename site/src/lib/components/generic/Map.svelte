@@ -73,7 +73,7 @@
 </script>
 
 <div
-    class="w-full h-full"
+    class="w-full h-full rounded-lg"
     bind:this={mapElement}
 >
     {#if map !== undefined}
