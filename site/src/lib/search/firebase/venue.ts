@@ -1,9 +1,10 @@
 import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { COLL_VENUES, COLL_VENUE_SUBMISSIONS, SUB_COLL_SEMESTERS, db } from '.';
 import type { Lesson, Venue } from '$lib/types/Firebase';
+import type { VenueSubmission } from '$lib/types/Venue';
 
 /**
- * Tries to find the module with the provided parameters
+ * Tries to find the module with the provided parameters.
  * @param venue Venue to find.
  * @param semesterId Target semester of the lessons for the module. In YYYY;S format.
  * @returns Module document or undefined if it was not found.
@@ -33,7 +34,7 @@ export async function getVenueLessons(venue: string, semesterId: string) {
  * @param comments Things to note about the venue.
  * @param lat
  * @param lng
- * @returns Error if submission failed
+ * @returns Error if submission failed.
  */
 export async function submitVenueLocation(
     venue: string,
@@ -49,12 +50,26 @@ export async function submitVenueLocation(
     );
 
     try {
-        await setDoc(cityRef, { venue, floor, comments, lat, lng });
-        return;
+        await setDoc(cityRef, { venue, floor, comments, lat, lng, confirmed: false });
     } catch (err) {
-        console.log(err);
         return err;
     }
 
     return;
+}
+
+/**
+ * Retrieves all unconfirmed venue submissions for admin the approve/disapprove.
+ * @returns All unconfirmed venue submissions.
+ */
+export async function getVenueSubmissions() {
+    // First find the main document of the module
+    const venuesSubsCollection = collection(db, COLL_VENUE_SUBMISSIONS);
+    const venuesQuery = query(venuesSubsCollection, where('confirmed', '==', true));
+    const querySnapshot = await getDocs(venuesQuery);
+    const documents = querySnapshot.docs;
+    if (documents.length === 0) return undefined;
+
+    const venueSubmissions = documents.map((doc) => doc.data() as VenueSubmission);
+    return venueSubmissions;
 }
