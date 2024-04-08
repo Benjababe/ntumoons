@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { COLL_VENUES, COLL_VENUE_SUBMISSIONS, SUB_COLL_SEMESTERS, db } from '.';
 import type { Lesson, Venue } from '$lib/types/Firebase';
-import type { VenueSubmission } from '$lib/types/Venue';
+import type { VenueSubmissionStored } from '$lib/types/Venue';
 
 /**
  * Tries to find the module with the provided parameters.
@@ -63,13 +63,10 @@ export async function submitVenueLocation(
  * @returns All unconfirmed venue submissions.
  */
 export async function getVenueSubmissions() {
-    // First find the main document of the module
     const venuesSubsCollection = collection(db, COLL_VENUE_SUBMISSIONS);
-    const venuesQuery = query(venuesSubsCollection, where('confirmed', '==', true));
+    const venuesQuery = query(venuesSubsCollection, where('confirmed', '==', false));
     const querySnapshot = await getDocs(venuesQuery);
     const documents = querySnapshot.docs;
-    if (documents.length === 0) return undefined;
-
-    const venueSubmissions = documents.map((doc) => doc.data() as VenueSubmission);
+    const venueSubmissions = documents.map((doc) => doc.data() as VenueSubmissionStored);
     return venueSubmissions;
 }
