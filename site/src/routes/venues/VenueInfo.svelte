@@ -43,15 +43,15 @@
         <div class="flex flex-col justify-center gap-4">
             <h2 class="text-3xl font-bold">{activeVenue.name}</h2>
             {#if activeVenue.coord_confirmed}
-            <span class="text-xl font-semibold">Level: {activeVenue.floor}</span>
-            <div class="h-[25rem]">
-                <Map
-                    initView={[activeVenue.lat, activeVenue.lng]}
-                    markers={[[activeVenue.lat, activeVenue.lng]]}
-                />
-            </div>
+                <span class="text-xl font-semibold">Level: {activeVenue.floor}</span>
+                <div class="h-[25rem]">
+                    <Map
+                        initView={[activeVenue.lat, activeVenue.lng]}
+                        markers={[[activeVenue.lat, activeVenue.lng]]}
+                    />
+                </div>
             {:else}
-                <VenueSubmit venueName={activeVenue.name}/>
+                <VenueSubmit venueName={activeVenue.name} />
             {/if}
             <div class="my-0 divider" />
             <Timetable lessons={activeVenue.lessons} />
