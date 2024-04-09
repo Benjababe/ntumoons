@@ -1,4 +1,4 @@
-import { submitVenueLocation } from '$lib/search/firebase/venue.js';
+import { submitVenueLocation } from '$lib/api/firebase/venue';
 import type { VenueSubmissionReq } from '$lib/types/Venue';
 import { json } from '@sveltejs/kit';
 

@@ -1,4 +1,4 @@
-import { getSemesters } from '$lib/search/firebase';
+import { getSemesters } from '$lib/api/firebase';
 import { json } from '@sveltejs/kit';
 
 export async function GET() {

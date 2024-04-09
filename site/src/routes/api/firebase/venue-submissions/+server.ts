@@ -1,5 +1,5 @@
-import { getVenueSubmissions, updateVenueSubmission } from '$lib/search/firebase/venue.js';
-import type { VenueSubmissionUpdate } from '$lib/types/Venue.js';
+import { getVenueSubmissions, updateVenueSubmission } from '$lib/api/firebase/venue';
+import type { VenueSubmissionUpdate } from '$lib/types/Venue';
 import { error, json } from '@sveltejs/kit';
 
 export async function GET() {

@@ -1,4 +1,4 @@
-import { getModuleDoc, getSemesterTitle } from '$lib/search/firebase';
+import { getModuleDoc, getSemesterTitle } from '$lib/api/firebase';
 import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {

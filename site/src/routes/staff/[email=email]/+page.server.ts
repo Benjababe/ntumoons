@@ -1,5 +1,5 @@
-import { COLL_STAFF, db } from '$lib/search/firebase';
-import type { Staff } from '$lib/types/Firebase.js';
+import { COLL_STAFF, db } from '$lib/api/firebase';
+import type { Staff } from '$lib/types/Firebase';
 import { error } from '@sveltejs/kit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 

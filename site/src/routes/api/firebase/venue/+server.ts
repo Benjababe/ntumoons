@@ -1,4 +1,4 @@
-import { getVenueLessons } from '$lib/search/firebase';
+import { getVenueLessons } from '$lib/api/firebase';
 import { json } from '@sveltejs/kit';
 
 export async function POST({ request }) {
