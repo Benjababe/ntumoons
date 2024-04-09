@@ -1,6 +1,6 @@
 import { searchModules, searchStaff } from '$lib/search/typesense';
-import type { TypesenseSearch } from '$lib/types/Search.js';
-import type { ModuleDoc, StaffDoc } from '$lib/types/Typesense.js';
+import type { TypesenseSearch } from '$lib/types/Search';
+import type { ModuleDoc, StaffDoc } from '$lib/types/Typesense';
 import { error, json } from '@sveltejs/kit';
 import type { SearchResponse } from 'typesense/lib/Typesense/Documents';
 

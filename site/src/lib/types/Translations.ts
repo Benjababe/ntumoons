@@ -7,4 +7,5 @@ export type TranslationPayload = {
     semesterTitle?: string;
     planIndex?: number;
     planLen?: number;
+    venueName?: string;
 };
