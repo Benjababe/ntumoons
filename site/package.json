@@ -49,6 +49,6 @@
         "svelte": "^4.2.12",
         "svelte-persisted-store": "^0.7.0",
         "sveltekit-i18n": "^2.4.2",
-        "typesense": "^1.7.2"
+        "typesense": "^1.8.1"
     }
 }
