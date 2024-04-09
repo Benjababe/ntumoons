@@ -1,7 +1,8 @@
 <script lang="ts">
     import type { Theme } from '$lib/types/Settings';
-    import L, { Marker, type LatLngExpression, type LeafletMouseEvent, marker } from 'leaflet';
+    import L, { Marker, type LatLngExpression, type LeafletMouseEvent } from 'leaflet';
     import { GestureHandling } from 'leaflet-gesture-handling';
+    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
     import 'leaflet/dist/leaflet.css';
     import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
     import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
@@ -35,11 +36,11 @@
     }
 
     onMount(() => {
-        L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
         const mapOptions = ctrlScroll ? { gestureHandling: true } : {};
 
         // Cast to any because TypeScript doesn't play well with `gestureHandling`
-        map = L.map(mapElement, mapOptions as any)
+        /* eslint-disable  @typescript-eslint/no-explicit-any */
+        map = L.map(mapElement, <any>mapOptions)
             .on('zoom', (e) => dispatch('zoom', e))
             .on('popupopen', async (e) => {
                 await tick();

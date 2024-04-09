@@ -17,6 +17,7 @@
             method: 'POST',
             body: JSON.stringify({ venue: venueName, floor, comments, lat, lng })
         });
+        alert(res ? 'Venue submitted successfully' : 'Failed to submit venue');
     }
 </script>
 
