@@ -88,7 +88,18 @@
 
     "Venues": {
         "Enter venue name": "Enter venue name",
-        "Report Inaccurate Information": "Report Inaccurate Information"
+        "Report Inaccurate Information": "Report Inaccurate Information",
+
+        "Submit": {
+            "This venue is currently unmapped in our database": "This venue is currently unmapped in our database.",
+            "Submit venue location": "Submit venue location",
+            "Mapping venue": "Mapping {{venueName}}",
+            "Floor": "Floor",
+            "Use negatives for basement": "Use negatives for basement",
+            "Comments": "Comments",
+            "Anything to note about the venue": "Anything to note about the venue",
+            "Submit": "Submit"
+        }
     },
 
     "Staff": {
@@ -133,5 +144,16 @@
         "The page you are looking for doesnt exist": "The page you are looking for doesnt exist",
         "If this is unexpected, raise an issue on GitHub": "If this is unexpected, raise an issue on GitHub",
         "Raise Issue": "Raise Issue"
+    },
+
+    "Admin": {
+        "Venue Submissions": {
+            "Select Venue": "Select Venue",
+            "Floor": "Floor",
+            "Comments": "Comments",
+            "No comments": "No comments",
+            "Approve": "Approve",
+            "Reject": "Reject"
+        }
     }
 }
