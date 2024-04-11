@@ -2,6 +2,10 @@
     "name": "ntumoons",
     "version": "1.0",
     "private": true,
+    "engines": {
+        "node": ">=20",
+        "pnpm": ">=8"
+    },
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",
