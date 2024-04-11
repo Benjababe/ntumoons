@@ -68,9 +68,11 @@ export type Semester = {
 };
 
 export type Venue = {
+    coord_confirmed: boolean;
     floor: number;
     lat: number;
     lng: number;
     name: string;
+    comments: string;
     lessons: Lesson[];
 };
