@@ -91,9 +91,6 @@ devDependencies:
   svelte-confetti:
     specifier: ^1.4.0
     version: 1.4.0(svelte@4.2.12)
-  sveltekit-rate-limiter:
-    specifier: ^0.5.1
-    version: 0.5.1(@sveltejs/kit@2.5.5)
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.3
@@ -1087,11 +1084,6 @@ packages:
       strip-ansi-cjs: /strip-ansi@6.0.1
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: /wrap-ansi@7.0.0
-    dev: true
-
-  /@isaacs/ttlcache@1.4.1:
-    resolution: {integrity: sha512-RQgQ4uQ+pLbqXfOmieB91ejmLwvSgv9nLx6sT6sD83s7umBypgg+OIBOBbEUiJXrfpnp9j0mRhYYdzp9uqq3lA==}
-    engines: {node: '>=12'}
     dev: true
 
   /@jest/schemas@29.6.3:
@@ -4642,15 +4634,6 @@ packages:
       '@sveltekit-i18n/parser-default': 1.1.1
       svelte: 4.2.12
     dev: false
-
-  /sveltekit-rate-limiter@0.5.1(@sveltejs/kit@2.5.5):
-    resolution: {integrity: sha512-Q2C7mT9PdoL6v3VXgxngyXiEg2i3Dp0iVjVvKi722lroTM7oHxAJsmj66607BiSw8mdQk1Me6nhE6uRXrkDVIg==}
-    peerDependencies:
-      '@sveltejs/kit': 1.x || 2.x
-    dependencies:
-      '@isaacs/ttlcache': 1.4.1
-      '@sveltejs/kit': 2.5.5(@sveltejs/vite-plugin-svelte@3.1.0)(svelte@4.2.12)(vite@5.2.8)
-    dev: true
 
   /tailwindcss@3.4.3:
     resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
