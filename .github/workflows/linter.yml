@@ -4,30 +4,52 @@ name: linter
 on:
   # Triggers the workflow on push or pull request events for the below branches
   pull_request:
-    branches: [ "development", "production" ]
-# Allows you to run this workflow manually from the Actions tab
+    branches: ["development", "production"]
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "lint"
   lint:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm 
+        uses: pnpm/action-setup@v3
         with:
-          node-version: '20.10.0'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          version: 8
+          run_install: false
 
-      - name: install
-        working-directory: site
-        run: npm install
+      - name: Install Node.JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.10.0"
 
-      - name: lint
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+  
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        env:
+          STORE_PATH: ${{ env.STORE_PATH }}
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
         working-directory: site
-        run: npm run lint
+        run: pnpm install
+
+      - name: Run linter
+        working-directory: site
+        run: pnpm run lint
