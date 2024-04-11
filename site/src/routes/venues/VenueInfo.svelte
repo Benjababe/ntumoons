@@ -15,7 +15,7 @@
     $: activeVenueName && getVenueLessons(activeVenueName);
 
     async function getVenueLessons(venue: string) {
-        const res = await fetch('/search/firebase/venue', {
+        const res = await fetch('/api/firebase/venue', {
             method: 'POST',
             body: JSON.stringify({ venue, semesterId: $activeSemester.id })
         });

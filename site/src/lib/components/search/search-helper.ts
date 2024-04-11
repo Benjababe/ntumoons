@@ -19,7 +19,7 @@ export async function callSearchPath(
     per_page = PER_PAGE,
     activeFilters: FilterMap = {}
 ) {
-    const res = await fetch('/search/typesense', {
+    const res = await fetch('/api/typesense', {
         method: 'POST',
         headers: {
             Accept: 'application/json',

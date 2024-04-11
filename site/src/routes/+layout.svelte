@@ -19,7 +19,7 @@
     });
 
     async function getSemester() {
-        const semRes = (await (await fetch('/search/firebase/semester')).json()) as Semester[];
+        const semRes = (await (await fetch('/api/firebase/semester')).json()) as Semester[];
         for (let i = 0; i < semRes.length; i++) {
             if (semRes[i].active) return semRes[i];
         }
