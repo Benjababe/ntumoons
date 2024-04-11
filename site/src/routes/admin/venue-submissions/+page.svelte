@@ -10,7 +10,7 @@
 
     onMount(async () => {
         submissions = (await (
-            await fetch('/search/firebase/venue-submissions')
+            await fetch('/api/firebase/venue-submissions')
         ).json()) as VenueSubmissionStored[];
     });
 
@@ -25,7 +25,7 @@
     ) {
         if (!submission) return;
 
-        const res = await fetch('/search/firebase/venue-submissions', {
+        const res = await fetch('/api/firebase/venue-submissions', {
             method: 'POST',
             body: JSON.stringify({ approved, ...submission })
         });
