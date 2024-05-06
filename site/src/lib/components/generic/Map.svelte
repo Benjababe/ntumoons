@@ -1,10 +1,8 @@
 <script lang="ts">
     import type { Theme } from '$lib/types/Settings';
     import L, { Marker, type LatLngExpression, type LeafletMouseEvent } from 'leaflet';
-    import { GestureHandling } from 'leaflet-gesture-handling';
-    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
-    import 'leaflet/dist/leaflet.css';
     import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
+    import 'leaflet/dist/leaflet.css';
     import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte';
     import { markerIcon } from '../map/icons';
 
@@ -32,7 +30,7 @@
     function setUserMarker(e: LeafletMouseEvent) {
         if (!map || !allowUserMarker) return;
         if (userMarker) map.removeLayer(userMarker);
-        userMarker = L.marker(e.latlng, { draggable: true }).addTo(map);
+        userMarker = L.marker(e.latlng, { draggable: true, icon: markerIcon }).addTo(map);
     }
 
     onMount(() => {
