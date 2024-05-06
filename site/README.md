@@ -4,28 +4,28 @@
 
 To break it down:
 
-#### User
+### User
 
 A very cute little green dude
 
-#### Svelte Frontend
+### Svelte Frontend
 
 Component renderer and what our cute user will be interfacing with. Pick up [Svelte](https://learn.svelte.dev/tutorial/welcome-to-svelte) if you wish to contribute, it's like most other frontend frameworks (React, Angular, Vue).
 
-#### LocalStorage
+### LocalStorage
 
 I am not planning to store my users' data anywhere as I would have to handle user management, bot handling and security which are not required for the site's purpose. Storing everyting locally instead with an option for the user to delete everything.
 
-#### Typesense Indexer
+### Typesense Indexer
 
 [Typesense](https://typesense.org/) is a text based search engine incredibly similar to [Algolia](https://www.algolia.com/) and [ElasticSearch](https://www.elastic.co/elasticsearch). It is used for modules and staff where there are hundreds if not thousands of documents to be gone through. For deployment, it is currently hosted on my homelab so hopefully it is not abused.
 
 All data is inserted through the several web [scrapers](https://github.com/Benjababe/ntumoons/tree/development/scrapers) written.
 
-#### Sveltekit Endpoints
+### Sveltekit Endpoints
 
 This is the "backend" of the project, having the endpoints defined in `+server.ts` files under the `api` directory. Vercel should spawn serverless workers to handle backend requests on the fly.
 
-#### Firestore
+### Firestore
 
 Firebase is the database of choice, free and easy to integrate. It is so far read-only, no writes are expected in the near future. All data is inserted through the several web [scrapers](https://github.com/Benjababe/ntumoons/tree/development/scrapers) written.
