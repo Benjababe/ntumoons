@@ -33,11 +33,3 @@ This is the "backend" of the project, having the endpoints defined in `+server.t
 #### Firestore
 
 Firebase is the database of choice, free and easy to integrate. It is so far read-only, no writes are expected in the near future. All data is inserted through the several web [scrapers](https://github.com/Benjababe/ntumoons/tree/development/scrapers) written.
-
-## Todos
-
-Refer to the [issues](https://github.com/Benjababe/ntumoons/issues) page for any outstanding tasks. Feel free to add any if there is anything the site lacks.
-
-## Contributing
-
-Make sure to use `feet:` instead of `feat:` for features. Heck, use `feet:` for any changes made in commits, who's checking.
