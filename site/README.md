@@ -37,3 +37,7 @@ Firebase is the database of choice, free and easy to integrate. It is so far rea
 ## Todos
 
 Refer to the [issues](https://github.com/Benjababe/ntumoons/issues) page for any outstanding tasks. Feel free to add any if there is anything the site lacks.
+
+## Contributing
+
+Make sure to use `feet:` instead of `feat:` for features. Heck, use `feet:` for any changes made in commits, who's checking.
