@@ -1,8 +1,4 @@
-# NTUMoons
-
-NTUMoons is an evolution of this [piece of shit](https://devpost.com/software/ntumods) made almost a while ago. Decided to recreate it in [Sveltekit](https://kit.svelte.dev/), add proper features and have a more polished UI this time. Try it out [here](https://ntumoons.vercel.app)!
-
-## Layout
+# Site Design Layout
 
 ![There should be a system diagram here.](ntumoons-diagram.png)
 
