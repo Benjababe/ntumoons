@@ -19,9 +19,9 @@
             "justMyCode": true,
             "args": [
                 "--semester",
-                "2023;2",
+                "2024;1",
                 "--environment",
-                "dev"
+                "prod"
             ]
         },
     ]
