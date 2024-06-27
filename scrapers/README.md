@@ -25,13 +25,20 @@ Ensure `serviceAccountKeyDev.json` or `serviceAccountKeyProd.json` exists in the
 
 ### Typesense Uploader
 
-Typesense is used to index searching for modules and staff. It's hosted on a free [render](https://github.com/hmbrg/typesense-on-render) instance on my potato computer as of writing because free.
+Typesense is used to index searching for modules and staff. It's hosted on my home server as of writing because why not.
 
 A `.env` file is required containing the environment variables related to Typesense. Refer to `.env.example` for reference.
 
 ### Scraping
 
 Just run `python scrape.py` and pray everything goes smoothly.
+
+### Arguments
+
+| Name                 | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| `-s` `--semester`    | Semester to scrape in `YYYY;S` format.                       |
+| `-e` `--environment` | Environment to scrape for. Either `Staging`, `Dev` or `Prod` |
 
 ## Scraping Flow
 
